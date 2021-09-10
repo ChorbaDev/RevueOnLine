@@ -6,8 +6,8 @@ public class Periodicite {
 	
 	public Periodicite(String ch) {
 		this.libelle=ch;
-		Connexion maConnexion= new Connexion();
-	    Connection Connect=maConnexion.creeConnexion();
+		 maConnexion= new Connexion();
+	     Connect=maConnexion.creeConnexion();
 	}
 	
 	public void addPeriodicite() throws SQLException {

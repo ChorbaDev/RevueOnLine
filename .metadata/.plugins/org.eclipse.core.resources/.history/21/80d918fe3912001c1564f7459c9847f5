@@ -1,0 +1,49 @@
+import java.sql.*;
+public class Revue {
+	private String titre;
+	private String description;
+	private double tarif_numero;
+	private String visuel;
+	private int id_p;
+	
+	private Connexion maConnexion;
+	private  Connection connect;
+	
+	public Revue(String titre, String description, double tarif_numero, String visuel,int id_p) {
+		this.titre = titre;
+		this.description = description;
+		this.tarif_numero = tarif_numero;
+		this.visuel = visuel;
+		this.id_p=id_p;
+		
+		maConnexion= new Connexion();
+	    connect=maConnexion.creeConnexion();
+	}
+	public void addRevue() throws SQLException {
+		String sql="insert into Revue(titre,description,tarif_numero,visuel) values (?,?,?,?)";
+		PreparedStatement requete=connect.prepareStatement(sql);
+		requete.setString(1,this.titre );
+		requete.setString(2,this.description );
+		requete.setDouble(3, this.tarif_numero);
+		requete.setString(4,this.visuel );
+		int nbLignes=requete.executeUpdate();
+	}
+	public void deleteRevue() throws SQLException {
+		String sql="delete from Revue where titre=? and description=? and tarif_numero=? and visuel=?";
+		PreparedStatement requete=connect.prepareStatement(sql);
+		requete.setString(1,this.titre );
+		requete.setString(2,this.description );
+		requete.setDouble(3, this.tarif_numero);
+		requete.setString(4,this.visuel );
+		int nbLignes=requete.executeUpdate();
+	}
+	public void updateRevue() throws SQLException {
+		String sql="";
+		PreparedStatement requete=connect.prepareStatement(sql);
+		requete.setString(1,this.titre );
+		requete.setString(2,this.description );
+		requete.setDouble(3, this.tarif_numero);
+		requete.setString(4,this.visuel );
+		int nbLignes=requete.executeUpdate();
+	}
+}
