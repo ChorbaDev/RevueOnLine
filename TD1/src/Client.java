@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class Client {
     private int cle=0;
@@ -52,7 +53,25 @@ public class Client {
 
     }
 
-    public void updateNomClient(String ch) throws SQLException{
+    public void updateClient(String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) throws SQLException{
+        if(cle!=0){
+            PreparedStatement req=Connect.prepareStatement("update Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
+            req.setString(1,nom);
+            req.setString(2,prenom);
+            req.setString(3,no_rue);
+            req.setString(4,voie);
+            req.setString(5,code_postal);
+            req.setString(6,ville);
+            req.setString(7,pays);
+            req.setInt(8,cle);
+            int nbLignes=req.executeUpdate();
+        }
+        else
+                System.out.println("il n'existe aucun client avec une telle clé");
+
+    }
+
+    /*public void updateNomClient(String ch) throws SQLException{
         PreparedStatement req=Connect.prepareStatement("update Client set nom=? where nom=?");
         req.setString(1,ch);
         req.setString(2,this.nom);
@@ -93,7 +112,7 @@ public class Client {
         req.setString(1,ch);
         req.setString(2,this.pays);
         int nbLignes=req.executeUpdate();
-    }
+    }*/
 
 
 }
