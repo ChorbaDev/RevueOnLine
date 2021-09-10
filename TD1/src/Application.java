@@ -9,12 +9,23 @@ public class Application {
 		Client c=new Client("gho","you","5","fekoe","5700","yutz","fr");
 		System.out.println("que souhaitez vous faire ? : 1- ajouter, 2-modifier, 3-supprimer");
 		int choixtravail=scanner.nextInt();
-		System.out.println("sur quelle table souhaitez vous travailler ? : 1- client, 2-periodicité, 3-revue, 4-abonnement");
-		int choixtable=scanner.nextInt();
+		switch (choixtravail){
+			case 1:
+				c.ajoutClient();
+				break;
+			case 2:
+				c.updateClient("gholem","youss","12","the voice","57500","metz","marsa");
+				break;
+			case 3:
+				c.deleteClient();
+				break;
+		}
+
 
 
 
 
 	}
+
 
 }
