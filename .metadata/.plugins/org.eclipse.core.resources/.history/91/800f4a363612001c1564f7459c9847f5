@@ -1,0 +1,19 @@
+import java.sql.*;
+public class Periodicite {
+	private String libelle;
+	private Connexion maConnexion= new Connexion();
+	private Connection Connect=maConnexion.creeConnexion();
+	
+	public Periodicite(String ch) {
+		this.libelle=ch;
+	}
+	
+	public void addPeriodicite() throws SQLException {
+		String sql="insert into Periodicite(libelle) values (?)";
+		PreparedStatement requete=Connect.prepareStatement(sql);
+		requete.setString(1,this.libelle);
+		int Nblignes=requete.executeUpdate();
+	}
+
+	
+}
