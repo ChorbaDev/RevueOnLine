@@ -61,7 +61,7 @@ public class Abonnement {
 		requete.setDate(2, date_f);
 		requete.setInt(3, id_client);
 		requete.setInt(4, id_revue);
-		requete.setInt(5, id);
+		requete.setInt(4, id);
 		int nbLignes=requete.executeUpdate();
 	}
 	else {

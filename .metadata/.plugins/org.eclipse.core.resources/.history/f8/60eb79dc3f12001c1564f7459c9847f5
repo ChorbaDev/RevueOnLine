@@ -1,0 +1,6 @@
+
+public class Abonnement {
+	private int id;
+	private java.util.Date date_debut;
+	private java.util.Date date_fin;
+}

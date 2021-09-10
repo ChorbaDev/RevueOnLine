@@ -53,15 +53,12 @@ public class Abonnement {
 		PreparedStatement requete=connect.prepareStatement(sql);
 		java.util.Date dateD = new java.util.Date(deb);
 		java.util.Date dateF = new java.util.Date(fin);
-		//
-		java.sql.Date date_d = new java.sql.Date(dateD.getTime());
-		java.sql.Date date_f = new java.sql.Date(dateF.getTime());
-		//
-		requete.setDate(1, date_d);
-		requete.setDate(2, date_f);
+		date_debut = new java.sql.Date(dateD.getTime());
+		date_fin = new java.sql.Date(dateF.getTime());
+		requete.setDate(1, date_debut);
+		requete.setDate(2, date_fin);
 		requete.setInt(3, id_client);
 		requete.setInt(4, id_revue);
-		requete.setInt(5, id);
 		int nbLignes=requete.executeUpdate();
 	}
 	else {

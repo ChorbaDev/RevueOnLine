@@ -1,0 +1,16 @@
+
+public class Abonnement {
+	private int id;
+	private java.sql.Date date_debut;
+	private java.sql.Date date_fin;
+	int id_client;
+	int id_revue;
+	public Abonnement(String deb,String fin, int id_c,int id_r) {
+		java.util.Date dateD = new java.util.Date(deb);
+		java.util.Date dateF = new java.util.Date(fin);
+		date_debut = new java.sql.Date(dateD.getTime());
+		date_fin = new java.sql.Date(dateF.getTime());
+		id_client=id_c;
+		id_revue=id_r;
+	}
+}
