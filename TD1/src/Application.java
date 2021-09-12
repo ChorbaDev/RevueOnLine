@@ -8,6 +8,8 @@ public class Application {
 		Scanner scanner=new Scanner(System.in);
 		Client c=new Client("gho","you","5","fekoe","5700","yutz","fr");
 		Periodicite p= new Periodicite("bonjour");
+		Revue r= new Revue("Sa majesté le roi des mouches"," le roi de mouches",10.95,"beau",5);
+		Abonnement a= new Abonnement("10/09/21","11/10/21",12,1);
 		System.out.println("que souhaitez vous faire ? : 1- ajouter, 2-modifier, 3-supprimer");
 		int choixtravail=scanner.nextInt();
 		System.out.println("sur quelle table souhaitez vous travailler ? : 1- Periodicité, 2-Client, 3-Revue, 4-Abonnement");
@@ -28,7 +30,7 @@ public class Application {
 			case 2:
 				switch (choixtravail){
 					case 1:
-						c.ajoutClient();
+						c.addClient();
 						break;
 					case 2:
 						c.updateClient("gholem","youss","12","the voice","57500","metz","marsa");
@@ -40,25 +42,25 @@ public class Application {
 			case 3:
 				switch (choixtravail){
 					case 1:
-						c.ajoutClient();
+						r.addRevue();
 						break;
 					case 2:
-						c.updateClient("gholem","youss","12","the voice","57500","metz","marsa");
+						r.updateRevue("Sa majesté le roi des mouches"," le roi de mouches",10.95,"beau",5);
 						break;
 					case 3:
-						c.deleteClient();
+						r.deleteRevue();
 						break;
 				}
 			case 4:
 				switch (choixtravail){
 					case 1:
-						c.ajoutClient();
+						a.addAbonnement();
 						break;
 					case 2:
-						c.updateClient("gholem","youss","12","the voice","57500","metz","marsa");
+						a.updateAbonnement("10/09/21","11/10/22",12,1);
 						break;
 					case 3:
-						c.deleteClient();
+						a.deleteAbonnement();
 						break;
 				}
 

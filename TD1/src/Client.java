@@ -25,7 +25,7 @@ public class Client {
         Connect= maConnexion.creeConnexion();
     }
 
-    public void ajoutClient() throws SQLException {
+    public void addClient() throws SQLException {
         PreparedStatement req =Connect.prepareStatement("insert into Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         req.setString(1,this.nom);
         req.setString(2,this.prenom);
