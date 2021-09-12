@@ -2,13 +2,13 @@ import java.sql.*;
 
 public class Abonnement {
 	private int id;
-	private java.sql.Date date_debut;
-	private java.sql.Date date_fin;
+	private final java.sql.Date date_debut;
+	private final java.sql.Date date_fin;
 	int id_client;
 	int id_revue;
 	
-	private Connexion maConnexion;
-	private  Connection connect;
+	private final Connexion maConnexion;
+	private final Connection connect;
 	
 	public Abonnement(String deb,String fin, int id_c,int id_r) {
 		java.util.Date dateD = new java.util.Date(deb);

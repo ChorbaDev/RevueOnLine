@@ -3,15 +3,15 @@ import java.util.Scanner;
 
 public class Client {
     private int cle=0;
-    private String nom;
-    private String prenom;
-    private String no_rue;
-    private String voie;
-    private String code_postal;
-    private String ville;
-    private String pays;
-    private Connexion maConnexion;
-    private Connection Connect;
+    private final String nom;
+    private final String prenom;
+    private final String no_rue;
+    private final String voie;
+    private final String code_postal;
+    private final String ville;
+    private final String pays;
+    private final Connexion maConnexion;
+    private final Connection Connect;
 
     public Client(String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) {
         this.nom = nom;
