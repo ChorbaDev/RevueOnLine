@@ -1,0 +1,6 @@
+package DAO;
+import java.util.ArrayList;
+import 
+public interface Abonnement extends DAO<Abonnement>{
+	public ArrayList<Abonnement> getByClient (Client cl);
+}

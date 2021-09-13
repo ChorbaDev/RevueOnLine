@@ -1,0 +1,5 @@
+package DAO;
+import Metier.Revue;
+public interface RevueDAO extends DAO<Revue>{
+	
+}
