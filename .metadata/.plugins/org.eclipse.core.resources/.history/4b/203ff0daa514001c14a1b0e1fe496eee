@@ -1,8 +1,9 @@
 package MySQL;
 
 import DAO.PeriodiciteDAO;
-import Metier.*;
-
+import Metier.Client;
+import Metier.Connexion;
+import Metier.Periodicite;
 
 import java.sql.*;
 import java.util.ArrayList;
