@@ -1,0 +1,112 @@
+package Metier;
+
+import java.sql.*;
+
+public class Abonnement {
+    private int id;
+    private java.sql.Date date_debut;
+    private java.sql.Date date_fin;
+    int id_client;
+    int id_revue;
+
+    public Abonnement(String deb, String fin, int id_c, int id_r) {
+        java.util.Date dateD = new java.util.Date(deb);
+        java.util.Date dateF = new java.util.Date(fin);
+        date_debut = new java.sql.Date(dateD.getTime());
+        date_fin = new java.sql.Date(dateF.getTime());
+        id_client = id_c;
+        id_revue = id_r;
+    }
+    public Abonnement(int id, String deb, String fin, int id_c, int id_r) {
+        java.util.Date dateD = new java.util.Date(deb);
+        java.util.Date dateF = new java.util.Date(fin);
+        date_debut = new java.sql.Date(dateD.getTime());
+        date_fin = new java.sql.Date(dateF.getTime());
+        id_client = id_c;
+        id_revue = id_r;
+        this.id=id;
+    }
+    
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public java.sql.Date getDate_debut() {
+		return date_debut;
+	}
+	public java.sql.Date getDate_fin() {
+		return date_fin;
+	}
+	public void setDate_debut(java.sql.Date date_debut) {
+		this.date_debut = date_debut;
+	}
+	
+	public void setDate_fin(java.sql.Date date_fin) {
+		this.date_fin = date_fin;
+	}
+	public int getId_client() {
+		return id_client;
+	}
+	public void setId_client(int id_client) {
+		this.id_client = id_client;
+	}
+	public int getId_revue() {
+		return id_revue;
+	}
+	public void setId_revue(int id_revue) {
+		this.id_revue = id_revue;
+	}
+	
+	
+	public void addAbonnement() throws SQLException {
+        String sql = "insert into Metier.Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
+        PreparedStatement requete = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        requete.setDate(1, date_debut);
+        requete.setDate(2, date_fin);
+        requete.setInt(3, id_client);
+        requete.setInt(4, id_revue);
+        int nbLignes = requete.executeUpdate();
+        ResultSet res = requete.getGeneratedKeys();
+        if (res.next()) {
+            id = res.getInt(1);
+        }
+    }
+
+    public void deleteAbonnement() throws SQLException {
+        if (id != 0) {
+            String sql = "delete from Metier.Abonnement where id_abonnement=?";
+            PreparedStatement requete = connect.prepareStatement(sql);
+            requete.setInt(1, id);
+            int nbLignes = requete.executeUpdate();
+        } else {
+            System.out.println("Cette abonnement n'exite pas dans la base");
+        }
+
+    }
+
+    public void updateAbonnement(String deb, String fin, int id_c, int id_r) throws SQLException {
+        if (id != 0) {
+            String sql = "update Metier.Abonnement set date_debut=?, date_fin=?, id_client=?, id_revue=? where id_abonnement=?";
+            PreparedStatement requete = connect.prepareStatement(sql);
+            java.util.Date dateD = new java.util.Date(deb);
+            java.util.Date dateF = new java.util.Date(fin);
+            //
+            java.sql.Date date_d = new java.sql.Date(dateD.getTime());
+            java.sql.Date date_f = new java.sql.Date(dateF.getTime());
+            //
+            requete.setDate(1, date_d);
+            requete.setDate(2, date_f);
+            requete.setInt(3, id_client);
+            requete.setInt(4, id_revue);
+            requete.setInt(5, id);
+            int nbLignes = requete.executeUpdate();
+        } else {
+            System.out.println("Cette abonnement n'exite pas dans la base");
+        }
+
+
+    }
+}
