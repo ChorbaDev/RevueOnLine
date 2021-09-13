@@ -22,6 +22,17 @@ public class Client {
         this.pays = pays;
     }
 
+    public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) {
+        this.cle = cle;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.no_rue = no_rue;
+        this.voie = voie;
+        this.code_postal = code_postal;
+        this.ville = ville;
+        this.pays = pays;
+    }
+
     public void setCle(int cle) {
         this.cle = cle;
     }

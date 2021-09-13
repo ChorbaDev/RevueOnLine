@@ -1,4 +1,4 @@
-package DAO.MySQL;
+package MySQL;
 
 import DAO.ClientDAO;
 import Metier.Client;
@@ -16,13 +16,37 @@ public class MySQLClientDAO implements ClientDAO {
         PreparedStatement req = connect.prepareStatement("select * from Client where nom=? and prenom=?");
         req.setString(1, nom);
         req.setString(2, prenom);
+        ResultSet res=req.executeQuery();
 
-        return null;
+        while(res.next()){
+            lClient.add(new Client(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)));
+        }
+        if (res != null)
+            res.close();
+        if (req != null)
+            req.close();
+        if (connect != null)
+            connect.close();
+        return lClient;
     }
 
     @Override
     public Client getById(int id) throws SQLException {
-        return null;
+        Connexion maConnexion = new Connexion();
+        Connection connect = maConnexion.creeConnexion();
+        PreparedStatement req = connect.prepareStatement("select * from Client where id_client=?");
+        req.setInt(1, id);
+        ResultSet res=req.executeQuery();
+        Client client=null;
+        if(res.next())
+            client=new Client(id, res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8));
+        if (res != null)
+            res.close();
+        if (req != null)
+            req.close();
+        if (connect != null)
+            connect.close();
+        return client;
     }
 
     @Override
@@ -58,7 +82,7 @@ public class MySQLClientDAO implements ClientDAO {
     public boolean update(Client object) throws SQLException {
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
-        PreparedStatement req = connect.prepareStatement("update Metier.Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
+        PreparedStatement req = connect.prepareStatement("update Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
         req.setString(1, object.getNom());
         req.setString(2, object.getPrenom());
         req.setString(3, object.getNo_rue());
@@ -75,7 +99,7 @@ public class MySQLClientDAO implements ClientDAO {
     public boolean delete(Client object) throws SQLException {
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
-        PreparedStatement req = connect.prepareStatement("delete from Metier.Client where id_client=?");
+        PreparedStatement req = connect.prepareStatement("delete from Client where id_client=?");
         req.setInt(1, object.getCle());
         int nbLignes = req.executeUpdate();
         if (req != null)
