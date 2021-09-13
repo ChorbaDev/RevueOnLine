@@ -4,7 +4,7 @@ public class Application {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Periodicite p=new Periodicite("test 1");
+		Metier.Periodicite p=new Metier.Periodicite("test 1");
 		p.addPeriodicite();
 	}
 

@@ -1,3 +1,5 @@
+package Metier;
+
 import java.sql.*;
 
 public class Revue {
@@ -23,7 +25,7 @@ public class Revue {
     }
 
     public void addRevue() throws SQLException {
-        String sql = "insert into Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
+        String sql = "insert into Metier.Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
         PreparedStatement requete = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         requete.setString(1, this.titre);
         requete.setString(2, this.description);
@@ -39,19 +41,19 @@ public class Revue {
 
     public void deleteRevue() throws SQLException {
         if (id != 0) {
-            String sql = "delete from Revue where id_revue=?";
+            String sql = "delete from Metier.Revue where id_revue=?";
             PreparedStatement requete = connect.prepareStatement(sql);
             requete.setInt(1, id);
             int nbLignes = requete.executeUpdate();
         } else {
-            System.out.println("Cette Revue n'exite pas dans la base");
+            System.out.println("Cette Metier.Revue n'exite pas dans la base");
         }
 
     }
 
     public void updateRevue(String titre, String description, double tarif_numero, String visuel, int id_p) throws SQLException {
         if (id != 0) {
-            String sql = "update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
+            String sql = "update Metier.Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
             PreparedStatement requete = connect.prepareStatement(sql);
             requete.setString(1, titre);
             requete.setString(2, description);
@@ -61,7 +63,7 @@ public class Revue {
             requete.setInt(6, this.id);
             int nbLignes = requete.executeUpdate();
         } else {
-            System.out.println("Cette Revue n'exite pas dans la base");
+            System.out.println("Cette Metier.Revue n'exite pas dans la base");
         }
     }
 }

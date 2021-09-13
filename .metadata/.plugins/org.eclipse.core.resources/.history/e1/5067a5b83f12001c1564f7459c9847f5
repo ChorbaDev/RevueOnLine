@@ -1,5 +1,5 @@
 
-public class Abonnement {
+public class Metier.Abonnement {
 	private int id;
 
 }

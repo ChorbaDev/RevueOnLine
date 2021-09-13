@@ -1,5 +1,5 @@
 
-public class Abonnement {
+public class Metier.Abonnement {
 	private int id;
 	private java.util.Date date_debut;
 	private java.util.Date date_fin;

@@ -1,3 +1,8 @@
+import Metier.Abonnement;
+import Metier.Client;
+import Metier.Periodicite;
+import Metier.Revue;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -12,7 +17,7 @@ public class Application {
         Abonnement a = new Abonnement("10/09/21", "11/10/21", 12, 1);
         System.out.println("que souhaitez vous faire ? : 1- ajouter, 2-modifier, 3-supprimer");
         int choixtravail = scanner.nextInt();
-        System.out.println("sur quelle table souhaitez vous travailler ? : 1- Periodicité, 2-Client, 3-Revue, 4-Abonnement");
+        System.out.println("sur quelle table souhaitez vous travailler ? : 1- Periodicité, 2-Metier.Client, 3-Metier.Revue, 4-Metier.Abonnement");
         int choixtable = scanner.nextInt();
         switch (choixtable) {
             case 1:

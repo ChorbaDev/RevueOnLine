@@ -1,3 +1,5 @@
+package Metier;
+
 import java.sql.*;
 
 public class Connexion {

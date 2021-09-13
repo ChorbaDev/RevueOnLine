@@ -1,16 +1,16 @@
 import java.sql.*;
 
-public class Abonnement {
+public class Metier.Abonnement {
 	private int id;
 	private java.sql.Date date_debut;
 	private java.sql.Date date_fin;
 	int id_client;
 	int id_revue;
 	
-	private Connexion maConnexion;
+	private Metier.Connexion maConnexion;
 	private  Connection connect;
 	
-	public Abonnement(String deb,String fin, int id_c,int id_r) {
+	public Metier.Abonnement(String deb,String fin, int id_c,int id_r) {
 		java.util.Date dateD = new java.util.Date(deb);
 		java.util.Date dateF = new java.util.Date(fin);
 		date_debut = new java.sql.Date(dateD.getTime());
@@ -18,12 +18,12 @@ public class Abonnement {
 		id_client=id_c;
 		id_revue=id_r;
 		
-		maConnexion= new Connexion();
+		maConnexion= new Metier.Connexion();
 	    connect=maConnexion.creeConnexion();
 	}
 	
 	public void addAbonnement() throws SQLException {
-		String sql="insert into Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
+		String sql="insert into Metier.Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
 		PreparedStatement requete=connect.prepareStatement(sql);
 		requete.setDate(1, date_debut);
 		requete.setDate(2, date_fin);

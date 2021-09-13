@@ -1,5 +1,6 @@
+package Metier;
+
 import java.sql.*;
-import java.util.Scanner;
 
 public class Client {
     private int cle = 0;
@@ -26,7 +27,7 @@ public class Client {
     }
 
     public void addClient() throws SQLException {
-        PreparedStatement req = Connect.prepareStatement("insert into Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement req = Connect.prepareStatement("insert into Metier.Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         req.setString(1, this.nom);
         req.setString(2, this.prenom);
         req.setString(3, this.no_rue);
@@ -44,7 +45,7 @@ public class Client {
 
     public void deleteClient() throws SQLException {
         if (cle != 0) {
-            PreparedStatement req = Connect.prepareStatement("delete from Client where id_client=?");
+            PreparedStatement req = Connect.prepareStatement("delete from Metier.Client where id_client=?");
             req.setInt(1, cle);
             int nbLignes = req.executeUpdate();
 
@@ -55,7 +56,7 @@ public class Client {
 
     public void updateClient(String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) throws SQLException {
         if (cle != 0) {
-            PreparedStatement req = Connect.prepareStatement("update Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
+            PreparedStatement req = Connect.prepareStatement("update Metier.Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
             req.setString(1, nom);
             req.setString(2, prenom);
             req.setString(3, no_rue);

@@ -1,3 +1,5 @@
+package Metier;
+
 import java.sql.*;
 
 public class Abonnement {
@@ -23,7 +25,7 @@ public class Abonnement {
     }
 
     public void addAbonnement() throws SQLException {
-        String sql = "insert into Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
+        String sql = "insert into Metier.Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
         PreparedStatement requete = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         requete.setDate(1, date_debut);
         requete.setDate(2, date_fin);
@@ -38,7 +40,7 @@ public class Abonnement {
 
     public void deleteAbonnement() throws SQLException {
         if (id != 0) {
-            String sql = "delete from Abonnement where id_abonnement=?";
+            String sql = "delete from Metier.Abonnement where id_abonnement=?";
             PreparedStatement requete = connect.prepareStatement(sql);
             requete.setInt(1, id);
             int nbLignes = requete.executeUpdate();
@@ -50,7 +52,7 @@ public class Abonnement {
 
     public void updateAbonnement(String deb, String fin, int id_c, int id_r) throws SQLException {
         if (id != 0) {
-            String sql = "update Abonnement set date_debut=?, date_fin=?, id_client=?, id_revue=? where id_abonnement=?";
+            String sql = "update Metier.Abonnement set date_debut=?, date_fin=?, id_client=?, id_revue=? where id_abonnement=?";
             PreparedStatement requete = connect.prepareStatement(sql);
             java.util.Date dateD = new java.util.Date(deb);
             java.util.Date dateF = new java.util.Date(fin);

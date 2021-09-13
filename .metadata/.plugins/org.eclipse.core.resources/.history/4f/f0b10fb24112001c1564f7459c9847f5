@@ -4,7 +4,7 @@ public class Application {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Abonnement a=new Abonnement("02/02/2020","02/02/2021",1,4);
+		Metier.Abonnement a=new Metier.Abonnement("02/02/2020","02/02/2021",1,4);
 	}
 
 }
