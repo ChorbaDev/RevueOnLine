@@ -20,8 +20,7 @@ public MySQLRevueDAO getInstance() {
 	public Revue getById(int id) {
 		Connexion maConnexion=new Connexion();
 		Connection connect=maConnexion.creeConnexion();
-		String sql="select titre,description,tarif_numero,visuel,id_periodicite from Revue where id_revue=?";
-		PreparedStatement req=connect.prepareStatement(sql);
+		String sql="select ";
 		return null;
 	}
 
