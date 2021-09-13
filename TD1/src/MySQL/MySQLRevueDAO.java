@@ -2,7 +2,6 @@ package MySQL;
 
 
 import java.util.ArrayList;
-
 import DAO.RevueDAO;
 import Metier.*;
 import java.sql.*;
@@ -55,10 +54,8 @@ public MySQLRevueDAO getInstance() {
 	    int nbLignes=req.executeUpdate();
 	    ResultSet res = req.getGeneratedKeys();
 	    
-	    if (res.next()) {
+	    if (res.next()) 
             r.setId(res.getInt(1));
-        }
-	    
 	    if (res != null)
 			res.close();
 		if (req != null)
@@ -109,6 +106,7 @@ public MySQLRevueDAO getInstance() {
 	@Override
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException{
 		ArrayList<Revue> list=new ArrayList<>();
+		
 		Connexion maConnexion=new Connexion();
 		Connection connect=maConnexion.creeConnexion();
 		String sql="select * from Revue where titre=?";
@@ -126,6 +124,7 @@ public MySQLRevueDAO getInstance() {
 			req.close();
 		if (connect != null)
 			connect.close();
+		
 		return list;
 	}
 
