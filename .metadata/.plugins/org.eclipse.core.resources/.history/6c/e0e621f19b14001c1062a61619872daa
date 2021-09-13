@@ -70,7 +70,7 @@ public MySQLRevueDAO getInstance() {
 	}
 
 	@Override
-	public boolean update(Revue r) throws SQLException {
+	public boolean update(Revue r) {
 		Connexion maConnexion=new Connexion();
 		Connection connect=maConnexion.creeConnexion();
 		String sql="update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
@@ -91,42 +91,15 @@ public MySQLRevueDAO getInstance() {
 	}
 
 	@Override
-	public boolean delete(Revue r) throws SQLException{
-		Connexion maConnexion=new Connexion();
-		Connection connect=maConnexion.creeConnexion();
-		String sql = "delete from Metier.Revue where id_revue=?";
-		PreparedStatement req = connect.prepareStatement(sql);
-		req.setInt(1, r.getId());
-        int nbLignes = req.executeUpdate();
-		if (req != null)
-			req.close();
-		if (connect != null)
-			connect.close();
-	
-	    return nbLignes==1;
+	public boolean delete(Revue r) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public ArrayList<Revue> getByTitre(String titre) throws SQLException{
-		ArrayList<Revue> list=new ArrayList<>();
-		Connexion maConnexion=new Connexion();
-		Connection connect=maConnexion.creeConnexion();
-		String sql="select * from Revue where titre=?";
-		PreparedStatement req=connect.prepareStatement(sql);
-		req.setString(1, titre);
-		ResultSet res=req.executeQuery();
-		
-		while(res.next()) {
-			list.add(new Revue(res.getInt(1),res.getString(2),res.getString(3),res.getDouble(4),res.getString(5),res.getInt(6)));
-		}
-		
-		if (res != null)
-			res.close();
-		if (req != null)
-			req.close();
-		if (connect != null)
-			connect.close();
-		return list;
+	public ArrayList<Revue> getByTitre(String titre) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
