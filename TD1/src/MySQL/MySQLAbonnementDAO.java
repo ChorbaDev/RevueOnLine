@@ -89,7 +89,7 @@ public MySQLAbonnementDAO getInstance() {
 	public boolean delete(Abonnement a) throws SQLException {
 		Connexion maConnexion=new Connexion();
 		Connection connect=maConnexion.creeConnexion();
-		String sql="delete from abonnement where id_abonnement=? ";
+		String sql="delete from Abonnement where id_abonnement=? ";
 		PreparedStatement req=connect.prepareStatement(sql);
 		req.setInt(1, a.getId());
 		int nbLignes=req.executeUpdate();
@@ -107,7 +107,7 @@ public MySQLAbonnementDAO getInstance() {
 		ArrayList<Abonnement> list=new ArrayList<>();
 		Connexion maConnexion=new Connexion();
 		Connection connect=maConnexion.creeConnexion();
-		String sql="select * from abonnement where id_client=?";
+		String sql="select * from Abonnement where id_client=?";
 		PreparedStatement req=connect.prepareStatement(sql);
 		req.setInt(1,cl.getCle());
 		ResultSet res=req.executeQuery();
