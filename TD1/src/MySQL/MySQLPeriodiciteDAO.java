@@ -31,7 +31,7 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
     public boolean create(Periodicite object) throws SQLException {
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
-        String sql = "insert into Metier.Periodicite(libelle) values (?)";
+        String sql = "insert into Periodicite(libelle) values (?)";
         PreparedStatement req = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         req.setString(1, object.getLibelle());
         int nbLignes = req.executeUpdate();
@@ -54,7 +54,7 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
     public boolean update(Periodicite object) throws SQLException {
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
-        String sql = "update Metier.Periodicite set libelle=? where libelle=?";
+        String sql = "update Periodicite set libelle=? where libelle=?";
         PreparedStatement req = connect.prepareStatement(sql);
         req.setString(1, object.getLibelle());
         req.setInt(2, object.getCle());
@@ -82,7 +82,7 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
         ArrayList<Periodicite> lPeriodicite= new ArrayList<>();
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
-        PreparedStatement req = connect.prepareStatement("select * from Client where libelle=?");
+        PreparedStatement req = connect.prepareStatement("select * from Periodicite where libelle=?");
         req.setString(1, libelle);
         ResultSet res=req.executeQuery();
 
