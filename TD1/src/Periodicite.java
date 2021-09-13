@@ -1,8 +1,8 @@
 import java.sql.*;
 public class Periodicite {
-	private final String libelle;
-	private final Connexion maConnexion;
-	private final Connection Connect;
+	private String libelle;
+	private Connexion maConnexion;
+	private  Connection Connect;
 	
 	public Periodicite(String ch) {
 		this.libelle=ch;

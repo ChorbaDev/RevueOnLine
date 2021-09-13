@@ -1,14 +1,14 @@
 import java.sql.*;
 public class Revue {
-	private final String titre;
-	private final String description;
-	private final double tarif_numero;
-	private final String visuel;
-	private final int id_p;
+	private String titre;
+	private String description;
+	private double tarif_numero;
+	private String visuel;
+	private int id_p;
 	private int id=0;
 	
-	private final Connexion maConnexion;
-	private final Connection connect;
+	private Connexion maConnexion;
+	private  Connection connect;
 	
 	public Revue(String titre, String description, double tarif_numero, String visuel,int id_p) {
 		this.titre = titre;
