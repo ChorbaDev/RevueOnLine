@@ -1,0 +1,29 @@
+package DAOFactory;
+
+import DAO.*;
+import MySQL.*;
+
+public class ListeMemoireDAOFactory extends DAOFactory {
+
+	@Override
+	public AbonnementDAO getAbonnementDAO() {
+		return MySQLAbonnementDAO.getInstance();
+	}
+
+	@Override
+	public RevueDAO getRevueDAO() {
+		return MySQLRevueDAO.getInstance();
+	}
+
+	@Override
+	public PeriodiciteDAO getPeriodiciteDAO() {
+		return MySQLPeriodiciteDAO.getInstance();
+	}
+
+	@Override
+	public ClientDAO getClientDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -6,9 +6,9 @@ import java.sql.*;
 import java.time.*;
 
 public class MySQLAbonnementDAO implements AbonnementDAO{
-private MySQLAbonnementDAO instance;
+private static MySQLAbonnementDAO instance;
 public MySQLAbonnementDAO() {}
-public MySQLAbonnementDAO getInstance() {
+public static MySQLAbonnementDAO getInstance() {
 	if(instance==null)
 		instance=new MySQLAbonnementDAO();
 	return instance;	

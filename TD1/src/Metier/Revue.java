@@ -64,6 +64,11 @@ public class Revue {
 	public void setId_p(int id_p) {
 		this.id_p = id_p;
 	}
+	@Override
+	public String toString() {
+		return "Revue [id=" + id + ", titre=" + titre + ", description=" + description + ", tarif_numero="
+				+ tarif_numero + ", visuel=" + visuel + ", id_p=" + id_p + "]";
+	}
 	
 
 

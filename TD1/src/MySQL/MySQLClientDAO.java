@@ -3,11 +3,17 @@ package MySQL;
 import DAO.ClientDAO;
 import Metier.Client;
 import Metier.Connexion;
-
 import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLClientDAO implements ClientDAO {
+	private static MySQLClientDAO  instance;
+	public MySQLClientDAO () {}
+	public static MySQLClientDAO  getInstance() {
+		if(instance==null)
+			instance=new MySQLClientDAO ();
+		return instance;	
+	}
     @Override
     public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
         ArrayList<Client> lClient= new ArrayList<>();

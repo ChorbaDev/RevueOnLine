@@ -8,6 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
+	private static MySQLPeriodiciteDAO  instance;
+	public MySQLPeriodiciteDAO () {}
+	public static MySQLPeriodiciteDAO  getInstance() {
+		if(instance==null)
+			instance=new MySQLPeriodiciteDAO ();
+		return instance;	
+	}
     @Override
     public Periodicite getById(int id) throws SQLException {
         Connexion maConnexion = new Connexion();
