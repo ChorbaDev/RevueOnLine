@@ -8,23 +8,27 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
-	private static MySQLPeriodiciteDAO  instance;
-	public MySQLPeriodiciteDAO () {}
-	public static MySQLPeriodiciteDAO  getInstance() {
-		if(instance==null)
-			instance=new MySQLPeriodiciteDAO ();
-		return instance;	
-	}
+    private static MySQLPeriodiciteDAO instance;
+
+    public MySQLPeriodiciteDAO() {
+    }
+
+    public static MySQLPeriodiciteDAO getInstance() {
+        if (instance == null)
+            instance = new MySQLPeriodiciteDAO();
+        return instance;
+    }
+
     @Override
     public Periodicite getById(int id) throws SQLException {
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Periodicite where id_periodicite=?");
         req.setInt(1, id);
-        ResultSet res=req.executeQuery();
-        Periodicite periodicite=null;
-        if(res.next())
-            periodicite=new Periodicite(id, res.getString(2));
+        ResultSet res = req.executeQuery();
+        Periodicite periodicite = null;
+        if (res.next())
+            periodicite = new Periodicite(id, res.getString(2));
         if (res != null)
             res.close();
         if (req != null)
@@ -86,15 +90,15 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 
     @Override
     public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException {
-        ArrayList<Periodicite> lPeriodicite= new ArrayList<>();
+        ArrayList<Periodicite> lPeriodicite = new ArrayList<>();
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Periodicite where libelle=?");
         req.setString(1, libelle);
-        ResultSet res=req.executeQuery();
+        ResultSet res = req.executeQuery();
 
-        while(res.next()){
-            lPeriodicite.add(new Periodicite(res.getInt(1),res.getString(2)));
+        while (res.next()) {
+            lPeriodicite.add(new Periodicite(res.getInt(1), res.getString(2)));
         }
         if (res != null)
             res.close();
