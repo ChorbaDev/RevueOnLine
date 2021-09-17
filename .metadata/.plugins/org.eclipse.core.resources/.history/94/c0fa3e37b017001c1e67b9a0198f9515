@@ -63,7 +63,8 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO{
 	@Override
 	public ArrayList<Abonnement> getByClient(Client cl) throws SQLException {
 		ArrayList<Abonnement> liste=new ArrayList<>();
-		for(Abonnement ab: donnees) {
+		for(int i=1;i<donnees.size();i++) {
+			Abonnement ab=donnees.get(i);
 			if(ab.getId_client()==cl.getCle())
 				liste.add(ab);
 			}

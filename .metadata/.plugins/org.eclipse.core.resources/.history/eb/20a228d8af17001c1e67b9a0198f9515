@@ -13,11 +13,12 @@ private ListeMemoireRevueDAO() {
 }
 	@Override
 	public Revue getById(int id) throws SQLException {
-		for(Revue r: donnees) {
-			if(r.getId()==id)
-				return r;
+		int idx = this.donnees.indexOf(new Revue(id,"test","test",1.0,"test",1));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+		} else {
+			return this.donnees.get(idx);
 		}
-		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
 	}
 
 	@Override
@@ -60,7 +61,8 @@ private ListeMemoireRevueDAO() {
 	@Override
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException {
 		ArrayList<Revue> liste=new ArrayList<>();
-		for(Revue r: donnees) {
+		for(int i=1;i<donnees.size();i++) {
+			Revue r=donnees.get(i);
 			if(r.getTitre()==titre)
 				liste.add(r);
 			}

@@ -17,7 +17,7 @@ private ListeMemoireRevueDAO() {
 			if(r.getId()==id)
 				return r;
 		}
-		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+		throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 	}
 
 	@Override
