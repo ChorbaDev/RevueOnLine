@@ -7,12 +7,12 @@ import java.util.*;
 import java.time.*;
 
 public class ListeMemoireAbonnementDAO implements AbonnementDAO{
-	private static ListeMemoireAbonnementDAO instance;
+	private ListeMemoireAbonnementDAO instance;
 	private List<Abonnement> donnees;
 	private ListeMemoireAbonnementDAO() {
 		donnees=new ArrayList<>();
 	}
-	public static ListeMemoireAbonnementDAO getInstance() {
+	public ListeMemoireAbonnementDAO getInstance() {
 		if(instance==null)
 			instance=new ListeMemoireAbonnementDAO();
 			return instance;

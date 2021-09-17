@@ -8,12 +8,12 @@ import java.sql.*;
 import java.util.*;
 
 public class ListeMemoireRevueDAO implements RevueDAO{
-private static ListeMemoireRevueDAO instance;
+private ListeMemoireRevueDAO instance;
 private List<Revue> donnees;
 private ListeMemoireRevueDAO() {
 	this.donnees=new ArrayList<>();
 }
-public static ListeMemoireRevueDAO getInstance() {
+public ListeMemoireRevueDAO getInstance() {
 	if(instance==null)
 		instance=new ListeMemoireRevueDAO();
 	return instance;

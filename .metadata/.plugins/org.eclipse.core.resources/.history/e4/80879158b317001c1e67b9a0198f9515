@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
-	private static MySQLPeriodiciteDAO  instance;
+	private MySQLPeriodiciteDAO  instance;
 	public MySQLPeriodiciteDAO () {}
-	public static MySQLPeriodiciteDAO  getInstance() {
+	public MySQLPeriodiciteDAO  getInstance() {
 		if(instance==null)
 			instance=new MySQLPeriodiciteDAO ();
 		return instance;	

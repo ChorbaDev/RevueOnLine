@@ -7,9 +7,9 @@ import Metier.*;
 import java.sql.*;
 
 public class MySQLRevueDAO implements RevueDAO{
-private static MySQLRevueDAO instance;
+private MySQLRevueDAO instance;
 private MySQLRevueDAO() {}
-public static MySQLRevueDAO getInstance() {
+public MySQLRevueDAO getInstance() {
 	if(instance==null)
 		instance=new MySQLRevueDAO();
 	return instance;

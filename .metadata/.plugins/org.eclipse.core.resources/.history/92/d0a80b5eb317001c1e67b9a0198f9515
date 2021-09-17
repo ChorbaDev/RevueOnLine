@@ -3,13 +3,14 @@ package MySQL;
 import DAO.ClientDAO;
 import Metier.Client;
 import Metier.Connexion;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLClientDAO implements ClientDAO {
-	private static MySQLClientDAO  instance;
+	private MySQLClientDAO  instance;
 	public MySQLClientDAO () {}
-	public static MySQLClientDAO  getInstance() {
+	public MySQLClientDAO  getInstance() {
 		if(instance==null)
 			instance=new MySQLClientDAO ();
 		return instance;	
