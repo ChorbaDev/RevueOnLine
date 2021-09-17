@@ -18,6 +18,10 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO{
 			return instance;
 	}
 	@Override
+	public Abonnement getById(int id) throws SQLException {
+		return null;
+	}
+	@Override
 	public boolean create(Abonnement objet) throws SQLException {
 		objet.setId(1);
 		while (this.donnees.contains(objet)) {
@@ -53,25 +57,8 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO{
 		return objet.equals(supprime);
 	}
 	@Override
-	public Abonnement getById(int id) throws SQLException {
-		LocalDate dateDeb,dateFin;
-		dateDeb=LocalDate.now();
-		dateFin=LocalDate.now();
-		int idx = this.donnees.indexOf(new Abonnement(id, dateDeb,dateFin,1,1));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
-		} else {
-			return this.donnees.get(idx);
-		}
-	}
-	@Override
 	public ArrayList<Abonnement> getByClient(Client cl) throws SQLException {
-		ArrayList<Abonnement> liste=new ArrayList<>();
-		for(int i=1;i<donnees.size();i++) {
-			Abonnement ab=donnees.get(i);
-			if(ab.getId_client()==cl.getCle())
-				liste.add(ab);
-			}
-		return liste;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

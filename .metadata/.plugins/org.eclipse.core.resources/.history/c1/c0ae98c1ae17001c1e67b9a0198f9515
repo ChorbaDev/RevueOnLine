@@ -60,13 +60,8 @@ private ListeMemoireRevueDAO() {
 
 	@Override
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException {
-		ArrayList<Revue> liste=new ArrayList<>();
-		for(int i=1;i<donnees.size();i++) {
-			Revue r=donnees.get(i);
-			if(r.getTitre()==titre)
-				liste.add(r);
-			}
-		return liste;
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

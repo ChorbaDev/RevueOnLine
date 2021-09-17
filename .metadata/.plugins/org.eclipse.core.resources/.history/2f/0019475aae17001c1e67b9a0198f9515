@@ -13,12 +13,8 @@ private ListeMemoireRevueDAO() {
 }
 	@Override
 	public Revue getById(int id) throws SQLException {
-		int idx = this.donnees.indexOf(new Revue(id,"test","test",1.0,"test",1));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-		} else {
-			return this.donnees.get(idx);
-		}
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -46,27 +42,15 @@ private ListeMemoireRevueDAO() {
 	}
 
 	@Override
-	public boolean delete(Revue objet) throws SQLException {
-		Revue supprime;
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
-		
-		return objet.equals(supprime);
+	public boolean delete(Revue object) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException {
-		ArrayList<Revue> liste=new ArrayList<>();
-		for(int i=1;i<donnees.size();i++) {
-			Revue r=donnees.get(i);
-			if(r.getTitre()==titre)
-				liste.add(r);
-			}
-		return liste;
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
