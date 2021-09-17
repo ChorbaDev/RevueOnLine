@@ -13,92 +13,115 @@ import DAOFactory.*;
 public class Application {
 
     public static void main(String[] args) throws SQLException {
-    	System.out.println("---------Bienvenue dans notre application---------");
-    	System.out.println("Quelle table vous voulez manipuler? \n"
-    			+ "1-Abonnement\n"
-    			+ "2-Client\n"
-    			+ "3-Périodicité\n"
-    			+ "4-Revue");
-    	Scanner sc=new Scanner(System.in);
-    	int choixTable;
-    	do {
-    		choixTable=sc.nextInt();
-    	}while(choixTable<1 || choixTable>4);
-    	
-    	switch(choixTable) {
-	    	case 1:manipAbonnement(sc);break;
-	    	case 2:manipClient(sc);break;
-	    	case 3:manipPeriodicite(sc);break;
-	    	case 4:manipRevue(sc);break;
-	    	default:break;
-    	}
+        System.out.println("---------Bienvenue dans notre application---------");
+        System.out.println("Quelle table vous voulez manipuler? \n"
+                + "1-Abonnement\n"
+                + "2-Client\n"
+                + "3-Pï¿½riodicitï¿½\n"
+                + "4-Revue");
+        Scanner sc = new Scanner(System.in);
+        int choixTable;
+        do {
+            choixTable = sc.nextInt();
+        } while (choixTable < 1 || choixTable > 4);
+
+        switch (choixTable) {
+            case 1:
+                manipAbonnement(sc);
+                break;
+            case 2:
+                manipClient(sc);
+                break;
+            case 3:
+                manipPeriodicite(sc);
+                break;
+            case 4:
+                manipRevue(sc);
+                break;
+            default:
+                break;
+        }
     }
 
-	private static void manipRevue(Scanner sc) throws SQLException {
-		afficheCRUD();
-		int choixOperation;
-		do {
-			choixOperation=sc.nextInt();
-		}while(choixOperation<1 || choixOperation>4);
-		switch(choixOperation) {
-			case 1:;break;
-			case 2:requestRevue(sc);break;
-			case 3:;break;
-			case 4:;break;
-			default:break;
-		}
-	}
+    private static void manipRevue(Scanner sc) throws SQLException {
+        afficheCRUD();
+        int choixOperation;
+        do {
+            choixOperation = sc.nextInt();
+        } while (choixOperation < 1 || choixOperation > 4);
+        switch (choixOperation) {
+            case 1:
+                ;
+                break;
+            case 2:
+                requestRevue(sc);
+                break;
+            case 3:
+                ;
+                break;
+            case 4:
+                ;
+                break;
+            default:
+                break;
+        }
+    }
 
-	private static void requestRevue(Scanner sc) throws SQLException {
-		System.out.println("Affichage par:\n"
-				+ "1-ID\n"
-				+ "2-Titre\n");
-		int choix;
-		do {
-			choix=sc.nextInt();
-		}while(choix<1 || choix>4);
-		switch(choix) {
-			case 1:reqIdRevue(sc);break;
-			case 2:reqTitreRevue(sc);break;
-			default:break;
-		}
-		
-	}
+    private static void requestRevue(Scanner sc) throws SQLException {
+        System.out.println("Affichage par:\n"
+                + "1-ID\n"
+                + "2-Titre\n");
+        int choix;
+        do {
+            choix = sc.nextInt();
+        } while (choix < 1 || choix > 4);
+        switch (choix) {
+            case 1:
+                reqIdRevue(sc);
+                break;
+            case 2:
+                reqTitreRevue(sc);
+                break;
+            default:
+                break;
+        }
 
-	private static void reqTitreRevue(Scanner sc) throws SQLException {
-		String titre=sc.nextLine();
-		ArrayList<Revue> listR=DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO().getByTitre(titre);
-		for(Revue r : listR) {
-			System.out.println(r.toString());
-		}
-	}
+    }
 
-	private static void reqIdRevue(Scanner sc) throws SQLException {
-		int id=sc.nextInt();
-		Revue r=DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO().getById(id);
-		System.out.println(r.toString());
-	}
+    private static void reqTitreRevue(Scanner sc) throws SQLException {
+        String titre = sc.nextLine();
+        ArrayList<Revue> listR = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO().getByTitre(titre);
+        for (Revue r : listR) {
+            System.out.println(r.toString());
+        }
+    }
 
-	private static void manipPeriodicite(Scanner sc) {
-		afficheCRUD();		
-	}
+    private static void reqIdRevue(Scanner sc) throws SQLException {
+        int id = sc.nextInt();
+        Revue r = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO().getById(id);
+        System.out.println(r.toString());
+    }
 
-	private static void manipClient(Scanner sc) {
-		afficheCRUD();		
-	}
+    private static void manipPeriodicite(Scanner sc) {
+        afficheCRUD();
+    }
 
-	private static void manipAbonnement(Scanner sc) {
-		afficheCRUD();		
-	}
+    private static void manipClient(Scanner sc) {
+        afficheCRUD();
+    }
 
-	private static void afficheCRUD() {
-		System.out.println("Choisissez votre opération:\n"
-				+ "1-Create\n"
-				+ "2-Request\n"
-				+ "3-Update\n"
-				+ "4-Delete\n");
-		
-	}
+    private static void manipAbonnement(Scanner sc) {
+        afficheCRUD();
+    }
+
+    private static void afficheCRUD() {
+        System.out.println("Choisissez votre opï¿½ration:\n"
+                + "1-Create\n"
+                + "2-Request\n"
+                + "3-Update\n"
+                + "4-Delete\n");
+
+    }
 }
 /*  // TODO Auto-generated method stub
 Scanner scanner = new Scanner(System.in);

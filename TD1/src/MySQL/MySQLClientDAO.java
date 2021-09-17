@@ -3,29 +3,34 @@ package MySQL;
 import DAO.ClientDAO;
 import Metier.Client;
 import Metier.Connexion;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLClientDAO implements ClientDAO {
-	private static MySQLClientDAO  instance;
-	public MySQLClientDAO () {}
-	public static MySQLClientDAO  getInstance() {
-		if(instance==null)
-			instance=new MySQLClientDAO ();
-		return instance;	
-	}
+    private static MySQLClientDAO instance;
+
+    public MySQLClientDAO() {
+    }
+
+    public static MySQLClientDAO getInstance() {
+        if (instance == null)
+            instance = new MySQLClientDAO();
+        return instance;
+    }
+
     @Override
     public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
-        ArrayList<Client> lClient= new ArrayList<>();
+        ArrayList<Client> lClient = new ArrayList<>();
         Connexion maConnexion = new Connexion();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client where nom=? and prenom=?");
         req.setString(1, nom);
         req.setString(2, prenom);
-        ResultSet res=req.executeQuery();
+        ResultSet res = req.executeQuery();
 
-        while(res.next()){
-            lClient.add(new Client(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)));
+        while (res.next()) {
+            lClient.add(new Client(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8)));
         }
         if (res != null)
             res.close();
@@ -42,10 +47,10 @@ public class MySQLClientDAO implements ClientDAO {
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client where id_client=?");
         req.setInt(1, id);
-        ResultSet res=req.executeQuery();
-        Client client=null;
-        if(res.next())
-            client=new Client(id, res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8));
+        ResultSet res = req.executeQuery();
+        Client client = null;
+        if (res.next())
+            client = new Client(id, res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8));
         if (res != null)
             res.close();
         if (req != null)
