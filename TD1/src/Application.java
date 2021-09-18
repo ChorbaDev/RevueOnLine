@@ -11,7 +11,7 @@ public class Application {
 	public static void main(String[] args) throws SQLException {
 		System.out.println("---------Bienvenue dans notre application---------");
 		System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
-				+ "3-Périodicité\n" + "4-Revue");
+				+ "3-Pï¿½riodicitï¿½\n" + "4-Revue");
 		Scanner sc = new Scanner(System.in);
 		int choixTable;
 		do {
@@ -85,7 +85,7 @@ public class Application {
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
 		tarif = sc.nextDouble();
-		System.out.print("Périodicité (ID) :");
+		System.out.print("Pï¿½riodicitï¿½ (ID) :");
 		id_p = sc.nextInt();
 		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO()
 				.create(new Revue(titre, description, tarif, visuel, id_p));
@@ -138,7 +138,7 @@ public class Application {
 
 	private static void afficheCRUD() {
 		System.out
-				.println("Choisissez votre opération:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
+				.println("Choisissez votre opï¿½ration:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
 
 	}
 }
@@ -163,9 +163,9 @@ public class Application {
  * (choixtravail) { case 1: a.addAbonnement(); break; case 2:
  * a.updateAbonnement("10/09/21", "11/10/22", 12, 1); break; case 3:
  * a.deleteAbonnement(); break; }
- * 
+ *
  * }
- * 
- * 
+ *
+ *
  * }
  */
