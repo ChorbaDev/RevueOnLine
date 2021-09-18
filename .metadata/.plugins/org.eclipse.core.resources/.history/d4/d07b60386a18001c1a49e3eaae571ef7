@@ -63,16 +63,6 @@ public class Application {
 		}
 	}
 
-	private static void deleteRevue(Scanner sc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void updateRevue(Scanner sc) {
-		// TODO Auto-generated method stub
-
-	}
-
 	private static void createRevue(Scanner sc) throws SQLException {
 		String titre, description, visuel;
 		double tarif;

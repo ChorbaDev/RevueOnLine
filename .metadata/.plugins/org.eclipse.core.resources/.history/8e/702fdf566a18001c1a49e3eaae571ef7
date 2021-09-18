@@ -63,11 +63,6 @@ public class Application {
 		}
 	}
 
-	private static void deleteRevue(Scanner sc) {
-		// TODO Auto-generated method stub
-
-	}
-
 	private static void updateRevue(Scanner sc) {
 		// TODO Auto-generated method stub
 

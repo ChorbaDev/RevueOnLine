@@ -44,51 +44,20 @@ public class Application {
 		} while (choixOperation < 1 || choixOperation > 4);
 		switch (choixOperation) {
 		case 1:
-			createRevue(sc);
 			;
 			break;
 		case 2:
 			requestRevue(sc);
 			break;
 		case 3:
-			updateRevue(sc);
 			;
 			break;
 		case 4:
-			deleteRevue(sc);
 			;
 			break;
 		default:
 			break;
 		}
-	}
-
-	private static void deleteRevue(Scanner sc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void updateRevue(Scanner sc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void createRevue(Scanner sc) throws SQLException {
-		String titre, description, visuel;
-		double tarif;
-		int id_p;
-		System.out.print("Titre :");
-		titre = sc.nextLine();
-		System.out.print("Description :");
-		description = sc.nextLine();
-		System.out.print("Visuel :");
-		visuel = sc.nextLine();
-		System.out.print("Tarif :");
-		tarif = sc.nextDouble();
-		System.out.print("Périodicité (ID) :");
-		id_p = sc.nextInt();
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getRevueDAO()
-				.create(new Revue(titre, description, tarif, visuel, id_p));
 	}
 
 	private static void requestRevue(Scanner sc) throws SQLException {
