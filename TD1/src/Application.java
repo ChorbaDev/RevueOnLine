@@ -11,6 +11,7 @@ import DAO.Persistance;
 import DAOFactory.*;
 
 public class Application {
+    static DAOFactory daos=null;
 
     public static void main(String[] args) throws SQLException {
         System.out.println("---------Bienvenue dans notre application---------");
@@ -49,6 +50,7 @@ public class Application {
         do {
             choixOperation = sc.nextInt();
         } while (choixOperation < 1 || choixOperation > 4);
+        daos=choixPersistance(sc);
         switch (choixOperation) {
             case 1:
                 ;
@@ -108,6 +110,7 @@ public class Application {
         do {
             choixOperation = sc.nextInt();
         } while (choixOperation < 1 || choixOperation > 4);
+        daos=choixPersistance(sc);
         switch (choixOperation) {
             case 1:
                 ;
@@ -166,6 +169,7 @@ public class Application {
         do {
             choixOperation = sc.nextInt();
         } while (choixOperation < 1 || choixOperation > 4);
+        daos=choixPersistance(sc);
         switch (choixOperation) {
             case 1:
                 ;
@@ -231,6 +235,27 @@ public class Application {
                 + "3-Update\n"
                 + "4-Delete\n");
 
+    }
+
+    private static DAOFactory choixPersistance(Scanner sc) {
+        System.out.println("Choix de la solution de persistance:\n"
+                + "1-MySQL\n"
+                + "2-ListeMemoire\n");
+        int choix;
+        do {
+            choix = sc.nextInt();
+        } while (choix < 1 || choix > 2);
+        switch (choix) {
+            case 1:
+                daos=DAOFactory.getDAOFactory(Persistance.MYSQL);
+                break;
+            case 2:
+                daos=DAOFactory.getDAOFactory(Persistance.ListeMemoire);
+                break;
+            default:
+                break;
+        }
+        return daos;
     }
 }
 /*  // TODO Auto-generated method stub
