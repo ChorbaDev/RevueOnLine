@@ -3,4 +3,10 @@
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="DAO.RevueDAO"/>
+    <fullyQualifiedTypeName name="DAO.AbonnementDAO"/>
+    <fullyQualifiedTypeName name="MySQL.MySQLAbonnementDAO"/>
+    <fullyQualifiedTypeName name="ListeMemoire.ListeMemoireAbonnementDAO"/>
+    <fullyQualifiedTypeName name="DAOFactory.DAOFactory"/>
+    <fullyQualifiedTypeName name="DAOFactory.ListeMemoireDAOFactory"/>
+    <fullyQualifiedTypeName name="DAO.Persistance"/>
 </qualifiedTypeNameHistroy>
