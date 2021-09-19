@@ -5,6 +5,8 @@ import java.util.Scanner;
 import DAO.Persistance;
 import DAOFactory.DAOFactory;
 import Metier.Abonnement;
+import Metier.Client;
+import Metier.Periodicite;
 import Metier.Revue;
 
 public class Application {
@@ -161,12 +163,231 @@ public class Application {
 		System.out.println(r.toString());
 	}
 
-	private static void manipPeriodicite(Scanner sc) {
+	private static void manipPeriodicite(Scanner sc) throws SQLException {
 		afficheCRUD();
+		int choixOperation;
+		do {
+			choixOperation = Integer.parseInt(sc.nextLine());
+		} while (choixOperation < 1 || choixOperation > 4);
+		switch (choixOperation) {
+		case 1:
+			createPeriodicite(sc);
+			;
+			break;
+		case 2:
+			requestPeriodicite(sc);
+			break;
+		case 3:
+			updatePeriodicite(sc);
+			;
+			break;
+		case 4:
+			deletePeriodicite(sc);
+			;
+			break;
+		default:
+			break;
+		}
 	}
 
-	private static void manipClient(Scanner sc) {
+	private static void deletePeriodicite(Scanner sc) throws SQLException {
+		String libelle;
+		int id;
+		System.out.print("ID Periodicite :");
+		id = Integer.parseInt(sc.nextLine());
+		System.out.print("Libelle :");
+		libelle = sc.nextLine();
+		Periodicite p = new Periodicite(id, libelle);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().delete(p);
+	}
+
+	private static void updatePeriodicite(Scanner sc) throws SQLException {
+		String libelle;
+		int id;
+		System.out.print("ID Periodicite :");
+		id = Integer.parseInt(sc.nextLine());
+		System.out.print("Libelle :");
+		libelle = sc.nextLine();
+		Periodicite p = new Periodicite(id, libelle);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().update(p);
+
+	}
+
+	private static void requestPeriodicite(Scanner sc) throws SQLException {
+		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Libelle\n");
+		int choix;
+		do {
+			choix = Integer.parseInt(sc.nextLine());
+		} while (choix < 1 || choix > 4);
+		switch (choix) {
+		case 1:
+			reqIdPeriodicite(sc);
+			break;
+		case 2:
+			reqLibellePeriodicite(sc);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	private static void reqLibellePeriodicite(Scanner sc) throws SQLException {
+		String lib = sc.nextLine();
+		ArrayList<Periodicite> listeP = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO()
+				.getByLibelle(lib);
+		for (Periodicite p : listeP)
+			System.out.println(p.toString());
+
+	}
+
+	private static void reqIdPeriodicite(Scanner sc) throws SQLException {
+		int id = Integer.parseInt(sc.nextLine());
+		Periodicite ab = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().getById(id);
+		System.out.println(ab.toString());
+
+	}
+
+	private static void createPeriodicite(Scanner sc) throws SQLException {
+		String libelle;
+		System.out.print("Libelle :");
+		libelle = sc.nextLine();
+		Periodicite p = new Periodicite(libelle);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().create(p);
+
+	}
+
+	private static void manipClient(Scanner sc) throws SQLException {
 		afficheCRUD();
+		int choixOperation;
+		do {
+			choixOperation = Integer.parseInt(sc.nextLine());
+		} while (choixOperation < 1 || choixOperation > 4);
+		switch (choixOperation) {
+		case 1:
+			createClient(sc);
+			;
+			break;
+		case 2:
+			requestClient(sc);
+			break;
+		case 3:
+			updateClient(sc);
+			;
+			break;
+		case 4:
+			deleteClient(sc);
+			;
+			break;
+		default:
+			break;
+		}
+	}
+
+	private static void deleteClient(Scanner sc) throws SQLException {
+		int id;
+		String nom, prenom, no_rue, voie, code_postal, ville, pays;
+		System.out.print("ID Client :");
+		id = Integer.parseInt(sc.nextLine());
+		System.out.print("Nom :");
+		nom = sc.nextLine();
+		System.out.print("Prenom :");
+		prenom = sc.nextLine();
+		System.out.print("No rue:");
+		no_rue = sc.nextLine();
+		System.out.print("Voie :");
+		voie = sc.nextLine();
+		System.out.print("Code postal :");
+		code_postal = sc.nextLine();
+		System.out.print("Ville :");
+		ville = sc.nextLine();
+		System.out.print("Pays :");
+		pays = sc.nextLine();
+		Client cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getClientDAO().delete(cl);
+	}
+
+	private static void updateClient(Scanner sc) throws SQLException {
+		int id;
+		String nom, prenom, no_rue, voie, code_postal, ville, pays;
+		System.out.print("ID Client :");
+		id = Integer.parseInt(sc.nextLine());
+		System.out.print("Nom :");
+		nom = sc.nextLine();
+		System.out.print("Prenom :");
+		prenom = sc.nextLine();
+		System.out.print("No rue:");
+		no_rue = sc.nextLine();
+		System.out.print("Voie :");
+		voie = sc.nextLine();
+		System.out.print("Code postal :");
+		code_postal = sc.nextLine();
+		System.out.print("Ville :");
+		ville = sc.nextLine();
+		System.out.print("Pays :");
+		pays = sc.nextLine();
+		Client cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getClientDAO().update(cl);
+
+	}
+
+	private static void requestClient(Scanner sc) throws SQLException {
+		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Nom & Prenom\n");
+		int choix;
+		do {
+			choix = Integer.parseInt(sc.nextLine());
+		} while (choix < 1 || choix > 4);
+		switch (choix) {
+		case 1:
+			reqIdClient(sc);
+			break;
+		case 2:
+			reqNPClient(sc);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	private static void reqNPClient(Scanner sc) throws SQLException {
+		String nom, prenom;
+		System.out.print("Nom :");
+		nom = sc.nextLine();
+		System.out.print("Prenom :");
+		prenom = sc.nextLine();
+		ArrayList<Client> listeCL = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getClientDAO()
+				.getByNomPrenom(nom, prenom);
+		for (Client cl : listeCL)
+			System.out.println(cl.toString());
+
+	}
+
+	private static void reqIdClient(Scanner sc) throws SQLException {
+		int id = Integer.parseInt(sc.nextLine());
+		Client cl = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getClientDAO().getById(id);
+		System.out.println(cl.toString());
+	}
+
+	private static void createClient(Scanner sc) throws SQLException {
+		String nom, prenom, no_rue, voie, code_postal, ville, pays;
+		System.out.print("Nom :");
+		nom = sc.nextLine();
+		System.out.print("Prenom :");
+		prenom = sc.nextLine();
+		System.out.print("No rue:");
+		no_rue = sc.nextLine();
+		System.out.print("Voie :");
+		voie = sc.nextLine();
+		System.out.print("Code postal :");
+		code_postal = sc.nextLine();
+		System.out.print("Ville :");
+		ville = sc.nextLine();
+		System.out.print("Pays :");
+		pays = sc.nextLine();
+		Client cl = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
+		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getClientDAO().create(cl);
+
 	}
 
 	private static void manipAbonnement(Scanner sc) throws SQLException {
@@ -275,7 +496,7 @@ public class Application {
 	}
 
 	private static void reqIdAbonnement(Scanner sc) throws SQLException {
-		int id = sc.nextInt();
+		int id = Integer.parseInt(sc.nextLine());
 		Abonnement ab = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO().getById(id);
 		System.out.println(ab.toString());
 
@@ -287,30 +508,3 @@ public class Application {
 
 	}
 }
-/*
- * // TODO Auto-generated method stub Scanner scanner = new Scanner(System.in);
- * Client c = new Client("gho", "you", "5", "fekoe", "5700", "yutz", "fr");
- * Periodicite p = new Periodicite("bonjour"); Revue r = new
- * Revue("Sa majesté le roi des mouches", " le roi de mouches", 10.95, "beau",
- * 5); Abonnement a = new Abonnement("10/09/21", "11/10/21", 12, 1); System.out.
- * println("que souhaitez vous faire ? : 1- ajouter, 2-modifier, 3-supprimer");
- * int choixtravail = scanner.nextInt(); System.out.
- * println("sur quelle table souhaitez vous travailler ? : 1- Periodicité, 2-Metier.Client, 3-Metier.Revue, 4-Metier.Abonnement"
- * ); int choixtable = scanner.nextInt(); switch (choixtable) { case 1: switch
- * (choixtravail) { case 1: p.addPeriodicite(); break; case 2:
- * p.updatePeriodicite("aurevoir"); break; case 3: p.deletePeriodicite(); break;
- * } case 2: switch (choixtravail) { case 1: c.addClient(); break; case 2:
- * c.updateClient("gholem", "youss", "12", "the voice", "57500", "metz",
- * "marsa"); break; case 3: c.deleteClient(); break; } case 3: switch
- * (choixtravail) { case 1: r.addRevue(); break; case 2:
- * r.updateRevue("Sa majesté le roi des mouches", " le roi de mouches", 10.95,
- * "beau", 5); break; case 3: r.deleteRevue(); break; } case 4: switch
- * (choixtravail) { case 1: a.addAbonnement(); break; case 2:
- * a.updateAbonnement("10/09/21", "11/10/22", 12, 1); break; case 3:
- * a.deleteAbonnement(); break; }
- *
- * }
- *
- *
- * }
- */

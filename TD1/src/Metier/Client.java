@@ -1,101 +1,106 @@
 package Metier;
 
-import java.sql.*;
-
 public class Client {
-    private int cle;
-    private String nom;
-    private String prenom;
-    private String no_rue;
-    private String voie;
-    private String code_postal;
-    private String ville;
-    private String pays;
+	private int cle;
+	private String nom;
+	private String prenom;
+	private String no_rue;
+	private String voie;
+	private String code_postal;
+	private String ville;
+	private String pays;
 
-    public Client(String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.no_rue = no_rue;
-        this.voie = voie;
-        this.code_postal = code_postal;
-        this.ville = ville;
-        this.pays = pays;
-    }
+	@Override
+	public String toString() {
+		return "Client [cle=" + cle + ", nom=" + nom + ", prenom=" + prenom + ", no_rue=" + no_rue + ", voie=" + voie
+				+ ", code_postal=" + code_postal + ", ville=" + ville + ", pays=" + pays + "]";
+	}
 
-    public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville, String pays) {
-        this.cle = cle;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.no_rue = no_rue;
-        this.voie = voie;
-        this.code_postal = code_postal;
-        this.ville = ville;
-        this.pays = pays;
-    }
+	public Client(String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
+			String pays) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.no_rue = no_rue;
+		this.voie = voie;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.pays = pays;
+	}
 
-    public void setCle(int cle) {
-        this.cle = cle;
-    }
+	public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
+			String pays) {
+		this.cle = cle;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.no_rue = no_rue;
+		this.voie = voie;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.pays = pays;
+	}
 
-    public int getCle() {
-        return cle;
-    }
+	public void setCle(int cle) {
+		this.cle = cle;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public int getCle() {
+		return cle;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public String getPrenom() {
-        return prenom;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+	public String getPrenom() {
+		return prenom;
+	}
 
-    public String getNo_rue() {
-        return no_rue;
-    }
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 
-    public void setNo_rue(String no_rue) {
-        this.no_rue = no_rue;
-    }
+	public String getNo_rue() {
+		return no_rue;
+	}
 
-    public String getVoie() {
-        return voie;
-    }
+	public void setNo_rue(String no_rue) {
+		this.no_rue = no_rue;
+	}
 
-    public void setVoie(String voie) {
-        this.voie = voie;
-    }
+	public String getVoie() {
+		return voie;
+	}
 
-    public String getCode_postal() {
-        return code_postal;
-    }
+	public void setVoie(String voie) {
+		this.voie = voie;
+	}
 
-    public void setCode_postal(String code_postal) {
-        this.code_postal = code_postal;
-    }
+	public String getCode_postal() {
+		return code_postal;
+	}
 
-    public String getVille() {
-        return ville;
-    }
+	public void setCode_postal(String code_postal) {
+		this.code_postal = code_postal;
+	}
 
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
+	public String getVille() {
+		return ville;
+	}
 
-    public String getPays() {
-        return pays;
-    }
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
-    public void setPays(String pays) {
-        this.pays = pays;
-    }
+	public String getPays() {
+		return pays;
+	}
 
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
 
 }

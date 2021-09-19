@@ -1,35 +1,37 @@
 package Metier;
 
-import java.sql.*;
-
 public class Periodicite {
-    private int cle;
-    private String libelle;
+	private int cle;
+	private String libelle;
 
-    public Periodicite(String ch) {
-        this.libelle = ch;
-    }
+	public Periodicite(String ch) {
+		this.libelle = ch;
+	}
 
-    public Periodicite(int cle, String libelle) {
-        this.cle = cle;
-        this.libelle = libelle;
-    }
+	@Override
+	public String toString() {
+		return "Periodicite [cle=" + cle + ", libelle=" + libelle + "]";
+	}
 
-    public String getLibelle() {
-        return libelle;
-    }
+	public Periodicite(int cle, String libelle) {
+		this.cle = cle;
+		this.libelle = libelle;
+	}
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
+	public String getLibelle() {
+		return libelle;
+	}
 
-    public int getCle() {
-        return cle;
-    }
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
 
-    public void setCle(int cle) {
-        this.cle = cle;
-    }
+	public int getCle() {
+		return cle;
+	}
 
+	public void setCle(int cle) {
+		this.cle = cle;
+	}
 
 }

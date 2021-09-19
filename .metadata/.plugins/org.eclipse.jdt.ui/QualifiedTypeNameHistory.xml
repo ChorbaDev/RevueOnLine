@@ -9,4 +9,7 @@
     <fullyQualifiedTypeName name="DAOFactory.DAOFactory"/>
     <fullyQualifiedTypeName name="DAOFactory.ListeMemoireDAOFactory"/>
     <fullyQualifiedTypeName name="DAO.Persistance"/>
+    <fullyQualifiedTypeName name="Metier.Abonnement"/>
+    <fullyQualifiedTypeName name="Metier.Periodicite"/>
+    <fullyQualifiedTypeName name="Metier.Client"/>
 </qualifiedTypeNameHistroy>
