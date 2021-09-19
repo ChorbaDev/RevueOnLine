@@ -3,18 +3,26 @@ package Application;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import DAO.Persistance;
 import DAOFactory.DAOFactory;
 
 public class Application {
-	static DAOFactory daos = null;
 
 	public static void main(String[] args) throws SQLException {
 		String reponse;
 		System.out.println("---------Bienvenue dans notre application---------");
 		do {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Choissisez entre:\n1-My SQL\n2-Liste Memoire");
+			int idxPer = Integer.parseInt(sc.nextLine());
+			Persistance persistance;
+			if (idxPer == 1)
+				persistance = Persistance.MYSQL;
+			else
+				persistance = Persistance.ListeMemoire;
 			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
 					+ "3-Periodicite\n" + "4-Revue");
-			Scanner sc = new Scanner(System.in);
+			DAOFactory daof = DAOFactory.getDAOFactory(persistance);
 			int choixTable;
 			do {
 				choixTable = Integer.parseInt(sc.nextLine());
@@ -22,16 +30,16 @@ public class Application {
 
 			switch (choixTable) {
 			case 1:
-				AppAbonnement.manipAbonnement(sc);
+				AppAbonnement.manipAbonnement(sc, daof);
 				break;
 			case 2:
-				AppClient.manipClient(sc);
+				AppClient.manipClient(sc, daof);
 				break;
 			case 3:
-				AppPeriodicite.manipPeriodicite(sc);
+				AppPeriodicite.manipPeriodicite(sc, daof);
 				break;
 			case 4:
-				AppRevue.manipRevue(sc);
+				AppRevue.manipRevue(sc, daof);
 				break;
 			default:
 				break;

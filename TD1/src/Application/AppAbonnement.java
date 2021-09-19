@@ -4,12 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DAO.Persistance;
 import DAOFactory.DAOFactory;
 import Metier.Abonnement;
 
 public abstract class AppAbonnement {
-	public static void manipAbonnement(Scanner sc) throws SQLException {
+	public static void manipAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		afficheCRUD();
 		int choixOperation;
 		do {
@@ -17,18 +16,18 @@ public abstract class AppAbonnement {
 		} while (choixOperation < 1 || choixOperation > 4);
 		switch (choixOperation) {
 		case 1:
-			createAbonnement(sc);
+			createAbonnement(sc, daof);
 			;
 			break;
 		case 2:
-			requestAbonnement(sc);
+			requestAbonnement(sc, daof);
 			break;
 		case 3:
-			updateAbonnement(sc);
+			updateAbonnement(sc, daof);
 			;
 			break;
 		case 4:
-			deleteAbonnement(sc);
+			deleteAbonnement(sc, daof);
 			;
 			break;
 		default:
@@ -36,7 +35,7 @@ public abstract class AppAbonnement {
 		}
 	}
 
-	private static void deleteAbonnement(Scanner sc) throws SQLException {
+	private static void deleteAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		String date_deb, date_fin;
 		int id_c, id_r, id;
 		System.out.print("ID Abonnement :");
@@ -50,7 +49,7 @@ public abstract class AppAbonnement {
 		System.out.print("ID Revue :");
 		id_r = Integer.parseInt(sc.nextLine());
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO().delete(abonnement);
+		daof.getAbonnementDAO().delete(abonnement);
 	}
 
 	private static void afficheCRUD() {
@@ -59,7 +58,7 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void updateAbonnement(Scanner sc) throws SQLException {
+	private static void updateAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		String date_deb, date_fin;
 		int id_c, id_r, id;
 		System.out.print("ID Abonnement :");
@@ -73,10 +72,10 @@ public abstract class AppAbonnement {
 		System.out.print("ID Revue :");
 		id_r = Integer.parseInt(sc.nextLine());
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO().update(abonnement);
+		daof.getAbonnementDAO().update(abonnement);
 	}
 
-	private static void requestAbonnement(Scanner sc) throws SQLException {
+	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Client\n");
 		int choix;
 		do {
@@ -84,10 +83,10 @@ public abstract class AppAbonnement {
 		} while (choix < 1 || choix > 4);
 		switch (choix) {
 		case 1:
-			reqIdAbonnement(sc);
+			reqIdAbonnement(sc, daof);
 			break;
 		case 2:
-			reqClientAbonnement(sc);
+			reqClientAbonnement(sc, daof);
 			break;
 		default:
 			break;
@@ -95,7 +94,7 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void createAbonnement(Scanner sc) throws SQLException {
+	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		String date_deb, date_fin;
 		int id_c, id_r;
 		System.out.print("Date debut jj/mm/yyyy :");
@@ -107,22 +106,21 @@ public abstract class AppAbonnement {
 		System.out.print("ID Revue :");
 		id_r = Integer.parseInt(sc.nextLine());
 		Abonnement abonnement = new Abonnement(date_deb, date_fin, id_r, id_c);
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO().create(abonnement);
+		daof.getAbonnementDAO().create(abonnement);
 	}
 
-	private static void reqClientAbonnement(Scanner sc) throws SQLException {
+	private static void reqClientAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		int id_c = Integer.parseInt(sc.nextLine());
-		ArrayList<Abonnement> listeAb = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO()
-				.getByClient(id_c);
+		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().getByClient(id_c);
 		for (Abonnement ab : listeAb) {
 			System.out.println(ab.toString());
 		}
 
 	}
 
-	private static void reqIdAbonnement(Scanner sc) throws SQLException {
+	private static void reqIdAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
 		int id = Integer.parseInt(sc.nextLine());
-		Abonnement ab = DAOFactory.getDAOFactory(Persistance.ListeMemoire).getAbonnementDAO().getById(id);
+		Abonnement ab = daof.getAbonnementDAO().getById(id);
 		System.out.println(ab.toString());
 
 	}
