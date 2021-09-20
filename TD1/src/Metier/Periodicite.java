@@ -9,6 +9,29 @@ public class Periodicite {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cle;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Periodicite other = (Periodicite) obj;
+		if (cle != other.cle)
+			return false;
+		return true;
+	}
+
+	// && (other.libelle.equals(this.libelle))
+	@Override
 	public String toString() {
 		return "Periodicite [cle=" + cle + ", libelle=" + libelle + "]";
 	}
@@ -16,6 +39,10 @@ public class Periodicite {
 	public Periodicite(int cle, String libelle) {
 		this.cle = cle;
 		this.libelle = libelle;
+	}
+
+	public Periodicite(int cle) {
+		this.cle = cle;
 	}
 
 	public String getLibelle() {

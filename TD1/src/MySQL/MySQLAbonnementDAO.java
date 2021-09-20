@@ -126,4 +126,19 @@ public class MySQLAbonnementDAO implements AbonnementDAO {
 		}
 		return list;
 	}
+
+	@Override
+	public ArrayList<Abonnement> findAll() throws SQLException {
+		ArrayList<Abonnement> list = new ArrayList<>();
+		Connexion maConnexion = new Connexion();
+		Connection connect = maConnexion.creeConnexion();
+		String sql = "select * from Abonnement where id_client=?";
+		PreparedStatement req = connect.prepareStatement(sql);
+		ResultSet res = req.executeQuery();
+		while (res.next()) {
+			list.add(new Abonnement(res.getInt(1), res.getDate(2).toLocalDate(), res.getDate(3).toLocalDate(),
+					res.getInt(4), res.getInt(5)));
+		}
+		return list;
+	}
 }

@@ -128,7 +128,7 @@ public abstract class AppRevue {
 	}
 
 	private static void reqIdRevue(Scanner sc, DAOFactory daof) throws SQLException {
-		int id = sc.nextInt();
+		int id = Integer.parseInt(sc.nextLine());
 		Revue r = daof.getRevueDAO().getById(id);
 		System.out.println(r.toString());
 	}

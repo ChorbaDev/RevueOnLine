@@ -1,87 +1,110 @@
 package Metier;
 
-import java.sql.*;
-
 public class Revue {
-    private int id;
-    private String titre;
-    private String description;
-    private double tarif_numero;
-    private String visuel;
-    private int id_p;
+	private int id;
+	private String titre;
+	private String description;
+	private double tarif_numero;
+	private String visuel;
+	private int id_p;
 
+	public Revue(int id, String titre, String description, double tarif_numero, String visuel, int id_p) {
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.tarif_numero = tarif_numero;
+		this.visuel = visuel;
+		this.id_p = id_p;
+	}
 
-    public Revue(int id, String titre, String description, double tarif_numero, String visuel, int id_p) {
-        this.id = id;
-        this.titre = titre;
-        this.description = description;
-        this.tarif_numero = tarif_numero;
-        this.visuel = visuel;
-        this.id_p = id_p;
-    }
+	public Revue(int id) {
+		this.id = id;
 
-    public Revue(String titre, String description, double tarif_numero, String visuel, int id_p) {
-        this.titre = titre;
-        this.description = description;
-        this.tarif_numero = tarif_numero;
-        this.visuel = visuel;
-        this.id_p = id_p;
+	}
 
-    }
+	public Revue(String titre, String description, double tarif_numero, String visuel, int id_p) {
+		this.titre = titre;
+		this.description = description;
+		this.tarif_numero = tarif_numero;
+		this.visuel = visuel;
+		this.id_p = id_p;
 
-    public int getId() {
-        return id;
-    }
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
 
-    public String getTitre() {
-        return titre;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Revue other = (Revue) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getTitre() {
+		return titre;
+	}
 
-    public double getTarif_numero() {
-        return tarif_numero;
-    }
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-    public void setTarif_numero(double tarif_numero) {
-        this.tarif_numero = tarif_numero;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getVisuel() {
-        return visuel;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setVisuel(String visuel) {
-        this.visuel = visuel;
-    }
+	public double getTarif_numero() {
+		return tarif_numero;
+	}
 
-    public int getId_p() {
-        return id_p;
-    }
+	public void setTarif_numero(double tarif_numero) {
+		this.tarif_numero = tarif_numero;
+	}
 
-    public void setId_p(int id_p) {
-        this.id_p = id_p;
-    }
+	public String getVisuel() {
+		return visuel;
+	}
 
-    @Override
-    public String toString() {
-        return "Revue [id=" + id + ", titre=" + titre + ", description=" + description + ", tarif_numero="
-                + tarif_numero + ", visuel=" + visuel + ", id_p=" + id_p + "]";
-    }
+	public void setVisuel(String visuel) {
+		this.visuel = visuel;
+	}
 
+	public int getId_p() {
+		return id_p;
+	}
+
+	public void setId_p(int id_p) {
+		this.id_p = id_p;
+	}
+
+	@Override
+	public String toString() {
+		return "Revue [id=" + id + ", titre=" + titre + ", description=" + description + ", tarif_numero="
+				+ tarif_numero + ", visuel=" + visuel + ", id_p=" + id_p + "]";
+	}
 
 }

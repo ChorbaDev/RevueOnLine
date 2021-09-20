@@ -37,13 +37,10 @@ public abstract class AppPeriodicite {
 	}
 
 	private static void deletePeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
-		String libelle;
 		int id;
 		System.out.print("ID Periodicite :");
 		id = Integer.parseInt(sc.nextLine());
-		System.out.print("Libelle :");
-		libelle = sc.nextLine();
-		Periodicite p = new Periodicite(id, libelle);
+		Periodicite p = new Periodicite(id);
 		daof.getPeriodiciteDAO().delete(p);
 	}
 

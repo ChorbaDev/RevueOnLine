@@ -27,6 +27,28 @@ public class Client {
 		this.pays = pays;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cle;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (cle != other.cle)
+			return false;
+		return true;
+	}
+
 	public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
 			String pays) {
 		this.cle = cle;

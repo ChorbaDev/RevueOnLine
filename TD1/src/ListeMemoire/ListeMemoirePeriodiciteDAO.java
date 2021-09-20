@@ -1,73 +1,91 @@
 package ListeMemoire;
 
-import DAO.PeriodiciteDAO;
-import Metier.Periodicite;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.PeriodiciteDAO;
+import Metier.Periodicite;
+
 public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
-    private static ListeMemoirePeriodiciteDAO instance;
-    private List<Periodicite> donnees;
+	private static ListeMemoirePeriodiciteDAO instance;
+	private List<Periodicite> donnees;
 
-    private ListeMemoirePeriodiciteDAO() {
-        this.donnees = new ArrayList<>();
-    }
+	private ListeMemoirePeriodiciteDAO() {
+		this.donnees = new ArrayList<>();
+	}
 
-    public static ListeMemoirePeriodiciteDAO getInstance() {
-        if (instance == null)
-            instance = new ListeMemoirePeriodiciteDAO();
-        return instance;
-    }
+	public static ListeMemoirePeriodiciteDAO getInstance() {
+		if (instance == null)
+			instance = new ListeMemoirePeriodiciteDAO();
+		return instance;
+	}
 
-    @Override
-    public Periodicite getById(int id) throws SQLException {
-        for (Periodicite p : donnees) {
-            if (p.getCle() == id)
-                return p;
-        }
-        throw new IllegalArgumentException("Aucun objet de ce type ne possède cet identifiant");
-    }
+	@Override
+	public Periodicite getById(int id) throws SQLException {
+		int idx = this.donnees.indexOf(new Periodicite(id));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+		} else {
+			return this.donnees.get(idx);
+		}
+		/*
+		 * for (Periodicite p : donnees) { if (p.getCle() == id) return p; } throw new
+		 * IllegalArgumentException("Aucun objet de ce type ne possede cet identifiant"
+		 * );
+		 */
+	}
 
-    @Override
-    public boolean create(Periodicite object) throws SQLException {
-        object.setCle(donnees.size() + 1);
-        boolean validAjout = this.donnees.add(object);
-        return validAjout;
-    }
+	@Override
+	public boolean create(Periodicite objet) throws SQLException {
+		objet.setCle(1);
+		while (this.donnees.contains(objet)) {
+			objet.setCle(objet.getCle() + 1);
+		}
+		boolean ok = this.donnees.add(objet);
+		return ok;
+		/*
+		 * object.setCle(donnees.size() + 1); boolean validAjout =
+		 * this.donnees.add(object); return validAjout;
+		 */
+	}
 
-    @Override
-    public boolean update(Periodicite object) throws SQLException {
-        int idx = this.donnees.indexOf(object);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+	@Override
+	public boolean update(Periodicite object) throws SQLException {
+		int idx = this.donnees.indexOf(object);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
 
-        } else {
-            this.donnees.set(idx, object);
-        }
-        return true;
-    }
+		} else {
+			this.donnees.set(idx, object);
+		}
+		return true;
+	}
 
-    @Override
-    public boolean delete(Periodicite object) throws SQLException {
-        Periodicite supprime;
-        int idx = this.donnees.indexOf(object);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-        } else {
-            supprime = this.donnees.remove(idx);
-        }
-        return object.equals(supprime);
-    }
+	@Override
+	public boolean delete(Periodicite object) throws SQLException {
+		Periodicite supprime;
+		int idx = this.donnees.indexOf(object);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		} else {
+			supprime = this.donnees.remove(idx);
+		}
+		return object.equals(supprime);
+	}
 
-    @Override
-    public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException {
-        ArrayList<Periodicite> listePer = new ArrayList<>();
-        for (Periodicite p : donnees) {
-            if (p.getLibelle() == libelle)
-                listePer.add(p);
-        }
-        return listePer;
-    }
+	@Override
+	public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException {
+		ArrayList<Periodicite> listePer = new ArrayList<>();
+		for (Periodicite p : donnees) {
+			if (p.getLibelle() == libelle)
+				listePer.add(p);
+		}
+		return listePer;
+	}
+
+	@Override
+	public ArrayList<Periodicite> findAll() {
+		return (ArrayList<Periodicite>) this.donnees;
+	}
 }

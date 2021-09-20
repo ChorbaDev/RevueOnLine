@@ -34,7 +34,6 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 		if (idx == -1) {
 			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
 		} else {
-
 			this.donnees.set(idx, objet);
 		}
 
@@ -72,5 +71,10 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 				liste.add(ab);
 		}
 		return liste;
+	}
+
+	@Override
+	public ArrayList<Abonnement> findAll() throws SQLException {
+		return (ArrayList<Abonnement>) this.donnees;
 	}
 }
