@@ -48,7 +48,7 @@ public abstract class AppAbonnement {
             System.out.print("Date debut jj/mm/yyyy :");
             date_deb = sc.nextLine();
             valid=validationDate(date_deb);
-        }while(valid);
+        }while(!valid);
         valid=false;
         do{
             System.out.print("Date fin jj/mm/yyyy :");
@@ -56,7 +56,7 @@ public abstract class AppAbonnement {
             if (validationDate(date_fin) && compareDate(date_deb,date_fin) ) {
                 valid = true;
             }
-        } while (valid);
+        } while (!valid);
         System.out.print("ID Client :");
         id_c = Integer.parseInt(sc.nextLine());
         System.out.print("ID Revue :");
@@ -81,7 +81,7 @@ public abstract class AppAbonnement {
             System.out.print("Date debut jj/mm/yyyy :");
             date_deb = sc.nextLine();
             valid=validationDate(date_deb);
-        }while(valid);
+        }while(!valid);
         valid=false;
         do{
             System.out.print("Date fin jj/mm/yyyy :");
@@ -89,7 +89,7 @@ public abstract class AppAbonnement {
             if (validationDate(date_fin) && compareDate(date_deb,date_fin) ) {
                 valid = true;
             }
-        } while (valid);
+        } while (!valid);
         System.out.print("ID Client :");
         id_c = Integer.parseInt(sc.nextLine());
         System.out.print("ID Revue :");
@@ -125,7 +125,7 @@ public abstract class AppAbonnement {
             System.out.print("Date debut jj/mm/yyyy :");
             date_deb = sc.nextLine();
             valid=validationDate(date_deb);
-        }while(valid);
+        }while(!valid);
         valid=false;
         do{
             System.out.print("Date fin jj/mm/yyyy :");
@@ -133,7 +133,7 @@ public abstract class AppAbonnement {
             if (validationDate(date_fin) && compareDate(date_deb,date_fin) ) {
                 valid = true;
             }
-        } while (valid);
+        } while (!valid);
         System.out.print("ID Client :");
         id_c = Integer.parseInt(sc.nextLine());
         System.out.print("ID Revue :");
