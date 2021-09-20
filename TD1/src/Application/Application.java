@@ -1,6 +1,7 @@
 package Application;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import DAO.Persistance;
@@ -8,7 +9,7 @@ import DAOFactory.DAOFactory;
 
 public class Application {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ParseException {
 		String reponse;
 		System.out.println("---------Bienvenue dans notre application---------");
 		do {
