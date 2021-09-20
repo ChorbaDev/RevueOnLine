@@ -1,6 +1,5 @@
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Scanner;
 
 import Application.AppAbonnement;
@@ -12,7 +11,7 @@ import DAOFactory.DAOFactory;
 
 public class Application {
 
-	public static void main(String[] args) throws SQLException, ParseException {
+	public static void main(String[] args) throws SQLException {
 		String reponse;
 		System.out.println("---------Bienvenue dans notre application---------");
 		Scanner sc = new Scanner(System.in);

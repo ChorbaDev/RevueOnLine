@@ -30,22 +30,24 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 
 	@Override
 	public boolean update(Abonnement objet) throws SQLException {
-		for (int i = 0; i < donnees.size(); i++) {
-			if (objet.getId() == donnees.get(i).getId()) {
-				this.donnees.set(i, objet);
-				return true;
-			}
+		try {
+			this.donnees.set(objet.getId() - 1, objet);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
 		}
-		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		return true;
 	}
 
 	@Override
 	public boolean delete(Abonnement objet) throws SQLException {
+		boolean done;
 		for (Abonnement ab : donnees) {
-			if (objet.getId() == ab.getId())
-				return this.donnees.remove(ab);
-		}
-		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+			if (objet.getId() == ab.getId()) 
+			done =this.donnees.remove(ab);
+			}
+
+	
+		 
 	}
 
 	@Override
