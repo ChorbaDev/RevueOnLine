@@ -7,6 +7,9 @@ public class Connexion {
         String url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/ghoniem1u_bdRvOnl";
         String login = "ghoniem1u_appli";
         String pwd = "bonjour";
+        /*String url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
+        String login = "elloumi2u_appli";
+        String pwd = "bonjour";*/
         Connection maConnexion = null;
         try {
             maConnexion = DriverManager.getConnection(url, login, pwd);
