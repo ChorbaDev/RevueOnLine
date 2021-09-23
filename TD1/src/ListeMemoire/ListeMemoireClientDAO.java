@@ -21,6 +21,52 @@ public class ListeMemoireClientDAO implements ClientDAO {
 		return instance;
 	}
 
+	private int existanceID(Client objet) {
+		for (Client cl : donnees) {
+			if (objet.getCle() == cl.getCle())
+				return donnees.indexOf(objet);
+		}
+		return -1;
+	}
+
+	@Override
+	public boolean create(Client objet) throws SQLException {
+		while (existanceID(objet) >= 0) {
+			objet.setCle(objet.getCle() + 1);
+		}
+		return this.donnees.add(objet);
+	}
+
+	@Override
+	public boolean update(Client objet) throws SQLException {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
+		}
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+	}
+
+	@Override
+	public boolean delete(Client objet) throws SQLException {
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.remove(objet);
+		}
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+	}
+
+	@Override
+	public Client getById(int id) throws SQLException {
+		Client objet = new Client(id, "test", "test", "test", "test", "test", "test", "test");
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.get(index);
+		}
+		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+
+	}
+
 	@Override
 	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
 		ArrayList<Client> listeClient = new ArrayList<>();
@@ -29,46 +75,6 @@ public class ListeMemoireClientDAO implements ClientDAO {
 				listeClient.add(c);
 		}
 		return listeClient;
-	}
-
-	@Override
-	public Client getById(int id) throws SQLException {
-		for (Client c : donnees) {
-			if (c.getCle() == id)
-				return c;
-		}
-		throw new IllegalArgumentException("Aucun objet de ce type ne possède cet identifiant");
-	}
-
-	@Override
-	public boolean create(Client object) throws SQLException {
-		object.setCle(donnees.size() + 1);
-		boolean validAjout = this.donnees.add(object);
-		return validAjout;
-	}
-
-	@Override
-	public boolean update(Client object) throws SQLException {
-		int idx = this.donnees.indexOf(object);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-
-		} else {
-			this.donnees.set(idx, object);
-		}
-		return true;
-	}
-
-	@Override
-	public boolean delete(Client object) throws SQLException {
-		Client supprime;
-		int idx = this.donnees.indexOf(object);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
-		return object.equals(supprime);
 	}
 
 	@Override

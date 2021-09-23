@@ -1,0 +1,11 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import Metier.Abonnement;
+
+public interface AbonnementDAO extends DAO<Abonnement> {
+	public ArrayList<Abonnement> getByClient(int id_c);
+
+	public ArrayList<Abonnement> findAll();
+}

@@ -22,40 +22,49 @@ public class ListeMemoireRevueDAO implements RevueDAO {
 	}
 
 	@Override
-	public Revue getById(int id) throws SQLException {
-		for (Revue r : donnees) {
-			if (r.getId() == id)
-				return r;
+	public boolean create(Revue objet) throws SQLException {
+		while (existanceID(objet) >= 0) {
+			objet.setId(objet.getId() + 1);
 		}
-		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+		return this.donnees.add(objet);
 	}
 
-	@Override
-	public boolean create(Revue objet) throws SQLException {
-		objet.setId(donnees.size() + 1);
-		boolean ok = this.donnees.add(objet);
-		return ok;
+	private int existanceID(Revue objet) {
+		for (Revue ab : donnees) {
+			if (objet.getId() == ab.getId())
+				return donnees.indexOf(objet);
+		}
+		return -1;
 	}
 
 	@Override
 	public boolean update(Revue objet) throws SQLException {
-		try {
-			this.donnees.set(objet.getId() - 1, objet);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
 		}
-		return true;
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
 	}
 
 	@Override
 	public boolean delete(Revue objet) throws SQLException {
-		Revue supprime;
-		try {
-			supprime = this.donnees.remove(objet.getId() - 1);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.remove(objet);
 		}
-		return objet.equals(supprime);
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+	}
+
+	@Override
+	public Revue getById(int id) throws SQLException {
+		Revue objet = new Revue(id, "test", "test", 1.0, "test", 1);
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.get(index);
+		}
+		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+
 	}
 
 	@Override

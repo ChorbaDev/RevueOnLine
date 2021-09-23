@@ -2,14 +2,15 @@ package Metier;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Abonnement {
 
 	private int id;
 	private LocalDate date_debut;
 	private LocalDate date_fin;
-	int id_client;
-	int id_revue;
+	private int id_client;
+	private int id_revue;
 	private final DateTimeFormatter FORMATAGE = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public Abonnement(String deb, String fin, int id_c, int id_r) {
@@ -78,6 +79,25 @@ public class Abonnement {
 	@Override
 	public String toString() {
 		return "Abonnement [id=" + id + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", id_client="
-				+ id_client + ", id_revue=" + id_revue + ", FORMATAGE=" + FORMATAGE + "]";
+				+ id_client + ", id_revue=" + id_revue + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(date_debut, date_fin, id, id_client, id_revue);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Abonnement other = (Abonnement) obj;
+		return Objects.equals(date_debut, other.date_debut) && Objects.equals(date_fin, other.date_fin)
+				&& id == other.id && id_client == other.id_client && id_revue == other.id_revue;
+	}
+
 }

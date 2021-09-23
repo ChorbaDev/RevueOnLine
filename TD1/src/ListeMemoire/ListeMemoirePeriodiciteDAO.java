@@ -21,57 +21,50 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 		return instance;
 	}
 
+	private int existanceID(Periodicite objet) {
+		for (Periodicite p : donnees) {
+			if (objet.getCle() == p.getCle())
+				return donnees.indexOf(objet);
+		}
+		return -1;
+	}
+
 	@Override
 	public Periodicite getById(int id) throws SQLException {
-		int idx = this.donnees.indexOf(new Periodicite(id));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
-		} else {
-			return this.donnees.get(idx);
+		Periodicite objet = new Periodicite(id, "test");
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.get(index);
 		}
-		/*
-		 * for (Periodicite p : donnees) { if (p.getCle() == id) return p; } throw new
-		 * IllegalArgumentException("Aucun objet de ce type ne possede cet identifiant"
-		 * );
-		 */
+		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+
 	}
 
 	@Override
 	public boolean create(Periodicite objet) throws SQLException {
-		objet.setCle(1);
-		while (this.donnees.contains(objet)) {
+		while (existanceID(objet) >= 0) {
 			objet.setCle(objet.getCle() + 1);
 		}
-		boolean ok = this.donnees.add(objet);
-		return ok;
-		/*
-		 * object.setCle(donnees.size() + 1); boolean validAjout =
-		 * this.donnees.add(object); return validAjout;
-		 */
+		return this.donnees.add(objet);
 	}
 
 	@Override
-	public boolean update(Periodicite object) throws SQLException {
-		int idx = this.donnees.indexOf(object);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-
-		} else {
-			this.donnees.set(idx, object);
+	public boolean update(Periodicite objet) throws SQLException {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
 		}
-		return true;
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
 	}
 
 	@Override
-	public boolean delete(Periodicite object) throws SQLException {
-		Periodicite supprime;
-		int idx = this.donnees.indexOf(object);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
+	public boolean delete(Periodicite objet) throws SQLException {
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.remove(objet);
 		}
-		return object.equals(supprime);
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
 	}
 
 	@Override

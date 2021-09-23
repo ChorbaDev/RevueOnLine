@@ -1,6 +1,5 @@
 package ListeMemoire;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,45 +21,53 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	}
 
 	@Override
-	public boolean create(Abonnement objet) throws SQLException {
-		objet.setId(donnees.size() + 1);
-		boolean ok = this.donnees.add(objet);
-		return ok;
-	}
-
-	@Override
-	public boolean update(Abonnement objet) throws SQLException {
-		for (int i = 0; i < donnees.size(); i++) {
-			if (objet.getId() == donnees.get(i).getId()) {
-				this.donnees.set(i, objet);
-				return true;
-			}
+	public boolean create(Abonnement objet) {
+		while (existanceID(objet) >= 0) {
+			objet.setId(objet.getId() + 1);
 		}
-		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		return this.donnees.add(objet);
 	}
 
-	@Override
-	public boolean delete(Abonnement objet) throws SQLException {
+	private int existanceID(Abonnement objet) {
 		for (Abonnement ab : donnees) {
 			if (objet.getId() == ab.getId())
-				return this.donnees.remove(ab);
+				return donnees.indexOf(objet);
+		}
+		return -1;
+	}
+
+	@Override
+	public boolean update(Abonnement objet) {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
 		}
 		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
 	}
 
 	@Override
-	public Abonnement getById(int id) throws SQLException {
+	public boolean delete(Abonnement objet) {
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.remove(objet);
+		}
+		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+	}
 
-		for (Abonnement ab : donnees) {
-			if (ab.getId() == id)
-				return ab;
+	@Override
+	public Abonnement getById(int id) {
+		Abonnement objet = new Abonnement(id, "01/01/2001", "01/01/2002", 1, 1);
+		int index = existanceID(objet);
+		if (index > -1) {
+			return this.donnees.get(index);
 		}
 		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
 
 	}
 
 	@Override
-	public ArrayList<Abonnement> getByClient(int cl) throws SQLException {
+	public ArrayList<Abonnement> getByClient(int cl) {
 		ArrayList<Abonnement> liste = new ArrayList<>();
 		for (Abonnement ab : donnees) {
 			if (ab.getId_client() == cl)
@@ -70,7 +77,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	}
 
 	@Override
-	public ArrayList<Abonnement> findAll() throws SQLException {
+	public ArrayList<Abonnement> findAll() {
 		return (ArrayList<Abonnement>) this.donnees;
 	}
 }
