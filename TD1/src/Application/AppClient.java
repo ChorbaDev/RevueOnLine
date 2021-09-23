@@ -10,11 +10,7 @@ import Metier.Client;
 
 public abstract class AppClient {
 
-	public static void manipClient(Scanner sc, DAOFactory daof) throws SQLException {
-		int choixOperation;
-		do {
-			choixOperation = Integer.parseInt(sc.nextLine());
-		} while (choixOperation < 1 || choixOperation > 4);
+	public static void manipClient(Scanner sc, DAOFactory daof, int choixOperation) throws SQLException {
 		switch (choixOperation) {
 		case 1:
 			createClient(sc, daof);
@@ -37,9 +33,8 @@ public abstract class AppClient {
 	}
 
 	private static void deleteClient(Scanner sc, DAOFactory daof) throws SQLException {
-		int id;
 		System.out.print("ID Client :");
-		id = Integer.parseInt(sc.nextLine());
+		int id = Application.verifID(sc);
 		Client cl = new Client(id);
 		daof.getClientDAO().delete(cl);
 	}
@@ -70,10 +65,7 @@ public abstract class AppClient {
 
 	private static void requestClient(Scanner sc, DAOFactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Nom & Prenom\n3-Tout\n");
-		int choix;
-		do {
-			choix = Integer.parseInt(sc.nextLine());
-		} while (choix < 1 || choix > 4);
+		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
 		case 1:
 			reqIdClient(sc, daof);
@@ -110,7 +102,7 @@ public abstract class AppClient {
 	}
 
 	private static void reqIdClient(Scanner sc, DAOFactory daof) throws SQLException {
-		int id = Integer.parseInt(sc.nextLine());
+		int id = Application.verifID(sc);
 		Client cl = daof.getClientDAO().getById(id);
 		System.out.println(cl.toString());
 	}
@@ -122,7 +114,7 @@ public abstract class AppClient {
 		int id = 0;
 		if (isLM) {
 			System.out.print("ID Client :");
-			id = Integer.parseInt(sc.nextLine());
+			id = Application.verifID(sc);
 		}
 		System.out.print("Nom :");
 		nom = sc.nextLine();

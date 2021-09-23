@@ -10,12 +10,9 @@ import Metier.Revue;
 
 public abstract class AppRevue {
 
-	public static void manipRevue(Scanner sc, DAOFactory daof) throws SQLException {
-		int choixOperation;
-		do {
-			choixOperation = Integer.parseInt(sc.nextLine());
-		} while (choixOperation < 1 || choixOperation > 4);
-		switch (choixOperation) {
+	public static void manipRevue(Scanner sc, DAOFactory daof, int choixCRUD) throws SQLException {
+
+		switch (choixCRUD) {
 		case 1:
 			createRevue(sc, daof);
 			;
@@ -39,7 +36,7 @@ public abstract class AppRevue {
 	private static void deleteRevue(Scanner sc, DAOFactory daof) throws SQLException {
 		int id;
 		System.out.print("ID Revue:");
-		id = Integer.parseInt(sc.nextLine());
+		id = Application.verifID(sc);
 		Revue revue = new Revue(id);
 		daof.getRevueDAO().delete(revue);
 	}
@@ -49,7 +46,7 @@ public abstract class AppRevue {
 		double tarif;
 		int id_p, id;
 		System.out.print("ID Revue:");
-		id = Integer.parseInt(sc.nextLine());
+		id = Application.verifID(sc);
 		System.out.print("Titre :");
 		titre = sc.nextLine();
 		System.out.print("Description :");

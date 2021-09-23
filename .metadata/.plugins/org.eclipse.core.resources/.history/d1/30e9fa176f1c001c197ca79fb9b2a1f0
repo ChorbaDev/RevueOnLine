@@ -1,0 +1,80 @@
+package Application;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Scanner;
+
+import DAO.Persistance;
+import DAOFactory.DAOFactory;
+
+public class Application {
+
+	public static void main(String[] args) throws SQLException, ParseException {
+		String reponse;
+		int choix;
+		System.out.println("---------Bienvenue dans notre application---------");
+		do {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Choissisez entre:\n1-My SQL\n2-Liste Memoire");
+			int idxPer = Integer.parseInt(sc.nextLine());
+			Persistance persistance;
+			if (idxPer == 1)
+				persistance = Persistance.MYSQL;
+			else
+				persistance = Persistance.ListeMemoire;
+			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
+					+ "3-Periodicite\n" + "4-Revue");
+			DAOFactory daof = DAOFactory.getDAOFactory(persistance);
+			int choixTable;
+			do {
+				choixTable = Integer.parseInt(sc.nextLine());
+			} while (choixTable < 1 || choixTable > 4);
+
+			afficheCRUD();
+			choix = verifChoix(sc);
+			switch (choixTable) {
+			case 1:
+
+				AppAbonnement.manipAbonnement(sc, daof);
+				break;
+			case 2:
+				AppClient.manipClient(sc, daof, choix);
+				break;
+			case 3:
+				AppPeriodicite.manipPeriodicite(sc, daof);
+				break;
+			case 4:
+				AppRevue.manipRevue(sc, daof);
+				break;
+			default:
+				break;
+			}
+			System.out.println("Voulez-vous continuer? O pour oui");
+			reponse = sc.nextLine();
+		} while (reponse.toUpperCase().equals("O"));
+		System.out.println("Au revoir!");
+	}
+
+	private static int verifChoix(Scanner sc) {
+		int choixOperation;
+		do {
+			String chChoix = sc.nextLine();
+			choixOperation = isNumeric(chChoix) ? Integer.parseInt(chChoix) : 0;
+		} while (choixOperation < 1 || choixOperation > 4);
+		return choixOperation;
+	}
+
+	private static void afficheCRUD() {
+		System.out
+				.println("Choisissez votre operation:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
+	}
+	public static boolean isNumeric(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+}

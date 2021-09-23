@@ -9,12 +9,8 @@ import Metier.Periodicite;
 
 public abstract class AppPeriodicite {
 
-	public static void manipPeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
-		int choixOperation;
-		do {
-			choixOperation = Integer.parseInt(sc.nextLine());
-		} while (choixOperation < 1 || choixOperation > 4);
-		switch (choixOperation) {
+	public static void manipPeriodicite(Scanner sc, DAOFactory daof, int choixCRUD) throws SQLException {
+		switch (choixCRUD) {
 		case 1:
 			createPeriodicite(sc, daof);
 			;

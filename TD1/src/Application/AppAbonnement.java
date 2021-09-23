@@ -12,13 +12,8 @@ import DAOFactory.ListeMemoireDAOFactory;
 import Metier.Abonnement;
 
 public abstract class AppAbonnement {
-	public static void manipAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
-		afficheCRUD();
-		int choixOperation;
-		do {
-			choixOperation = Integer.parseInt(sc.nextLine());
-		} while (choixOperation < 1 || choixOperation > 4);
-		switch (choixOperation) {
+	public static void manipAbonnement(Scanner sc, DAOFactory daof, int choixCRUD) throws SQLException, ParseException {
+		switch (choixCRUD) {
 		case 1:
 			createAbonnement(sc, daof);
 			;
