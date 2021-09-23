@@ -1,6 +1,5 @@
 package ListeMemoire;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public boolean create(Client objet) throws SQLException {
+	public boolean create(Client objet) {
 		while (existanceID(objet) >= 0) {
 			objet.setCle(objet.getCle() + 1);
 		}
@@ -38,7 +37,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public boolean update(Client objet) throws SQLException {
+	public boolean update(Client objet) {
 		int index = existanceID(objet);
 		if (index > -1) {
 			this.donnees.set(index, objet);
@@ -48,7 +47,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public boolean delete(Client objet) throws SQLException {
+	public boolean delete(Client objet) {
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.remove(objet);
@@ -57,7 +56,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public Client getById(int id) throws SQLException {
+	public Client getById(int id) {
 		Client objet = new Client(id, "test", "test", "test", "test", "test", "test", "test");
 		int index = existanceID(objet);
 		if (index > -1) {
@@ -68,7 +67,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
+	public ArrayList<Client> getByNomPrenom(String nom, String prenom) {
 		ArrayList<Client> listeClient = new ArrayList<>();
 		for (Client c : donnees) {
 			if (c.getNom() == nom && c.getPrenom() == prenom)
@@ -78,7 +77,7 @@ public class ListeMemoireClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public ArrayList<Client> findAll() throws SQLException {
+	public ArrayList<Client> findAll() {
 		return (ArrayList<Client>) this.donnees;
 	}
 }

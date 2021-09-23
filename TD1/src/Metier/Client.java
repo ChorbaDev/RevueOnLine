@@ -33,6 +33,10 @@ public class Client {
 		this.pays = pays;
 	}
 
+	public Client(int id) {
+		this.cle = id;
+	}
+
 	public void setCle(int cle) {
 		this.cle = cle;
 	}

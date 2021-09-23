@@ -31,15 +31,19 @@ public class Application {
 
 			switch (choixTable) {
 			case 1:
+				afficheCRUD();
 				AppAbonnement.manipAbonnement(sc, daof);
 				break;
 			case 2:
+				afficheCRUD();
 				AppClient.manipClient(sc, daof);
 				break;
 			case 3:
+				afficheCRUD();
 				AppPeriodicite.manipPeriodicite(sc, daof);
 				break;
 			case 4:
+				afficheCRUD();
 				AppRevue.manipRevue(sc, daof);
 				break;
 			default:
@@ -51,4 +55,8 @@ public class Application {
 		System.out.println("Au revoir!");
 	}
 
+	private static void afficheCRUD() {
+		System.out
+				.println("Choisissez votre operation:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
+	}
 }

@@ -8,6 +8,15 @@ public class Periodicite {
 		this.libelle = ch;
 	}
 
+	public Periodicite(int cle, String libelle) {
+		this.cle = cle;
+		this.libelle = libelle;
+	}
+
+	public Periodicite(int cle) {
+		this.cle = cle;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -30,19 +39,9 @@ public class Periodicite {
 		return true;
 	}
 
-	// && (other.libelle.equals(this.libelle))
 	@Override
 	public String toString() {
-		return "Periodicite [cle=" + cle + ", libelle=" + libelle + "]";
-	}
-
-	public Periodicite(int cle, String libelle) {
-		this.cle = cle;
-		this.libelle = libelle;
-	}
-
-	public Periodicite(int cle) {
-		this.cle = cle;
+		return "Cle :" + cle + "\nLibelle :" + libelle + "\n__________________\n";
 	}
 
 	public String getLibelle() {

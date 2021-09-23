@@ -103,8 +103,8 @@ public class Revue {
 
 	@Override
 	public String toString() {
-		return "Revue [id=" + id + ", titre=" + titre + ", description=" + description + ", tarif_numero="
-				+ tarif_numero + ", visuel=" + visuel + ", id_p=" + id_p + "]";
+		return "ID :" + id + "\nTitre :" + titre + "\nDescription :" + description + "\nTarif Numero :" + tarif_numero
+				+ "\nVisuel :" + visuel + "\nID Periodicite :" + id_p + "\n__________________\n";
 	}
 
 }

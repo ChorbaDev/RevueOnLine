@@ -1,6 +1,5 @@
 package ListeMemoire;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	}
 
 	@Override
-	public Periodicite getById(int id) throws SQLException {
+	public Periodicite getById(int id) {
 		Periodicite objet = new Periodicite(id, "test");
 		int index = existanceID(objet);
 		if (index > -1) {
@@ -41,7 +40,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	}
 
 	@Override
-	public boolean create(Periodicite objet) throws SQLException {
+	public boolean create(Periodicite objet) {
 		while (existanceID(objet) >= 0) {
 			objet.setCle(objet.getCle() + 1);
 		}
@@ -49,7 +48,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	}
 
 	@Override
-	public boolean update(Periodicite objet) throws SQLException {
+	public boolean update(Periodicite objet) {
 		int index = existanceID(objet);
 		if (index > -1) {
 			this.donnees.set(index, objet);
@@ -59,7 +58,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	}
 
 	@Override
-	public boolean delete(Periodicite objet) throws SQLException {
+	public boolean delete(Periodicite objet) {
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.remove(objet);
@@ -68,7 +67,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	}
 
 	@Override
-	public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException {
+	public ArrayList<Periodicite> getByLibelle(String libelle) {
 		ArrayList<Periodicite> listePer = new ArrayList<>();
 		for (Periodicite p : donnees) {
 			if (p.getLibelle() == libelle)

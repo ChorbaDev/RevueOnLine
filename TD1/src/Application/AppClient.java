@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import DAOFactory.DAOFactory;
+import DAOFactory.ListeMemoireDAOFactory;
 import Metier.Client;
 
 public abstract class AppClient {
 
 	public static void manipClient(Scanner sc, DAOFactory daof) throws SQLException {
-		afficheCRUD();
 		int choixOperation;
 		do {
 			choixOperation = Integer.parseInt(sc.nextLine());
@@ -38,31 +38,10 @@ public abstract class AppClient {
 
 	private static void deleteClient(Scanner sc, DAOFactory daof) throws SQLException {
 		int id;
-		String nom, prenom, no_rue, voie, code_postal, ville, pays;
 		System.out.print("ID Client :");
 		id = Integer.parseInt(sc.nextLine());
-		System.out.print("Nom :");
-		nom = sc.nextLine();
-		System.out.print("Prenom :");
-		prenom = sc.nextLine();
-		System.out.print("No rue:");
-		no_rue = sc.nextLine();
-		System.out.print("Voie :");
-		voie = sc.nextLine();
-		System.out.print("Code postal :");
-		code_postal = sc.nextLine();
-		System.out.print("Ville :");
-		ville = sc.nextLine();
-		System.out.print("Pays :");
-		pays = sc.nextLine();
-		Client cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
+		Client cl = new Client(id);
 		daof.getClientDAO().delete(cl);
-	}
-
-	private static void afficheCRUD() {
-		System.out
-				.println("Choisissez votre operation:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
-
 	}
 
 	private static void updateClient(Scanner sc, DAOFactory daof) throws SQLException {
@@ -90,7 +69,7 @@ public abstract class AppClient {
 	}
 
 	private static void requestClient(Scanner sc, DAOFactory daof) throws SQLException {
-		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Nom & Prenom\n");
+		System.out.println("Affichage par:\n1-ID\n2-Nom & Prenom\n3-Tout\n");
 		int choix;
 		do {
 			choix = Integer.parseInt(sc.nextLine());
@@ -102,9 +81,19 @@ public abstract class AppClient {
 		case 2:
 			reqNPClient(sc, daof);
 			break;
+		case 3:
+			reqAllClient(sc, daof);
+			break;
 		default:
 			break;
 		}
+
+	}
+
+	private static void reqAllClient(Scanner sc, DAOFactory daof) throws SQLException {
+		ArrayList<Client> listeP = daof.getClientDAO().findAll();
+		for (Client c : listeP)
+			System.out.println(c.toString());
 
 	}
 
@@ -128,6 +117,13 @@ public abstract class AppClient {
 
 	private static void createClient(Scanner sc, DAOFactory daof) throws SQLException {
 		String nom, prenom, no_rue, voie, code_postal, ville, pays;
+		boolean isLM = daof instanceof ListeMemoireDAOFactory;
+		Client cl;
+		int id = 0;
+		if (isLM) {
+			System.out.print("ID Client :");
+			id = Integer.parseInt(sc.nextLine());
+		}
 		System.out.print("Nom :");
 		nom = sc.nextLine();
 		System.out.print("Prenom :");
@@ -142,7 +138,7 @@ public abstract class AppClient {
 		ville = sc.nextLine();
 		System.out.print("Pays :");
 		pays = sc.nextLine();
-		Client cl = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
+		cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
 		daof.getClientDAO().create(cl);
 
 	}
