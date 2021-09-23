@@ -91,8 +91,8 @@ public abstract class AppClient {
 	}
 
 	private static void reqAllClient(Scanner sc, DAOFactory daof) throws SQLException {
-		ArrayList<Client> listeC = daof.getClientDAO().findAll();
-		for (Client c : listeC)
+		ArrayList<Client> listeP = daof.getClientDAO().findAll();
+		for (Client c : listeP)
 			System.out.println(c.toString());
 
 	}

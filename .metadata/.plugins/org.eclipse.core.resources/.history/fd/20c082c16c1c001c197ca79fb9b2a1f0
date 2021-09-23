@@ -110,8 +110,8 @@ public abstract class AppRevue {
 	}
 
 	private static void reqAllRevue(Scanner sc, DAOFactory daof) throws SQLException {
-		ArrayList<Revue> listeR = daof.getRevueDAO().findAll();
-		for (Revue r : listeR)
+		ArrayList<Revue> listeP = daof.getRevueDAO().findAll();
+		for (Revue r : listeP)
 			System.out.println(r.toString());
 
 	}

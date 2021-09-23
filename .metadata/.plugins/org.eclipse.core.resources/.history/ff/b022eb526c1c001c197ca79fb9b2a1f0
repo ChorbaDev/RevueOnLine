@@ -100,7 +100,7 @@ public abstract class AppAbonnement {
 	}
 
 	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		System.out.println("Affichage par:\n1-ID\n2-Client\n-3Abonemment");
+		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Client\n");
 		int choix;
 		do {
 			choix = Integer.parseInt(sc.nextLine());
@@ -112,19 +112,10 @@ public abstract class AppAbonnement {
 		case 2:
 			reqClientAbonnement(sc, daof);
 			break;
-		case 3:
-			reqAllAbonnement(sc, daof);
-			break;
 		default:
 			break;
 		}
 
-	}
-
-	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
-		for (Abonnement ab : listeAb)
-			System.out.println(ab.toString());
 	}
 
 	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {

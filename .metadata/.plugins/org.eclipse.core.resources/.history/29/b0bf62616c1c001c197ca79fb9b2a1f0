@@ -10,6 +10,7 @@ import java.util.Scanner;
 import DAOFactory.DAOFactory;
 import DAOFactory.ListeMemoireDAOFactory;
 import Metier.Abonnement;
+import Metier.Periodicite;
 
 public abstract class AppAbonnement {
 	public static void manipAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
@@ -121,10 +122,10 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
-		for (Abonnement ab : listeAb)
-			System.out.println(ab.toString());
+	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) {
+		ArrayList<Abonnement> listeP = daof.getPeriodiciteDAO().findAll();
+		for (Abonnement ab : listeP)
+			System.out.println(p.toString());
 	}
 
 	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {

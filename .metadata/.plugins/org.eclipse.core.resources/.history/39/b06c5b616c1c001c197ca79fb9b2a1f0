@@ -121,10 +121,9 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
-		for (Abonnement ab : listeAb)
-			System.out.println(ab.toString());
+	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
