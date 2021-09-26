@@ -8,9 +8,10 @@
     <fullyQualifiedTypeName name="ListeMemoire.ListeMemoireAbonnementDAO"/>
     <fullyQualifiedTypeName name="DAOFactory.DAOFactory"/>
     <fullyQualifiedTypeName name="Metier.Abonnement"/>
-    <fullyQualifiedTypeName name="Metier.Periodicite"/>
     <fullyQualifiedTypeName name="Metier.Client"/>
-    <fullyQualifiedTypeName name="DAO.Persistance"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="DAOFactory.ListeMemoireDAOFactory"/>
+    <fullyQualifiedTypeName name="Metier.Revue"/>
+    <fullyQualifiedTypeName name="DAO.Persistance"/>
+    <fullyQualifiedTypeName name="Metier.Periodicite"/>
 </qualifiedTypeNameHistroy>

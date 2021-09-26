@@ -100,7 +100,7 @@ public class MySQLRevueDAO implements RevueDAO {
 	public boolean delete(Revue r) throws SQLException {
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
-		String sql = "delete from Revue where id_revue=?";
+		String sql = "delete from Metier.Revue where id_revue=?";
 		PreparedStatement req = connect.prepareStatement(sql);
 		req.setInt(1, r.getId());
 		int nbLignes = req.executeUpdate();

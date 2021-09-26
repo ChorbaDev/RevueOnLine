@@ -115,9 +115,10 @@ public abstract class AppAbonnement {
 		Client cl;
 		try {
 			cl = daof.getClientDAO().getById(id_c);
-			String ch = cl.toString();
+
 		} catch (Exception e) {
 			cl = null;
+			System.out.println("no");
 			return false;
 		}
 		return true;
@@ -127,9 +128,10 @@ public abstract class AppAbonnement {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
-			String ch = r.toString();
+			System.out.println(r.toString());
 		} catch (Exception e) {
 			r = null;
+			System.out.println("no");
 			return false;
 		}
 		return true;

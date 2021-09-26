@@ -93,7 +93,7 @@ public abstract class AppRevue {
 		Periodicite p;
 		try {
 			p = daof.getPeriodiciteDAO().getById(id_p);
-			String ch = p.toString();
+			String ch= p.toString();
 		} catch (Exception e) {
 			p = null;
 			return false;

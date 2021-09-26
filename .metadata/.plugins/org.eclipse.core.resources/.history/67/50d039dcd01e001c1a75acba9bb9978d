@@ -70,8 +70,7 @@ public class MySQLClientDAO implements ClientDAO {
 	public boolean create(Client object) throws SQLException {
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
-		PreparedStatement req = connect.prepareStatement(
-				"insert into Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)",
+		PreparedStatement req = connect.prepareStatement("insert into Client values (?,?,?,?,?,?,?)",
 				Statement.RETURN_GENERATED_KEYS);
 
 		req.setString(1, object.getNom());

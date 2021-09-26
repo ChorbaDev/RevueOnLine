@@ -113,11 +113,13 @@ public abstract class AppAbonnement {
 
 	private static boolean existanceClient(int id_c, DAOFactory daof) throws SQLException {
 		Client cl;
+		System.out.println("ready");
 		try {
 			cl = daof.getClientDAO().getById(id_c);
-			String ch = cl.toString();
+			
 		} catch (Exception e) {
 			cl = null;
+			System.out.println("no");
 			return false;
 		}
 		return true;
@@ -127,7 +129,7 @@ public abstract class AppAbonnement {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
-			String ch = r.toString();
+			System.out.println(r.toString());
 		} catch (Exception e) {
 			r = null;
 			return false;

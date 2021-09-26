@@ -130,6 +130,7 @@ public abstract class AppAbonnement {
 			String ch = r.toString();
 		} catch (Exception e) {
 			r = null;
+			System.out.println("no");
 			return false;
 		}
 		return true;

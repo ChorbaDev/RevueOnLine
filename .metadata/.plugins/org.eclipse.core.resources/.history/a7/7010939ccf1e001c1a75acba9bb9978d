@@ -107,7 +107,7 @@ public abstract class AppAbonnement {
 			id_r = Application.verifID(sc);
 		} while (existanceRevue(id_r, daof));
 
-		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_c, id_r);
+		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
 		daof.getAbonnementDAO().update(abonnement);
 	}
 
@@ -115,24 +115,23 @@ public abstract class AppAbonnement {
 		Client cl;
 		try {
 			cl = daof.getClientDAO().getById(id_c);
-			String ch = cl.toString();
+			return true;
 		} catch (Exception e) {
 			cl = null;
 			return false;
 		}
-		return true;
+
 	}
 
 	private static boolean existanceRevue(int id_r, DAOFactory daof) {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
-			String ch = r.toString();
 		} catch (Exception e) {
 			r = null;
 			return false;
 		}
-		return true;
+		return !r.equals(null);
 	}
 
 	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {

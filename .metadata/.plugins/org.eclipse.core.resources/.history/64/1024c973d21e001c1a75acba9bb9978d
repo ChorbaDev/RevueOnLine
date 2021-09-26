@@ -93,12 +93,11 @@ public abstract class AppRevue {
 		Periodicite p;
 		try {
 			p = daof.getPeriodiciteDAO().getById(id_p);
-			String ch = p.toString();
 		} catch (Exception e) {
 			p = null;
 			return false;
 		}
-		return true;
+		return !p.equals(null);
 	}
 
 	private static void requestRevue(Scanner sc, DAOFactory daof) throws SQLException {
