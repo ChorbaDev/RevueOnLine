@@ -8,12 +8,14 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="throws SQLException"/>
 			<item value="addPeriodicite()"/>
 			<item value="sc.nextLine()"/>
 			<item value="sc.nextDouble()"/>
 			<item value="nextDouble()"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="Integer.parseInt(sc.nextLine())"/>
 			<item value="Double.parseDouble(sc.nextLine())"/>
 		</list>

@@ -63,10 +63,19 @@ public class Application {
 	public static int verifID(Scanner sc) {
 		int id;
 		do {
-			String chChoix = sc.nextLine();
-			id = isNumeric(chChoix) ? Integer.parseInt(chChoix) : 0;
+			String chID = sc.nextLine();
+			id = isNumeric(chID) ? Integer.parseInt(chID) : 0;
 		} while (id > 0);
 		return id;
+	}
+
+	public static double verifPrix(Scanner sc) {
+		double Prix;
+		do {
+			String chPrix = sc.nextLine();
+			Prix = isNumeric(chPrix) ? Double.parseDouble(chPrix) : 0;
+		} while (Prix > 0);
+		return Prix;
 	}
 
 	private static void afficheCRUD() {
@@ -77,6 +86,7 @@ public class Application {
 	private static boolean isNumeric(String str) {
 		try {
 			Integer.parseInt(str);
+			Double.parseDouble(str);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;

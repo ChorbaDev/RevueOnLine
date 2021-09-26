@@ -35,36 +35,11 @@ public abstract class AppAbonnement {
 	}
 
 	private static void deleteAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
-		boolean valid = false;
-		String date_deb, date_fin;
-		int id_c, id_r, id;
+		int id;
 		System.out.print("ID Abonnement :");
-		id = Integer.parseInt(sc.nextLine());
-		do {
-			System.out.print("Date debut jj/mm/yyyy :");
-			date_deb = sc.nextLine();
-			valid = validationDate(date_deb);
-		} while (!valid);
-		valid = false;
-		do {
-			System.out.print("Date fin jj/mm/yyyy :");
-			date_fin = sc.nextLine();
-			if (validationDate(date_fin) && compareDate(date_deb, date_fin)) {
-				valid = true;
-			}
-		} while (!valid);
-		System.out.print("ID Client :");
-		id_c = Integer.parseInt(sc.nextLine());
-		System.out.print("ID Revue :");
-		id_r = Integer.parseInt(sc.nextLine());
-		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
+		id = Application.verifID(sc);
+		Abonnement abonnement = new Abonnement(id);
 		daof.getAbonnementDAO().delete(abonnement);
-	}
-
-	private static void afficheCRUD() {
-		System.out
-				.println("Choisissez votre operation:\n" + "1-Create\n" + "2-Request\n" + "3-Update\n" + "4-Delete\n");
-
 	}
 
 	private static void updateAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
@@ -72,7 +47,7 @@ public abstract class AppAbonnement {
 		String date_deb, date_fin;
 		int id_c, id_r, id;
 		System.out.print("ID Abonnement :");
-		id = Integer.parseInt(sc.nextLine());
+		id = Application.verifID(sc);
 		do {
 			System.out.print("Date debut jj/mm/yyyy :");
 			date_deb = sc.nextLine();
@@ -87,9 +62,9 @@ public abstract class AppAbonnement {
 			}
 		} while (!valid);
 		System.out.print("ID Client :");
-		id_c = Integer.parseInt(sc.nextLine());
+		id_c = Application.verifID(sc);
 		System.out.print("ID Revue :");
-		id_r = Integer.parseInt(sc.nextLine());
+		id_r = Application.verifID(sc);
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
 		daof.getAbonnementDAO().update(abonnement);
 	}

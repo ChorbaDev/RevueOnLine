@@ -54,9 +54,9 @@ public abstract class AppRevue {
 		System.out.print("Visuel :");
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
-		tarif = Double.parseDouble(sc.nextLine());
+		tarif = Application.verifPrix(sc);
 		System.out.print("Periodicite (ID) :");
-		id_p = Integer.parseInt(sc.nextLine());
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().update(revue);
 	}
@@ -68,7 +68,7 @@ public abstract class AppRevue {
 		boolean isLM = daof instanceof ListeMemoireDAOFactory;
 		if (isLM) {
 			System.out.print("ID Revue:");
-			id = Integer.parseInt(sc.nextLine());
+			id = Application.verifID(sc);
 		}
 		System.out.print("Titre :");
 		titre = sc.nextLine();
@@ -77,9 +77,9 @@ public abstract class AppRevue {
 		System.out.print("Visuel :");
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
-		tarif = Double.parseDouble(sc.nextLine());
+		tarif = Application.verifPrix(sc);
 		System.out.print("Periodicite (ID) :");
-		id_p = Integer.parseInt(sc.nextLine());
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().create(revue);
 	}

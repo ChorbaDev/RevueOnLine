@@ -43,7 +43,7 @@ public abstract class AppClient {
 		int id;
 		String nom, prenom, no_rue, voie, code_postal, ville, pays;
 		System.out.print("ID Client :");
-		id = Integer.parseInt(sc.nextLine());
+		id = Application.verifID(sc);
 		System.out.print("Nom :");
 		nom = sc.nextLine();
 		System.out.print("Prenom :");

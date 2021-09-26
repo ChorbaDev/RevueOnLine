@@ -36,6 +36,10 @@ public class Abonnement {
 		this.id = id;
 	}
 
+	public Abonnement(int id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}

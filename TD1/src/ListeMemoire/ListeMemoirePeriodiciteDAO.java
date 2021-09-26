@@ -70,7 +70,7 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	public ArrayList<Periodicite> getByLibelle(String libelle) {
 		ArrayList<Periodicite> listePer = new ArrayList<>();
 		for (Periodicite p : donnees) {
-			if (p.getLibelle() == libelle)
+			if (p.getLibelle().equals(libelle))
 				listePer.add(p);
 		}
 		return listePer;
