@@ -128,7 +128,6 @@ public abstract class AppAbonnement {
 			r = daof.getRevueDAO().getById(id_r);
 		} catch (Exception e) {
 			r = null;
-			return false;
 		}
 		return !r.equals(null);
 	}

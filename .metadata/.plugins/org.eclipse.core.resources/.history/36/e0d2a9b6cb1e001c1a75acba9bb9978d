@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import DAOFactory.DAOFactory;
 import DAOFactory.ListeMemoireDAOFactory;
+import Metier.Client;
 import Metier.Periodicite;
 import Metier.Revue;
 
@@ -56,10 +57,8 @@ public abstract class AppRevue {
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
 		tarif = Application.verifPrix(sc);
-		do {
-			System.out.print("Periodicite (ID) :");
-			id_p = Application.verifID(sc);
-		} while (!existancePeriodicite(id_p, daof));
+		System.out.print("Periodicite (ID) :");
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().update(revue);
 	}
@@ -81,14 +80,11 @@ public abstract class AppRevue {
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
 		tarif = Application.verifPrix(sc);
-		do {
-			System.out.print("Periodicite (ID) :");
-			id_p = Application.verifID(sc);
-		} while (!existancePeriodicite(id_p, daof));
+		System.out.print("Periodicite (ID) :");
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().create(revue);
 	}
-
 	private static boolean existancePeriodicite(int id_p, DAOFactory daof) throws SQLException {
 		Periodicite p;
 		try {
@@ -99,7 +95,6 @@ public abstract class AppRevue {
 		}
 		return !p.equals(null);
 	}
-
 	private static void requestRevue(Scanner sc, DAOFactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Titre\n3-Tout\n");
 		int choix;

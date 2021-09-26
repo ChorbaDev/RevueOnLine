@@ -14,15 +14,15 @@ public class Application {
 		int choixCRUD;
 		int choixTable;
 		System.out.println("---------Bienvenue dans notre application---------");
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Choissisez entre:\n1-My SQL\n2-Liste Memoire");
-		int idxPer = verifChoix(sc, 1, 2);
-		Persistance persistance;
-		if (idxPer == 1)
-			persistance = Persistance.MYSQL;
-		else
-			persistance = Persistance.ListeMemoire;
 		do {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Choissisez entre:\n1-My SQL\n2-Liste Memoire");
+			int idxPer = verifChoix(sc,1,2);
+			Persistance persistance;
+			if (idxPer == 1)
+				persistance = Persistance.MYSQL;
+			else
+				persistance = Persistance.ListeMemoire;
 			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
 					+ "3-Periodicite\n" + "4-Revue");
 			DAOFactory daof = DAOFactory.getDAOFactory(persistance);
@@ -65,7 +65,7 @@ public class Application {
 		do {
 			String chID = sc.nextLine();
 			id = isNumeric(chID) ? Integer.parseInt(chID) : 0;
-		} while (id <= 0);
+		} while (id > 0);
 		return id;
 	}
 
@@ -74,7 +74,7 @@ public class Application {
 		do {
 			String chPrix = sc.nextLine();
 			Prix = isNumeric(chPrix) ? Double.parseDouble(chPrix) : 0;
-		} while (Prix <= 0);
+		} while (Prix > 0);
 		return Prix;
 	}
 

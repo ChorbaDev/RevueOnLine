@@ -58,14 +58,10 @@ public abstract class AppAbonnement {
 				valid = true;
 			}
 		} while (!valid);
-		do {
-			System.out.print("ID Client :");
-			id_c = Application.verifID(sc);
-		} while (!existanceClient(id_c, daof));
-		do {
-			System.out.print("ID Revue :");
-			id_r = Application.verifID(sc);
-		} while (!existanceRevue(id_r, daof));
+		System.out.print("ID Client :");
+		id_c = Application.verifID(sc);
+		System.out.print("ID Revue :");
+		id_r = Application.verifID(sc);
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
 		daof.getAbonnementDAO().create(abonnement);
 	}
@@ -101,7 +97,7 @@ public abstract class AppAbonnement {
 		do {
 			System.out.print("ID Client :");
 			id_c = Application.verifID(sc);
-		} while (!existanceClient(id_c, daof));
+		} while ();
 		do {
 			System.out.print("ID Revue :");
 			id_r = Application.verifID(sc);
@@ -113,11 +109,13 @@ public abstract class AppAbonnement {
 
 	private static boolean existanceClient(int id_c, DAOFactory daof) throws SQLException {
 		Client cl;
+
 		try {
 			cl = daof.getClientDAO().getById(id_c);
+			System.out.println(daof.getClientDAO().getById(id_c).toString());
 		} catch (Exception e) {
 			cl = null;
-			return false;
+			System.out.println("yo");
 		}
 		return !cl.equals(null);
 	}
@@ -126,9 +124,10 @@ public abstract class AppAbonnement {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
+			System.out.println(daof.getRevueDAO().getById(id_r).toString());
 		} catch (Exception e) {
 			r = null;
-			return false;
+			System.out.println("lo");
 		}
 		return !r.equals(null);
 	}
@@ -191,13 +190,15 @@ public abstract class AppAbonnement {
 
 	static boolean verifDate(String date) {
 		String pattern = "(0?[1-9]|[12][0-9]|3[01])\\/(0?[1-9]|1[0-2])\\/([0-9]{4})";
+		boolean verif = false;
 		if (date.matches(pattern)) {
-			return true;
+			verif = true;
 		}
-		return false;
+		return verif;
 	}
 
 	static boolean compareDate(String date_deb, String date_fin) throws ParseException {
+		boolean verif = false;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		dateFormat.parse(date_deb);
 		if (dateFormat.parse(date_deb).before(dateFormat.parse(date_fin))) {

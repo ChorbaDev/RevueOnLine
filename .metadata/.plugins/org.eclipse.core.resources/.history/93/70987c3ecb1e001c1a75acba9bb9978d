@@ -126,11 +126,11 @@ public abstract class AppAbonnement {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
+			return true;
 		} catch (Exception e) {
 			r = null;
 			return false;
 		}
-		return !r.equals(null);
 	}
 
 	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {

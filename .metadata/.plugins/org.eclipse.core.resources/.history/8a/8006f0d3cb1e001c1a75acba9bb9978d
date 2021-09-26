@@ -56,10 +56,8 @@ public abstract class AppRevue {
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
 		tarif = Application.verifPrix(sc);
-		do {
-			System.out.print("Periodicite (ID) :");
-			id_p = Application.verifID(sc);
-		} while (!existancePeriodicite(id_p, daof));
+		System.out.print("Periodicite (ID) :");
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().update(revue);
 	}
@@ -81,10 +79,8 @@ public abstract class AppRevue {
 		visuel = sc.nextLine();
 		System.out.print("Tarif :");
 		tarif = Application.verifPrix(sc);
-		do {
-			System.out.print("Periodicite (ID) :");
-			id_p = Application.verifID(sc);
-		} while (!existancePeriodicite(id_p, daof));
+		System.out.print("Periodicite (ID) :");
+		id_p = Application.verifID(sc);
 		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
 		daof.getRevueDAO().create(revue);
 	}

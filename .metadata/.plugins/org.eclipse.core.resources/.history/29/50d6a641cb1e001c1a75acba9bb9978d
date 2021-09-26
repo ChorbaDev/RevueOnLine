@@ -126,6 +126,7 @@ public abstract class AppAbonnement {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
+	
 		} catch (Exception e) {
 			r = null;
 			return false;
