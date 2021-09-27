@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import metier.Abonnement;
 
-public class testAbonnement {
+public class AbonnementTest {
 	private Abonnement ab1;
 	private Abonnement ab2;
 

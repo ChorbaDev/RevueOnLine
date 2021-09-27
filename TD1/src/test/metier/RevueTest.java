@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import metier.Revue;
 
-public class testRevue {
+public class RevueTest {
 	private Revue r1;
 	private Revue r2;
 
