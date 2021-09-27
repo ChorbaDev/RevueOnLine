@@ -6,19 +6,19 @@ import java.util.List;
 import dao.PeriodiciteDAO;
 import metier.Periodicite;
 
-public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
-	private static ListeMemoirePeriodiciteDAO instance;
+public class ListeMemoirePeriodiciteDao implements PeriodiciteDAO {
+	private static ListeMemoirePeriodiciteDao instance;
 	private List<Periodicite> donnees;
 
-	private ListeMemoirePeriodiciteDAO() {
+	private ListeMemoirePeriodiciteDao() {
 		this.donnees = new ArrayList<>();
 		this.donnees.add(new Periodicite(1, "Mensuel"));
 		this.donnees.add(new Periodicite(2, "Quotidien"));
 	}
 
-	public static ListeMemoirePeriodiciteDAO getInstance() {
+	public static ListeMemoirePeriodiciteDao getInstance() {
 		if (instance == null)
-			instance = new ListeMemoirePeriodiciteDAO();
+			instance = new ListeMemoirePeriodiciteDao();
 		return instance;
 	}
 

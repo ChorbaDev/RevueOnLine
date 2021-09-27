@@ -7,17 +7,18 @@ import java.util.List;
 import dao.RevueDAO;
 import metier.Revue;
 
-public class ListeMemoireRevueDAO implements RevueDAO {
-	private static ListeMemoireRevueDAO instance;
+public class ListeMemoireRevueDao implements RevueDAO {
+	private static ListeMemoireRevueDao instance;
 	private List<Revue> donnees;
 
-	private ListeMemoireRevueDAO() {
+	private ListeMemoireRevueDao() {
 		this.donnees = new ArrayList<>();
+		this.donnees.add(new Revue(1, "titre", "descp", 1.2, "visuel", 1));
 	}
 
-	public static ListeMemoireRevueDAO getInstance() {
+	public static ListeMemoireRevueDao getInstance() {
 		if (instance == null)
-			instance = new ListeMemoireRevueDAO();
+			instance = new ListeMemoireRevueDao();
 		return instance;
 	}
 

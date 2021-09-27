@@ -6,17 +6,17 @@ import java.util.List;
 import dao.AbonnementDAO;
 import metier.Abonnement;
 
-public class ListeMemoireAbonnementDAO implements AbonnementDAO {
-	private static ListeMemoireAbonnementDAO instance;
+public class ListeMemoireAbonnementDao implements AbonnementDAO {
+	private static ListeMemoireAbonnementDao instance;
 	private List<Abonnement> donnees;
 
-	private ListeMemoireAbonnementDAO() {
+	private ListeMemoireAbonnementDao() {
 		donnees = new ArrayList<>();
 	}
 
-	public static ListeMemoireAbonnementDAO getInstance() {
+	public static ListeMemoireAbonnementDao getInstance() {
 		if (instance == null)
-			instance = new ListeMemoireAbonnementDAO();
+			instance = new ListeMemoireAbonnementDao();
 		return instance;
 	}
 

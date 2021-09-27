@@ -6,17 +6,17 @@ import java.util.List;
 import dao.ClientDAO;
 import metier.Client;
 
-public class ListeMemoireClientDAO implements ClientDAO {
-	private static ListeMemoireClientDAO instance;
+public class ListeMemoireClientDao implements ClientDAO {
+	private static ListeMemoireClientDao instance;
 	private List<Client> donnees;
 
-	private ListeMemoireClientDAO() {
+	private ListeMemoireClientDao() {
 		this.donnees = new ArrayList<>();
 	}
 
-	public static ListeMemoireClientDAO getInstance() {
+	public static ListeMemoireClientDao getInstance() {
 		if (instance == null)
-			instance = new ListeMemoireClientDAO();
+			instance = new ListeMemoireClientDao();
 		return instance;
 	}
 
