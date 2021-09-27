@@ -1,4 +1,4 @@
-package test.listememoire;
+package listememoire;
 
 import static dao.Persistance.ListeMemoire;
 import static daofactory.DAOFactory.getDAOFactory;
