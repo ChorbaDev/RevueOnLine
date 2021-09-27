@@ -15,7 +15,7 @@ import Metier.Connexion;
 public class MySQLAbonnementDAO implements AbonnementDAO {
 	private static MySQLAbonnementDAO instance;
 
-	public MySQLAbonnementDAO() {
+	private MySQLAbonnementDAO() {
 	}
 
 	public static MySQLAbonnementDAO getInstance() {
