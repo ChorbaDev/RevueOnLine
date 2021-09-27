@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import metier.Revue;
 
-public interface RevueDAO extends DAO<Revue> {
+public interface RevueDao extends Dao<Revue> {
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException;
 
 	public ArrayList<Revue> findAll() throws SQLException;

@@ -4,13 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import daofactory.DAOFactory;
-import daofactory.ListeMemoireDAOFactory;
+import daofactory.DaoFactory;
+import daofactory.ListeMemoireDaoFactory;
 import metier.Client;
 
 public abstract class AppClient {
 
-	public static void manipClient(Scanner sc, DAOFactory daof, int choixOperation) throws SQLException {
+	public static void manipClient(Scanner sc, DaoFactory daof, int choixOperation) throws SQLException {
 		switch (choixOperation) {
 		case 1:
 			createClient(sc, daof);
@@ -32,14 +32,14 @@ public abstract class AppClient {
 		}
 	}
 
-	private static void deleteClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void deleteClient(Scanner sc, DaoFactory daof) throws SQLException {
 		System.out.print("ID Client :");
 		int id = Application.verifID(sc);
 		Client cl = new Client(id);
 		daof.getClientDAO().delete(cl);
 	}
 
-	private static void updateClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void updateClient(Scanner sc, DaoFactory daof) throws SQLException {
 		int id;
 		String nom, prenom, no_rue, voie, code_postal, ville, pays;
 		System.out.print("ID Client :");
@@ -63,7 +63,7 @@ public abstract class AppClient {
 
 	}
 
-	private static void requestClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void requestClient(Scanner sc, DaoFactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Nom & Prenom\n3-Tout\n");
 		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
@@ -82,14 +82,14 @@ public abstract class AppClient {
 
 	}
 
-	private static void reqAllClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqAllClient(Scanner sc, DaoFactory daof) throws SQLException {
 		ArrayList<Client> listeC = daof.getClientDAO().findAll();
 		for (Client c : listeC)
 			System.out.println(c.toString());
 
 	}
 
-	private static void reqNPClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqNPClient(Scanner sc, DaoFactory daof) throws SQLException {
 		String nom, prenom;
 		System.out.print("Nom :");
 		nom = sc.nextLine();
@@ -101,15 +101,15 @@ public abstract class AppClient {
 
 	}
 
-	private static void reqIdClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqIdClient(Scanner sc, DaoFactory daof) throws SQLException {
 		int id = Application.verifID(sc);
 		Client cl = daof.getClientDAO().getById(id);
 		System.out.println(cl.toString());
 	}
 
-	private static void createClient(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void createClient(Scanner sc, DaoFactory daof) throws SQLException {
 		String nom, prenom, no_rue, voie, code_postal, ville, pays;
-		boolean isLM = daof instanceof ListeMemoireDAOFactory;
+		boolean isLM = daof instanceof ListeMemoireDaoFactory;
 		Client cl;
 		int id = 0;
 		if (isLM) {

@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.ClientDAO;
+import dao.ClientDao;
 import metier.Client;
 import metier.Connexion;
 
-public class MySQLClientDAO implements ClientDAO {
-	private static MySQLClientDAO instance;
+public class MySqlClientDao implements ClientDao {
+	private static MySqlClientDao instance;
 
-	public MySQLClientDAO() {
+	public MySqlClientDao() {
 	}
 
-	public static MySQLClientDAO getInstance() {
+	public static MySqlClientDao getInstance() {
 		if (instance == null)
-			instance = new MySQLClientDAO();
+			instance = new MySqlClientDao();
 		return instance;
 	}
 

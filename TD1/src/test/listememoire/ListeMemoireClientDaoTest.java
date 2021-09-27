@@ -1,6 +1,6 @@
 package test.listememoire;
 
-import daofactory.DAOFactory;
+import daofactory.DaoFactory;
 import metier.Client;
 import org.junit.After;
 import org.junit.Before;
@@ -12,12 +12,12 @@ import static dao.Persistance.ListeMemoire;
 import static org.junit.Assert.*;
 
 public class ListeMemoireClientDaoTest {
-    private DAOFactory daof;
+    private DaoFactory daof;
     private Client c;
 
     @Before
     public void setUp() throws Exception {
-        daof = DAOFactory.getDAOFactory(ListeMemoire);
+        daof = DaoFactory.getDAOFactory(ListeMemoire);
         c = new Client(1, "TEST", "Test", "99", "rue de test", "99999", "TestVille", "TestPays");
     }
 

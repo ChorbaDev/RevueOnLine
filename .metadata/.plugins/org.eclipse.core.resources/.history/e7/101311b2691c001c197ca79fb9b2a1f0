@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import daofactory.daofactory;
-import daofactory.ListeMemoireDAOFactory;
+import daofactory.ListeMemoireDaoFactory;
 import metier.Client;
 
 public abstract class AppClient {

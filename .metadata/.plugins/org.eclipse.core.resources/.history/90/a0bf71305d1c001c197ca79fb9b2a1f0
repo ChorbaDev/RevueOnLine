@@ -3,7 +3,7 @@ package listememoire;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbonnementDAO;
+import dao.AbonnementDao;
 import metier.Abonnement;
 
 public class ListeMemoireAbonnementDAO implements AbonnementDAO {

@@ -1,6 +1,6 @@
 package test.listememoire;
 
-import daofactory.DAOFactory;
+import daofactory.DaoFactory;
 import metier.Periodicite;
 import org.junit.After;
 import org.junit.Before;
@@ -12,12 +12,12 @@ import static dao.Persistance.ListeMemoire;
 import static org.junit.Assert.*;
 
 public class ListeMemoirePeriodiciteDaoTest {
-	private DAOFactory daof;
+	private DaoFactory daof;
 	private Periodicite p;
 
 	@Before
 	public void setUp() throws Exception {
-		daof = DAOFactory.getDAOFactory(ListeMemoire);
+		daof = DaoFactory.getDAOFactory(ListeMemoire);
 		p= new Periodicite(1,"Mensuel");
 	}
 

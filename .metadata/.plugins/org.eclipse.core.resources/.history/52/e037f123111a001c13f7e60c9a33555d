@@ -1,6 +1,6 @@
 package listememoire;
 
-import dao.PeriodiciteDAO;
+import dao.PeriodiciteDao;
 import metier.Periodicite;
 
 import java.sql.SQLException;

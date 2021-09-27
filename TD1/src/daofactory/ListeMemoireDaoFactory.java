@@ -3,26 +3,26 @@ package daofactory;
 import dao.*;
 import listememoire.*;
 
-public class ListeMemoireDAOFactory extends DAOFactory {
+public class ListeMemoireDaoFactory extends DaoFactory {
 
     @Override
-    public AbonnementDAO getAbonnementDAO() {
+    public AbonnementDao getAbonnementDAO() {
         return ListeMemoireAbonnementDao.getInstance();
     }
 
     @Override
-    public RevueDAO getRevueDAO() {
+    public RevueDao getRevueDAO() {
         return ListeMemoireRevueDao.getInstance();
     }
 
     @Override
-    public PeriodiciteDAO getPeriodiciteDAO() {
+    public PeriodiciteDao getPeriodiciteDAO() {
         return ListeMemoirePeriodiciteDao.getInstance();
         //ListeMemoirePeriodiciteDAO.getInstance();
     }
 
     @Override
-    public ClientDAO getClientDAO() {
+    public ClientDao getClientDAO() {
         return ListeMemoireClientDao.getInstance();
         //ListeMemoireClientDAO.getInstance();
     }

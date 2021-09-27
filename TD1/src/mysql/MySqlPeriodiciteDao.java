@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.PeriodiciteDAO;
+import dao.PeriodiciteDao;
 import metier.Connexion;
 import metier.Periodicite;
 
-public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
-	private static MySQLPeriodiciteDAO instance;
+public class MySqlPeriodiciteDao implements PeriodiciteDao {
+	private static MySqlPeriodiciteDao instance;
 
-	public MySQLPeriodiciteDAO() {
+	public MySqlPeriodiciteDao() {
 	}
 
-	public static MySQLPeriodiciteDAO getInstance() {
+	public static MySqlPeriodiciteDao getInstance() {
 		if (instance == null)
-			instance = new MySQLPeriodiciteDAO();
+			instance = new MySqlPeriodiciteDao();
 		return instance;
 	}
 

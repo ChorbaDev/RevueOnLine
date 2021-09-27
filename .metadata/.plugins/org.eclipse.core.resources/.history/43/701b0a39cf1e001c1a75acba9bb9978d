@@ -3,7 +3,7 @@ package listememoire;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.ClientDAO;
+import dao.ClientDao;
 import metier.Client;
 
 public class ListeMemoireClientDAO implements ClientDAO {

@@ -3,7 +3,7 @@ package mysql;
 
 import java.util.ArrayList;
 
-import dao.RevueDAO;
+import dao.RevueDao;
 import metier.*;
 
 import java.sql.*;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import daofactory.daofactory;
-import daofactory.ListeMemoireDAOFactory;
+import daofactory.ListeMemoireDaoFactory;
 import metier.Abonnement;
 import metier.Client;
 import metier.Revue;

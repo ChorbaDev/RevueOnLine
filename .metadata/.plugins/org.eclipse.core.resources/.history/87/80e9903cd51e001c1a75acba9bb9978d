@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.RevueDAO;
+import dao.RevueDao;
 import metier.Connexion;
 import metier.Revue;
 

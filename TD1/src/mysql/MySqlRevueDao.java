@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.RevueDAO;
+import dao.RevueDao;
 import metier.Connexion;
 import metier.Revue;
 
-public class MySQLRevueDAO implements RevueDAO {
-	private static MySQLRevueDAO instance;
+public class MySqlRevueDao implements RevueDao {
+	private static MySqlRevueDao instance;
 
-	private MySQLRevueDAO() {
+	private MySqlRevueDao() {
 	}
 
-	public static MySQLRevueDAO getInstance() {
+	public static MySqlRevueDao getInstance() {
 		if (instance == null)
-			instance = new MySQLRevueDAO();
+			instance = new MySqlRevueDao();
 		return instance;
 	}
 

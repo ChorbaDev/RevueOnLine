@@ -1,21 +1,21 @@
 package test.listememoire;
 
 import static dao.Persistance.ListeMemoire;
-import static daofactory.DAOFactory.getDAOFactory;
+import static daofactory.DaoFactory.getDAOFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
 
+import daofactory.DaoFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import daofactory.DAOFactory;
 import metier.Revue;
 
 public class ListeMemoireRevueDaoTest {
 
-	private DAOFactory daof;
+	private DaoFactory daof;
 	private Revue r;
 
 	@Before

@@ -1,6 +1,6 @@
 package mysql;
 
-import dao.ClientDAO;
+import dao.ClientDao;
 import metier.Client;
 import metier.Connexion;
 

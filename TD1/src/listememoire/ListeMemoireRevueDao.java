@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.RevueDAO;
+import dao.RevueDao;
 import metier.Revue;
 
-public class ListeMemoireRevueDao implements RevueDAO {
+public class ListeMemoireRevueDao implements RevueDao {
 	private static ListeMemoireRevueDao instance;
 	private List<Revue> donnees;
 

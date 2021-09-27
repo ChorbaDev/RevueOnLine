@@ -3,10 +3,10 @@ package listememoire;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbonnementDAO;
+import dao.AbonnementDao;
 import metier.Abonnement;
 
-public class ListeMemoireAbonnementDao implements AbonnementDAO {
+public class ListeMemoireAbonnementDao implements AbonnementDao {
 	private static ListeMemoireAbonnementDao instance;
 	private List<Abonnement> donnees;
 

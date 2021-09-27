@@ -3,10 +3,10 @@ package listememoire;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.ClientDAO;
+import dao.ClientDao;
 import metier.Client;
 
-public class ListeMemoireClientDao implements ClientDAO {
+public class ListeMemoireClientDao implements ClientDao {
 	private static ListeMemoireClientDao instance;
 	private List<Client> donnees;
 

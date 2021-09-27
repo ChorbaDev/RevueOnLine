@@ -1,8 +1,8 @@
 package listememoire;
 
-import dao.RevueDAO;
+import dao.RevueDao;
 import metier.*;
-import mysql.MySQLRevueDAO;
+import mysql.MySqlRevueDao;
 
 import java.sql.*;
 import java.util.*;

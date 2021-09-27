@@ -1,6 +1,6 @@
 package mysql;
 
-import dao.PeriodiciteDAO;
+import dao.PeriodiciteDao;
 import metier.*;
 
 

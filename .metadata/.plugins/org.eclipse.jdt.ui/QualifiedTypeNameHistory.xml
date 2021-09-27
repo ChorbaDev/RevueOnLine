@@ -2,15 +2,15 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="dao.RevueDAO"/>
-    <fullyQualifiedTypeName name="dao.AbonnementDAO"/>
-    <fullyQualifiedTypeName name="mysql.MySQLAbonnementDAO"/>
+    <fullyQualifiedTypeName name="dao.RevueDao"/>
+    <fullyQualifiedTypeName name="dao.AbonnementDao"/>
+    <fullyQualifiedTypeName name="mysql.MySqlAbonnementDao"/>
     <fullyQualifiedTypeName name="listememoire.ListeMemoireAbonnementDAO"/>
-    <fullyQualifiedTypeName name="daofactory.DAOFactory"/>
+    <fullyQualifiedTypeName name="daofactory.DaoFactory"/>
     <fullyQualifiedTypeName name="metier.Abonnement"/>
     <fullyQualifiedTypeName name="metier.Client"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
-    <fullyQualifiedTypeName name="daofactory.ListeMemoireDAOFactory"/>
+    <fullyQualifiedTypeName name="daofactory.ListeMemoireDaoFactory"/>
     <fullyQualifiedTypeName name="metier.Revue"/>
     <fullyQualifiedTypeName name="dao.Persistance"/>
     <fullyQualifiedTypeName name="metier.Periodicite"/>

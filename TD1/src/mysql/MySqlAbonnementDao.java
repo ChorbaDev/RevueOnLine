@@ -8,19 +8,19 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import dao.AbonnementDAO;
+import dao.AbonnementDao;
 import metier.Abonnement;
 import metier.Connexion;
 
-public class MySQLAbonnementDAO implements AbonnementDAO {
-	private static MySQLAbonnementDAO instance;
+public class MySqlAbonnementDao implements AbonnementDao {
+	private static MySqlAbonnementDao instance;
 
-	private MySQLAbonnementDAO() {
+	private MySqlAbonnementDao() {
 	}
 
-	public static MySQLAbonnementDAO getInstance() {
+	public static MySqlAbonnementDao getInstance() {
 		if (instance == null)
-			instance = new MySQLAbonnementDAO();
+			instance = new MySqlAbonnementDao();
 		return instance;
 	}
 

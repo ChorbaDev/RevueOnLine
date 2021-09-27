@@ -7,14 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import daofactory.DAOFactory;
-import daofactory.ListeMemoireDAOFactory;
+import daofactory.DaoFactory;
+import daofactory.ListeMemoireDaoFactory;
 import metier.Abonnement;
 import metier.Client;
 import metier.Revue;
 
 public abstract class AppAbonnement {
-	public static void manipAbonnement(Scanner sc, DAOFactory daof, int choixCRUD) throws SQLException, ParseException {
+	public static void manipAbonnement(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, ParseException {
 		switch (choixCRUD) {
 		case 1:
 			createAbonnement(sc, daof);
@@ -36,11 +36,11 @@ public abstract class AppAbonnement {
 		}
 	}
 
-	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void createAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException {
 		String date_deb, date_fin;
 		boolean valid = false;
 		int id_c, id_r, id = 0;
-		boolean isLM = daof instanceof ListeMemoireDAOFactory;
+		boolean isLM = daof instanceof ListeMemoireDaoFactory;
 		if (isLM) {
 			System.out.print("ID Abonnement :");
 			id_c = Integer.parseInt(sc.nextLine());
@@ -70,7 +70,7 @@ public abstract class AppAbonnement {
 		daof.getAbonnementDAO().create(abonnement);
 	}
 
-	private static void deleteAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void deleteAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException {
 		int id;
 		System.out.print("ID Abonnement :");
 		id = Application.verifID(sc);
@@ -78,7 +78,7 @@ public abstract class AppAbonnement {
 		daof.getAbonnementDAO().delete(abonnement);
 	}
 
-	private static void updateAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void updateAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException {
 		boolean valid = false;
 		String date_deb, date_fin;
 		int id_c, id_r, id;
@@ -111,7 +111,7 @@ public abstract class AppAbonnement {
 		daof.getAbonnementDAO().update(abonnement);
 	}
 
-	private static boolean existanceClient(int id_c, DAOFactory daof) throws SQLException {
+	private static boolean existanceClient(int id_c, DaoFactory daof) throws SQLException {
 		Client cl;
 		try {
 			cl = daof.getClientDAO().getById(id_c);
@@ -123,7 +123,7 @@ public abstract class AppAbonnement {
 		return true;
 	}
 
-	private static boolean existanceRevue(int id_r, DAOFactory daof) {
+	private static boolean existanceRevue(int id_r, DaoFactory daof) {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
@@ -135,7 +135,7 @@ public abstract class AppAbonnement {
 		return true;
 	}
 
-	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void requestAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Client\n3-Tout");
 		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
@@ -154,13 +154,13 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqAllAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
 		for (Abonnement ab : listeAb)
 			System.out.println(ab.toString());
 	}
 
-	private static void reqClientAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqClientAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
 		int id_c = Application.verifID(sc);
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().getByClient(id_c);
 		for (Abonnement ab : listeAb) {
@@ -169,7 +169,7 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqIdAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqIdAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
 		int id = Application.verifID(sc);
 		Abonnement ab = daof.getAbonnementDAO().getById(id);
 		System.out.println(ab.toString());

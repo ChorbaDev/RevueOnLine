@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import dao.Persistance;
-import daofactory.DAOFactory;
+import daofactory.DaoFactory;
 
 public class Application {
 
@@ -25,7 +25,7 @@ public class Application {
 		do {
 			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
 					+ "3-Periodicite\n" + "4-Revue");
-			DAOFactory daof = DAOFactory.getDAOFactory(persistance);
+			DaoFactory daof = DaoFactory.getDAOFactory(persistance);
 			choixTable = verifChoix(sc, 1, 4);
 			afficheCRUD();
 			choixCRUD = verifChoix(sc, 1, 4);

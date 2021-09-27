@@ -1,6 +1,6 @@
 package test.mysql;
 
-import static daofactory.DAOFactory.getDAOFactory;
+import static daofactory.DaoFactory.getDAOFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.Persistance;
-import daofactory.DAOFactory;
+import daofactory.DaoFactory;
 import metier.Abonnement;
 
 public class MySqlAbonnementDaoTest {
-	private DAOFactory daof;
+	private DaoFactory daof;
 	private Abonnement ab;
 
 	@Before
