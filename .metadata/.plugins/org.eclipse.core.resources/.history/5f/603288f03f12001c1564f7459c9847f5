@@ -1,11 +1,11 @@
 
-public class Metier.Abonnement {
+public class metier.Abonnement {
 	private int id;
 	private java.util.Date date_debut;
 	private java.util.Date date_fin;
 	int id_client;
 	int id_revue;
-	public Metier.Abonnement(String deb,String fin, int id_c,int id_r) {
+	public metier.Abonnement(String deb,String fin, int id_c,int id_r) {
 		
 	}
 }

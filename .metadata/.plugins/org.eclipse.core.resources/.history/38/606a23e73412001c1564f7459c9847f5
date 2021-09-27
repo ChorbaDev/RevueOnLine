@@ -1,7 +1,7 @@
 
-public class Metier.Periodicite {
+public class metier.Periodicite {
 	private String libelle;
-	public Metier.Periodicite(String ch) {
+	public metier.Periodicite(String ch) {
 		this.libelle=ch;
 	}
 }

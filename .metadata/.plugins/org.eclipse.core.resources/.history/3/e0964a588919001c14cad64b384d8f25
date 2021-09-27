@@ -1,16 +1,16 @@
-package Application;
+package application;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DAO.Persistance;
-import DAOFactory.DAOFactory;
-import Metier.Periodicite;
+import dao.Persistance;
+import daofactory.daofactory;
+import metier.Periodicite;
 
 public abstract class AppPeriodicite {
 
-	public static void manipPeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
+	public static void manipPeriodicite(Scanner sc, daofactory daof) throws SQLException {
 		afficheCRUD();
 		int choixOperation;
 		do {
@@ -45,7 +45,7 @@ public abstract class AppPeriodicite {
 		System.out.print("Libelle :");
 		libelle = sc.nextLine();
 		Periodicite p = new Periodicite(id, libelle);
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().delete(p);
+		daofactory.getDAOFactory(Persistance.listememoire).getPeriodiciteDAO().delete(p);
 	}
 
 	private static void updatePeriodicite(Scanner sc) throws SQLException {
@@ -56,7 +56,7 @@ public abstract class AppPeriodicite {
 		System.out.print("Libelle :");
 		libelle = sc.nextLine();
 		Periodicite p = new Periodicite(id, libelle);
-		DAOFactory.getDAOFactory(Persistance.ListeMemoire).getPeriodiciteDAO().update(p);
+		daofactory.getDAOFactory(Persistance.listememoire).getPeriodiciteDAO().update(p);
 
 	}
 
@@ -66,7 +66,7 @@ public abstract class AppPeriodicite {
 
 	}
 
-	private static void requestPeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void requestPeriodicite(Scanner sc, daofactory daof) throws SQLException {
 		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Libelle\n");
 		int choix;
 		do {
@@ -85,7 +85,7 @@ public abstract class AppPeriodicite {
 
 	}
 
-	private static void reqLibellePeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqLibellePeriodicite(Scanner sc, daofactory daof) throws SQLException {
 		String lib = sc.nextLine();
 		ArrayList<Periodicite> listeP = daof.getPeriodiciteDAO().getByLibelle(lib);
 		for (Periodicite p : listeP)
@@ -93,14 +93,14 @@ public abstract class AppPeriodicite {
 
 	}
 
-	private static void reqIdPeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqIdPeriodicite(Scanner sc, daofactory daof) throws SQLException {
 		int id = Integer.parseInt(sc.nextLine());
 		Periodicite ab = daof.getPeriodiciteDAO().getById(id);
 		System.out.println(ab.toString());
 
 	}
 
-	private static void createPeriodicite(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void createPeriodicite(Scanner sc, daofactory daof) throws SQLException {
 		String libelle;
 		System.out.print("Libelle :");
 		libelle = sc.nextLine();

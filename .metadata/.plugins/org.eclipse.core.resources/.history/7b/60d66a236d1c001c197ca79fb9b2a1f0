@@ -3,14 +3,14 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import Application.AppAbonnement;
-import Application.AppClient;
-import Application.AppPeriodicite;
-import Application.AppRevue;
-import DAO.Persistance;
-import DAOFactory.DAOFactory;
+import application.AppAbonnement;
+import application.AppClient;
+import application.AppPeriodicite;
+import application.AppRevue;
+import dao.Persistance;
+import daofactory.daofactory;
 
-public class Application {
+public class application {
 
 	public static void main(String[] args) throws SQLException, ParseException {
 		String reponse;
@@ -22,8 +22,8 @@ public class Application {
 		if (idxPer == 1)
 			persistance = Persistance.MYSQL;
 		else
-			persistance = Persistance.ListeMemoire;
-		DAOFactory daof = DAOFactory.getDAOFactory(persistance);
+			persistance = Persistance.listememoire;
+		daofactory daof = daofactory.getDAOFactory(persistance);
 		do {
 			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
 					+ "3-Periodicite\n" + "4-Revue");

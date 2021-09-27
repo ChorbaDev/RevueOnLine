@@ -1,11 +1,11 @@
-package ListeMemoire;
+package listememoire;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.RevueDAO;
-import Metier.Revue;
+import dao.RevueDAO;
+import metier.Revue;
 
 public class ListeMemoireRevueDAO implements RevueDAO {
 	private static ListeMemoireRevueDAO instance;

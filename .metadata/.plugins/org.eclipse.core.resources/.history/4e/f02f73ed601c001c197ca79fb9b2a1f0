@@ -1,12 +1,12 @@
-package ListeMemoire;
+package listememoire;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.PeriodiciteDAO;
-import Metier.Periodicite;
-import Metier.Revue;
+import dao.PeriodiciteDAO;
+import metier.Periodicite;
+import metier.Revue;
 
 public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	private static ListeMemoirePeriodiciteDAO instance;

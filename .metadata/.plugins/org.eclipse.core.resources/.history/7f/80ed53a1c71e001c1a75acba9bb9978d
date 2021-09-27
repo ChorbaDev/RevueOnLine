@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -7,14 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DAOFactory.DAOFactory;
-import DAOFactory.ListeMemoireDAOFactory;
-import Metier.Abonnement;
-import Metier.Client;
-import Metier.Revue;
+import daofactory.daofactory;
+import daofactory.ListeMemoireDAOFactory;
+import metier.Abonnement;
+import metier.Client;
+import metier.Revue;
 
 public abstract class AppAbonnement {
-	public static void manipAbonnement(Scanner sc, DAOFactory daof, int choixCRUD) throws SQLException, ParseException {
+	public static void manipAbonnement(Scanner sc, daofactory daof, int choixCRUD) throws SQLException, ParseException {
 		switch (choixCRUD) {
 		case 1:
 			createAbonnement(sc, daof);
@@ -36,7 +36,7 @@ public abstract class AppAbonnement {
 		}
 	}
 
-	private static void createAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void createAbonnement(Scanner sc, daofactory daof) throws SQLException, ParseException {
 		String date_deb, date_fin;
 		boolean valid = false;
 		int id_c, id_r, id = 0;
@@ -59,27 +59,27 @@ public abstract class AppAbonnement {
 			}
 		} while (!valid);
 		System.out.print("ID Client :");
-		id_c = Application.verifID(sc);
+		id_c = application.verifID(sc);
 		System.out.print("ID Revue :");
-		id_r = Application.verifID(sc);
+		id_r = application.verifID(sc);
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
 		daof.getAbonnementDAO().create(abonnement);
 	}
 
-	private static void deleteAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void deleteAbonnement(Scanner sc, daofactory daof) throws SQLException, ParseException {
 		int id;
 		System.out.print("ID Abonnement :");
-		id = Application.verifID(sc);
+		id = application.verifID(sc);
 		Abonnement abonnement = new Abonnement(id);
 		daof.getAbonnementDAO().delete(abonnement);
 	}
 
-	private static void updateAbonnement(Scanner sc, DAOFactory daof) throws SQLException, ParseException {
+	private static void updateAbonnement(Scanner sc, daofactory daof) throws SQLException, ParseException {
 		boolean valid = false;
 		String date_deb, date_fin;
 		int id_c, id_r, id;
 		System.out.print("ID Abonnement :");
-		id = Application.verifID(sc);
+		id = application.verifID(sc);
 		do {
 			System.out.print("Date debut jj/mm/yyyy :");
 			date_deb = sc.nextLine();
@@ -96,18 +96,18 @@ public abstract class AppAbonnement {
 
 		do {
 			System.out.print("ID Client :");
-			id_c = Application.verifID(sc);
+			id_c = application.verifID(sc);
 		} while (existanceClient(id_c, daof));
 		do {
 			System.out.print("ID Revue :");
-			id_r = Application.verifID(sc);
+			id_r = application.verifID(sc);
 		}while(existanceRevue(id_r, daof));
 		
 		Abonnement abonnement = new Abonnement(id, date_deb, date_fin, id_r, id_c);
 		daof.getAbonnementDAO().update(abonnement);
 	}
 
-	private static boolean existanceClient(int id_c, DAOFactory daof) {
+	private static boolean existanceClient(int id_c, daofactory daof) {
 		Client cl;
 		try {
 			cl = daof.getClientDAO().getById(id_c);
@@ -117,7 +117,7 @@ public abstract class AppAbonnement {
 		return !cl.equals(null);
 	}
 
-	private static boolean existanceRevue(int id_r, DAOFactory daof) {
+	private static boolean existanceRevue(int id_r, daofactory daof) {
 		Revue r;
 		try {
 			r = daof.getRevueDAO().getById(id_r);
@@ -127,9 +127,9 @@ public abstract class AppAbonnement {
 		return !r.equals(null);
 	}
 
-	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void requestAbonnement(Scanner sc, daofactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Client\n-3Abonemment");
-		int choix = Application.verifChoix(sc, 1, 3);
+		int choix = application.verifChoix(sc, 1, 3);
 		switch (choix) {
 		case 1:
 			reqIdAbonnement(sc, daof);
@@ -146,14 +146,14 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqAllAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqAllAbonnement(Scanner sc, daofactory daof) throws SQLException {
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
 		for (Abonnement ab : listeAb)
 			System.out.println(ab.toString());
 	}
 
-	private static void reqClientAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		int id_c = Application.verifID(sc);
+	private static void reqClientAbonnement(Scanner sc, daofactory daof) throws SQLException {
+		int id_c = application.verifID(sc);
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().getByClient(id_c);
 		for (Abonnement ab : listeAb) {
 			System.out.println(ab.toString());
@@ -161,8 +161,8 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqIdAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		int id = Application.verifID(sc);
+	private static void reqIdAbonnement(Scanner sc, daofactory daof) throws SQLException {
+		int id = application.verifID(sc);
 		Abonnement ab = daof.getAbonnementDAO().getById(id);
 		System.out.println(ab.toString());
 

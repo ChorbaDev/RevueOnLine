@@ -1,10 +1,10 @@
 import java.sql.SQLException;
 
-public class Application {
+public class application {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Metier.Revue r=new Metier.Revue("titre","descp",1.2,"visuel",4);
+		metier.Revue r=new metier.Revue("titre","descp",1.2,"visuel",4);
 		r.addRevue();
 		r.deleteRevue();
 	}

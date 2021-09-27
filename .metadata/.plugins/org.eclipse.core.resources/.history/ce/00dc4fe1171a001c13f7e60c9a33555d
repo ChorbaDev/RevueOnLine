@@ -1,4 +1,4 @@
-package MySQL;
+package mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAO.PeriodiciteDAO;
-import Metier.Connexion;
-import Metier.Periodicite;
+import dao.PeriodiciteDAO;
+import metier.Connexion;
+import metier.Periodicite;
 
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 	private static MySQLPeriodiciteDAO instance;

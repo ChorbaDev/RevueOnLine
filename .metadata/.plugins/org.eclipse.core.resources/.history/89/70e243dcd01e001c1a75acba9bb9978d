@@ -1,4 +1,4 @@
-package MySQL;
+package mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAO.ClientDAO;
-import Metier.Client;
-import Metier.Connexion;
+import dao.ClientDAO;
+import metier.Client;
+import metier.Connexion;
 
 public class MySQLClientDAO implements ClientDAO {
 	private static MySQLClientDAO instance;

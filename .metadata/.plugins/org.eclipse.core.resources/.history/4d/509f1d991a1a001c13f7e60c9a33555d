@@ -1,8 +1,8 @@
-package MySQL;
+package mysql;
 
-import DAO.ClientDAO;
-import Metier.Client;
-import Metier.Connexion;
+import dao.ClientDAO;
+import metier.Client;
+import metier.Connexion;
 
 import java.sql.*;
 import java.util.ArrayList;

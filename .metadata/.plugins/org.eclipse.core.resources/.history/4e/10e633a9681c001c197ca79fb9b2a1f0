@@ -1,15 +1,15 @@
-package Application;
+package application;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import DAOFactory.DAOFactory;
-import Metier.Revue;
+import daofactory.daofactory;
+import metier.Revue;
 
 public abstract class AppRevue {
 
-	public static void manipRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	public static void manipRevue(Scanner sc, daofactory daof) throws SQLException {
 		int choixOperation;
 		do {
 			choixOperation = Integer.parseInt(sc.nextLine());
@@ -35,7 +35,7 @@ public abstract class AppRevue {
 		}
 	}
 
-	private static void deleteRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void deleteRevue(Scanner sc, daofactory daof) throws SQLException {
 		int id;
 		System.out.print("ID Revue:");
 		id = Integer.parseInt(sc.nextLine());
@@ -43,7 +43,7 @@ public abstract class AppRevue {
 		daof.getRevueDAO().delete(revue);
 	}
 
-	private static void updateRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void updateRevue(Scanner sc, daofactory daof) throws SQLException {
 		String titre, description, visuel;
 		double tarif;
 		int id_p, id;
@@ -63,7 +63,7 @@ public abstract class AppRevue {
 		daof.getRevueDAO().update(revue);
 	}
 
-	private static void createRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void createRevue(Scanner sc, daofactory daof) throws SQLException {
 		String titre, description, visuel;
 		double tarif;
 		int id_p, id;
@@ -83,7 +83,7 @@ public abstract class AppRevue {
 		daof.getRevueDAO().create(revue);
 	}
 
-	private static void requestRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void requestRevue(Scanner sc, daofactory daof) throws SQLException {
 		System.out.println("Affichage par:\n1-ID\n2-Titre\n3-Tout\n");
 		int choix;
 		do {
@@ -105,12 +105,12 @@ public abstract class AppRevue {
 
 	}
 
-	private static void reqAllRevue(Scanner sc, DAOFactory daof) {
+	private static void reqAllRevue(Scanner sc, daofactory daof) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void reqTitreRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqTitreRevue(Scanner sc, daofactory daof) throws SQLException {
 		String titre = sc.nextLine();
 		ArrayList<Revue> listR = daof.getRevueDAO().getByTitre(titre);
 		for (Revue r : listR) {
@@ -118,7 +118,7 @@ public abstract class AppRevue {
 		}
 	}
 
-	private static void reqIdRevue(Scanner sc, DAOFactory daof) throws SQLException {
+	private static void reqIdRevue(Scanner sc, daofactory daof) throws SQLException {
 		int id = Integer.parseInt(sc.nextLine());
 		Revue r = daof.getRevueDAO().getById(id);
 		System.out.println(r.toString());

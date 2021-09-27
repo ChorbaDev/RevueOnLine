@@ -1,11 +1,11 @@
-package DAO;
+package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Metier.Periodicite;
+import metier.Periodicite;
 
-public interface PeriodiciteDAO extends DAO<Periodicite> {
+public interface PeriodiciteDAO extends dao<Periodicite> {
 	public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException;
 	public ArrayList<Periodicite> findAll() throws SQLException;
 }

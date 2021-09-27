@@ -1,10 +1,10 @@
 import java.sql.SQLException;
 
-public class Application {
+public class application {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Metier.Periodicite p=new Metier.Periodicite("tests");
+		metier.Periodicite p=new metier.Periodicite("tests");
 		p.addPeriodicite();
 	}
 

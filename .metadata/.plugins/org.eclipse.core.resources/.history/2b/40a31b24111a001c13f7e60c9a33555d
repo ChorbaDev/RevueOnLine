@@ -1,7 +1,7 @@
-package ListeMemoire;
+package listememoire;
 
-import DAO.PeriodiciteDAO;
-import Metier.Periodicite;
+import dao.PeriodiciteDAO;
+import metier.Periodicite;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

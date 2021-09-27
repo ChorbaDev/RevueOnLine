@@ -1,4 +1,4 @@
-package MySQL;
+package mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import DAO.RevueDAO;
-import Metier.Connexion;
-import Metier.Revue;
+import dao.RevueDAO;
+import metier.Connexion;
+import metier.Revue;
 
 public class MySQLRevueDAO implements RevueDAO {
 	private static MySQLRevueDAO instance;
@@ -52,7 +52,7 @@ public class MySQLRevueDAO implements RevueDAO {
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
 
-		String sql = "insert into Metier.Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
+		String sql = "insert into metier.Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
 		PreparedStatement req = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		req.setString(1, r.getTitre());
 		req.setString(2, r.getDescription());
@@ -100,7 +100,7 @@ public class MySQLRevueDAO implements RevueDAO {
 	public boolean delete(Revue r) throws SQLException {
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
-		String sql = "delete from Metier.Revue where id_revue=?";
+		String sql = "delete from metier.Revue where id_revue=?";
 		PreparedStatement req = connect.prepareStatement(sql);
 		req.setInt(1, r.getId());
 		int nbLignes = req.executeUpdate();

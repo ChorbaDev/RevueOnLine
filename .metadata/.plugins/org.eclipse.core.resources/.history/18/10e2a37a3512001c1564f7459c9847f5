@@ -1,13 +1,13 @@
 import java.sql.*;
-public class Metier.Periodicite {
+public class metier.Periodicite {
 	private String libelle;
 	
-	public Metier.Periodicite(String ch) {
+	public metier.Periodicite(String ch) {
 		this.libelle=ch;
 	}
 	
-	public void addPeriodicite(Metier.Periodicite p) {
-		Metier.Connexion maConnexion= new Metier.Connexion();
+	public void addPeriodicite(metier.Periodicite p) {
+		metier.Connexion maConnexion= new metier.Connexion();
 		Connection Connect=maConnexion.creeConnexion();
 		
 	}

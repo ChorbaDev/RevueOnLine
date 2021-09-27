@@ -1,10 +1,10 @@
-package DAO;
+package dao;
 
-import Metier.Revue;
+import metier.Revue;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface RevueDAO extends DAO<Revue> {
+public interface RevueDAO extends dao<Revue> {
     public ArrayList<Revue> getByTitre(String titre) throws SQLException;
 }

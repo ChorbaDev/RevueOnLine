@@ -1,4 +1,4 @@
-package MySQL;
+package mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import DAO.AbonnementDAO;
-import Metier.Abonnement;
-import Metier.Connexion;
+import dao.AbonnementDAO;
+import metier.Abonnement;
+import metier.Connexion;
 
 public class MySQLAbonnementDAO implements AbonnementDAO {
 	private static MySQLAbonnementDAO instance;

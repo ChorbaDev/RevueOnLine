@@ -1,12 +1,12 @@
-package ListeMemoire;
+package listememoire;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.ClientDAO;
-import Metier.Client;
-import Metier.Revue;
+import dao.ClientDAO;
+import metier.Client;
+import metier.Revue;
 
 public class ListeMemoireClientDAO implements ClientDAO {
 	private static ListeMemoireClientDAO instance;

@@ -1,13 +1,13 @@
-package Application;
+package application;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import DAO.Persistance;
-import DAOFactory.DAOFactory;
+import dao.Persistance;
+import daofactory.daofactory;
 
-public class Application {
+public class application {
 
 	public static void main(String[] args) throws SQLException, ParseException {
 		String reponse;
@@ -22,10 +22,10 @@ public class Application {
 			if (idxPer == 1)
 				persistance = Persistance.MYSQL;
 			else
-				persistance = Persistance.ListeMemoire;
+				persistance = Persistance.listememoire;
 			System.out.println("Quelle table vous voulez manipuler? \n" + "1-Abonnement\n" + "2-Client\n"
 					+ "3-Periodicite\n" + "4-Revue");
-			DAOFactory daof = DAOFactory.getDAOFactory(persistance);
+			daofactory daof = daofactory.getDAOFactory(persistance);
 			choixTable = verifChoix(sc,1,4);
 			afficheCRUD();
 			choixCRUD = verifChoix(sc,1,4);
