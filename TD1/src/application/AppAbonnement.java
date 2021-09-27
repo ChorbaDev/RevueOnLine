@@ -136,7 +136,7 @@ public abstract class AppAbonnement {
 	}
 
 	private static void requestAbonnement(Scanner sc, DAOFactory daof) throws SQLException {
-		System.out.println("Affichage par:\n1-ID\n2-Client\n-3Abonemment");
+		System.out.println("Affichage par:\n1-ID\n2-Client\n3-Tout");
 		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
 		case 1:

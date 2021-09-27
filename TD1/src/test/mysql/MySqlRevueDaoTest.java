@@ -21,7 +21,7 @@ public class MySqlRevueDaoTest {
 	@Before
 	public void setUp() {
 		daof = getDAOFactory(MYSQL);
-		r = new Revue(1, "test", "descp", 1.6, "visuel", 1);
+		r = new Revue("test", "descp", 1.6, "visuel", 1);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class MySqlRevueDaoTest {
 	@Test
 	public void testExistanceTitreRevue() throws SQLException {
 		daof.getRevueDAO().create(r);
-		assertNotNull(daof.getRevueDAO().getByTitre("test").size());
+		assertNotNull(daof.getRevueDAO().getByTitre(r.getTitre()).size());
 	}
 
 }

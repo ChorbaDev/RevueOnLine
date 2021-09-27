@@ -132,7 +132,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO {
 		ArrayList<Abonnement> list = new ArrayList<>();
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
-		String sql = "select * from Abonnement where id_client=?";
+		String sql = "select * from Abonnement";
 		PreparedStatement req = connect.prepareStatement(sql);
 		ResultSet res = req.executeQuery();
 		while (res.next()) {

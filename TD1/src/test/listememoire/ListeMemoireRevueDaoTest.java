@@ -43,6 +43,6 @@ public class ListeMemoireRevueDaoTest {
 	@Test
 	public void testExistanceTitreRevue() throws SQLException {
 		daof.getRevueDAO().create(r);
-		assertNotNull(daof.getRevueDAO().getByTitre("test").size());
+		assertNotNull(daof.getRevueDAO().getByTitre(r.getTitre()).size());
 	}
 }
