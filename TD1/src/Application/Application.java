@@ -45,9 +45,11 @@ public class Application {
 			default:
 				break;
 			}
-			System.out.println("Voulez-vous continuer? O pour oui");
-			reponse = sc.nextLine();
-		} while (reponse.toUpperCase().equals("O"));
+			do{
+				System.out.println("Voulez-vous continuer? O pour oui");
+				reponse = sc.nextLine();
+			}while (reponse.isEmpty());
+		} while (reponse.equalsIgnoreCase("O"));
 		System.out.println("Au revoir!");
 	}
 
