@@ -1,22 +1,55 @@
 package test.listememoire;
 
+import daofactory.DAOFactory;
+import metier.Periodicite;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
+import static dao.Persistance.ListeMemoire;
+import static org.junit.Assert.*;
+
 public class ListeMemoirePeriodiciteDaoTest {
+	private DAOFactory daof;
+	private Periodicite p;
 
-	@Test
-	public void getById() {
+	@Before
+	public void setUp() throws Exception {
+		daof = DAOFactory.getDAOFactory(ListeMemoire);
+		p= new Periodicite(1,"Mensuel");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
 	}
 
 	@Test
-	public void create() {
+	public void getById() throws SQLException {
+		daof.getPeriodiciteDAO().create(p);
+		assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size()-1).getCle()>=p.getCle());
 	}
 
 	@Test
-	public void delete() {
+	public void create() throws SQLException {
+		int initSize=daof.getPeriodiciteDAO().findAll().size();
+		daof.getPeriodiciteDAO().create(p);
+		assertEquals(initSize+1,daof.getPeriodiciteDAO().findAll().size());
 	}
 
 	@Test
-	public void getByLibelle() {
+	public void delete() throws SQLException {
+		daof.getPeriodiciteDAO().create(p);
+		int initSize=daof.getPeriodiciteDAO().findAll().size();
+		daof.getPeriodiciteDAO().delete(p);
+		assertEquals(initSize-1,daof.getPeriodiciteDAO().findAll().size());
+	}
+
+	@Test
+	public void getByLibelle() throws SQLException {
+		daof.getPeriodiciteDAO().create(p);
+		assertNotNull(daof.getPeriodiciteDAO().getByLibelle(p.getLibelle()).size());
 	}
 }
