@@ -27,12 +27,12 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
 	public Periodicite getById(int id) throws SQLException {
 		Connexion maConnexion = new Connexion();
 		Connection connect = maConnexion.creeConnexion();
-		PreparedStatement req = connect.prepareStatement("select * from Periodicite where id_periodicite=?");
+		PreparedStatement req = connect.prepareStatement("select libelle from Periodicite where id_periodicite=?");
 		req.setInt(1, id);
 		ResultSet res = req.executeQuery();
 		Periodicite periodicite = null;
 		if (res.next())
-			periodicite = new Periodicite(id, res.getString(2));
+			periodicite = new Periodicite(id, res.getString(1));
 		if (res != null)
 			res.close();
 		if (req != null)
@@ -83,6 +83,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement("delete from Periodicite where id_periodicite=?");
 		req.setInt(1, object.getCle());
+
 		int nbLignes = req.executeUpdate();
 		if (req != null)
 			req.close();

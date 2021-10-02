@@ -48,9 +48,7 @@ public class Revue {
 		if (getClass() != obj.getClass())
 			return false;
 		Revue other = (Revue) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		return id == other.id;
 	}
 
 	public int getId() {

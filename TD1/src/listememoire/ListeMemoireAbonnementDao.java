@@ -30,7 +30,7 @@ public class ListeMemoireAbonnementDao implements AbonnementDao {
 
 	private int existanceID(Abonnement objet) {
 		for (Abonnement ab : donnees) {
-			if (objet.getId() == ab.getId())
+			if (objet.equals(ab))
 				return donnees.indexOf(objet);
 		}
 		return -1;

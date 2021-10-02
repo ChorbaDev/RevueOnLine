@@ -31,8 +31,8 @@ public class ListeMemoireRevueDao implements RevueDao {
 	}
 
 	private int existanceID(Revue objet) {
-		for (Revue ab : donnees) {
-			if (objet.getId() == ab.getId())
+		for (Revue revue : donnees) {
+			if (objet.equals(revue))
 				return donnees.indexOf(objet);
 		}
 		return -1;
@@ -71,9 +71,9 @@ public class ListeMemoireRevueDao implements RevueDao {
 	@Override
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException {
 		ArrayList<Revue> liste = new ArrayList<>();
-		for (Revue r : donnees) {
-			if (r.getTitre() == titre)
-				liste.add(r);
+		for (Revue revue : donnees) {
+			if (revue.getTitre() == titre)
+				liste.add(revue);
 		}
 		return liste;
 	}

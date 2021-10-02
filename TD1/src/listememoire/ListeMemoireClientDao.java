@@ -21,8 +21,8 @@ public class ListeMemoireClientDao implements ClientDao {
 	}
 
 	private int existanceID(Client objet) {
-		for (Client cl : donnees) {
-			if (objet.getCle() == cl.getCle())
+		for (Client client : donnees) {
+			if (objet.equals(client))
 				return donnees.indexOf(objet);
 		}
 		return -1;

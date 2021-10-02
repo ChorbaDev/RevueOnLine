@@ -24,7 +24,7 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 
 	private int existanceID(Periodicite objet) {
 		for (Periodicite p : donnees) {
-			if (objet.getCle() == p.getCle())
+			if (objet.equals(p))
 				return donnees.indexOf(objet);
 		}
 		return -1;

@@ -7,10 +7,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
 
-import daofactory.DaoFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import daofactory.DaoFactory;
 import metier.Abonnement;
 
 public class ListeMemoireAbonnementDaoTest {

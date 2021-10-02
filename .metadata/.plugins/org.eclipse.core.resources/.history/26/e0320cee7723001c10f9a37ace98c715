@@ -1,0 +1,132 @@
+package metier;
+
+public class Client {
+	private int cle;
+	private String nom;
+	private String prenom;
+	private String no_rue;
+	private String voie;
+	private String code_postal;
+	private String ville;
+	private String pays;
+
+	public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
+			String pays) {
+		this.cle = cle;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.no_rue = no_rue;
+		this.voie = voie;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.pays = pays;
+	}
+
+	public Client(String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
+			String pays) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.no_rue = no_rue;
+		this.voie = voie;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.pays = pays;
+	}
+
+	public Client(int id) {
+		this.cle = id;
+	}
+
+	public void setCle(int cle) {
+		this.cle = cle;
+	}
+
+	public int getCle() {
+		return cle;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getNo_rue() {
+		return no_rue;
+	}
+
+	public void setNo_rue(String no_rue) {
+		this.no_rue = no_rue;
+	}
+
+	public String getVoie() {
+		return voie;
+	}
+
+	public void setVoie(String voie) {
+		this.voie = voie;
+	}
+
+	public String getCode_postal() {
+		return code_postal;
+	}
+
+	public void setCode_postal(String code_postal) {
+		this.code_postal = code_postal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getPays() {
+		return pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	@Override
+	public String toString() {
+		return "Cle :" + cle + "\nNom :" + nom + "\nPrenom :" + prenom + "\nNo rue :" + no_rue + "\nVoie :" + voie
+				+ "Code postal :" + code_postal + "\nVille=" + ville + ", pays=" + pays + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cle;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (cle != other.cle)
+			return false;
+		return true;
+	}
+
+}

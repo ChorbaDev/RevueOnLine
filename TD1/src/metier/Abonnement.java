@@ -82,8 +82,8 @@ public class Abonnement {
 
 	@Override
 	public String toString() {
-		return "Abonnement [id=" + id + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", id_client="
-				+ id_client + ", id_revue=" + id_revue + "]";
+		return "ID :" + id + "\nDate debut :" + date_debut + "\nDate fin :" + date_fin + "\nID (Client) :" + id_client
+				+ "\nID (Revue) :" + id_revue + "\n__________________\n";
 	}
 
 	@Override
@@ -100,8 +100,7 @@ public class Abonnement {
 		if (getClass() != obj.getClass())
 			return false;
 		Abonnement other = (Abonnement) obj;
-		return Objects.equals(date_debut, other.date_debut) && Objects.equals(date_fin, other.date_fin)
-				&& id == other.id && id_client == other.id_client && id_revue == other.id_revue;
+		return id == other.id;
 	}
 
 }

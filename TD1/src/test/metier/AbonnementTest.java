@@ -1,6 +1,6 @@
 package test.metier;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -15,7 +15,7 @@ public class AbonnementTest {
 	@Before
 	public void setUp() {
 		ab1 = new Abonnement(1, "01/01/2001", "01/01/2002", 1, 1);
-		ab2 = new Abonnement(1, "01/01/2001", "01/01/2002", 1, 1);
+		ab2 = new Abonnement(1, "02/01/2001", "01/01/2002", 1, 1);
 	}
 
 	@Test
@@ -25,6 +25,6 @@ public class AbonnementTest {
 
 	@Test
 	public void testHashCode() {
-		assertEquals(ab1.hashCode(), ab2.hashCode());
+		assertNotEquals(ab1.hashCode(), ab2.hashCode());
 	}
 }
