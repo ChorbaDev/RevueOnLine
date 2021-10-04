@@ -12,15 +12,14 @@ public class Client {
 		this.cle = cle;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.adresse= adresse;
+		this.adresse = adresse;
 	}
+
 	public Client(String nom, String prenom, Adresse adresse) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.adresse= adresse;
+		this.adresse = adresse;
 	}
-
-
 
 	public Client(int id) {
 		this.cle = id;
@@ -50,12 +49,23 @@ public class Client {
 		this.prenom = prenom;
 	}
 
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Client client = (Client) o;
-		return getCle() == client.getCle() && Objects.equals(getNom(), client.getNom()) && Objects.equals(getPrenom(), client.getPrenom()) && Objects.equals(adresse, client.adresse);
+		return getCle() == client.getCle() && Objects.equals(getNom(), client.getNom())
+				&& Objects.equals(getPrenom(), client.getPrenom()) && Objects.equals(adresse, client.adresse);
 	}
 
 	@Override
@@ -65,11 +75,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client{" +
-				"cle=" + cle +
-				", nom='" + nom + '\'' +
-				", prenom='" + prenom + '\'' +
-				", adresse=" + adresse +
-				'}';
+		return "Client{" + "cle=" + cle + ", nom='" + nom + '\'' + ", prenom='" + prenom + '\'' + ", adresse=" + adresse
+				+ '}';
 	}
 }

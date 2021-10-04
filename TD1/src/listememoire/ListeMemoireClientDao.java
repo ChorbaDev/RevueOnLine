@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ClientDao;
+import metier.Adresse;
 import metier.Client;
 
 public class ListeMemoireClientDao implements ClientDao {
@@ -57,7 +58,8 @@ public class ListeMemoireClientDao implements ClientDao {
 
 	@Override
 	public Client getById(int id) {
-		Client objet = new Client(id, "test", "test", "test", "test", "test", "test", "test");
+		Adresse adresse = new Adresse("test", "test", "test", "test", "test");
+		Client objet = new Client(id, "test", "test", adresse);
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.get(index);
