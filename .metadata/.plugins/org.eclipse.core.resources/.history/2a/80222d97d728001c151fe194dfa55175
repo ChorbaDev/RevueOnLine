@@ -105,19 +105,19 @@ public class ProcessAdresse {
 		//
 		if (existeDansTab(decompVille[0], tabTiret)) {
 			ch += decompVille[0] + '-';
-			decompVille[1] = capitalize(decompVille[1]);
+			decompVille[0] = capitalize(decompVille[0]);
 		}
 		//
 		for (int i = 1; i < decompVille.length - 1; i++) {
 			if (existeDansTab(decompVille[i], tabTiret)) {
 				ch += '-' + decompVille[i] + '-';
-				decompVille[i + 1] = capitalize(decompVille[i + 1]);
-			} else
-				ch += decompVille[i];
+				decompVille[i] = capitalize(decompVille[i]);
+			}
 		}
 		int l = decompVille.length - 1;
 		if (existeDansTab(decompVille[l], tabTiret)) {
 			ch += '-' + decompVille[l];
+			decompVille[l] = capitalize(decompVille[l]);
 		}
 		return ch;
 	}
@@ -133,6 +133,13 @@ public class ProcessAdresse {
 		return ch;
 	}
 
+	/*
+	 * ville = ville.substring(0, 1).toUpperCase() + ville.substring(1); // String[]
+	 * preposition = { " lès ", " le ", " sous ", " sur ", " à ", " aux " }; ville =
+	 * reforme1(ville, preposition); // String[] saints = { " St " }; ville =
+	 * reforme2(ville, saints, "Saint"); ville = reforme1(ville, saints); return
+	 * ville;
+	 */
 	public String normalizeCodePostal(String codePostal) {
 		codePostal = codePostal.replaceAll("[^\\d]", "");
 		while (codePostal.length() < 5)
