@@ -1,0 +1,65 @@
+package process;
+
+import metier.Adresse;
+
+public class ProcessAdresse {
+
+	public Adresse normalizeAdresse(Adresse adresse) {
+		String paysNormalized = normalizePays(adresse.getPays());
+		String villeNormalized = normalizeVille(adresse.getVille());
+		String codePostalNormalized = normalizeCodePostal(adresse.getCode_postal());
+		String nomDeVoieNormalized = normalizeNomDeVoie(adresse.getVoie());
+		String numVoieNormalized = normalizeNumDeVoie(adresse.getNo_rue());
+		Adresse adresseNormalized = new Adresse(numVoieNormalized, nomDeVoieNormalized, codePostalNormalized,
+				villeNormalized, paysNormalized);
+		return adresseNormalized;
+	}
+
+	public String normalizePays(String pays) {
+		return null;
+	}
+
+	public String normalizeNomDeVoie(String nomDeVoie) {
+		return null;
+	}
+
+	public String normalizeVille(String ville) {
+		ville = ville.substring(0, 1).toUpperCase() + ville.substring(1);
+		String[] preposition = { " lès ", " le ", " sous ", " à ", " aux " };
+		//
+		for (String pre : preposition) {
+			String str;
+			if (ville.contains(str))
+				str = '-' + pre.trim() + '-';
+			else if (ville.contains(pre.substring(1)))
+				str = pre.trim() + '-';
+			else if (ville.contains(pre.substring(0, pre.length() - 1)))
+				str = '-' + pre.trim();
+			ville = ville.replace(pre, str);
+		}
+		//
+		String[] saints = { " St ", " Saint " };
+		for (String st : saints) {
+			String str;
+			if (ville.contains(st))
+				str = '-' + str.trim() + '-';
+			else if (ville.contains(pre.substring(1)))
+				str = pre.trim() + '-';
+			else if (ville.contains(pre.substring(0, pre.length() - 1)))
+				str = '-' + pre.trim();
+			ville = ville.replace(st, str);
+		}
+		ville = ville.replace(" St ", "Saint");
+		ville = ville.replace(" Ste ", "Sainte");
+		return ville;
+	}
+
+	public String normalizeCodePostal(String codePostal) {
+		return null;
+	}
+
+	public String normalizeNumDeVoie(String numVoie) {
+		return null;
+	}
+
+}

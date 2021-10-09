@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="processTest" project="TD1" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="test.process.processTest" time="0.005">
+    <testcase name="NormalisationTest" classname="test.process.processTest" time="0.005"/>
+    <testcase name="NormalisationCodePostalTest" classname="test.process.processTest" time="0.0"/>
+    <testcase name="NormalisationNomDeVoieTest" classname="test.process.processTest" time="0.0"/>
+    <testcase name="NormalisationVilleTest" classname="test.process.processTest" time="0.0"/>
+    <testcase name="NormalisationNumDeVoieTest" classname="test.process.processTest" time="0.0"/>
+    <testcase name="NormalisationPaysTest" classname="test.process.processTest" time="0.0"/>
+  </testsuite>
+</testrun>

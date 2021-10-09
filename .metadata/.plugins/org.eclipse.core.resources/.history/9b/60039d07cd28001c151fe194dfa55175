@@ -1,0 +1,28 @@
+package test.process;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class processTest {
+
+	@Test
+	public void NormalisationTest() {
+		
+	}
+	public void NormalisationPaysTest() {
+			
+	}
+	public void NormalisationNomDeVoieTest() {
+		
+	}
+	public void NormalisationVilleTest() {
+		
+	}
+	public void NormalisationCodePostalTest() {
+		
+	}
+	public void NormalisationNumDeVoieTest() {
+		
+	}
+}

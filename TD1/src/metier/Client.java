@@ -1,36 +1,24 @@
 package metier;
 
+import java.util.Objects;
+
 public class Client {
 	private int cle;
 	private String nom;
 	private String prenom;
-	private String no_rue;
-	private String voie;
-	private String code_postal;
-	private String ville;
-	private String pays;
+	private Adresse adresse;
 
-	public Client(int cle, String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
-			String pays) {
+	public Client(int cle, String nom, String prenom, Adresse adresse) {
 		this.cle = cle;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.no_rue = no_rue;
-		this.voie = voie;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.pays = pays;
+		this.adresse = adresse;
 	}
 
-	public Client(String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
-			String pays) {
+	public Client(String nom, String prenom, Adresse adresse) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.no_rue = no_rue;
-		this.voie = voie;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.pays = pays;
+		this.adresse = adresse;
 	}
 
 	public Client(int id) {
@@ -61,73 +49,33 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public String getNo_rue() {
-		return no_rue;
+	public Adresse getAdresse() {
+		return adresse;
 	}
 
-	public void setNo_rue(String no_rue) {
-		this.no_rue = no_rue;
-	}
-
-	public String getVoie() {
-		return voie;
-	}
-
-	public void setVoie(String voie) {
-		this.voie = voie;
-	}
-
-	public String getCode_postal() {
-		return code_postal;
-	}
-
-	public void setCode_postal(String code_postal) {
-		this.code_postal = code_postal;
-	}
-
-	public String getVille() {
-		return ville;
-	}
-
-	public void setVille(String ville) {
-		this.ville = ville;
-	}
-
-	public String getPays() {
-		return pays;
-	}
-
-	public void setPays(String pays) {
-		this.pays = pays;
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 	@Override
-	public String toString() {
-		return "Cle :" + cle + "\nNom :" + nom + "\nPrenom :" + prenom + "\nNo rue :" + no_rue + "\nVoie :" + voie
-				+ "\nCode postal :" + code_postal + "\nVille :" + ville + "\nPays :" + pays + "\n__________________\n";
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Client client = (Client) o;
+		return getCle() == client.getCle() && Objects.equals(getNom(), client.getNom())
+				&& Objects.equals(getPrenom(), client.getPrenom()) && Objects.equals(adresse, client.adresse);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cle;
-		return result;
+		return Objects.hash(getCle(), getNom(), getPrenom(), adresse);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Client other = (Client) obj;
-		if (cle != other.cle)
-			return false;
-		return true;
+	public String toString() {
+		return "Client{" + "cle=" + cle + ", nom='" + nom + '\'' + ", prenom='" + prenom + '\'' + ", adresse=" + adresse
+				+ '}';
 	}
-
-
 }

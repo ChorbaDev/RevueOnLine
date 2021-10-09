@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import daofactory.DaoFactory;
 import daofactory.ListeMemoireDaoFactory;
+import metier.Adresse;
 import metier.Client;
 
 public abstract class AppClient {
@@ -58,7 +59,8 @@ public abstract class AppClient {
 		ville = sc.nextLine();
 		System.out.print("Pays :");
 		pays = sc.nextLine();
-		Client cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
+		Adresse adresse = new Adresse(no_rue, voie, code_postal, ville, pays);
+		Client cl = new Client(id, nom, prenom, adresse);
 		daof.getClientDAO().update(cl);
 
 	}
@@ -130,7 +132,8 @@ public abstract class AppClient {
 		ville = sc.nextLine();
 		System.out.print("Pays :");
 		pays = sc.nextLine();
-		cl = new Client(id, nom, prenom, no_rue, voie, code_postal, ville, pays);
+		Adresse adresse = new Adresse(no_rue, voie, code_postal, ville, pays);
+		cl = new Client(id, nom, prenom, adresse);
 		daof.getClientDAO().create(cl);
 
 	}

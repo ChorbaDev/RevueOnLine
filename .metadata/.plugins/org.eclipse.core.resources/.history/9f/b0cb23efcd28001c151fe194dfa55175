@@ -1,0 +1,43 @@
+package test.process;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import metier.Adresse;
+
+public class processTest {
+	@Before
+	public void setUp() {
+		Adresse ad = new Adresse("6", " av drogon  ", "L-5400", "  st julien aux metz sur  ", " belgium     ");
+	}
+
+	@Test
+	public void NormalisationTest() {
+
+	}
+
+	@Test
+	public void NormalisationPaysTest() {
+
+	}
+
+	@Test
+	public void NormalisationNomDeVoieTest() {
+
+	}
+
+	@Test
+	public void NormalisationVilleTest() {
+
+	}
+
+	@Test
+	public void NormalisationCodePostalTest() {
+
+	}
+
+	@Test
+	public void NormalisationNumDeVoieTest() {
+
+	}
+}
