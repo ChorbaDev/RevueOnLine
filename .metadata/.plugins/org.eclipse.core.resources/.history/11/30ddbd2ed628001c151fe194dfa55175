@@ -81,6 +81,7 @@ public class ProcessAdresse {
 		return string.substring(0, 1).toUpperCase() + string.substring(1);
 	}
 
+
 	private boolean existeDansTab(String elt, String[] tabTiret) {
 		for (String tiret : tabTiret) {
 			if (tiret.equals(elt))
@@ -98,7 +99,6 @@ public class ProcessAdresse {
 		}
 		return decompVille;
 	}
-
 	//////////////
 	private String ajouterTiret(String[] decompVille, String[] tabTiret) {
 		String ch = "";
@@ -116,7 +116,6 @@ public class ProcessAdresse {
 		}
 		return ch;
 	}
-
 	public String normalizeVille(String ville) {
 		ville.trim();
 		String[] decompVille = ville.split(" ");
@@ -127,6 +126,7 @@ public class ProcessAdresse {
 		ville = ajouterTiret(decompVille, tiret);
 		return ville;
 	}
+
 
 	/*
 	 * ville = ville.substring(0, 1).toUpperCase() + ville.substring(1); // String[]

@@ -77,16 +77,23 @@ public class ProcessAdresse {
 		return str;
 	}
 
-	private String capitalize(String string) {
-		return string.substring(0, 1).toUpperCase() + string.substring(1);
+	public String normalizeVille(String ville) {
+		ville.trim();
+		String[] decompVille = ville.split(" ");
+		String[] tiret = { "lès", "le", "sous", "sur", "à", "aux", "Saint" };
+		String[] aRemplacer = { "st" };
+		String par = "Saint";
+		decompVille = remplaceMots(decompVille, aRemplacer, par);
+		ville=ajouterTiret(decompVille,tiret);
+		return ville;
 	}
 
-	private boolean existeDansTab(String elt, String[] tabTiret) {
-		for (String tiret : tabTiret) {
-			if (tiret.equals(elt))
-				return true;
-		}
-		return false;
+	private String ajouterTiret(String[] decompVille, String[] tabTiret) {
+		String ch="";
+			for(String tiret : tabTiret) {
+				
+			}
+		return ch;
 	}
 
 	private String[] remplaceMots(String[] decompVille, String[] aRemplacer, String par) {
@@ -97,35 +104,6 @@ public class ProcessAdresse {
 			}
 		}
 		return decompVille;
-	}
-
-	//////////////
-	private String ajouterTiret(String[] decompVille, String[] tabTiret) {
-		String ch = "";
-		//
-		if (existeDansTab(tabTiret[0], tabTiret)) {
-			ch += tabTiret[0] + '-';
-			tabTiret[0] = capitalize(tabTiret[0]);
-		}
-		//
-		for (int i = 1; i < tabTiret.length - 1; i++) {
-			if (existeDansTab(tabTiret[i], tabTiret)) {
-				ch += '-' + tabTiret[i] + '-';
-				tabTiret[i] = capitalize(tabTiret[i]);
-			}
-		}
-		return ch;
-	}
-
-	public String normalizeVille(String ville) {
-		ville.trim();
-		String[] decompVille = ville.split(" ");
-		String[] tiret = { "lès", "le", "sous", "sur", "à", "aux", "Saint" };
-		String[] aRemplacer = { "st" };
-		String par = "Saint";
-		decompVille = remplaceMots(decompVille, aRemplacer, par);
-		ville = ajouterTiret(decompVille, tiret);
-		return ville;
 	}
 
 	/*

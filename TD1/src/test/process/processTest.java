@@ -1,5 +1,7 @@
 package test.process;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +11,7 @@ import process.ProcessAdresse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+<<<<<<< Updated upstream
 public class processTest {
     private ProcessAdresse pr;
     private Adresse ad;
@@ -25,6 +28,17 @@ public class processTest {
     public void NormalisationTest() {
         pr.normalizeAdresse(ad);
         assertTrue(ad.equals(adVrai));
+=======
+	@Test
+	public void NormalisationTest() {
+
+	}
+
+	@Test
+	public void NormalisationPaysTest() {
+		assertEquals("Belgique", pr.normalizePays(ad.getPays()));
+	}
+>>>>>>> Stashed changes
 
     }
 
@@ -35,6 +49,7 @@ public class processTest {
         assertEquals("Belgique", pays);
     }
 
+<<<<<<< Updated upstream
     @Test
     public void NormalisationNomDeVoieTest() {
         String nomVoie = ad.getVoie();
@@ -42,6 +57,12 @@ public class processTest {
         assertEquals("avenue drogon", nomVoie);
 
     }
+=======
+	@Test
+	public void NormalisationVilleTest() {
+		System.out.println(pr.normalizeNomDeVoie(ad.getVoie()));
+	}
+>>>>>>> Stashed changes
 
     @Test
     public void NormalisationVilleTest() {
