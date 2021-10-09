@@ -58,7 +58,7 @@ public class ProcessAdresse {
 		return nomDeVoie;
 	}
 
-	private String reformeVille(String str, String[] tab) {
+	private String reforme(String str, String[] tab) {
 		for (String elt : tab) {
 			String ch = elt;
 			if (str.contains(elt))
@@ -76,10 +76,10 @@ public class ProcessAdresse {
 		ville = ville.substring(0, 1).toUpperCase() + ville.substring(1);
 		//
 		String[] preposition = { " l�s ", " le ", " sous ", " � ", " aux " };
-		ville = reformeVille(ville, preposition);
+		ville = reforme(ville, preposition);
 		//
 		String[] saints = { " St ", " Saint " };
-		ville = reformeVille(ville, saints);
+		ville = reforme(ville, saints);
 		return ville;
 	}
 

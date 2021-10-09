@@ -28,37 +28,28 @@ public class ProcessAdresse {
 			return pays.trim().substring(0, 1).toUpperCase() + pays.trim().substring(1).toLowerCase();
 	}
 
-	private String reformeNomVoie(String nomDeVoie, String[] tab, String prefix) {
-		for (String prefAbv : tab) {
-			String ch1 = prefAbv;
-			String ch2 = prefAbv.substring(1);
-			String ch3 = prefAbv.substring(0, prefAbv.length() - 1);
-			String ch = prefix;
-			if (nomDeVoie.contains(ch1)) {
-				ch = ch1;
-				prefix = " " + prefix + " ";
-			} else if (nomDeVoie.contains(ch2)) {
-				ch = ch2;
-				prefix = " " + prefix;
-			} else if (nomDeVoie.contains(ch3)) {
-				ch = ch3;
-				prefix += " ";
-			}
-			nomDeVoie = nomDeVoie.replace(ch, prefix);
-		}
-		return nomDeVoie;
-	}
-
 	public String normalizeNomDeVoie(String nomDeVoie) {
 		nomDeVoie = nomDeVoie.trim();
-		String[] boulevardAbv = { " boul ", " boul. ", " bd " };
-		nomDeVoie = reformeNomVoie(nomDeVoie, boulevardAbv, "boulevard");
-		String[] faubourgAbv = { " faub. ", " fg " };
-		nomDeVoie = reformeNomVoie(nomDeVoie, faubourgAbv, "faubourg");
+		String[] boulevardAbv = { "boul", "boul.", "bd" };
+		String[] faubourgAbv = { "faub.", "fb" };
+
+		if (nomDeVoie.contains("av"))
+			return nomDeVoie.replace("av", "avenue");
+		else if (nomDeVoie.contains("pl"))
+			return nomDeVoie.replace("pl", "place");
+		for (String elt : boulevardAbv) {
+			if (nomDeVoie.contains(elt))
+				return nomDeVoie.replace(elt, "boulevard");
+		}
+		for (String elt : faubourgAbv) {
+			if (nomDeVoie.contains(elt))
+				return nomDeVoie.replace(elt, "faubourg");
+		}
+
 		return nomDeVoie;
 	}
 
-	private String reformeVille(String str, String[] tab) {
+	private String reforme(String str, String[] tab) {
 		for (String elt : tab) {
 			String ch = elt;
 			if (str.contains(elt))
@@ -76,10 +67,10 @@ public class ProcessAdresse {
 		ville = ville.substring(0, 1).toUpperCase() + ville.substring(1);
 		//
 		String[] preposition = { " l�s ", " le ", " sous ", " � ", " aux " };
-		ville = reformeVille(ville, preposition);
+		ville = reforme(ville, preposition);
 		//
 		String[] saints = { " St ", " Saint " };
-		ville = reformeVille(ville, saints);
+		ville = reforme(ville, saints);
 		return ville;
 	}
 

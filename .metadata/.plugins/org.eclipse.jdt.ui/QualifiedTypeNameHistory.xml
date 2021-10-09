@@ -14,4 +14,5 @@
     <fullyQualifiedTypeName name="metier.Revue"/>
     <fullyQualifiedTypeName name="dao.Persistance"/>
     <fullyQualifiedTypeName name="metier.Periodicite"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
