@@ -24,15 +24,11 @@ public class ProcessAdresse {
 		pays = pays.trim().toLowerCase();
 		String[] suisse = { "switzerland", "schweiz" };
 		String[] lux = { "letzebuerg" };
-		String[] belg = { "belgium" };
-		if (existeDansTab(pays, suisse))
-			return "Suisse";
-		else if (existeDansTab(pays, lux))
-			return "Luxembourg";
-		else if (existeDansTab(pays, belg))
-			return "Belgique";
-		else
-			return capitalize(pays);
+		String[] belg= {"belgium"};
+		if(existeDansTab(pays,suisse)) return "Suisse";
+		else if(existeDansTab(pays,lux)) return "Luxembourg";
+		else if(existeDansTab(pays,belg)) return "Belgique";
+		else return capitalize(pays);
 	}
 
 	public String normalizeNomDeVoie(String nomDeVoie) {
@@ -74,6 +70,7 @@ public class ProcessAdresse {
 		return decompVille;
 	}
 
+	//////////////
 	private String ajouterTiret(String[] decompVille, String[] tabTiret) {
 		String ch = "";
 		//
@@ -120,8 +117,9 @@ public class ProcessAdresse {
 	public String normalizeNumDeVoie(String numVoie) {
 		numVoie = numVoie.trim();
 		if (numVoie.charAt(numVoie.length() - 1) != ',')
-			numVoie += ", ";
-		return numVoie;
+			return numVoie + ", ";
+		else
+			return numVoie;
 	}
 
 }

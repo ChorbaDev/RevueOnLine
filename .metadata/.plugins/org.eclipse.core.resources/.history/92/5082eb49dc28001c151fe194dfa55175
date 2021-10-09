@@ -74,6 +74,7 @@ public class ProcessAdresse {
 		return decompVille;
 	}
 
+	//////////////
 	private String ajouterTiret(String[] decompVille, String[] tabTiret) {
 		String ch = "";
 		//
@@ -120,8 +121,9 @@ public class ProcessAdresse {
 	public String normalizeNumDeVoie(String numVoie) {
 		numVoie = numVoie.trim();
 		if (numVoie.charAt(numVoie.length() - 1) != ',')
-			numVoie += ", ";
-		return numVoie;
+			return numVoie + ", ";
+		else
+			return numVoie;
 	}
 
 }
