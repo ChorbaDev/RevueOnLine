@@ -7,28 +7,39 @@ import metier.Adresse;
 import process.ProcessAdresse;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class processTest {
 	private ProcessAdresse pr;
 	private Adresse ad;
+	private Adresse adVrai;
 
 	@Before
 	public void setUp() {
 		ad = new Adresse("6", " av drogon  ", "L-5400", "  st julien aux metz sur  ", " belgium     ");
+		adVrai=new Adresse("6, ","avenue drogon","05400","Saint-Julien-aux-Metz-sur","Belgique");
 		pr = new ProcessAdresse();
 	}
 
 	@Test
 	public void NormalisationTest() {
+		pr.normalizeAdresse(ad);
+		assertTrue(ad.equals(adVrai));
+
 	}
 
 	@Test
 	public void NormalisationPaysTest() {
-
+		String pays= ad.getPays();
+		pays=pr.normalizePays(pays);
+		assertEquals("Belgique", pays);
 	}
 
 	@Test
 	public void NormalisationNomDeVoieTest() {
+		String nomVoie=ad.getVoie();
+		nomVoie=pr.normalizeNomDeVoie(nomVoie);
+		assertEquals("avenue drogon",nomVoie);
 
 	}
 
