@@ -37,15 +37,10 @@ public class ProcessAdresse {
 		String[] boulevardAbv = { "boul", "boul.", "bd" };
 		String[] faubourgAbv = { "faub.", "fg" };
 		String[] avenueAbv = { "av.", "av" };
-		String[] placeAbv = { "pl.", "pl" };
 		decompNom = remplaceMots(decompNom, boulevardAbv, "boulevard");
 		decompNom = remplaceMots(decompNom, faubourgAbv, "faubourg");
 		decompNom = remplaceMots(decompNom, avenueAbv, "avenue");
-		decompNom = remplaceMots(decompNom, placeAbv, "place");
-		String ch = "";
-		for (String elt : decompNom)
-			ch += elt + " ";
-		return ch.substring(0, ch.length() - 1);
+		return nomDeVoie;
 	}
 
 	private String capitalize(String string) {
