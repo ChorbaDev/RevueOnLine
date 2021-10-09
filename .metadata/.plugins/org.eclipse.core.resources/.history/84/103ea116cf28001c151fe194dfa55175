@@ -3,9 +3,6 @@ package process;
 import metier.Adresse;
 
 public class ProcessAdresse {
-	public ProcessAdresse() {
-
-	}
 
 	public void normalizeAdresse(Adresse adresse) {
 		String paysNormalized = normalizePays(adresse.getPays());

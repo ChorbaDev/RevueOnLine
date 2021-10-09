@@ -3,9 +3,6 @@ package process;
 import metier.Adresse;
 
 public class ProcessAdresse {
-	public ProcessAdresse() {
-
-	}
 
 	public void normalizeAdresse(Adresse adresse) {
 		String paysNormalized = normalizePays(adresse.getPays());
@@ -55,9 +52,9 @@ public class ProcessAdresse {
 	public String normalizeNomDeVoie(String nomDeVoie) {
 		nomDeVoie = nomDeVoie.trim();
 		String[] boulevardAbv = { " boul ", " boul. ", " bd " };
-		nomDeVoie = reforme2(nomDeVoie, boulevardAbv, "boulevard");
+		nomDeVoie = reformeNomVoie(nomDeVoie, boulevardAbv, "boulevard");
 		String[] faubourgAbv = { " faub. ", " fg " };
-		nomDeVoie = reforme2(nomDeVoie, faubourgAbv, "faubourg");
+		nomDeVoie = reformeNomVoie(nomDeVoie, faubourgAbv, "faubourg");
 		return nomDeVoie;
 	}
 
@@ -79,11 +76,11 @@ public class ProcessAdresse {
 		ville = ville.substring(0, 1).toUpperCase() + ville.substring(1);
 		//
 		String[] preposition = { " lès ", " le ", " sous ", " à ", " aux " };
-		ville = reforme1(ville, preposition);
+		ville = reformeVille(ville, preposition);
 		//
-		String[] saints = { " St " };
-		ville = reforme2(ville, saints, "Saint");
-		ville = reforme1(ville, saints);
+		String[] saints = { " St ", " Saint " };
+		ville = reformeNomVoie(ville, saints, "Saint");
+		ville = reformeVille(ville, saints);
 		return ville;
 	}
 

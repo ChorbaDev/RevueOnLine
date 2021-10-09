@@ -1,5 +1,7 @@
 package test.process;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,18 +9,15 @@ import metier.Adresse;
 import process.ProcessAdresse;
 
 public class processTest {
-	private ProcessAdresse pr;
-	private Adresse ad;
-
 	@Before
 	public void setUp() {
-		ad = new Adresse("6", " av drogon  ", "L-5400", "  st julien aux metz sur  ", " belgium     ");
-		pr = new ProcessAdresse();
+		Adresse ad = new Adresse("6", " av drogon  ", "L-5400", "  st julien aux metz sur  ", " belgium     ");
+		ProcessAdresse pr = new ProcessAdresse();
 	}
 
 	@Test
 	public void NormalisationTest() {
-
+	
 	}
 
 	@Test

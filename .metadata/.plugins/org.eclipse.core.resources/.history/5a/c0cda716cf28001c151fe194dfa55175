@@ -3,10 +3,9 @@ package process;
 import metier.Adresse;
 
 public class ProcessAdresse {
-	public ProcessAdresse() {
-
-	}
-
+public ProcessAdresse() {
+	
+}
 	public void normalizeAdresse(Adresse adresse) {
 		String paysNormalized = normalizePays(adresse.getPays());
 		String villeNormalized = normalizeVille(adresse.getVille());

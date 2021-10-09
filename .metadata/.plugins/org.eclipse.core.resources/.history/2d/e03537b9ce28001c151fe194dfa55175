@@ -3,9 +3,6 @@ package process;
 import metier.Adresse;
 
 public class ProcessAdresse {
-	public ProcessAdresse() {
-
-	}
 
 	public void normalizeAdresse(Adresse adresse) {
 		String paysNormalized = normalizePays(adresse.getPays());
@@ -81,7 +78,7 @@ public class ProcessAdresse {
 		String[] preposition = { " lès ", " le ", " sous ", " à ", " aux " };
 		ville = reforme1(ville, preposition);
 		//
-		String[] saints = { " St " };
+		String[] saints = { " St "};
 		ville = reforme2(ville, saints, "Saint");
 		ville = reforme1(ville, saints);
 		return ville;
