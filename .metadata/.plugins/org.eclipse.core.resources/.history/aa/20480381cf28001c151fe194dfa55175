@@ -95,11 +95,9 @@ public class ProcessAdresse {
 	}
 
 	public String normalizeNumDeVoie(String numVoie) {
-		numVoie = numVoie.trim();
-		if (numVoie.charAt(numVoie.length() - 1) != ',')
-			return numVoie + ", ";
-		else
-			return numVoie;
+		String arr[] = numVoie.split(" ", 2);
+		numVoie = arr[0] + ", " + arr[1];
+		return numVoie;
 	}
 
 }
