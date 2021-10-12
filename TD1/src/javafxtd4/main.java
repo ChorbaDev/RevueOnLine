@@ -23,8 +23,7 @@ public class main extends Application {
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root);
           //  scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
-
-                    primaryStage.setScene(scene);
+            primaryStage.setScene(scene);
             primaryStage.setTitle("Gestion des revues");
             primaryStage.show();
         } catch (Exception e) {

@@ -64,6 +64,8 @@ public class Revue {
 	}
 
 	public void setTitre(String titre) {
+		if(titre.isEmpty())
+			throw new RuntimeException("Le titre doit être renseigné");
 		this.titre = titre;
 	}
 
@@ -72,6 +74,8 @@ public class Revue {
 	}
 
 	public void setDescription(String description) {
+		if(description.isEmpty())
+			throw new RuntimeException("La description doit être renseigné");
 		this.description = description;
 	}
 
@@ -80,6 +84,8 @@ public class Revue {
 	}
 
 	public void setTarif_numero(double tarif_numero) {
+		if(tarif_numero<=0)
+			throw new ArithmeticException("Le tarif doit être strictement positif");
 		this.tarif_numero = tarif_numero;
 	}
 
@@ -101,8 +107,7 @@ public class Revue {
 
 	@Override
 	public String toString() {
-		return "ID :" + id + "\nTitre :" + titre + "\nDescription :" + description + "\nTarif Numero :" + tarif_numero
-				+ "\nVisuel :" + visuel + "\nID Periodicite :" + id_p + "\n__________________\n";
+		return titre+" ("+tarif_numero+" euros)";
 	}
 
 }
