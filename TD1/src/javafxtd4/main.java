@@ -22,7 +22,7 @@ public class main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root);
-            scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
+          //  scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
 
                     primaryStage.setScene(scene);
             primaryStage.setTitle("Gestion des revues");

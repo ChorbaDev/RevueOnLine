@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -55,7 +55,6 @@
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font></TextField>
-            <ComboBox fx:id="comboPeriodicite" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label contentDisplay="CENTER" text="euros au numéro" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="60.0" />
@@ -64,14 +63,12 @@
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
+            <JFXComboBox fx:id="comboPeriodicite" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <FlowPane alignment="CENTER" prefHeight="113.0" prefWidth="800.0">
          <children>
-            <Button fx:id="btnCreer" mnemonicParsing="false" onAction="#clickCreer" style="-fx-background-radius: 50;" text="Créer">
-               <font>
-                  <Font name="Segoe UI" size="15.0" />
-               </font></Button>
+            <JFXButton fx:id="btnCreer" onAction="#clickCreer" text="Créer" />
          </children>
       </FlowPane>
       <FlowPane alignment="CENTER" prefHeight="112.0" prefWidth="800.0">

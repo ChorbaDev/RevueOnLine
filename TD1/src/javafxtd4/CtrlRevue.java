@@ -1,5 +1,6 @@
 package javafxtd4;
 
+import com.jfoenix.controls.*;
 import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
@@ -14,8 +15,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CtrlRevue implements Initializable {
-    @FXML private Button btnCreer;
-    @FXML private ComboBox<Periodicite> comboPeriodicite;
+    @FXML private JFXButton btnCreer;
+    @FXML private JFXComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
     @FXML private TextField edtTitre;
