@@ -41,7 +41,7 @@ public class Periodicite {
 
 	@Override
 	public String toString() {
-		return "Cle :" + cle + "\nLibelle :" + libelle + "\n__________________\n";
+		return  getLibelle();
 	}
 
 	public String getLibelle() {

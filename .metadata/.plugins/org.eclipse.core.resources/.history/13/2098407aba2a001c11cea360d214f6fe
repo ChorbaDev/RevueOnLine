@@ -19,7 +19,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
+	public static void javafxtd4.main(String[] args) {
 		launch(args);
 	}
 }

@@ -616,7 +616,7 @@
       </menus>
       <toolbar xmi:id="_w9bgEijbEeyknufojNoHIA" elementId="org.eclipse.eclemma.ui.CoverageView" visible="false"/>
     </sharedElements>
-    <trimBars xmi:id="_w9cEACjbEeyknufojNoHIA" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.eclipse.platform">
+    <trimBars xmi:id="_w9cEACjbEeyknufojNoHIA" elementId="org.eclipse.ui.javafxtd4.main.toolbar" contributorURI="platform:/plugin/org.eclipse.platform">
       <children xsi:type="menu:ToolBar" xmi:id="_w9cEASjbEeyknufojNoHIA" elementId="group.file" toBeRendered="false">
         <tags>toolbarSeparator</tags>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_w9cEAijbEeyknufojNoHIA" elementId="group.file" toBeRendered="false"/>
@@ -1636,7 +1636,7 @@
     <tags>View</tags>
     <tags>categoryTag:XML</tags>
   </descriptors>
-  <trimContributions xmi:id="_w9d6ryjbEeyknufojNoHIA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
+  <trimContributions xmi:id="_w9d6ryjbEeyknufojNoHIA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.javafxtd4.main.toolbar" positionInParent="last">
     <children xsi:type="menu:ToolControl" xmi:id="_w9d6sCjbEeyknufojNoHIA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
       <tags>glue</tags>
       <tags>move_after:PerspectiveSpacer</tags>
