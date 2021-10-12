@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CtrlRevue">
+   <children>
+      <GridPane alignment="CENTER_RIGHT" prefHeight="418.0" prefWidth="746.0" style="-fx-border-color: black;">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="295.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="630.0" minWidth="10.0" prefWidth="505.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Titre :" />
+            <Label text="Description :" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <Label text="Tarif: " GridPane.rowIndex="2" />
+            <Label text="Périodicité :" GridPane.rowIndex="3" />
+            <ComboBox fx:id="comboPeriodicite" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="edtTarif" maxWidth="60.0" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="edtDescp" maxHeight="100.0" maxWidth="400.0" prefHeight="85.0" prefWidth="424.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="edtTitre" maxWidth="350.0" prefHeight="25.0" prefWidth="404.0" GridPane.columnIndex="1" />
+            <Label prefHeight="17.0" prefWidth="378.0" text="euros au numéro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="125.0" prefWidth="800.0">
+         <children>
+            <Button fx:id="btnCreer" mnemonicParsing="false" onAction="#ClickBtnCreer" text="Créer" />
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER" prefHeight="191.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="lblExp" text="Label" />
+         </children>
+      </FlowPane>
+   </children>
+</VBox>

@@ -1,0 +1,27 @@
+package javafxtd;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+//			URL fxmlURL = getClass().getResource("GestionDesRevues.fxml");
+//			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
+//			Node root = fxmlLoader.load();
+//			Scene scene = new Scene((VBox) root);
+//			//
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			primaryStage.setScene(scene);
+//			primaryStage.setTitle("Gestion des revues");
+//			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
