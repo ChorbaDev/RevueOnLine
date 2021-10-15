@@ -7,8 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0" level="application" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
@@ -18,9 +17,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="mysql-connector-java-8.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="lib1" level="project" />
-    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
-    <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
   </component>
 </module>
