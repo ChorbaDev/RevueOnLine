@@ -21,7 +21,9 @@ public class Revue {
 		this.id = id;
 
 	}
+	public Revue(){
 
+	}
 	public Revue(String titre, String description, double tarif_numero, String visuel, int id_p) {
 		this.titre = titre;
 		this.description = description;
@@ -107,7 +109,8 @@ public class Revue {
 
 	@Override
 	public String toString() {
-		return titre+" ("+tarif_numero+" euros)";
+		return "ID :" + id + "\nTitre :" + titre + "\nDescription :" + description + "\nTarif Numero :" + tarif_numero
+				+ "\nVisuel :" + visuel + "\nID Periodicite :" + id_p + "\n";
 	}
 
 }

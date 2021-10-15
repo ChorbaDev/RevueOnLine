@@ -24,6 +24,7 @@ public class main extends Application {
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root);
             primaryStage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
             primaryStage.setTitle("Gestion des revues");
             primaryStage.setResizable(false);
             primaryStage.show();

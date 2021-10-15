@@ -24,10 +24,16 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	@Override
 	public boolean create(Revue objet) throws SQLException {
-		while (existanceID(objet) >= 0) {
+		objet.setId(2);
+		while (this.donnees.contains(objet)) {
 			objet.setId(objet.getId() + 1);
 		}
-		return this.donnees.add(objet);
+		boolean ok = this.donnees.add(objet);
+		return ok;
+		/*while (existanceID(objet) >= 0) {
+			objet.setId(objet.getId() + 1);
+		}
+		return this.donnees.add(objet);*/
 	}
 
 	private int existanceID(Revue objet) {

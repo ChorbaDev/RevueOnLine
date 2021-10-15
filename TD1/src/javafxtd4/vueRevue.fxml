@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -13,10 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxtd4.CtrlRevue">
+<VBox id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxtd4.CtrlRevue">
    <children>
-      <GridPane prefHeight="397.0" prefWidth="800.0">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="69.0" prefWidth="800.0">
+         <children>
+            <Label id="ajoutRevue" alignment="CENTER" prefHeight="36.0" prefWidth="332.0" text="Ajout d'un revue" />
+         </children>
+      </FlowPane>
+      <GridPane id="grid" prefHeight="397.0" prefWidth="800.0">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="650.0" />
@@ -28,37 +32,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Tarif :" GridPane.rowIndex="2">
+            <Label text="Tarif : " GridPane.rowIndex="2">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
-            <Label text="Description :" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Label text="Description : " GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
-            <Label text="Titre :">
+            <Label text="Titre : ">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
-            <Label text="Périodicité :" GridPane.rowIndex="3">
+            <Label text="Périodicité : " GridPane.rowIndex="3">
                <font>
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
-            <TextField id="titre" fx:id="edtTitre" maxWidth="250.0" prefHeight="30.0" prefWidth="235.0" style="-fx-background-radius: 50; -fx-border-color: black; -fx-border-radius: 50;" GridPane.columnIndex="1">
+            <TextField id="titre" fx:id="edtTitre" maxWidth="250.0" prefHeight="30.0" prefWidth="235.0" GridPane.columnIndex="1">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </TextField>
-            <TextArea id="descp" fx:id="edtDescription" maxWidth="500.0" prefHeight="76.0" prefWidth="500.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextArea id="descp" fx:id="edtDescription" maxWidth="500.0" prefHeight="76.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </TextArea>
-            <TextField id="tarif" fx:id="edtTarif" maxWidth="50.0" prefHeight="25.0" prefWidth="334.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField id="tarif" fx:id="edtTarif" maxWidth="50.0" prefHeight="25.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
@@ -71,25 +75,12 @@
                   <Font name="Segoe UI" size="15.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="comboPeriodicite" focusColor="BLACK" prefHeight="25.0" prefWidth="126.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="comboPeriodicite" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <FlowPane alignment="CENTER" prefHeight="113.0" prefWidth="800.0">
          <children>
-            <JFXButton fx:id="btnCreer" onAction="#clickCreer" style="-fx-background-radius: 50; -fx-border-color: black; -fx-border-radius: 50; -fx-background-color: white;" text="Créer">
-               <font>
-                  <Font name="Segoe UI" size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </FlowPane>
-      <FlowPane alignment="CENTER" opacity="0.74" prefHeight="112.0" prefWidth="800.0" style="-fx-border-color: black; -fx-background-color: white;">
-         <children>
-            <Label fx:id="lblExp" text="Label">
-               <font>
-                  <Font name="Segoe UI Bold" size="16.0" />
-               </font>
-            </Label>
+            <Button fx:id="btnCreer" mnemonicParsing="false" onAction="#clickCreer" text="Créer" />
          </children>
       </FlowPane>
    </children>
