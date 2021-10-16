@@ -24,7 +24,7 @@ public class main extends Application {
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root);
             primaryStage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("../vue/cssfiles/guiRevue.css").toExternalForm());
             primaryStage.setTitle("RevuesOnLine");
             primaryStage.setResizable(false);
             primaryStage.show();
