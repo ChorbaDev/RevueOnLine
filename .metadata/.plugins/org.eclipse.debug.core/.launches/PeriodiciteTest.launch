@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/TD1/src/test/metier/PeriodiciteTest.java"/>
+        <listEntry value="/TD1/src/test/modele.metier/PeriodiciteTest.java"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
@@ -9,7 +9,7 @@
     <stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
     <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
     <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
-    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="test.metier.PeriodiciteTest"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="test.modele.metier.PeriodiciteTest"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="TD1"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
 </launchConfiguration>

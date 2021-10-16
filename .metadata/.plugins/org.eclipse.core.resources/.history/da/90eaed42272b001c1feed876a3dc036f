@@ -3,13 +3,13 @@ module javafx {
 	exports process;
 	exports dao;
 	exports daofactory;
-	exports test.metier;
+	exports test.modele.metier;
 	exports application;
 	exports mysql;
 	exports javafx;
 	exports test.listememoire;
 	exports test.mysql;
-	exports metier;
+	exports modele.metier;
 	exports test.process;
 
 	requires java.desktop;

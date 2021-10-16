@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 import daofactory.DaoFactory;
 import daofactory.ListeMemoireDaoFactory;
-import metier.Abonnement;
-import metier.Client;
-import metier.Revue;
+import modele.metier.Abonnement;
+import modele.metier.Client;
+import modele.metier.Revue;
 
 public abstract class AppAbonnement {
 	public static void manipAbonnement(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, ParseException {

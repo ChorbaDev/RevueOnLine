@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import dao.Persistance;
 import daofactory.DaoFactory;
-import metier.Abonnement;
+import modele.metier.Abonnement;
 
 public class MySqlAbonnementDaoTest {
 	private DaoFactory daof;

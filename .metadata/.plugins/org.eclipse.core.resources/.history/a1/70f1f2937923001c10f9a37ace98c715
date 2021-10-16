@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.RevueDao;
-import metier.Revue;
+import modele.metier.Revue;
 
 public class ListeMemoireRevueDao implements RevueDao {
 	private static ListeMemoireRevueDao instance;

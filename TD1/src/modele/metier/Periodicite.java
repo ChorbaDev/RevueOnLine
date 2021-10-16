@@ -1,4 +1,4 @@
-package metier;
+package modele.metier;
 
 public class Periodicite {
 	private int cle;

@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import daofactory.DaoFactory;
 import daofactory.ListeMemoireDaoFactory;
-import metier.Adresse;
-import metier.Client;
+import modele.metier.Adresse;
+import modele.metier.Client;
 
 public abstract class AppClient {
 

@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import daofactory.DaoFactory;
-import metier.Adresse;
-import metier.Client;
+import modele.metier.Adresse;
+import modele.metier.Client;
 
 public class MySqlClientDaoTest {
 	private DaoFactory daof;

@@ -1,4 +1,4 @@
-package test.metier;
+package test.modele.metier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Abonnement;
+import modele.metier.Abonnement;
 
 public class AbonnementTest {
 	private Abonnement ab1;

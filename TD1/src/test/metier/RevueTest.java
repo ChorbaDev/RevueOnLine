@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Revue;
+import modele.metier.Revue;
 
 public class RevueTest {
 	private Revue r1;

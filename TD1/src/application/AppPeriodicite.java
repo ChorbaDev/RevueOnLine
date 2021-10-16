@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import daofactory.DaoFactory;
-import metier.Periodicite;
+import modele.metier.Periodicite;
 
 public abstract class AppPeriodicite {
 

@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.RevueDao;
-import metier.Connexion;
-import metier.Revue;
+import modele.metier.Connexion;
+import modele.metier.Revue;
 
 public class MySqlRevueDao implements RevueDao {
 	private static MySqlRevueDao instance;

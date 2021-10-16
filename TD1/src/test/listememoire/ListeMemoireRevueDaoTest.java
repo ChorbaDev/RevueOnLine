@@ -11,7 +11,7 @@ import daofactory.DaoFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Revue;
+import modele.metier.Revue;
 
 public class ListeMemoireRevueDaoTest {
 

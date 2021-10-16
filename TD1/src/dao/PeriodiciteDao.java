@@ -3,7 +3,7 @@ package dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import metier.Periodicite;
+import modele.metier.Periodicite;
 
 public interface PeriodiciteDao extends Dao<Periodicite> {
 	public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException;

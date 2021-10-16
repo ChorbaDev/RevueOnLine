@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.PeriodiciteDao;
-import metier.Periodicite;
+import modele.metier.Periodicite;
 
 public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 	private static ListeMemoirePeriodiciteDao instance;

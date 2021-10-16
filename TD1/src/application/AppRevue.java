@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import daofactory.DaoFactory;
 import daofactory.ListeMemoireDaoFactory;
-import metier.Periodicite;
-import metier.Revue;
+import modele.metier.Periodicite;
+import modele.metier.Revue;
 
 public abstract class AppRevue {
 

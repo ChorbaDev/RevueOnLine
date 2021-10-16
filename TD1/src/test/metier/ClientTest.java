@@ -7,8 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Adresse;
-import metier.Client;
+import modele.metier.Adresse;
+import modele.metier.Client;
 
 public class ClientTest {
 	private Client c1;

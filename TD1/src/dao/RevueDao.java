@@ -3,7 +3,7 @@ package dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import metier.Revue;
+import modele.metier.Revue;
 
 public interface RevueDao extends Dao<Revue> {
 	public ArrayList<Revue> getByTitre(String titre) throws SQLException;

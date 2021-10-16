@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ClientDao;
-import metier.Adresse;
-import metier.Client;
+import modele.metier.Adresse;
+import modele.metier.Client;
 
 public class ListeMemoireClientDao implements ClientDao {
 	private static ListeMemoireClientDao instance;

@@ -1,11 +1,11 @@
 
-public class metier.Abonnement {
+public class modele.metier.Abonnement {
 	private int id;
 	private java.sql.Date date_debut;
 	private java.sql.Date date_fin;
 	int id_client;
 	int id_revue;
-	public metier.Abonnement(String deb,String fin, int id_c,int id_r) {
+	public modele.metier.Abonnement(String deb,String fin, int id_c,int id_r) {
 		java.util.Date dateD = new java.util.Date(deb);
 		java.util.Date dateF = new java.util.Date(fin);
 		date_debut = new java.sql.Date(dateD.getTime());

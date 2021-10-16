@@ -7,12 +7,12 @@
     <fullyQualifiedTypeName name="mysql.MySqlAbonnementDao"/>
     <fullyQualifiedTypeName name="listememoire.ListeMemoireAbonnementDAO"/>
     <fullyQualifiedTypeName name="daofactory.DaoFactory"/>
-    <fullyQualifiedTypeName name="metier.Abonnement"/>
-    <fullyQualifiedTypeName name="metier.Client"/>
+    <fullyQualifiedTypeName name="modele.metier.Abonnement"/>
+    <fullyQualifiedTypeName name="modele.metier.Client"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="daofactory.ListeMemoireDaoFactory"/>
-    <fullyQualifiedTypeName name="metier.Revue"/>
+    <fullyQualifiedTypeName name="modele.metier.Revue"/>
     <fullyQualifiedTypeName name="dao.Persistance"/>
-    <fullyQualifiedTypeName name="metier.Periodicite"/>
+    <fullyQualifiedTypeName name="modele.metier.Periodicite"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

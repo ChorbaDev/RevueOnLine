@@ -1,4 +1,4 @@
-package metier;
+package modele.metier;
 
 import java.util.Objects;
 

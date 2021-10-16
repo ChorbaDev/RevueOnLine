@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Abonnement;
+import modele.metier.Abonnement;
 
 public class AbonnementTest {
 	private Abonnement ab1;

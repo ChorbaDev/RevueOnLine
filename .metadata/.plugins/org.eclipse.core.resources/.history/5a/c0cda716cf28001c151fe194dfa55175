@@ -1,6 +1,6 @@
 package process;
 
-import metier.Adresse;
+import modele.metier.Adresse;
 
 public class ProcessAdresse {
 public ProcessAdresse() {

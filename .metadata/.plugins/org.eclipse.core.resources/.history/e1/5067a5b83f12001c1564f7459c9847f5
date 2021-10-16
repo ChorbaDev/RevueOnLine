@@ -1,5 +1,5 @@
 
-public class metier.Abonnement {
+public class modele.metier.Abonnement {
 	private int id;
 
 }

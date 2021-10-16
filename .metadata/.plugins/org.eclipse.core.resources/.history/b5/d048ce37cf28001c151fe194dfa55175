@@ -3,7 +3,7 @@ package test.process;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Adresse;
+import modele.metier.Adresse;
 import process.ProcessAdresse;
 
 public class processTest {

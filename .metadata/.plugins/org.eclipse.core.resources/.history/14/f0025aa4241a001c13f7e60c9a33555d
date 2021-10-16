@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AbonnementDao;
-import metier.Abonnement;
-import metier.Periodicite;
+import modele.metier.Abonnement;
+import modele.metier.Periodicite;
 
 public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	private static ListeMemoireAbonnementDAO instance;

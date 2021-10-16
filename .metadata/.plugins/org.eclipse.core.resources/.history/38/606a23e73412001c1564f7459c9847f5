@@ -1,7 +1,7 @@
 
-public class metier.Periodicite {
+public class modele.metier.Periodicite {
 	private String libelle;
-	public metier.Periodicite(String ch) {
+	public modele.metier.Periodicite(String ch) {
 		this.libelle=ch;
 	}
 }

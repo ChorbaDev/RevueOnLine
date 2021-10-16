@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.PeriodiciteDao;
-import metier.Connexion;
-import metier.Periodicite;
+import modele.metier.Connexion;
+import modele.metier.Periodicite;
 
 public class MySqlPeriodiciteDao implements PeriodiciteDao {
 	private static MySqlPeriodiciteDao instance;

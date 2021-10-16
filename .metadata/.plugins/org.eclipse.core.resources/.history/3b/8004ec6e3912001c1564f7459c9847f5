@@ -1,23 +1,23 @@
 import java.sql.*;
-public class metier.Revue {
+public class modele.metier.Revue {
 	private String titre;
 	private String description;
 	private double tarif_numero;
 	private String visuel;
 	
-	private metier.Connexion maConnexion;
+	private modele.metier.Connexion maConnexion;
 	private  Connection connect;
 	
-	public metier.Revue(String titre, String description, double tarif_numero, String visuel) {
+	public modele.metier.Revue(String titre, String description, double tarif_numero, String visuel) {
 		this.titre = titre;
 		this.description = description;
 		this.tarif_numero = tarif_numero;
 		this.visuel = visuel;
-		metier.Connexion maConnexion= new metier.Connexion();
+		modele.metier.Connexion maConnexion= new modele.metier.Connexion();
 	    Connection Connect=maConnexion.creeConnexion();
 	}
 	public void addRevue() throws SQLException {
-		String sql="insert into metier.Revue(titre,description,tarif_numero,visuel) values (?,?,?,?)";
+		String sql="insert into modele.metier.Revue(titre,description,tarif_numero,visuel) values (?,?,?,?)";
 		PreparedStatement requete=connect.prepareStatement(sql);
 		requete.setString(1,this.titre );
 		requete.setString(2,this.description );
@@ -26,7 +26,7 @@ public class metier.Revue {
 		int nbLignes=requete.executeUpdate();
 	}
 	public void deleteRevue() throws SQLException {
-		String sql="delete from metier.Revue where titre=? and description=? and tarif_numero=? and visuel=?";
+		String sql="delete from modele.metier.Revue where titre=? and description=? and tarif_numero=? and visuel=?";
 		PreparedStatement requete=connect.prepareStatement(sql);
 		requete.setString(1,this.titre );
 		requete.setString(2,this.description );

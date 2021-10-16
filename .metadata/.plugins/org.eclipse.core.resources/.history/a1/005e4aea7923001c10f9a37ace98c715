@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AbonnementDao;
-import metier.Abonnement;
+import modele.metier.Abonnement;
 
 public class ListeMemoireAbonnementDao implements AbonnementDao {
 	private static ListeMemoireAbonnementDao instance;

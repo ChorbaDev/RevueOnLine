@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import daofactory.DaoFactory;
-import metier.Abonnement;
+import modele.metier.Abonnement;
 
 public class ListeMemoireAbonnementDaoTest {
 	private DaoFactory daof;

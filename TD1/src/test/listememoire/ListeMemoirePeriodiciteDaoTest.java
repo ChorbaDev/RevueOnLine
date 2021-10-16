@@ -1,7 +1,7 @@
 package test.listememoire;
 
 import daofactory.DaoFactory;
-import metier.Periodicite;
+import modele.metier.Periodicite;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

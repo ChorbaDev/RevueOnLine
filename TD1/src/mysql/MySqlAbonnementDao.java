@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import dao.AbonnementDao;
-import metier.Abonnement;
-import metier.Connexion;
+import modele.metier.Abonnement;
+import modele.metier.Connexion;
 
 public class MySqlAbonnementDao implements AbonnementDao {
 	private static MySqlAbonnementDao instance;

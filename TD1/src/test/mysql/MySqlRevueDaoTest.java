@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import daofactory.DaoFactory;
-import metier.Revue;
+import modele.metier.Revue;
 
 public class MySqlRevueDaoTest {
 

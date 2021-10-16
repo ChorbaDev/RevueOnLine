@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.ClientDao;
-import metier.Adresse;
-import metier.Client;
-import metier.Connexion;
+import modele.metier.Adresse;
+import modele.metier.Client;
+import modele.metier.Connexion;
 
 public class MySqlClientDao implements ClientDao {
 	private static MySqlClientDao instance;
