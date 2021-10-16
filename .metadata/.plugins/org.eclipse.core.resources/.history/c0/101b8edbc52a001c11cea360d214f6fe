@@ -19,7 +19,7 @@ BorderPane root = new BorderPane();
 		}
 	}
 
-	public static void javafxtd4.main(String[] args) {
+	public static void application.main(String[] args) {
 		launch(args);
 	}
 }

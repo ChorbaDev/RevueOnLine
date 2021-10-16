@@ -113,7 +113,7 @@
     -fx-max-width: 50px;
 }
 #vbox{
-    -fx-background-color: linear-gradient(to top right,#232A30,#e5383b);
+    -fx-background-color: linear-gradient(to top right,#103783,#9bafd9);
 }
 #grid{
     -fx-background-color: rgba(22, 26, 29, 0.5);

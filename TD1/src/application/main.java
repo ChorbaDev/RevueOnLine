@@ -1,4 +1,4 @@
-package javafxtd4;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("vueRevue.fxml");
+            URL fxmlURL=getClass().getResource("../vue/fxmlfiles/vueRevue.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root);
