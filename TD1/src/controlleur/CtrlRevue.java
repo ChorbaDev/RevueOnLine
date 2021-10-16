@@ -29,7 +29,7 @@ public class CtrlRevue implements Initializable {
      * @param header
      * @param content
      * @param type
-     * @return alert créé a l'aide de ces paramétre
+     * @return alert créé a l'aide de ces paramètres
      */
     private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
         Alert alert=new Alert(type);
@@ -42,6 +42,7 @@ public class CtrlRevue implements Initializable {
     @FXML
     public void clickCreer(ActionEvent event) {
         String aRemplacer="";
+        //à changer une fois la gestion de solution de persistance faite
         DaoFactory daof=DaoFactory.getDAOFactory(Persistance.ListeMemoire);
         Alert alert;
         try{

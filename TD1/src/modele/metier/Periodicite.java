@@ -8,6 +8,9 @@ public class Periodicite {
 		this.libelle = ch;
 	}
 
+	public Periodicite() {
+	}
+
 	public Periodicite(int cle, String libelle) {
 		this.cle = cle;
 		this.libelle = libelle;
@@ -49,6 +52,8 @@ public class Periodicite {
 	}
 
 	public void setLibelle(String libelle) {
+		if(libelle.isEmpty())
+			throw new RuntimeException("Le libellé doit être renseigné");
 		this.libelle = libelle;
 	}
 
