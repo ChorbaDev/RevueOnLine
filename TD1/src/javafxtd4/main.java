@@ -25,7 +25,7 @@ public class main extends Application {
             Scene scene = new Scene((VBox) root);
             primaryStage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("guiRevue.css").toExternalForm());
-            primaryStage.setTitle("Gestion des revues");
+            primaryStage.setTitle("RevuesOnLine");
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
