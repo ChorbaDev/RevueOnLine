@@ -71,7 +71,7 @@
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)&#13;
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)&#13;
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)&#13;
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.javafxtd4.main(RemoteTestRunner.java:210)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.application.main(RemoteTestRunner.java:210)&#13;
 &#13;
 
       </failure>

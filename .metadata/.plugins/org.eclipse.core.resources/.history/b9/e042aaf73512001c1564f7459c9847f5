@@ -1,7 +1,7 @@
 
 public class application {
 
-	public static void javafxtd4.main(String[] args) {
+	public static void application.main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}

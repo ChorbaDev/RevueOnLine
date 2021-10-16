@@ -2,7 +2,7 @@ package TD4;
 
 public class Main {
 
-	public static void javafxtd4.main(String[] args) {
+	public static void application.main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
