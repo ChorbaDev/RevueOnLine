@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -19,12 +20,12 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("../vue/fxmlfiles/vueRevue.fxml");
+            URL fxmlURL=getClass().getResource("../vue/fxmlfiles/Accueil.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
-            Scene scene = new Scene((VBox) root);
+            Scene scene = new Scene((Parent) root);
             primaryStage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../vue/cssfiles/guiRevue.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("../vue/cssfiles/guiAccueil.css").toExternalForm());
             primaryStage.setTitle("RevuesOnLine");
             primaryStage.setResizable(false);
             primaryStage.show();
