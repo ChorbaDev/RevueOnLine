@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import daofactory.DaoFactory;
 
 public class Application {
 
-	public static void main(String[] args) throws SQLException, ParseException {
+	public static void main(String[] args) throws SQLException, ParseException, IOException {
 		String reponse;
 		int choixCRUD;
 		int choixTable;

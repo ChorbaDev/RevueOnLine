@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import modele.metier.Periodicite;
 
 public abstract class AppPeriodicite {
 
-	public static void manipPeriodicite(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException {
+	public static void manipPeriodicite(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, IOException {
 		switch (choixCRUD) {
 		case 1:
 			createPeriodicite(sc, daof);
@@ -39,7 +40,7 @@ public abstract class AppPeriodicite {
 		daof.getPeriodiciteDAO().delete(p);
 	}
 
-	private static void updatePeriodicite(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void updatePeriodicite(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		String libelle;
 		int id;
 		System.out.print("ID Periodicite :");
@@ -51,7 +52,7 @@ public abstract class AppPeriodicite {
 
 	}
 
-	private static void requestPeriodicite(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void requestPeriodicite(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		System.out.println("Affichage par:\n" + "1-ID\n" + "2-Libelle\n" + "3-Tout\n");
 		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
@@ -83,14 +84,14 @@ public abstract class AppPeriodicite {
 			System.out.println(p.toString());
 	}
 
-	private static void reqIdPeriodicite(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqIdPeriodicite(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		int id = Application.verifID(sc);
 		Periodicite ab = daof.getPeriodiciteDAO().getById(id);
 		System.out.println(ab.toString());
 
 	}
 
-	private static void createPeriodicite(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void createPeriodicite(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		System.out.println("ID : ");
 		int id = Application.verifID(sc);
 		String libelle;

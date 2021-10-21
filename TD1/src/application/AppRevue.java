@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import modele.metier.Revue;
 
 public abstract class AppRevue {
 
-	public static void manipRevue(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException {
+	public static void manipRevue(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, IOException {
 
 		switch (choixCRUD) {
 		case 1:
@@ -42,7 +43,7 @@ public abstract class AppRevue {
 		daof.getRevueDAO().delete(revue);
 	}
 
-	private static void updateRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void updateRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		String titre, description, visuel;
 		double tarif;
 		int id_p, id;
@@ -60,11 +61,11 @@ public abstract class AppRevue {
 			System.out.print("Periodicite (ID) :");
 			id_p = Application.verifID(sc);
 		} while (!existancePeriodicite(id_p, daof));
-		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
+		Revue revue = new Revue(id, titre, description, tarif, id_p);
 		daof.getRevueDAO().update(revue);
 	}
 
-	private static void createRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void createRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		String titre, description, visuel;
 		double tarif;
 		int id_p, id = 0;
@@ -85,7 +86,7 @@ public abstract class AppRevue {
 			System.out.print("Periodicite (ID) :");
 			id_p = Application.verifID(sc);
 		} while (!existancePeriodicite(id_p, daof));
-		Revue revue = new Revue(id, titre, description, tarif, visuel, id_p);
+		Revue revue = new Revue(id, titre, description, tarif, id_p);
 		daof.getRevueDAO().create(revue);
 	}
 
@@ -101,7 +102,7 @@ public abstract class AppRevue {
 		return true;
 	}
 
-	private static void requestRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void requestRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		System.out.println("Affichage par:\n1-ID\n2-Titre\n3-Tout\n");
 		int choix;
 		do {
@@ -123,14 +124,14 @@ public abstract class AppRevue {
 
 	}
 
-	private static void reqAllRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqAllRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		ArrayList<Revue> listeR = daof.getRevueDAO().findAll();
 		for (Revue r : listeR)
 			System.out.println(r.toString());
 
 	}
 
-	private static void reqTitreRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqTitreRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		String titre = sc.nextLine();
 		ArrayList<Revue> listR = daof.getRevueDAO().getByTitre(titre);
 		for (Revue r : listR) {
@@ -138,7 +139,7 @@ public abstract class AppRevue {
 		}
 	}
 
-	private static void reqIdRevue(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqIdRevue(Scanner sc, DaoFactory daof) throws SQLException, IOException {
 		int id = Integer.parseInt(sc.nextLine());
 		Revue r = daof.getRevueDAO().getById(id);
 		System.out.println(r.toString());

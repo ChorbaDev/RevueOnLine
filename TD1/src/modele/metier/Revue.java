@@ -1,14 +1,20 @@
 package modele.metier;
 
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.*;
+
 public class Revue {
 	private int id;
 	private String titre;
 	private String description;
 	private double tarif_numero;
-	private String visuel;
+	private Image visuel;
 	private int id_p;
 
-	public Revue(int id, String titre, String description, double tarif_numero, String visuel, int id_p) {
+	public Revue(int id, String titre, String description, double tarif_numero, Image visuel, int id_p) {
 		this.id = id;
 		this.titre = titre;
 		this.description = description;
@@ -24,13 +30,26 @@ public class Revue {
 	public Revue(){
 
 	}
-	public Revue(String titre, String description, double tarif_numero, String visuel, int id_p) {
+	public Revue(String titre, String description, double tarif_numero, Image visuel, int id_p) {
 		this.titre = titre;
 		this.description = description;
 		this.tarif_numero = tarif_numero;
 		this.visuel = visuel;
 		this.id_p = id_p;
+	}
+	public Revue(int id,String titre, String description, double tarif_numero, int id_p) {
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.tarif_numero = tarif_numero;
+		this.id_p = id_p;
+	}
 
+	public Revue(String test, String descp, double v, int i) {
+		this.titre = titre;
+		this.description = description;
+		this.tarif_numero = tarif_numero;
+		this.id_p = id_p;
 	}
 
 	@Override
@@ -91,11 +110,17 @@ public class Revue {
 		this.tarif_numero = tarif_numero;
 	}
 
-	public String getVisuel() {
+	public InputStream getVisuel() throws IOException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		ImageIO.write((RenderedImage) visuel,"png", os);
+		InputStream fis = new ByteArrayInputStream(os.toByteArray());
+		return fis;
+	}
+	public Image getVisuelImg() {
 		return visuel;
 	}
 
-	public void setVisuel(String visuel) {
+	public void setVisuel(Image visuel) {
 		this.visuel = visuel;
 	}
 

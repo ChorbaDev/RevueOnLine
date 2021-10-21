@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.After;
@@ -31,14 +32,14 @@ public class MySqlClientDaoTest {
 	}
 
 	@Test
-	public void create() throws SQLException {
+	public void create() throws SQLException, IOException {
 		int initSize = daof.getClientDAO().findAll().size();
 		daof.getClientDAO().create(c);
 		assertEquals(initSize + 1, daof.getClientDAO().findAll().size());
 	}
 
 	@Test
-	public void delete() throws SQLException {
+	public void delete() throws SQLException, IOException {
 		daof.getClientDAO().create(c);
 		int initSize = daof.getClientDAO().findAll().size();
 		daof.getClientDAO().delete(c);
@@ -46,13 +47,13 @@ public class MySqlClientDaoTest {
 	}
 
 	@Test
-	public void getById() throws SQLException {
+	public void getById() throws SQLException, IOException {
 		daof.getClientDAO().create(c);
 		assertTrue(daof.getClientDAO().findAll().get(daof.getClientDAO().findAll().size() - 1).getCle() >= c.getCle());
 	}
 
 	@Test
-	public void getByNomPrenom() throws SQLException {
+	public void getByNomPrenom() throws SQLException, IOException {
 		daof.getClientDAO().create(c);
 		assertNotNull(daof.getClientDAO().getByNomPrenom(c.getNom(), c.getPrenom()).size());
 	}

@@ -13,7 +13,7 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	private ListeMemoireRevueDao() {
 		this.donnees = new ArrayList<>();
-		this.donnees.add(new Revue(1, "titre", "descp", 1.2, "visuel", 1));
+		this.donnees.add(new Revue(1, "titre", "descp", 1.2, 1));
 	}
 
 	public static ListeMemoireRevueDao getInstance() {
@@ -65,7 +65,7 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	@Override
 	public Revue getById(int id) throws SQLException {
-		Revue objet = new Revue(id, "test", "test", 1.0, "test", 1);
+		Revue objet = new Revue(id, "test", "test", 1.0, 1);
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.get(index);

@@ -4,6 +4,7 @@ import static daofactory.DaoFactory.getDAOFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.Before;
@@ -24,14 +25,14 @@ public class MySqlAbonnementDaoTest {
 	}
 
 	@Test
-	public void testAjoutAbonnement() throws SQLException {
+	public void testAjoutAbonnement() throws SQLException, IOException {
 		int initSize = daof.getAbonnementDAO().findAll().size();
 		daof.getAbonnementDAO().create(ab);
 		assertEquals(initSize + 1, daof.getAbonnementDAO().findAll().size());
 	}
 
 	@Test
-	public void testSupprimerAbonnement() throws SQLException {
+	public void testSupprimerAbonnement() throws SQLException, IOException {
 		daof.getAbonnementDAO().create(ab);
 		int initSize = daof.getAbonnementDAO().findAll().size();
 		daof.getAbonnementDAO().delete(ab);
