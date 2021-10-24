@@ -1,5 +1,7 @@
 package modele.metier;
 
+import dao.Persistance;
+import daofactory.DaoFactory;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
@@ -135,7 +137,7 @@ public class Revue {
 	@Override
 	public String toString() {
 		return "ID :" + id + "\nTitre :" + titre + "\nDescription :" + description + "\nTarif Numero :" + tarif_numero
-				+ "\nVisuel :" + visuel + "\nID Periodicite :" + id_p + "\n";
+				+ "\nID Periodicite :" + id_p + "\n";
 	}
 
 }

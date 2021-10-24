@@ -1,4 +1,4 @@
-package controlleur;
+package controlleur.Revue;
 
 import dao.Persistance;
 import daofactory.DaoFactory;
@@ -6,12 +6,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import modele.metier.Revue;
+import vue.dialogFiles.Revue.vueAjoutRevue;
+import vue.dialogFiles.Revue.vueModifRevue;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,22 +37,51 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
     @FXML private ImageView imgVisuel;
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
+    @FXML private AnchorPane anchor;
+    @FXML private Label titre;
     private DaoFactory dao;
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+    private String path;
     @FXML
-    void clickAjouter(ActionEvent event) {
-
+    void clickAjouter(ActionEvent event) throws IOException, SQLException {
+        vueAjoutRevue ajoutRevue= new vueAjoutRevue(anchor,dao,listeRevue);
     }
 
     @FXML
-    void clickModifier(ActionEvent event) {
-
+    void clickModifier(ActionEvent event) throws SQLException, IOException {
+        vueModifRevue modifRevue= new vueModifRevue(anchor,dao,listeRevue);
     }
-
+    @FXML
+    void retourAccueil(ActionEvent event) throws IOException {
+        path="../../vue/fxmlfiles/Accueil.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(path));
+        loader.load();
+        root = loader.getRoot();
+        basculeScene(event);
+    }
     @FXML
     void clickSupprimer(ActionEvent event) throws SQLException, IOException {
-        dao.getRevueDAO().delete(listeRevue.getSelectionModel().getSelectedItem());
-        this.listeRevue.getItems().clear();
-        this.listeRevue.getItems().addAll(dao.getRevueDAO().findAll());
+        Alert alert=makeAlert
+                ("Confirmation",
+                        "Est-ce-que vous ete sur de supprimer cette revue?",
+                        "",
+                        Alert.AlertType.CONFIRMATION);
+        if(alert.showAndWait().get()==ButtonType.OK){
+            dao.getRevueDAO().delete(listeRevue.getSelectionModel().getSelectedItem());
+            this.listeRevue.getItems().clear();
+            this.listeRevue.getItems().addAll(dao.getRevueDAO().findAll());
+            initImg();
+        }
+    }
+    private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
+        Alert alert=new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert;
     }
     private void setColonnes() {
         colID.setCellValueFactory(new PropertyValueFactory<Revue, Integer>("id"));
@@ -54,7 +91,13 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
         colIDP.setCellValueFactory(new PropertyValueFactory<Revue, Integer>("id_p"));
         listeRevue.getColumns().setAll(colID,colTitre,colDescp,colTarif,colIDP);
     }
-
+    public void basculeScene(ActionEvent e)
+    {
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     private void initChamps() {
         initImg();
         btnModifier.setDisable(true);
@@ -90,13 +133,17 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
         initChamps();
         this.listeRevue.getSelectionModel().selectedItemProperty().addListener(this);
     }
-
-    public void getInfos(Persistance persistance) {
-        dao = DaoFactory.getDAOFactory(persistance);
+    public void getInfos(Persistance persistance) throws SQLException, IOException {
         try {
-            this.listeRevue.getItems().addAll(dao.getRevueDAO().findAll());
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            dao = DaoFactory.getDAOFactory(persistance);
+            refreshListe();
+        } catch (SQLException | IOException | RuntimeException e) {
+            dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+            refreshListe();
         }
+    }
+    public void refreshListe() throws SQLException, IOException {
+        if(listeRevue!=null)
+        this.listeRevue.getItems().addAll(dao.getRevueDAO().findAll());
     }
 }

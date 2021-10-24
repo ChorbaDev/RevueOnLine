@@ -1,30 +1,61 @@
-package controlleur;
+package controlleur.Revue;
 
 //import com.jfoenix.controls.*;
-import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
+import vue.dialogFiles.Revue.vueAjoutRevue;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlRevue implements Initializable {
+public class CtrlAjoutRevue implements Initializable {
     @FXML private Button btnCreer;
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
     @FXML private TextField edtTitre;
-    Revue revue;
+    @FXML private Label visuelPath;
+    private AnchorPane anchor;
+    private vueAjoutRevue vue;
+    private Image visuel;
+    private Revue revue;
+    private TableView<Revue> tab;
+    private DaoFactory dao;
+    private void unblurStage(){
+        BoxBlur blur=new BoxBlur(0,0,0);
+        anchor.setEffect(blur);
+    }
+    public void fermeDialogue() throws SQLException, IOException {
+        unblurStage();
+        this.tab.getItems().clear();
+        if(tab!=null && dao!=null)
+        this.tab.getItems().addAll(dao.getRevueDAO().findAll());
+        this.vue.close();
+    }
+    public void setVue(vueAjoutRevue vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException {
+        this.vue=vue;
+        this.anchor=anchor;
+        this.dao=dao;
+        this.tab=tab;
+        if(dao!=null)
+            this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+    }
+
 
     /**
-     *
      * @param title
      * @param header
      * @param content
@@ -38,19 +69,19 @@ public class CtrlRevue implements Initializable {
         alert.setContentText(content);
         return alert;
     }
-
     @FXML
     public void clickCreer(ActionEvent event) {
         String aRemplacer="";
-        //à changer une fois la gestion de solution de persistance faite
-        DaoFactory daof=DaoFactory.getDAOFactory(Persistance.ListeMemoire);
         Alert alert;
         try{
+            revue.setTitre(edtTitre.getText().trim());
+            revue.setDescription(edtDescription.getText().trim());
             revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-            revue.setTitre(edtTitre.getText());
-            revue.setDescription(edtDescription.getText());
-            revue.setId_p(daof.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-            daof.getRevueDAO().create(revue);
+            revue.setVisuel(visuel);
+            if(dao!=null){
+                revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+                dao.getRevueDAO().create(revue);
+            }
             aRemplacer=revue.toString();
             initChamps();
             alert=makeAlert
@@ -77,22 +108,35 @@ public class CtrlRevue implements Initializable {
     }
 
     private void initChamps() {
+        initImg();
         edtTarif.setText("0");
         edtDescription.setText("");
         edtTitre.setText("");
         comboPeriodicite.getSelectionModel().clearSelection();
     }
-
+    @FXML
+    public void choisirUneImage(ActionEvent event){
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
+        fc.getExtensionFilters().addAll(ext1, ext2);
+        File fichierSelect = fc.showOpenDialog(null);
+        if (fichierSelect != null) {
+            visuel=new Image(fichierSelect.toURI().toString());
+            visuelPath.setText(fichierSelect.getPath());
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChamps();
-        DaoFactory dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
-        try {
-            this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
             edtTarif.setText("0");
             revue=new Revue();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
+
+    private void initImg() {
+        File file=new File("TD1/src/vue/images/empty.jpg");
+        visuel=new Image(file.getAbsolutePath());
+        visuelPath.setText("");
+    }
+
 }

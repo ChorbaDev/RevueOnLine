@@ -1,5 +1,6 @@
 package controlleur;
 
+import controlleur.Revue.CtrlAfficheRevue;
 import dao.Persistance;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CtrlAccueil implements Initializable {
@@ -41,8 +42,8 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    public void clickRevue(ActionEvent e) throws IOException {
-        path="../vue/fxmlfiles/afficheRevue.fxml";
+    public void clickRevue(ActionEvent e) throws IOException, SQLException {
+        path="../vue/fxmlfiles/Revue/afficheRevue.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();

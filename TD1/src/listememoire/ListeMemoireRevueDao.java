@@ -1,10 +1,12 @@
 package listememoire;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.RevueDao;
+import javafx.scene.image.Image;
 import modele.metier.Revue;
 
 public class ListeMemoireRevueDao implements RevueDao {
@@ -13,7 +15,8 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	private ListeMemoireRevueDao() {
 		this.donnees = new ArrayList<>();
-		this.donnees.add(new Revue(1, "titre", "descp", 1.2, 1));
+		File file=new File("TD1/src/vue/images/empty.jpg");
+		this.donnees.add(new Revue(1, "titre", "descp", 1.2,new Image(file.getAbsolutePath()), 1));
 	}
 
 	public static ListeMemoireRevueDao getInstance() {
