@@ -15,7 +15,7 @@ import modele.metier.Client;
 import modele.metier.Revue;
 
 public abstract class AppAbonnement {
-	public static void manipAbonnement(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, ParseException, IOException {
+	public static void manipAbonnement(Scanner sc, DaoFactory daof, int choixCRUD) throws SQLException, ParseException, IOException, ClassNotFoundException {
 		switch (choixCRUD) {
 		case 1:
 			createAbonnement(sc, daof);
@@ -37,7 +37,7 @@ public abstract class AppAbonnement {
 		}
 	}
 
-	private static void createAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException, IOException {
+	private static void createAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException, IOException, ClassNotFoundException {
 		String date_deb, date_fin;
 		boolean valid = false;
 		int id_c, id_r, id = 0;
@@ -71,7 +71,7 @@ public abstract class AppAbonnement {
 		daof.getAbonnementDAO().create(abonnement);
 	}
 
-	private static void deleteAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException {
+	private static void deleteAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException, ClassNotFoundException {
 		int id;
 		System.out.print("ID Abonnement :");
 		id = Application.verifID(sc);
@@ -79,7 +79,7 @@ public abstract class AppAbonnement {
 		daof.getAbonnementDAO().delete(abonnement);
 	}
 
-	private static void updateAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException, IOException {
+	private static void updateAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ParseException, IOException, ClassNotFoundException {
 		boolean valid = false;
 		String date_deb, date_fin;
 		int id_c, id_r, id;
@@ -136,7 +136,7 @@ public abstract class AppAbonnement {
 		return true;
 	}
 
-	private static void requestAbonnement(Scanner sc, DaoFactory daof) throws SQLException, IOException {
+	private static void requestAbonnement(Scanner sc, DaoFactory daof) throws SQLException, IOException, ClassNotFoundException {
 		System.out.println("Affichage par:\n1-ID\n2-Client\n3-Tout");
 		int choix = Application.verifChoix(sc, 1, 3);
 		switch (choix) {
@@ -155,13 +155,13 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqAllAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqAllAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ClassNotFoundException {
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().findAll();
 		for (Abonnement ab : listeAb)
 			System.out.println(ab.toString());
 	}
 
-	private static void reqClientAbonnement(Scanner sc, DaoFactory daof) throws SQLException {
+	private static void reqClientAbonnement(Scanner sc, DaoFactory daof) throws SQLException, ClassNotFoundException {
 		int id_c = Application.verifID(sc);
 		ArrayList<Abonnement> listeAb = daof.getAbonnementDAO().getByClient(id_c);
 		for (Abonnement ab : listeAb) {
@@ -170,7 +170,7 @@ public abstract class AppAbonnement {
 
 	}
 
-	private static void reqIdAbonnement(Scanner sc, DaoFactory daof) throws SQLException, IOException {
+	private static void reqIdAbonnement(Scanner sc, DaoFactory daof) throws SQLException, IOException, ClassNotFoundException {
 		int id = Application.verifID(sc);
 		Abonnement ab = daof.getAbonnementDAO().getById(id);
 		System.out.println(ab.toString());

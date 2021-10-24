@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    public void clickRevue(ActionEvent e) throws IOException, SQLException {
+    public void clickRevue(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
         path="../vue/fxmlfiles/Revue/afficheRevue.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
@@ -52,7 +51,7 @@ public class CtrlAccueil implements Initializable {
         root = loader.getRoot();
         basculeScene(e);
     }
-    public void basculeScene(ActionEvent e) throws IOException
+    public void basculeScene(ActionEvent e)
     {
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);

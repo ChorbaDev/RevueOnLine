@@ -32,14 +32,14 @@ public class MySqlClientDaoTest {
 	}
 
 	@Test
-	public void create() throws SQLException, IOException {
+	public void create() throws SQLException, IOException, ClassNotFoundException {
 		int initSize = daof.getClientDAO().findAll().size();
 		daof.getClientDAO().create(c);
 		assertEquals(initSize + 1, daof.getClientDAO().findAll().size());
 	}
 
 	@Test
-	public void delete() throws SQLException, IOException {
+	public void delete() throws SQLException, IOException, ClassNotFoundException {
 		daof.getClientDAO().create(c);
 		int initSize = daof.getClientDAO().findAll().size();
 		daof.getClientDAO().delete(c);
@@ -47,13 +47,13 @@ public class MySqlClientDaoTest {
 	}
 
 	@Test
-	public void getById() throws SQLException, IOException {
+	public void getById() throws SQLException, IOException, ClassNotFoundException {
 		daof.getClientDAO().create(c);
 		assertTrue(daof.getClientDAO().findAll().get(daof.getClientDAO().findAll().size() - 1).getCle() >= c.getCle());
 	}
 
 	@Test
-	public void getByNomPrenom() throws SQLException, IOException {
+	public void getByNomPrenom() throws SQLException, IOException, ClassNotFoundException {
 		daof.getClientDAO().create(c);
 		assertNotNull(daof.getClientDAO().getByNomPrenom(c.getNom(), c.getPrenom()).size());
 	}

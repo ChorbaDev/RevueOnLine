@@ -40,8 +40,8 @@ public class MySqlRevueDao implements RevueDao {
 		return img;
 	}
 	@Override
-	public Revue getById(int id) throws SQLException, IOException {
-		Connexion maConnexion = new Connexion();
+	public Revue getById(int id) throws SQLException, IOException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select titre,description,tarif_numero,visuel,id_periodicite from Revue where id_revue=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -67,8 +67,8 @@ public class MySqlRevueDao implements RevueDao {
 	}
 
 	@Override
-	public boolean create(Revue r) throws SQLException, IOException {
-		Connexion maConnexion = new Connexion();
+	public boolean create(Revue r) throws SQLException, IOException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 
 		String sql = "insert into Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
@@ -76,7 +76,7 @@ public class MySqlRevueDao implements RevueDao {
 		req.setString(1, r.getTitre());
 		req.setString(2, r.getDescription());
 		req.setDouble(3, r.getTarif_numero());
-		req.setBinaryStream(4, r.getVisuel());
+		req.setBlob(4, r.getVisuel());
 		req.setInt(5, r.getId_p());
 
 		int nbLignes = req.executeUpdate();
@@ -95,8 +95,8 @@ public class MySqlRevueDao implements RevueDao {
 	}
 
 	@Override
-	public boolean update(Revue r) throws SQLException, IOException {
-		Connexion maConnexion = new Connexion();
+	public boolean update(Revue r) throws SQLException, IOException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -116,8 +116,8 @@ public class MySqlRevueDao implements RevueDao {
 	}
 
 	@Override
-	public boolean delete(Revue r) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean delete(Revue r) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "delete from Revue where id_revue=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -132,10 +132,10 @@ public class MySqlRevueDao implements RevueDao {
 	}
 
 	@Override
-	public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException {
+	public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException, ClassNotFoundException {
 		ArrayList<Revue> list = new ArrayList<>();
 
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select * from Revue where titre=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -159,10 +159,10 @@ public class MySqlRevueDao implements RevueDao {
 	}
 
 	@Override
-	public ArrayList<Revue> findAll() throws SQLException, IOException {
+	public ArrayList<Revue> findAll() throws SQLException, IOException, ClassNotFoundException {
 		ArrayList<Revue> list = new ArrayList<>();
 
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select * from Revue";
 		PreparedStatement req = connect.prepareStatement(sql);

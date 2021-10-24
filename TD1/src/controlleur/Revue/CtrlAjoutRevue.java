@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutRevue implements Initializable {
-    @FXML private Button btnCreer;
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
@@ -34,18 +33,19 @@ public class CtrlAjoutRevue implements Initializable {
     private Revue revue;
     private TableView<Revue> tab;
     private DaoFactory dao;
+
     private void unblurStage(){
         BoxBlur blur=new BoxBlur(0,0,0);
         anchor.setEffect(blur);
     }
-    public void fermeDialogue() throws SQLException, IOException {
+    public void fermeDialogue() throws SQLException, IOException, ClassNotFoundException {
         unblurStage();
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
         this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(vueAjoutRevue vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException {
+    public void setVue(vueAjoutRevue vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
@@ -69,19 +69,22 @@ public class CtrlAjoutRevue implements Initializable {
         alert.setContentText(content);
         return alert;
     }
+    private void setRevue() throws SQLException, IOException, ClassNotFoundException {
+        revue.setTitre(edtTitre.getText().trim());
+        revue.setDescription(edtDescription.getText().trim());
+        revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
+        revue.setVisuel(visuel);
+        if(dao!=null){
+            revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+            dao.getRevueDAO().create(revue);
+        }
+    }
     @FXML
     public void clickCreer(ActionEvent event) {
         String aRemplacer="";
         Alert alert;
         try{
-            revue.setTitre(edtTitre.getText().trim());
-            revue.setDescription(edtDescription.getText().trim());
-            revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-            revue.setVisuel(visuel);
-            if(dao!=null){
-                revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-                dao.getRevueDAO().create(revue);
-            }
+            setRevue();
             aRemplacer=revue.toString();
             initChamps();
             alert=makeAlert
@@ -114,6 +117,11 @@ public class CtrlAjoutRevue implements Initializable {
         edtTitre.setText("");
         comboPeriodicite.getSelectionModel().clearSelection();
     }
+
+    /**
+     * selectionner une image PNG ou JPG depuis votre pc
+     * @param event
+     */
     @FXML
     public void choisirUneImage(ActionEvent event){
         FileChooser fc = new FileChooser();
@@ -129,10 +137,12 @@ public class CtrlAjoutRevue implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChamps();
-            edtTarif.setText("0");
-            revue=new Revue();
+        revue=new Revue();
     }
 
+    /**
+     * initialiser l'image par le placeholder
+     */
     private void initImg() {
         File file=new File("TD1/src/vue/images/empty.jpg");
         visuel=new Image(file.getAbsolutePath());

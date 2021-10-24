@@ -2,9 +2,12 @@ package modele.metier;
 
 import dao.Persistance;
 import daofactory.DaoFactory;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
 
@@ -113,10 +116,11 @@ public class Revue {
 	}
 
 	public InputStream getVisuel() throws IOException {
+		BufferedImage bufferedImage = SwingFXUtils.fromFXImage(visuel, null);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		ImageIO.write((RenderedImage) visuel,"png", os);
-		InputStream fis = new ByteArrayInputStream(os.toByteArray());
-		return fis;
+		ImageIO.write(bufferedImage, "jpeg", os);
+		InputStream is = new ByteArrayInputStream(os.toByteArray());
+		return is;
 	}
 	public Image getVisuelImg() {
 		return visuel;

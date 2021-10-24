@@ -20,13 +20,13 @@
                <children>
                   <FlowPane prefHeight="25.0" prefWidth="450.0">
                      <children>
-                        <TextField alignment="TOP_LEFT" prefHeight="13.0" prefWidth="149.0" promptText="Recherche" />
+                        <TextField fx:id="recherche" alignment="TOP_LEFT" focusTraversable="false" prefHeight="13.0" prefWidth="149.0" promptText="Recherche" />
                      </children>
                      <FlowPane.margin>
                         <Insets bottom="10.0" />
                      </FlowPane.margin>
                   </FlowPane>
-                  <TableView fx:id="listeRevue" prefHeight="350.0" prefWidth="450.0">
+                  <TableView fx:id="listeRevue" focusTraversable="false" prefHeight="350.0" prefWidth="450.0">
                     <columns>
                       <TableColumn fx:id="colID" prefWidth="22.0" text="ID" />
                       <TableColumn fx:id="colTitre" prefWidth="128.0" text="Titre" />
@@ -35,12 +35,12 @@
                         <TableColumn fx:id="colIDP" prefWidth="38.0" text="ID (P)" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" onAction="#retourAccueil" text="Retour" />
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#retourAccueil" text="Retour" />
                   <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="396.0">
                     <buttons>
-                      <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#clickSupprimer" text="Supprimer" textOverrun="CLIP" />
-                        <Button fx:id="btnModifier" mnemonicParsing="false" onAction="#clickModifier" text="Modifier" />
-                        <Button mnemonicParsing="false" onAction="#clickAjouter" text="Ajouter" />
+                      <Button fx:id="btnSupprimer" focusTraversable="false" mnemonicParsing="false" onAction="#clickSupprimer" text="Supprimer" textOverrun="CLIP" />
+                        <Button fx:id="btnModifier" focusTraversable="false" mnemonicParsing="false" onAction="#clickModifier" text="Modifier" />
+                        <Button focusTraversable="false" mnemonicParsing="false" onAction="#clickAjouter" text="Ajouter" />
                     </buttons>
                   </ButtonBar>
                </children></FlowPane>

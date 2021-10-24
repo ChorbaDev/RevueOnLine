@@ -28,20 +28,20 @@ public class ListeMemoirePeriodiciteDaoTest {
 	}
 
 	@Test
-	public void getById() throws SQLException, IOException {
+	public void getById() throws SQLException, IOException, ClassNotFoundException {
 		daof.getPeriodiciteDAO().create(p);
 		assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size()-1).getCle()>=p.getCle());
 	}
 
 	@Test
-	public void create() throws SQLException, IOException {
+	public void create() throws SQLException, IOException, ClassNotFoundException {
 		int initSize=daof.getPeriodiciteDAO().findAll().size();
 		daof.getPeriodiciteDAO().create(p);
 		assertEquals(initSize+1,daof.getPeriodiciteDAO().findAll().size());
 	}
 
 	@Test
-	public void delete() throws SQLException, IOException {
+	public void delete() throws SQLException, IOException, ClassNotFoundException {
 		daof.getPeriodiciteDAO().create(p);
 		int initSize=daof.getPeriodiciteDAO().findAll().size();
 		daof.getPeriodiciteDAO().delete(p);
@@ -49,7 +49,7 @@ public class ListeMemoirePeriodiciteDaoTest {
 	}
 
 	@Test
-	public void getByLibelle() throws SQLException, IOException {
+	public void getByLibelle() throws SQLException, IOException, ClassNotFoundException {
 		daof.getPeriodiciteDAO().create(p);
 		assertNotNull(daof.getPeriodiciteDAO().getByLibelle(p.getLibelle()).size());
 	}

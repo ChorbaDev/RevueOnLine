@@ -4,7 +4,6 @@ import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -16,12 +15,9 @@ import vue.dialogFiles.Revue.vueModifRevue;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-public class CtrlModifRevue implements Initializable {
-    @FXML private Button btnCreer;
+public class CtrlModifRevue {
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
@@ -37,14 +33,14 @@ public class CtrlModifRevue implements Initializable {
         BoxBlur blur=new BoxBlur(0,0,0);
         anchor.setEffect(blur);
     }
-    public void fermeDialogue() throws SQLException, IOException {
+    public void fermeDialogue() throws SQLException, IOException, ClassNotFoundException {
         unblurStage();
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
             this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(vueModifRevue vue, AnchorPane anchor, DaoFactory dao, TableView<Revue> tab) throws SQLException, IOException {
+    public void setVue(vueModifRevue vue, AnchorPane anchor, DaoFactory dao, TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
@@ -71,19 +67,22 @@ public class CtrlModifRevue implements Initializable {
         alert.setContentText(content);
         return alert;
     }
+    private void setRevue() throws SQLException, IOException, ClassNotFoundException {
+        revue.setTitre(edtTitre.getText().trim());
+        revue.setDescription(edtDescription.getText().trim());
+        revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
+        revue.setVisuel(visuel);
+        if(dao!=null){
+            revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+            dao.getRevueDAO().update(revue);
+        }
+    }
     @FXML
     public void clickModif(ActionEvent event) {
         String aRemplacer="";
         Alert alert;
         try{
-            revue.setTitre(edtTitre.getText().trim());
-            revue.setDescription(edtDescription.getText().trim());
-            revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-            revue.setVisuel(visuel);
-            if(dao!=null){
-                revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-                dao.getRevueDAO().update(revue);
-            }
+            setRevue();
             aRemplacer=revue.toString();
             initChamps();
             alert=makeAlert
@@ -91,7 +90,6 @@ public class CtrlModifRevue implements Initializable {
                             "Cette revue a été modifié avec succès",
                             aRemplacer,
                             Alert.AlertType.INFORMATION);
-            //revue=new Revue();
         }catch(Exception e){
             if((e instanceof RuntimeException) || (e instanceof ArithmeticException))
                 aRemplacer=e.getMessage();
@@ -129,9 +127,6 @@ public class CtrlModifRevue implements Initializable {
             visuel=new Image(fichierSelect.toURI().toString());
             visuelPath.setText(fichierSelect.getPath());
         }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     private void initImg(){

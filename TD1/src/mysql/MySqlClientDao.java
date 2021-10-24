@@ -25,9 +25,9 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
+	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException, ClassNotFoundException {
 		ArrayList<Client> lClient = new ArrayList<>();
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion =Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement("select * from Client where nom=? and prenom=?");
 		req.setString(1, nom);
@@ -49,8 +49,8 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public Client getById(int id) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public Client getById(int id) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement("select * from Client where id_client=?");
 		req.setInt(1, id);
@@ -72,8 +72,8 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public boolean create(Client object) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean create(Client object) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement(
 				"insert into Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)",
@@ -103,8 +103,8 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public boolean update(Client object) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean update(Client object) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement(
 				"update Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
@@ -121,8 +121,8 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public boolean delete(Client object) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean delete(Client object) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion =Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement("delete from Client where id_client=?");
 		req.setInt(1, object.getCle());
@@ -136,9 +136,9 @@ public class MySqlClientDao implements ClientDao {
 	}
 
 	@Override
-	public ArrayList<Client> findAll() throws SQLException {
+	public ArrayList<Client> findAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Client> lClient = new ArrayList<>();
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		PreparedStatement req = connect.prepareStatement("select * from Client");
 

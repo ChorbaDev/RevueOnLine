@@ -18,7 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 
 public class vueAjoutRevue extends Stage {
-    public vueAjoutRevue(AnchorPane anchor, DaoFactory dao, TableView<Revue> tab) throws IOException, SQLException {
+    public vueAjoutRevue(AnchorPane anchor, DaoFactory dao, TableView<Revue> tab) throws IOException, SQLException, ClassNotFoundException {
         final URL fxmlURL=getClass().getResource("../../fxmlfiles/Revue/createRevue.fxml");
         final FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
         final Parent node = (Parent)fxmlLoader.load();
