@@ -1,0 +1,35 @@
+#gradientFlow{
+    -fx-background-color: linear-gradient(to top right,#FF0F7B,#F89B29);
+}
+#whiteFlow{
+    -fx-background-color: white;
+    -fx-background-radius: 30px;
+}
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.button {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+
+}
+#visuelPath{
+    -fx-text-fill: red;
+}
+.button , .text-field, .text-area{
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+}
+.button:pressed{
+    -fx-rotate: 10px;
+}
+.button:hover{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+.combo-box{
+    -fx-background-radius: 20px;
+    -fx-background-color: white;
+    -fx-border-color: black;
+}
