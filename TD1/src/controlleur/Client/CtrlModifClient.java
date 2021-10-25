@@ -3,20 +3,18 @@ package controlleur.Client;
 import daofactory.DaoFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import modele.metier.Adresse;
 import modele.metier.Client;
 import vue.dialogFiles.Client.vueAjoutClient;
+import vue.dialogFiles.Client.vueModifClient;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-public class CtrlAjoutClient implements Initializable {
+public class CtrlModifClient {
     @FXML private TextField edtCodeP;
     @FXML private TextField edtNoRue;
     @FXML private TextField edtNom;
@@ -24,13 +22,14 @@ public class CtrlAjoutClient implements Initializable {
     @FXML private TextField edtPrenom;
     @FXML private TextField edtVille;
     @FXML private TextField edtVoie;
-    private vueAjoutClient vue;
+    private vueModifClient vue;
     private TableView<Client> tab;
     private DaoFactory dao;
     private AnchorPane anchor;
     private Client client;
     private Adresse adresse;
     private String aRemplacer;
+
     public static boolean isStringOnlyAlphabet(String str)
     {
         return ((!str.equals(""))
@@ -38,13 +37,13 @@ public class CtrlAjoutClient implements Initializable {
                 && (str.matches("^[a-zA-Z ]*$")));
     }
     @FXML
-    void clickAjout(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    void clickModif(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer="";
         setClient();
         if(aRemplacer.isEmpty()){
             client.setAdresse(adresse);
-            dao.getClientDAO().create(client);
+            dao.getClientDAO().update(client);
             aRemplacer=client.toString();
             alert=makeAlert
                     ("Ajout avec succès",
@@ -53,7 +52,6 @@ public class CtrlAjoutClient implements Initializable {
                             Alert.AlertType.INFORMATION);
             client=new Client();
             adresse=new Adresse();
-            initChamps();
         }
         else{
             alert=makeAlert
@@ -64,7 +62,6 @@ public class CtrlAjoutClient implements Initializable {
         }
         alert.showAndWait();
     }
-
     private void setClient() {
         String nom,prenom,pay,rue,voie,code,ville;
         nom=edtNom.getText().trim();
@@ -118,7 +115,15 @@ public class CtrlAjoutClient implements Initializable {
             else aRemplacer+="Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-
+    public void setVue(vueModifClient vueModifClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
+        this.vue=vueModifClient;
+        this.anchor=anchor;
+        this.dao=dao;
+        this.client=tab.getSelectionModel().getSelectedItem();
+        this.adresse=this.client.getAdresse();
+        this.tab=tab;
+        initChamps();
+    }
     private void unblurStage(){
         BoxBlur blur=new BoxBlur(0,0,0);
         anchor.setEffect(blur);
@@ -131,29 +136,16 @@ public class CtrlAjoutClient implements Initializable {
             this.tab.getItems().addAll(dao.getClientDAO().findAll());
         this.vue.close();
     }
-
-    public void setVue(vueAjoutClient vueAjoutClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
-        this.vue=vueAjoutClient;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.tab=tab;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initChamps();
-        client = new Client();
-        adresse=new Adresse();
-    }
-
     private void initChamps() {
-        edtCodeP.setText("");
-        edtNom.setText("");
-        edtNoRue.setText("");
-        edtPays.setText("");
-        edtPrenom.setText("");
-        edtVille.setText("");
-        edtVoie.setText("");
+        if(client!=null){
+            edtCodeP.setText(client.getAdresse().getCode_postal());
+            edtNom.setText(client.getNom());
+            edtNoRue.setText(client.getAdresse().getNo_rue());
+            edtPays.setText(client.getAdresse().getPays());
+            edtPrenom.setText(client.getPrenom());
+            edtVille.setText(client.getAdresse().getVille());
+            edtVoie.setText(client.getAdresse().getVoie());
+        }
     }
     private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
         Alert alert=new Alert(type);

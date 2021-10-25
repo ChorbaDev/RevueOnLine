@@ -50,12 +50,12 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
     private String path;
 
     @FXML
-    void clickAjouter(ActionEvent event) {
+    void clickAjouter(ActionEvent event) throws IOException {
         vueAjoutClient ajoutClient= new vueAjoutClient(anchor,dao,listeClient);
     }
 
     @FXML
-    void clickModifier(ActionEvent event) {
+    void clickModifier(ActionEvent event) throws IOException {
         vueModifClient modifClient= new vueModifClient(anchor,dao,listeClient);
     }
 

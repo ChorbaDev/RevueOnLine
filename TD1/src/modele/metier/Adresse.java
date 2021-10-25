@@ -19,6 +19,10 @@ public class Adresse {
         this.pays = pays;
     }
 
+    public Adresse() {
+
+    }
+
     public String getNo_rue() {
         return no_rue;
     }

@@ -1,11 +1,34 @@
 package vue.dialogFiles.Client;
 
+import controlleur.Client.CtrlAjoutClient;
 import daofactory.DaoFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modele.metier.Client;
 
-public class vueAjoutClient {
-    public vueAjoutClient(AnchorPane anchor, DaoFactory dao, TableView<Client> listeClient) {
+import java.io.IOException;
+import java.net.URL;
+
+public class vueAjoutClient extends Stage {
+    public vueAjoutClient(AnchorPane anchor, DaoFactory dao, TableView<Client> tab) throws IOException {
+        final URL fxmlURL=getClass().getResource("../../fxmlfiles/Client/createClient.fxml");
+        final FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
+        final Parent node = (Parent)fxmlLoader.load();
+        Scene scene = new Scene(node);
+        this.initModality(Modality.APPLICATION_MODAL);
+        this.initStyle(StageStyle.UNDECORATED);
+        CtrlAjoutClient controleur = fxmlLoader.getController();
+        controleur.setVue(this,anchor,dao,tab);
+        BoxBlur blur=new BoxBlur(5,5,5);
+        anchor.setEffect(blur);
+        this.setScene(scene);
+        this.show();
     }
 }

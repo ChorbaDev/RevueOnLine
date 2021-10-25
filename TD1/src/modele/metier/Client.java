@@ -25,6 +25,10 @@ public class Client {
 		this.cle = id;
 	}
 
+    public Client() {
+
+    }
+
 	public void setCle(int cle) {
 		this.cle = cle;
 	}
