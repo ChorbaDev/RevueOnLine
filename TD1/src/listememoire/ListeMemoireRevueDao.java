@@ -33,10 +33,6 @@ public class ListeMemoireRevueDao implements RevueDao {
 		}
 		boolean ok = this.donnees.add(objet);
 		return ok;
-		/*while (existanceID(objet) >= 0) {
-			objet.setId(objet.getId() + 1);
-		}
-		return this.donnees.add(objet);*/
 	}
 
 	private int existanceID(Revue objet) {

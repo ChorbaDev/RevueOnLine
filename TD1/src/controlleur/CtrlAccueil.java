@@ -1,5 +1,6 @@
 package controlleur;
 
+import controlleur.Client.CtrlAfficheClient;
 import controlleur.Revue.CtrlAfficheRevue;
 import dao.Persistance;
 import javafx.collections.FXCollections;
@@ -31,8 +32,15 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    void clickClient(ActionEvent event) {
-
+    void clickClient(ActionEvent e) throws SQLException, IOException, ClassNotFoundException {
+        path="../vue/fxmlfiles/Client/afficheClient.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(path));
+        loader.load();
+        CtrlAfficheClient controller=loader.getController();
+        controller.getInfos(this.comboType.getSelectionModel().getSelectedItem());
+        root = loader.getRoot();
+        basculeScene(e);
     }
 
     @FXML

@@ -79,7 +79,7 @@ public class ProcessAdresse {
 		//
 		if (existeDansTab(decompVille[0], tabTiret)) {
 			ch += decompVille[0] + '-';
-			decompVille[1] = capitalize(decompVille[1]);
+			ch+=decompVille[1] = capitalize(decompVille[1]);
 		}
 		//
 		for (int i = 1; i < decompVille.length - 1; i++) {
@@ -87,8 +87,7 @@ public class ProcessAdresse {
 				ch += '-' + decompVille[i] + '-';
 
 			} else {
-				decompVille[i] = capitalize(decompVille[i]);
-				ch += decompVille[i];
+				ch += decompVille[i]= capitalize(decompVille[i]);
 			}
 
 		}

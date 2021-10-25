@@ -31,10 +31,12 @@ public class ListeMemoireClientDao implements ClientDao {
 
 	@Override
 	public boolean create(Client objet) {
-		while (existanceID(objet) >= 0) {
+		objet.setCle(1);
+		while (this.donnees.contains(objet)) {
 			objet.setCle(objet.getCle() + 1);
 		}
-		return this.donnees.add(objet);
+		boolean ok = this.donnees.add(objet);
+		return ok;
 	}
 
 	@Override

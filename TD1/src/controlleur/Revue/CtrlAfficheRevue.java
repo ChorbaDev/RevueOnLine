@@ -1,5 +1,4 @@
 package controlleur.Revue;
-
 import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.collections.transformation.FilteredList;
@@ -10,7 +9,6 @@ import javafx.scene.*;
 import javafx.beans.value.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.input.KeyCode;
 import vue.dialogFiles.Revue.*;
 import java.io.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,11 +17,7 @@ import javafx.stage.Stage;
 import modele.metier.Revue;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
     @FXML private TableView<Revue> listeRevue;
@@ -42,10 +36,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
     private Stage stage;
     private Scene scene;
     private String path;
-    @FXML
-    void search(ActionEvent event) {
 
-    }
 
     @FXML
     void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {

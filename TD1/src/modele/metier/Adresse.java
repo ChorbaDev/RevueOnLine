@@ -1,5 +1,7 @@
 package modele.metier;
 
+import javafx.scene.control.TableColumn;
+
 import java.util.Objects;
 
 public class Adresse {
@@ -55,6 +57,11 @@ public class Adresse {
 
     public void setPays(String pays) {
         this.pays = pays;
+    }
+
+    @Override
+    public String toString() {
+        return no_rue+", "+voie+", "+code_postal+", "+ville+", "+pays;
     }
 
     @Override

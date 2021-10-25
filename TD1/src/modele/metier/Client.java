@@ -64,8 +64,7 @@ public class Client {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Client client = (Client) o;
-		return getCle() == client.getCle() && Objects.equals(getNom(), client.getNom())
-				&& Objects.equals(getPrenom(), client.getPrenom()) && Objects.equals(adresse, client.adresse);
+		return getCle() == client.getCle();
 	}
 
 	@Override
@@ -75,7 +74,19 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client{" + "cle=" + cle + ", nom='" + nom + '\'' + ", prenom='" + prenom + '\'' + ", adresse=" + adresse
-				+ '}';
+		return  "\nClé: " + cle +
+				"\nNom: " + nom +
+				"\nPrénom: " + prenom +
+				"\nAdresse: " + adresse;
+	}
+
+	public boolean equalsTout(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Client client = (Client) o;
+		return  Objects.equals(getNom(), client.getNom())
+				&& Objects.equals(getPrenom(), client.getPrenom()) && Objects.equals(adresse, client.adresse);
 	}
 }
