@@ -27,6 +27,8 @@ public class CtrlAjoutRevue implements Initializable {
     @FXML private TextField edtTarif;
     @FXML private TextField edtTitre;
     @FXML private Label visuelPath;
+    @FXML private Label nbCaracteres;
+    final int MAX_CHARS = 400 ;
     private AnchorPane anchor;
     private vueAjoutRevue vue;
     private Image visuel;
@@ -138,6 +140,16 @@ public class CtrlAjoutRevue implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChamps();
         revue=new Revue();
+        incNbCaracteres();
+    }
+
+    private void incNbCaracteres() {
+        edtDescription.setTextFormatter(new TextFormatter<String>(change ->
+        change.getControlNewText().length() <= MAX_CHARS ? change : null)
+        );
+        edtDescription.textProperty().addListener((observable, oldValue, newValue) ->{
+            nbCaracteres.setText(Integer.toString(newValue.length()));
+        });
     }
 
     /**

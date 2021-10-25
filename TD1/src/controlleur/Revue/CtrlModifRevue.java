@@ -4,6 +4,7 @@ import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -15,14 +16,18 @@ import vue.dialogFiles.Revue.vueModifRevue;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class CtrlModifRevue {
+public class CtrlModifRevue implements Initializable {
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
     @FXML private TextField edtTitre;
     @FXML private Label visuelPath;
+    @FXML private Label nbCaracteres;
+    final int MAX_CHARS = 400 ;
     private vueModifRevue vue;
     private Image visuel;
     private AnchorPane anchor;
@@ -114,6 +119,7 @@ public class CtrlModifRevue {
             edtDescription.setText(revue.getDescription());
             edtTitre.setText(revue.getTitre());
             comboPeriodicite.getSelectionModel().select(revue.getId_p()-1);
+            nbCaracteres.setText(Integer.toString(edtDescription.getText().length()));
         }
     }
     @FXML
@@ -132,5 +138,18 @@ public class CtrlModifRevue {
     private void initImg(){
         visuel=revue.getVisuelImg();
         visuelPath.setText("");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        incNbCaracteres();
+    }
+    private void incNbCaracteres() {
+        edtDescription.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= MAX_CHARS ? change : null)
+        );
+        edtDescription.textProperty().addListener((observable, oldValue, newValue) ->{
+            nbCaracteres.setText(Integer.toString(newValue.length()));
+        });
     }
 }

@@ -33,3 +33,7 @@
     -fx-background-color: white;
     -fx-border-color: black;
 }
+#boldGrey{
+    -fx-font-weight:null ;
+    -fx-text-fill: grey;
+}
