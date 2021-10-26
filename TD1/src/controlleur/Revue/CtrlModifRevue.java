@@ -1,5 +1,6 @@
 package controlleur.Revue;
 
+import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlModifRevue implements Initializable {
+public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
@@ -34,19 +35,19 @@ public class CtrlModifRevue implements Initializable {
     private TableView<Revue> tab;
     private Revue revue;
 
-    public void fermeDialogue() throws SQLException, IOException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
             this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
         this.tab=tab;
-        this.revue=tab.getSelectionModel().getSelectedItem();
+        this.revue= (Revue) tab.getSelectionModel().getSelectedItem();
         this.visuel=revue.getVisuelImg();
         if(dao!=null)
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
@@ -54,7 +55,7 @@ public class CtrlModifRevue implements Initializable {
     }
 
 
-    private void setRevue() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
         revue.setTitre(edtTitre.getText().trim());
         revue.setDescription(edtDescription.getText().trim());
         revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
@@ -66,11 +67,11 @@ public class CtrlModifRevue implements Initializable {
     }
 
     @FXML
-    public void clickModif(ActionEvent event) {
+    public void clickMAJ() {
         String aRemplacer="";
         Alert alert;
         try{
-            setRevue();
+            setObjectForMetier();
             aRemplacer=revue.toString();
             initChamps();
             alert=CommunStaticMethods.makeAlert
@@ -95,7 +96,7 @@ public class CtrlModifRevue implements Initializable {
         alert.showAndWait();
     }
 
-    private void initChamps() throws IOException {
+    public void initChamps() {
         if(revue!=null){
             initImg();
             edtTarif.setText(Double.toString(revue.getTarif_numero()));

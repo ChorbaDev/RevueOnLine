@@ -96,8 +96,8 @@
             </GridPane>
             <FlowPane alignment="CENTER" minWidth="351.0" prefHeight="39.0" prefWidth="351.0">
                <children>
-                  <Button fx:id="btnCreer" alignment="CENTER" mnemonicParsing="false" onAction="#clickModif" text="Modifier" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#fermeDialogue" text="Annuler">
+                  <Button fx:id="btnCreer" alignment="CENTER" mnemonicParsing="false" onAction="#clickMAJ" text="Modifier" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#fermeDialog" text="Annuler">
                      <FlowPane.margin>
                         <Insets left="10.0" />
                      </FlowPane.margin>

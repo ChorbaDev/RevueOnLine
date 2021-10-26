@@ -1,5 +1,6 @@
 package controlleur.Client;
 
+import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.event.ActionEvent;
@@ -17,7 +18,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlAjoutClient implements Initializable {
+public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
     @FXML private TextField edtCodeP;
     @FXML private TextField edtNoRue;
     @FXML private TextField edtNom;
@@ -34,10 +35,10 @@ public class CtrlAjoutClient implements Initializable {
     private String aRemplacer;
 
     @FXML
-    public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer="";
-        setClient();
+        setObjectForMetier();
         if(aRemplacer.isEmpty()){
             ProcessAdresse pa=new ProcessAdresse();
             pa.normalizeAdresse(adresse);
@@ -63,7 +64,7 @@ public class CtrlAjoutClient implements Initializable {
         alert.showAndWait();
     }
 
-    private void setClient() {
+    public void setObjectForMetier() {
         String nom,prenom,pay,rue,voie,code,ville;
         nom=edtNom.getText().trim();
         prenom=edtPrenom.getText().trim();
@@ -117,7 +118,7 @@ public class CtrlAjoutClient implements Initializable {
         }
     }
     @FXML
-    void fermerDialog(ActionEvent event) throws SQLException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
@@ -125,7 +126,7 @@ public class CtrlAjoutClient implements Initializable {
         this.vue.close();
     }
 
-    public void setVue(DialogMAJ vueAjoutClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
+    public void setVue(DialogMAJ vueAjoutClient, AnchorPane anchor, DaoFactory dao, TableView tab) {
         this.vue=vueAjoutClient;
         this.anchor=anchor;
         this.dao=dao;

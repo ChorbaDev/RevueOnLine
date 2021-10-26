@@ -1,5 +1,6 @@
 package controlleur.Client;
 
+import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import vue.dialogFiles.DialogMAJ;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class CtrlModifClient {
+public class CtrlModifClient implements CommunEntreMAJ {
     @FXML private TextField edtCodeP;
     @FXML private TextField edtNoRue;
     @FXML private TextField edtNom;
@@ -29,8 +30,7 @@ public class CtrlModifClient {
     private Adresse adresse;
     private String aRemplacer;
 
-
-    private void initChamps() {
+    public void initChamps() {
         if(client!=null){
             edtCodeP.setText(client.getAdresse().getCode_postal());
             edtNom.setText(client.getNom());
@@ -122,11 +122,11 @@ public class CtrlModifClient {
             else aRemplacer+="Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
-        this.client=tab.getSelectionModel().getSelectedItem();
+        this.client= (Client) tab.getSelectionModel().getSelectedItem();
         this.adresse=this.client.getAdresse();
         this.tab=tab;
         initChamps();

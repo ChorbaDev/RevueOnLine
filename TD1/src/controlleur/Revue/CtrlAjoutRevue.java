@@ -1,6 +1,7 @@
 package controlleur.Revue;
 
 //import com.jfoenix.controls.*;
+import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlAjoutRevue implements Initializable {
+public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
@@ -36,14 +37,14 @@ public class CtrlAjoutRevue implements Initializable {
     private TableView<Revue> tab;
     private DaoFactory dao;
 
-    public void fermeDialogue() throws SQLException, IOException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
         this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor,DaoFactory dao,TableView tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
@@ -52,7 +53,7 @@ public class CtrlAjoutRevue implements Initializable {
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
-    private void setRevue() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
         revue.setTitre(edtTitre.getText().trim());
         revue.setDescription(edtDescription.getText().trim());
         revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
@@ -63,11 +64,11 @@ public class CtrlAjoutRevue implements Initializable {
         }
     }
     @FXML
-    public void clickCreer(ActionEvent event) {
+    public void clickMAJ() {
         String aRemplacer="";
         Alert alert;
         try{
-            setRevue();
+            setObjectForMetier();
             aRemplacer=revue.toString();
             initChamps();
             alert=CommunStaticMethods.makeAlert
@@ -93,7 +94,7 @@ public class CtrlAjoutRevue implements Initializable {
         alert.showAndWait();
     }
 
-    private void initChamps() {
+    public void initChamps() {
         initImg();
         edtTarif.setText("0");
         edtDescription.setText("");
