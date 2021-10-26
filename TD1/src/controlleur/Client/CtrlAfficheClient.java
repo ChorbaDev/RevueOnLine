@@ -1,8 +1,8 @@
 package controlleur.Client;
 
+import controlleur.commun.CommunEntreAffiche;
 import dao.Persistance;
 import daofactory.DaoFactory;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
@@ -16,15 +16,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.metier.Adresse;
 import modele.metier.Client;
 import process.ProcessAdresse;
-import vue.dialogFiles.Client.vueAjoutClient;
-import vue.dialogFiles.Client.vueModifClient;
+import vue.dialogFiles.DialogMAJ;
 
 import java.io.*;
 import java.net.URL;
@@ -32,7 +30,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CtrlAfficheClient implements Initializable, ChangeListener<Client> {
+public class CtrlAfficheClient implements Initializable, ChangeListener<Client> , CommunEntreAffiche<Client> {
     @FXML private AnchorPane anchor;
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
@@ -50,17 +48,19 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
     private String path;
 
     @FXML
-    void clickAjouter(ActionEvent event) throws IOException {
-        vueAjoutClient ajoutClient= new vueAjoutClient(anchor,dao,listeClient);
+    public void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/Client/createClient.fxml");
+        DialogMAJ<CtrlAjoutClient> ajoutClient= new DialogMAJ(anchor,dao,listeClient,fxmlURL);
     }
 
     @FXML
-    void clickModifier(ActionEvent event) throws IOException {
-        vueModifClient modifClient= new vueModifClient(anchor,dao,listeClient);
+    public void clickModifier(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/Client/modifClient.fxml");
+        DialogMAJ<CtrlModifClient> ajoutClient= new DialogMAJ(anchor,dao,listeClient,fxmlURL);
     }
 
     @FXML
-    void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         Alert alert=makeAlert
                 ("Confirmation",
                         "Est-ce-que vous ete sur de supprimer cette client?",
@@ -114,7 +114,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
     }
 
     @FXML
-    void retourAccueil(ActionEvent event) throws IOException {
+    public void retourAccueil(ActionEvent event) throws IOException {
         path="../../vue/fxmlfiles/Accueil.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
@@ -144,7 +144,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
         filter();
     }
 
-    private void filter() {
+    public void filter() {
         FilteredList<Client> filteredData = new FilteredList<>(listeClient.getItems(), b -> true);
         recherche.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(cl -> {
@@ -178,12 +178,12 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
         });
     }
 
-    private void initChamps() {
+    public void initChamps() {
         btnModifier.setDisable(true);
         btnSupprimer.setDisable(true);
     }
 
-    private void setColonnes() {
+    public void setColonnes() {
         colID.setCellValueFactory(new PropertyValueFactory<Client, Integer>("cle"));
         colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));

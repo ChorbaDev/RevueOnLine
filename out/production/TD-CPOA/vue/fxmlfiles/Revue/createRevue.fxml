@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane id="gradientFlow" alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="500.0" prefWidth="400.0" stylesheets="@../../cssfiles/Revue/guiMAJRevue.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.Revue.CtrlAjoutRevue">
+<FlowPane id="gradientFlow" alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="500.0" prefWidth="400.0" stylesheets="@../../cssfiles/guiMAJ.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.Revue.CtrlAjoutRevue">
    <children>
       <FlowPane id="whiteFlow" minHeight="450.0" minWidth="350.0" prefHeight="400.0" prefWidth="300.0">
          <children>

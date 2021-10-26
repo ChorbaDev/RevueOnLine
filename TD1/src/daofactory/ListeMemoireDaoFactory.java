@@ -18,13 +18,11 @@ public class ListeMemoireDaoFactory extends DaoFactory {
     @Override
     public PeriodiciteDao getPeriodiciteDAO() {
         return ListeMemoirePeriodiciteDao.getInstance();
-        //ListeMemoirePeriodiciteDAO.getInstance();
     }
 
     @Override
     public ClientDao getClientDAO() {
         return ListeMemoireClientDao.getInstance();
-        //ListeMemoireClientDAO.getInstance();
     }
 
 }

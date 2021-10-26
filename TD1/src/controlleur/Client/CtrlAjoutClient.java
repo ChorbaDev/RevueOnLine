@@ -1,15 +1,16 @@
 package controlleur.Client;
 
+import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import modele.metier.Adresse;
 import modele.metier.Client;
-import vue.dialogFiles.Client.vueAjoutClient;
+import process.ProcessAdresse;
+import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,29 +25,26 @@ public class CtrlAjoutClient implements Initializable {
     @FXML private TextField edtPrenom;
     @FXML private TextField edtVille;
     @FXML private TextField edtVoie;
-    private vueAjoutClient vue;
+    private DialogMAJ<CtrlAjoutClient> vue;
     private TableView<Client> tab;
     private DaoFactory dao;
     private AnchorPane anchor;
     private Client client;
     private Adresse adresse;
     private String aRemplacer;
-    public static boolean isStringOnlyAlphabet(String str)
-    {
-        return ((!str.equals(""))
-                && (str != null)
-                && (str.matches("^[a-zA-Z ]*$")));
-    }
+
     @FXML
-    void clickAjout(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer="";
         setClient();
         if(aRemplacer.isEmpty()){
+            ProcessAdresse pa=new ProcessAdresse();
+            pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
             dao.getClientDAO().create(client);
             aRemplacer=client.toString();
-            alert=makeAlert
+            alert=CommunStaticMethods.makeAlert
                     ("Ajout avec succès",
                             "Cette client a été ajouté avec succès",
                             aRemplacer,
@@ -56,7 +54,7 @@ public class CtrlAjoutClient implements Initializable {
             initChamps();
         }
         else{
-            alert=makeAlert
+            alert=CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
@@ -75,13 +73,13 @@ public class CtrlAjoutClient implements Initializable {
         code=edtCodeP.getText().trim();
         ville=edtVille.getText().trim();
 
-        if(isStringOnlyAlphabet(nom))
+        if(CommunStaticMethods.isStringOnlyAlphabet(nom))
             client.setNom(nom);
         else{
             if(nom.isEmpty()) aRemplacer+="Le nom est obligatoire\n";
             else aRemplacer+="Le nom ne contient pas des caractéres non alphabétiques\n";
         }
-        if(isStringOnlyAlphabet(prenom))
+        if(CommunStaticMethods.isStringOnlyAlphabet(prenom))
             client.setPrenom(prenom);
         else{
             if(prenom.isEmpty()) aRemplacer+="Le Prénom est obligatoire\n";
@@ -111,28 +109,23 @@ public class CtrlAjoutClient implements Initializable {
         else{
             aRemplacer+="La Ville est obligatoire\n";
         }
-        if(isStringOnlyAlphabet(pay))
+        if(CommunStaticMethods.isStringOnlyAlphabet(pay))
             adresse.setPays(pay);
         else{
             if(pay.isEmpty()) aRemplacer+="Le pay est obligatoire\n";
             else aRemplacer+="Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-
-    private void unblurStage(){
-        BoxBlur blur=new BoxBlur(0,0,0);
-        anchor.setEffect(blur);
-    }
     @FXML
     void fermerDialog(ActionEvent event) throws SQLException, ClassNotFoundException {
-        unblurStage();
+        CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
             this.tab.getItems().addAll(dao.getClientDAO().findAll());
         this.vue.close();
     }
 
-    public void setVue(vueAjoutClient vueAjoutClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
+    public void setVue(DialogMAJ vueAjoutClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
         this.vue=vueAjoutClient;
         this.anchor=anchor;
         this.dao=dao;
@@ -146,7 +139,7 @@ public class CtrlAjoutClient implements Initializable {
         adresse=new Adresse();
     }
 
-    private void initChamps() {
+    public void initChamps() {
         edtCodeP.setText("");
         edtNom.setText("");
         edtNoRue.setText("");
@@ -154,12 +147,5 @@ public class CtrlAjoutClient implements Initializable {
         edtPrenom.setText("");
         edtVille.setText("");
         edtVoie.setText("");
-    }
-    private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
-        Alert alert=new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        return alert;
     }
 }

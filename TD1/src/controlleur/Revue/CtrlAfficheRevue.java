@@ -1,4 +1,6 @@
 package controlleur.Revue;
+import controlleur.commun.CommunEntreAffiche;
+import controlleur.commun.CommunStaticMethods;
 import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.collections.transformation.FilteredList;
@@ -9,17 +11,16 @@ import javafx.scene.*;
 import javafx.beans.value.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import vue.dialogFiles.Revue.*;
+import vue.dialogFiles.DialogMAJ;
 import java.io.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import modele.metier.Revue;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
+public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, CommunEntreAffiche<Revue> {
     @FXML private TableView<Revue> listeRevue;
     @FXML private TableColumn<Revue, String> colDescp;
     @FXML private TableColumn<Revue, Integer> colID;
@@ -33,32 +34,32 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
     @FXML private  TextField recherche;
     private DaoFactory dao;
     private Parent root;
-    private Stage stage;
-    private Scene scene;
     private String path;
 
 
     @FXML
-    void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        vueAjoutRevue ajoutRevue= new vueAjoutRevue(anchor,dao,listeRevue);
+    public void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/Revue/createRevue.fxml");
+        DialogMAJ<CtrlAjoutRevue> ajoutClient= new DialogMAJ(anchor,dao,listeRevue,fxmlURL);
     }
 
     @FXML
-    void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        vueModifRevue modifRevue= new vueModifRevue(anchor,dao,listeRevue);
+    public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles//Revue/modifRevue.fxml");
+        DialogMAJ<CtrlModifRevue> modifClient= new DialogMAJ(anchor,dao,listeRevue,fxmlURL);
     }
     @FXML
-    void retourAccueil(ActionEvent event) throws IOException {
+    public void retourAccueil(ActionEvent event) throws IOException {
         path="../../vue/fxmlfiles/Accueil.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();
         root = loader.getRoot();
-        basculeScene(event);
+        CommunStaticMethods.basculeScene(event,root);
     }
     @FXML
-    void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        Alert alert=makeAlert
+    public  void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        Alert alert= CommunStaticMethods.makeAlert
                 ("Confirmation",
                         "Est-ce-que vous ete sur de supprimer cette revue?",
                         "",
@@ -70,21 +71,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
         }
     }
 
-    /**
-     * @param title
-     * @param header
-     * @param content
-     * @param type
-     * @return une alerte personnaliser à l'aide des paramétres
-     */
-    private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
-        Alert alert=new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        return alert;
-    }
-    private void setColonnes() {
+    public void setColonnes() {
         colID.setCellValueFactory(new PropertyValueFactory<Revue, Integer>("id"));
         colTitre.setCellValueFactory(new PropertyValueFactory<Revue, String>("titre"));
         colDescp.setCellValueFactory(new PropertyValueFactory<Revue, String>("description"));
@@ -93,22 +80,11 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
         listeRevue.getColumns().setAll(colID,colTitre,colDescp,colTarif,colIDP);
     }
 
-    /**
-     * nous permetre de basculer entre les scenes
-     * @param e
-     */
-    public void basculeScene(ActionEvent e)
-    {
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     /**
      * initialiser les champs a l'ouverture du page ou aprés une opération
      */
-    private void initChamps() {
+    public void initChamps() {
         initImg();
         btnModifier.setDisable(true);
         btnSupprimer.setDisable(true);
@@ -129,7 +105,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
      * sinon on met un placeholder
      * @throws IOException
      */
-    private void setVisuel() throws IOException {
+    public void setVisuel() throws IOException {
         Revue revue=listeRevue.getSelectionModel().getSelectedItem();
         if(revue.getVisuelImg()!=null)
             imgVisuel.setImage(revue.getVisuelImg());
@@ -158,7 +134,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue> {
     /**
      * filter
      */
-    private void filter() {
+    public  void filter() {
         FilteredList<Revue> filteredData = new FilteredList<>(listeRevue.getItems(), b -> true);
         recherche.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(rev -> {

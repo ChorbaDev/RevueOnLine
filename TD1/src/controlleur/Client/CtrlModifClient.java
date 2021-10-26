@@ -1,15 +1,14 @@
 package controlleur.Client;
 
+import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
 import modele.metier.Adresse;
 import modele.metier.Client;
-import vue.dialogFiles.Client.vueAjoutClient;
-import vue.dialogFiles.Client.vueModifClient;
+import process.ProcessAdresse;
+import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ public class CtrlModifClient {
     @FXML private TextField edtPrenom;
     @FXML private TextField edtVille;
     @FXML private TextField edtVoie;
-    private vueModifClient vue;
+    private DialogMAJ<CtrlModifClient> vue;
     private TableView<Client> tab;
     private DaoFactory dao;
     private AnchorPane anchor;
@@ -30,31 +29,38 @@ public class CtrlModifClient {
     private Adresse adresse;
     private String aRemplacer;
 
-    public static boolean isStringOnlyAlphabet(String str)
-    {
-        return ((!str.equals(""))
-                && (str != null)
-                && (str.matches("^[a-zA-Z ]*$")));
+
+    private void initChamps() {
+        if(client!=null){
+            edtCodeP.setText(client.getAdresse().getCode_postal());
+            edtNom.setText(client.getNom());
+            edtNoRue.setText(client.getAdresse().getNo_rue());
+            edtPays.setText(client.getAdresse().getPays());
+            edtPrenom.setText(client.getPrenom());
+            edtVille.setText(client.getAdresse().getVille());
+            edtVoie.setText(client.getAdresse().getVoie());
+        }
     }
+
     @FXML
-    void clickModif(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer="";
-        setClient();
+        setObjectForMetier();
         if(aRemplacer.isEmpty()){
+            ProcessAdresse pa=new ProcessAdresse();
+            pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
             dao.getClientDAO().update(client);
             aRemplacer=client.toString();
-            alert=makeAlert
+            alert= CommunStaticMethods.makeAlert
                     ("Ajout avec succès",
                             "Cette client a été ajouté avec succès",
                             aRemplacer,
                             Alert.AlertType.INFORMATION);
-            client=new Client();
-            adresse=new Adresse();
         }
         else{
-            alert=makeAlert
+            alert=CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
@@ -62,7 +68,8 @@ public class CtrlModifClient {
         }
         alert.showAndWait();
     }
-    private void setClient() {
+
+    public void setObjectForMetier() {
         String nom,prenom,pay,rue,voie,code,ville;
         nom=edtNom.getText().trim();
         prenom=edtPrenom.getText().trim();
@@ -72,13 +79,13 @@ public class CtrlModifClient {
         code=edtCodeP.getText().trim();
         ville=edtVille.getText().trim();
 
-        if(isStringOnlyAlphabet(nom))
+        if(CommunStaticMethods.isStringOnlyAlphabet(nom))
             client.setNom(nom);
         else{
             if(nom.isEmpty()) aRemplacer+="Le nom est obligatoire\n";
             else aRemplacer+="Le nom ne contient pas des caractéres non alphabétiques\n";
         }
-        if(isStringOnlyAlphabet(prenom))
+        if(CommunStaticMethods.isStringOnlyAlphabet(prenom))
             client.setPrenom(prenom);
         else{
             if(prenom.isEmpty()) aRemplacer+="Le Prénom est obligatoire\n";
@@ -108,15 +115,15 @@ public class CtrlModifClient {
         else{
             aRemplacer+="La Ville est obligatoire\n";
         }
-        if(isStringOnlyAlphabet(pay))
+        if(CommunStaticMethods.isStringOnlyAlphabet(pay))
             adresse.setPays(pay);
         else{
             if(pay.isEmpty()) aRemplacer+="Le pay est obligatoire\n";
             else aRemplacer+="Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-    public void setVue(vueModifClient vueModifClient, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
-        this.vue=vueModifClient;
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView<Client> tab) {
+        this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
         this.client=tab.getSelectionModel().getSelectedItem();
@@ -124,34 +131,12 @@ public class CtrlModifClient {
         this.tab=tab;
         initChamps();
     }
-    private void unblurStage(){
-        BoxBlur blur=new BoxBlur(0,0,0);
-        anchor.setEffect(blur);
-    }
     @FXML
-    void fermerDialog(ActionEvent event) throws SQLException, ClassNotFoundException {
-        unblurStage();
+    public void fermeDialog() throws SQLException, ClassNotFoundException {
+        CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
             this.tab.getItems().addAll(dao.getClientDAO().findAll());
         this.vue.close();
-    }
-    private void initChamps() {
-        if(client!=null){
-            edtCodeP.setText(client.getAdresse().getCode_postal());
-            edtNom.setText(client.getNom());
-            edtNoRue.setText(client.getAdresse().getNo_rue());
-            edtPays.setText(client.getAdresse().getPays());
-            edtPrenom.setText(client.getPrenom());
-            edtVille.setText(client.getAdresse().getVille());
-            edtVoie.setText(client.getAdresse().getVoie());
-        }
-    }
-    private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
-        Alert alert=new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        return alert;
     }
 }

@@ -1,19 +1,19 @@
 package controlleur.Revue;
 
 //import com.jfoenix.controls.*;
+import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
-import vue.dialogFiles.Revue.vueAjoutRevue;
+import vue.dialogFiles.DialogMAJ;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,24 +30,20 @@ public class CtrlAjoutRevue implements Initializable {
     @FXML private Label nbCaracteres;
     final int MAX_CHARS = 400 ;
     private AnchorPane anchor;
-    private vueAjoutRevue vue;
+    private DialogMAJ<CtrlAjoutRevue> vue;
     private Image visuel;
     private Revue revue;
     private TableView<Revue> tab;
     private DaoFactory dao;
 
-    private void unblurStage(){
-        BoxBlur blur=new BoxBlur(0,0,0);
-        anchor.setEffect(blur);
-    }
     public void fermeDialogue() throws SQLException, IOException, ClassNotFoundException {
-        unblurStage();
+        CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
         this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(vueAjoutRevue vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor,DaoFactory dao,TableView<Revue> tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
@@ -56,21 +52,6 @@ public class CtrlAjoutRevue implements Initializable {
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
-
-    /**
-     * @param title
-     * @param header
-     * @param content
-     * @param type
-     * @return alert créé a l'aide de ces paramètres
-     */
-    private Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
-        Alert alert=new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        return alert;
-    }
     private void setRevue() throws SQLException, IOException, ClassNotFoundException {
         revue.setTitre(edtTitre.getText().trim());
         revue.setDescription(edtDescription.getText().trim());
@@ -89,7 +70,7 @@ public class CtrlAjoutRevue implements Initializable {
             setRevue();
             aRemplacer=revue.toString();
             initChamps();
-            alert=makeAlert
+            alert=CommunStaticMethods.makeAlert
                     ("Ajout avec succès",
                             "Cette revue a été ajouté avec succès",
                             aRemplacer,
@@ -102,7 +83,7 @@ public class CtrlAjoutRevue implements Initializable {
                 aRemplacer="Le tarif doit être numérique";
             if(e instanceof NullPointerException)
                 aRemplacer="il faut choisir une périodicité";
-            alert=makeAlert
+            alert=CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
                     "Un ou plusieurs champs sont mal remplis.",
                     aRemplacer,
