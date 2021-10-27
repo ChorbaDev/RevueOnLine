@@ -1,7 +1,7 @@
 package controlleur;
 
 import controlleur.client.CtrlAfficheClient;
-import controlleur.Revue.CtrlAfficheRevue;
+import controlleur.revue.CtrlAfficheRevue;
 import controlleur.abonnement.CtrlAfficheAbonnement;
 import controlleur.periodicite.CtrlAffichePeriodicite;
 import dao.Persistance;
@@ -43,7 +43,7 @@ public class CtrlAccueil implements Initializable {
 
     @FXML
     void clickClient(ActionEvent e) throws SQLException, IOException, ClassNotFoundException {
-        path="../vue/fxmlfiles/Client/afficheClient.fxml";
+        path="../vue/fxmlfiles/client/afficheClient.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();
@@ -68,7 +68,7 @@ public class CtrlAccueil implements Initializable {
 
     @FXML
     public void clickRevue(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
-        path="../vue/fxmlfiles/Revue/afficheRevue.fxml";
+        path="../vue/fxmlfiles/revue/afficheRevue.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();

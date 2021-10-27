@@ -1,6 +1,5 @@
-package controlleur.Revue;
+package controlleur.revue;
 
-//import com.jfoenix.controls.*;
 import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
@@ -15,14 +14,13 @@ import javafx.stage.FileChooser;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
+public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     @FXML private ComboBox<Periodicite> comboPeriodicite;
     @FXML private TextArea edtDescription;
     @FXML private TextField edtTarif;
@@ -30,28 +28,32 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     @FXML private Label visuelPath;
     @FXML private Label nbCaracteres;
     final int MAX_CHARS = 400 ;
-    private AnchorPane anchor;
-    private DialogMAJ<CtrlAjoutRevue> vue;
+    private DialogMAJ<CtrlModifRevue> vue;
     private Image visuel;
-    private Revue revue;
-    private TableView<Revue> tab;
+    private AnchorPane anchor;
     private DaoFactory dao;
+    private TableView<Revue> tab;
+    private Revue revue;
 
     public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if(tab!=null && dao!=null)
-        this.tab.getItems().addAll(dao.getRevueDAO().findAll());
+            this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor,DaoFactory dao,TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
         this.vue=vue;
         this.anchor=anchor;
         this.dao=dao;
         this.tab=tab;
+        this.revue= (Revue) tab.getSelectionModel().getSelectedItem();
+        this.visuel=revue.getVisuelImg();
         if(dao!=null)
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+        initChamps();
     }
+
 
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
         revue.setTitre(edtTitre.getText().trim());
@@ -60,9 +62,10 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
         revue.setVisuel(visuel);
         if(dao!=null){
             revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-            dao.getRevueDAO().create(revue);
+            dao.getRevueDAO().update(revue);
         }
     }
+
     @FXML
     public void clickMAJ() {
         String aRemplacer="";
@@ -72,11 +75,10 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
             aRemplacer=revue.toString();
             initChamps();
             alert=CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette revue a été ajouté avec succès",
+                    ("Modifiation avec succès",
+                            "Cette revue a été modifié avec succès",
                             aRemplacer,
                             Alert.AlertType.INFORMATION);
-            revue=new Revue();
         }catch(Exception e){
             if((e instanceof RuntimeException) || (e instanceof ArithmeticException))
                 aRemplacer=e.getMessage();
@@ -86,26 +88,24 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
                 aRemplacer="il faut choisir une périodicité";
             alert=CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
-                    "Un ou plusieurs champs sont mal remplis.",
-                    aRemplacer,
-                    Alert.AlertType.ERROR);
+                            "Un ou plusieurs champs sont mal remplis.",
+                            aRemplacer,
+                            Alert.AlertType.ERROR);
             System.out.println(e.toString());
         }
         alert.showAndWait();
     }
 
     public void initChamps() {
-        initImg();
-        edtTarif.setText("0");
-        edtDescription.setText("");
-        edtTitre.setText("");
-        comboPeriodicite.getSelectionModel().clearSelection();
+        if(revue!=null){
+            initImg();
+            edtTarif.setText(Double.toString(revue.getTarif_numero()));
+            edtDescription.setText(revue.getDescription());
+            edtTitre.setText(revue.getTitre());
+            comboPeriodicite.getSelectionModel().select(revue.getId_p()-1);
+            nbCaracteres.setText(Integer.toString(edtDescription.getText().length()));
+        }
     }
-
-    /**
-     * selectionner une image PNG ou JPG depuis votre pc
-     * @param event
-     */
     @FXML
     public void choisirUneImage(ActionEvent event){
         FileChooser fc = new FileChooser();
@@ -118,29 +118,22 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
             visuelPath.setText(fichierSelect.getPath());
         }
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initChamps();
-        revue=new Revue();
-        incNbCaracteres();
+
+    private void initImg(){
+        visuel=revue.getVisuelImg();
+        visuelPath.setText("");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        incNbCaracteres();
+    }
     private void incNbCaracteres() {
         edtDescription.setTextFormatter(new TextFormatter<String>(change ->
-        change.getControlNewText().length() <= MAX_CHARS ? change : null)
+                change.getControlNewText().length() <= MAX_CHARS ? change : null)
         );
         edtDescription.textProperty().addListener((observable, oldValue, newValue) ->{
             nbCaracteres.setText(Integer.toString(newValue.length()));
         });
     }
-
-    /**
-     * initialiser l'image par le placeholder
-     */
-    private void initImg() {
-        File file=new File("TD1/src/vue/images/empty.jpg");
-        visuel=new Image(file.getAbsolutePath());
-        visuelPath.setText("");
-    }
-
 }

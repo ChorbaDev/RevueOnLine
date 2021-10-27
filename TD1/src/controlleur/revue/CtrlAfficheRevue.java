@@ -1,4 +1,4 @@
-package controlleur.Revue;
+package controlleur.revue;
 import controlleur.commun.CommunEntreAffiche;
 import controlleur.commun.CommunStaticMethods;
 import dao.Persistance;
