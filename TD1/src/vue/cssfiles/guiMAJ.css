@@ -37,3 +37,10 @@
     -fx-font-weight:null ;
     -fx-text-fill: grey;
 }
+
+.date-picker{
+    -fx-background-radius: 20px;
+    -fx-background-color: white;
+
+
+}

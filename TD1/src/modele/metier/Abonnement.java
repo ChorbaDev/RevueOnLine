@@ -40,6 +40,9 @@ public class Abonnement {
 		this.id = id;
 	}
 
+	public Abonnement() {
+	}
+
 	public int getId() {
 		return id;
 	}
