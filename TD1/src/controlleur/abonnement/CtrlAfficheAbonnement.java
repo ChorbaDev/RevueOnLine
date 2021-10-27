@@ -140,7 +140,7 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
                     return true;
                 } else if (abo.getDate_debut().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).indexOf(lowerCaseFilter) != -1) {
                     return true;
-                }else if (abo.getDate_fin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).indexOf(lowerCaseFilter) != -1) {
+                } else if (abo.getDate_fin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).indexOf(lowerCaseFilter) != -1) {
                     return true;
                 } else
                     return false;

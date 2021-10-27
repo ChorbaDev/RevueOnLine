@@ -5,22 +5,17 @@ import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import modele.metier.Abonnement;
 import modele.metier.Client;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
-
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class CtrlModifAbonnement implements CommunEntreMAJ {
 
@@ -79,7 +74,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
     @Override
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
-        int idcl=0, idrev=0;
+        int idcl = 0, idrev = 0;
         LocalDate dateDeb, dateFin;
         String[] infoClient, infoRevue;
         if (!cbxIdClient.getSelectionModel().isEmpty()) {
@@ -101,8 +96,8 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
             }
             if (idrev > 0) {
                 abonnement.setId_client(idcl);
-            }else{
-                aRemplacer+="L'ID Client passé est incorrecte. \n";
+            } else {
+                aRemplacer += "L'ID Client passé est incorrecte. \n";
             }
         }
         if (dateDeb.isEqual(LocalDate.now()) || dateDeb.isAfter(LocalDate.now())) {
@@ -127,7 +122,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
         this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;
-        this.abonnement=(Abonnement) tab.getSelectionModel().getSelectedItem();
+        this.abonnement = (Abonnement) tab.getSelectionModel().getSelectedItem();
         this.tab = tab;
         if (dao != null) {
             ArrayList<Client> listCl = dao.getClientDAO().findAll();
@@ -149,16 +144,16 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
     @Override
     public void initChamps() {
-        if (abonnement!=null){
-            String infoClient= null;
-            Client cl=null;
-            String infoRevue=null;
-            Revue rev=null;
+        if (abonnement != null) {
+            String infoClient = null;
+            Client cl = null;
+            String infoRevue = null;
+            Revue rev = null;
             try {
-                cl=dao.getClientDAO().getById(abonnement.getId_client());
-                infoClient = abonnement.getId_client()+" "+cl.getNom()+" "+cl.getPrenom();
-                rev=dao.getRevueDAO().getById(abonnement.getId_revue());
-                infoRevue=abonnement.getId_revue()+" "+ rev.getTitre();
+                cl = dao.getClientDAO().getById(abonnement.getId_client());
+                infoClient = abonnement.getId_client() + " " + cl.getNom() + " " + cl.getPrenom();
+                rev = dao.getRevueDAO().getById(abonnement.getId_revue());
+                infoRevue = abonnement.getId_revue() + " " + rev.getTitre();
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

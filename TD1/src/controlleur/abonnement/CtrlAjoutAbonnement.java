@@ -5,7 +5,6 @@ import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -83,7 +82,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @Override
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
-        int idcl=0, idrev=0;
+        int idcl = 0, idrev = 0;
         LocalDate dateDeb, dateFin;
         String[] infoClient, infoRevue;
         if (!cbxIdClient.getSelectionModel().isEmpty()) {
@@ -105,8 +104,8 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
             }
             if (idrev > 0) {
                 abonnement.setId_client(idcl);
-            }else{
-                aRemplacer+="L'ID Client passé est incorrecte. \n";
+            } else {
+                aRemplacer += "L'ID Client passé est incorrecte. \n";
             }
         }
         if (dateDeb.isEqual(LocalDate.now()) || dateDeb.isAfter(LocalDate.now())) {
