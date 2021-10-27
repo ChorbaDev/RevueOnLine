@@ -4,6 +4,8 @@ import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,15 +20,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @FXML
-    private ComboBox<Client> cbxIdClient;
+    private ComboBox<String> cbxIdClient; //ID + Nom + Prenom
 
     @FXML
-    private ComboBox<Revue> cbxIdRevue;
+    private ComboBox<String> cbxIdRevue; //ID + Titre
 
     @FXML
     private DatePicker datePickerDeb;
@@ -45,19 +48,20 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     @FXML
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
-        aRemplacer="";
-        if (aRemplacer.isEmpty()){
+        aRemplacer = "";
+        setObjectForMetier();
+        if (aRemplacer.isEmpty()) {
             dao.getAbonnementDAO().create(abonnement);
-            aRemplacer=abonnement.toString();
-            alert=CommunStaticMethods.makeAlert(
+            aRemplacer = abonnement.toString();
+            alert = CommunStaticMethods.makeAlert(
                     "Ajout avec succès",
                     "Cet Abonnement a été ajouté avec succès",
                     aRemplacer,
                     Alert.AlertType.INFORMATION);
-            abonnement=new Abonnement();
+            abonnement = new Abonnement();
             initChamps();
-        }else{
-            alert=CommunStaticMethods.makeAlert(
+        } else {
+            alert = CommunStaticMethods.makeAlert(
                     "Erreur lors de la saisie",
                     "Un ou plusieurs champs sont mal remplis.",
                     aRemplacer,
@@ -69,42 +73,66 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @FXML
     void fermeDialog(ActionEvent event) throws SQLException, ClassNotFoundException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if (tab!=null && dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getAbonnementDAO().findAll());
         this.vue.close();
 
     }
 
 
-
     @Override
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
-        int idcl,idrev;
-        LocalDate dateDeb,dateFin;
-        idcl=cbxIdClient.getSelectionModel().getSelectedItem().getCle();
-        idrev=cbxIdRevue.getSelectionModel().getSelectedItem().getId();
-        dateDeb=datePickerDeb.getValue();
-        dateFin=datePickerFin.getValue();
-        if (dao!=null){
-            abonnement.setId_revue(dao.getRevueDAO().getByTitre(cbxIdRevue.getValue().getTitre()).get(0).getId());
-            abonnement.setId_client(dao.getClientDAO().getByNomPrenom(cbxIdClient.getValue().getNom(),cbxIdClient.getValue().getPrenom()).get(0).getCle());
+        int idcl=0, idrev=0;
+        LocalDate dateDeb, dateFin;
+        String[] infoClient, infoRevue;
+        if (!cbxIdClient.getSelectionModel().isEmpty()) {
+            infoClient = cbxIdClient.getValue().split(" ");
+            idcl = Integer.parseInt(infoClient[0]);
         }
+        if (!cbxIdRevue.getSelectionModel().isEmpty()) {
+            infoRevue = cbxIdRevue.getValue().split(" ");
+            idrev = Integer.parseInt(infoRevue[0]);
+        }
+        dateDeb = datePickerDeb.getValue();
+        dateFin = datePickerFin.getValue();
 
-        abonnement.setId_client(idcl);
-        abonnement.setId_revue(idrev);
-        abonnement.setDate_debut(dateDeb);
-        abonnement.setDate_fin(dateFin);
+        if (dao != null) {
+            if (idcl > 0) {
+                abonnement.setId_revue(idrev);
+            } else {
+                aRemplacer += "L'ID revue passé est incorrecte. \n";
+            }
+            if (idrev > 0) {
+                abonnement.setId_client(idcl);
+            }else{
+                aRemplacer+="L'ID Client passé est incorrecte. \n";
+            }
+        }
+        if (dateDeb.isEqual(LocalDate.now()) || dateDeb.isAfter(LocalDate.now())) {
+            abonnement.setDate_debut(dateDeb);
+        } else {
+            if (dateDeb.isBefore(LocalDate.now())) {
+                aRemplacer += "La date de début entrée est inferieure à la date du jour \n";
+            }
+        }
+        if (dateFin.isEqual(dateDeb) || dateFin.isAfter(dateDeb)) {
+            abonnement.setDate_fin(dateFin);
+        } else {
+            if (dateFin.isBefore(LocalDate.now())) {
+                aRemplacer += "La date de fin entrée est inferieure à la date du jour \n";
+            } else aRemplacer += "La date de fin entrée est inferieur à la date de début \n";
+        }
 
 
     }
 
     @Override
     public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if (tab!=null&&dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getAbonnementDAO().findAll());
         this.vue.close();
 
@@ -112,13 +140,25 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @Override
     public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vueAjoutAbonnement;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.tab=tab;
-        if (dao!=null) {
-            this.cbxIdRevue.setItems(FXCollections.observableArrayList(dao.getRevueDAO().findAll()));
-            this.cbxIdClient.setItems(FXCollections.observableArrayList(dao.getClientDAO().findAll()));
+        this.vue = vueAjoutAbonnement;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.tab = tab;
+        if (dao != null) {
+            ArrayList<Client> listCl = dao.getClientDAO().findAll();
+            ObservableList<String> obsCl = FXCollections.observableArrayList();
+            ArrayList<Revue> listRev = dao.getRevueDAO().findAll();
+            ObservableList<String> obsRev = FXCollections.observableArrayList();
+            for (Client c : listCl) {
+                obsCl.add(c.getCle() + " " + c.getNom() + " " + c.getPrenom());
+            }
+            this.cbxIdClient.setItems(obsCl);
+            for (Revue r : listRev) {
+                obsRev.add(r.getId() + " " + r.getTitre());
+            }
+            this.cbxIdRevue.setItems(obsRev);
+
+
         }
     }
 
@@ -134,7 +174,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChamps();
-        abonnement=new Abonnement();
+        abonnement = new Abonnement();
 
     }
 }

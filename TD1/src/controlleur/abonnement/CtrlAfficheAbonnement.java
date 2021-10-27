@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abonnement>, CommunEntreAffiche<Abonnement> {
@@ -66,19 +67,19 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
     @FXML
     public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/abonnement/vueAjoutAbonnement.fxml");
-        DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement= new DialogMAJ(anchor,dao,listeAbonnement,fxmlURL);
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/abonnement/vueAjoutAbonnement.fxml");
+        DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement = new DialogMAJ(anchor, dao, listeAbonnement, fxmlURL);
     }
 
     @FXML
     public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/abonnement/vueModifAbonnement.fxml");
-        DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement= new DialogMAJ(anchor,dao,listeAbonnement,fxmlURL);
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/abonnement/vueModifAbonnement.fxml");
+        DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement = new DialogMAJ(anchor, dao, listeAbonnement, fxmlURL);
     }
 
     @FXML
     public void clickSupprimer(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
-        Alert alert = CommunStaticMethods.makeAlert("Confirmation", "Êtes-vous sûr de vouloir supprimer cette periodicité?", "", Alert.AlertType.CONFIRMATION);
+        Alert alert = CommunStaticMethods.makeAlert("Confirmation", "Êtes-vous sûr de vouloir supprimer cet abonnement?", "", Alert.AlertType.CONFIRMATION);
         if (alert.showAndWait().get() == ButtonType.OK) {
             dao.getAbonnementDAO().delete(listeAbonnement.getSelectionModel().getSelectedItem());
             refreshListe();
@@ -88,15 +89,15 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
     @Override
     public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
-        dao= DaoFactory.getDAOFactory(persistance);
+        dao = DaoFactory.getDAOFactory(persistance);
         refreshListe();
     }
 
     @Override
     public void refreshListe() throws SQLException, IOException, ClassNotFoundException {
-        if(listeAbonnement!=null){
+        if (listeAbonnement != null) {
             this.listeAbonnement.getItems().clear();
-            this.listeAbonnement.getItems().addAll(dao.getAbonnementDAO().findAll());
+            listeAbonnement.getItems().addAll(dao.getAbonnementDAO().findAll());
         }
 
     }
@@ -104,23 +105,23 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
     @FXML
     public void retourAccueil(ActionEvent event) throws IOException {
-        path="../../vue/fxmlfiles/Accueil.fxml";
+        path = "../../vue/fxmlfiles/Accueil.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();
         root = loader.getRoot();
-        CommunStaticMethods.basculeScene(event,root);
+        CommunStaticMethods.basculeScene(event, root);
 
     }
 
     @Override
     public void setColonnes() {
         colID.setCellValueFactory(new PropertyValueFactory<Abonnement, Integer>("id"));
-        colIdCl.setCellValueFactory(new PropertyValueFactory<Abonnement,Integer>("id_client"));
-        colIDRevue.setCellValueFactory(new PropertyValueFactory<Abonnement,Integer>("id_revue"));
+        colIdCl.setCellValueFactory(new PropertyValueFactory<Abonnement, Integer>("id_client"));
+        colIDRevue.setCellValueFactory(new PropertyValueFactory<Abonnement, Integer>("id_revue"));
         colDateDeb.setCellValueFactory(new PropertyValueFactory<Abonnement, LocalDate>("date_debut"));
-        colDateFin.setCellValueFactory(new PropertyValueFactory<Abonnement,LocalDate>("date_fin"));
-        listeAbonnement.getColumns().setAll(colID,colIdCl,colIDRevue,colDateDeb,colDateFin);
+        colDateFin.setCellValueFactory(new PropertyValueFactory<Abonnement, LocalDate>("date_fin"));
+        listeAbonnement.getColumns().setAll(colID, colIdCl, colIDRevue, colDateDeb, colDateFin);
 
     }
 
@@ -135,9 +136,13 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (String.valueOf(abo.getId_client()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                }else if(String.valueOf(abo.getId_revue()).toLowerCase().indexOf(lowerCaseFilter)!=-1){
+                } else if (String.valueOf(abo.getId_revue()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                }else
+                } else if (abo.getDate_debut().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }else if (abo.getDate_fin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else
                     return false;
             });
             SortedList<Abonnement> sortedList = new SortedList<>(filteredList);

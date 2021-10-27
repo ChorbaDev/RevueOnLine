@@ -34,8 +34,8 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer = "";
+        setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            periodicite.setLibelle(edtPeriodicite.getText().trim());
             dao.getPeriodiciteDAO().create(periodicite);
             aRemplacer = periodicite.toString();
             alert = CommunStaticMethods.makeAlert

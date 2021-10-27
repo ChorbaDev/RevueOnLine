@@ -22,10 +22,12 @@ public class ListeMemoireAbonnementDao implements AbonnementDao {
 
 	@Override
 	public boolean create(Abonnement objet) {
-		while (existanceID(objet) >= 0) {
+		objet.setId(1);
+		while (this.donnees.contains(objet)) {
 			objet.setId(objet.getId() + 1);
 		}
-		return this.donnees.add(objet);
+		boolean ok = this.donnees.add(objet);
+		return ok;
 	}
 
 	private int existanceID(Abonnement objet) {

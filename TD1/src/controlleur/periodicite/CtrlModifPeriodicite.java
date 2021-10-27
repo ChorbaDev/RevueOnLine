@@ -32,8 +32,9 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer = "";
+        setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            dao.getPeriodiciteDAO().create(periodicite);
+            dao.getPeriodiciteDAO().update(periodicite);
             aRemplacer = periodicite.toString();
             alert = CommunStaticMethods.makeAlert
                     ("Ajout avec succès",
