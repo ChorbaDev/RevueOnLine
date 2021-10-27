@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-212.5457.46">
+  <component name="dataSourceStorageLocal" created-in="IU-212.5284.40">
     <data-source name="MySQL - elloumi2u_base@devbdd.iutmetz.univ-lorraine.fr" uuid="a078d1fe-0623-42df-80c2-d9c020c2fa37">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
       <secret-storage>forget</secret-storage>

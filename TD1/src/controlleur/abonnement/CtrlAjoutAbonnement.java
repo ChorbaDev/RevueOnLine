@@ -5,7 +5,6 @@ import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -140,6 +139,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @Override
     public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+
         this.vue = vueAjoutAbonnement;
         this.anchor = anchor;
         this.dao = dao;
@@ -157,8 +157,6 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
                 obsRev.add(r.getId() + " " + r.getTitre());
             }
             this.cbxIdRevue.setItems(obsRev);
-
-
         }
     }
 

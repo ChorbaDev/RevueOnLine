@@ -2,11 +2,10 @@ package vue.dialogFiles;
 
 import controlleur.Client.CtrlAjoutClient;
 import controlleur.Client.CtrlModifClient;
-//import controlleur.abonnement.CtrlAjoutAbonnement;
+import controlleur.abonnement.CtrlAjoutAbonnement;
 import controlleur.commun.CommunStaticMethods;
 import controlleur.Revue.CtrlAjoutRevue;
 import controlleur.Revue.CtrlModifRevue;
-import controlleur.periodicite.CtrlAffichePeriodicite;
 import controlleur.periodicite.CtrlAjoutPeriodicite;
 import controlleur.periodicite.CtrlModifPeriodicite;
 import daofactory.DaoFactory;
@@ -53,12 +52,12 @@ public class DialogMAJ<C> extends Stage {
             CtrlModifPeriodicite controleur=(CtrlModifPeriodicite) cast;
             controleur.setVue(this,anchor,dao,tab);
         }
-        /*else if(cast instanceof CtrlAjoutAbonnement){
+        else if(cast instanceof CtrlAjoutAbonnement){
             CtrlAjoutAbonnement contoleur=(CtrlAjoutAbonnement) cast;
             contoleur.setVue(this,anchor,dao,tab);
         }else{
 //            CtrlModifAbonnement contoleur
-        }*/
+        }
 
 
         CommunStaticMethods.blurStage(anchor,5,5,5);

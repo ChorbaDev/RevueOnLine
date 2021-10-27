@@ -2,7 +2,7 @@ package controlleur;
 
 import controlleur.Client.CtrlAfficheClient;
 import controlleur.Revue.CtrlAfficheRevue;
-//import controlleur.abonnement.CtrlAfficheAbonnement;
+import controlleur.abonnement.CtrlAfficheAbonnement;
 import controlleur.periodicite.CtrlAffichePeriodicite;
 import dao.Persistance;
 import javafx.collections.FXCollections;
@@ -34,8 +34,8 @@ public class CtrlAccueil implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         loader.load();
-       // CtrlAfficheAbonnement controller=loader.getController();
-        //controller.getInfos(this.comboType.getSelectionModel().getSelectedItem());
+        CtrlAfficheAbonnement controller=loader.getController();
+        controller.getInfos(this.comboType.getSelectionModel().getSelectedItem());
         root = loader.getRoot();
         basculeScene(event);
 
