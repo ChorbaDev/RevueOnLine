@@ -1,5 +1,7 @@
 package modele.metier;
 
+import java.util.Objects;
+
 public class Periodicite {
 	private int cle;
 	private String libelle;
@@ -63,6 +65,15 @@ public class Periodicite {
 
 	public void setCle(int cle) {
 		this.cle = cle;
+	}
+
+	public boolean equalsTout(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Periodicite periodicite = (Periodicite) o;
+		return  Objects.equals(getLibelle(), periodicite.getLibelle());
 	}
 
 }

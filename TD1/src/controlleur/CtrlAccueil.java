@@ -2,6 +2,8 @@ package controlleur;
 
 import controlleur.Client.CtrlAfficheClient;
 import controlleur.Revue.CtrlAfficheRevue;
+import controlleur.abonnement.CtrlAfficheAbonnement;
+import controlleur.periodicite.CtrlAffichePeriodicite;
 import dao.Persistance;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -27,7 +29,15 @@ public class CtrlAccueil implements Initializable {
     private ComboBox<Persistance> comboType;
 
     @FXML
-    void clickAbonnement(ActionEvent event) {
+    void clickAbonnement(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        path="../vue/fxmlfiles/abonnement/vueAfficheAbonnement.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(path));
+        loader.load();
+        CtrlAfficheAbonnement controller=loader.getController();
+        controller.getInfos(this.comboType.getSelectionModel().getSelectedItem());
+        root = loader.getRoot();
+        basculeScene(event);
 
     }
 
@@ -44,7 +54,15 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    void clickPeriodicite(ActionEvent event) {
+    void clickPeriodicite(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        path="../vue/fxmlfiles/periodicite/vueAffichePeriodicite.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(path));
+        loader.load();
+        CtrlAffichePeriodicite controller=loader.getController();
+        controller.getInfos(this.comboType.getSelectionModel().getSelectedItem());
+        root = loader.getRoot();
+        basculeScene(event);
 
     }
 

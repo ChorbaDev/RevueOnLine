@@ -1,5 +1,6 @@
 package listememoire;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 	}
 
 	@Override
-	public boolean delete(Periodicite objet) {
+	public boolean delete(Periodicite objet) throws SQLException {
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.remove(objet);
