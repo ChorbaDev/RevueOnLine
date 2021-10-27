@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
+public class CtrlModifAbonnement implements CommunEntreMAJ {
 
     @FXML
     private ComboBox<String> cbxIdClient; //ID + Nom + Prenom
@@ -35,7 +35,6 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @FXML
     private DatePicker datePickerFin;
-
 
     private DaoFactory dao;
     private Abonnement abonnement;
@@ -50,15 +49,13 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
         aRemplacer = "";
         setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            dao.getAbonnementDAO().create(abonnement);
+            dao.getAbonnementDAO().update(abonnement);
             aRemplacer = abonnement.toString();
             alert = CommunStaticMethods.makeAlert(
                     "Ajout avec succès",
                     "Cet Abonnement a été ajouté avec succès",
                     aRemplacer,
                     Alert.AlertType.INFORMATION);
-            abonnement = new Abonnement();
-            initChamps();
         } else {
             alert = CommunStaticMethods.makeAlert(
                     "Erreur lors de la saisie",
@@ -77,7 +74,6 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
         if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getAbonnementDAO().findAll());
         this.vue.close();
-
     }
 
 
@@ -123,16 +119,15 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
                 aRemplacer += "La date de fin entrée est inferieure à la date du jour \n";
             } else aRemplacer += "La date de fin entrée est inferieur à la date de début \n";
         }
-
-
     }
 
-    @Override
-    public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
 
-        this.vue = vueAjoutAbonnement;
+    @Override
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+        this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;
+        this.abonnement=(Abonnement) tab.getSelectionModel().getSelectedItem();
         this.tab = tab;
         if (dao != null) {
             ArrayList<Client> listCl = dao.getClientDAO().findAll();
@@ -148,21 +143,35 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
             }
             this.cbxIdRevue.setItems(obsRev);
         }
+        initChamps();
+
     }
 
     @Override
     public void initChamps() {
-        cbxIdClient.getSelectionModel().clearSelection();
-        cbxIdRevue.getSelectionModel().clearSelection();
-        datePickerDeb.setValue(LocalDate.now());
-        datePickerFin.setValue(LocalDate.now());
+        if (abonnement!=null){
+            String infoClient= null;
+            Client cl=null;
+            String infoRevue=null;
+            Revue rev=null;
+            try {
+                cl=dao.getClientDAO().getById(abonnement.getId_client());
+                infoClient = abonnement.getId_client()+" "+cl.getNom()+" "+cl.getPrenom();
+                rev=dao.getRevueDAO().getById(abonnement.getId_revue());
+                infoRevue=abonnement.getId_revue()+" "+ rev.getTitre();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            cbxIdClient.setValue(infoClient);
+            cbxIdRevue.setValue(infoRevue);
+            datePickerDeb.setValue(abonnement.getDate_debut());
+            datePickerFin.setValue(abonnement.getDate_fin());
+        }
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initChamps();
-        abonnement = new Abonnement();
-
-    }
 }

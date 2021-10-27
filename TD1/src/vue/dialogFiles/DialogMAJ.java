@@ -3,6 +3,7 @@ package vue.dialogFiles;
 import controlleur.Client.CtrlAjoutClient;
 import controlleur.Client.CtrlModifClient;
 import controlleur.abonnement.CtrlAjoutAbonnement;
+import controlleur.abonnement.CtrlModifAbonnement;
 import controlleur.commun.CommunStaticMethods;
 import controlleur.Revue.CtrlAjoutRevue;
 import controlleur.Revue.CtrlModifRevue;
@@ -56,7 +57,8 @@ public class DialogMAJ<C> extends Stage {
             CtrlAjoutAbonnement contoleur=(CtrlAjoutAbonnement) cast;
             contoleur.setVue(this,anchor,dao,tab);
         }else{
-//            CtrlModifAbonnement contoleur
+            CtrlModifAbonnement contoleur=(CtrlModifAbonnement) cast;
+            contoleur.setVue(this,anchor,dao,tab);
         }
 
 
