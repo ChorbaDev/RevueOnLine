@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -20,7 +18,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("../vue/fxmlfiles/Accueil.fxml");
+            URL fxmlURL = getClass().getResource("../vue/fxmlfiles/Accueil.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((Parent) root);
