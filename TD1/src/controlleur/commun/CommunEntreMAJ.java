@@ -3,7 +3,6 @@ package controlleur.commun;
 import daofactory.DaoFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import modele.metier.Client;
 import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;

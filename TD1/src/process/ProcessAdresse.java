@@ -79,7 +79,6 @@ public class ProcessAdresse {
 		//
 		if (existeDansTab(decompVille[0], tabTiret)) {
 			ch += decompVille[0] + '-';
-			ch+=decompVille[1] = capitalize(decompVille[1]);
 		}else {
 			ch += decompVille[0]= capitalize(decompVille[0]);
 		}
@@ -87,7 +86,6 @@ public class ProcessAdresse {
 		for (int i = 1; i < decompVille.length - 1; i++) {
 			if (existeDansTab(decompVille[i], tabTiret)) {
 				ch += '-' + decompVille[i] + '-';
-
 			} else {
 				ch += decompVille[i]= capitalize(decompVille[i]);
 			}
@@ -96,7 +94,7 @@ public class ProcessAdresse {
 		int l = decompVille.length - 1;
 		if (existeDansTab(decompVille[l], tabTiret)) {
 			ch += '-' + decompVille[l];
-		}
+		}else ch += decompVille[l]= capitalize(decompVille[l]);
 		return ch;
 	}
 
@@ -121,8 +119,8 @@ public class ProcessAdresse {
 	public String normalizeNumDeVoie(String numVoie) {
 		numVoie = numVoie.trim();
 		if (numVoie.charAt(numVoie.length() - 1) != ',')
-			numVoie += ", ";
-		return numVoie;
+			numVoie += ",";
+		return numVoie+' ';
 	}
 
 }

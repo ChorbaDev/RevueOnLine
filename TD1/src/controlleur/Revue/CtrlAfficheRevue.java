@@ -46,6 +46,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
     @FXML
     public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         URL fxmlURL=getClass().getResource("../../vue/fxmlfiles//Revue/modifRevue.fxml");
+
         DialogMAJ<CtrlModifRevue> modifClient= new DialogMAJ(anchor,dao,listeRevue,fxmlURL);
     }
     @FXML

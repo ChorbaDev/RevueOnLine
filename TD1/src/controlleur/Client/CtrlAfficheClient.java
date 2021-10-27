@@ -84,8 +84,8 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
             reader=new BufferedReader(new FileReader(fichierSelect));
             while((line=reader.readLine())!=null){
                 String[] row = line.split(";");
-                if(row.length==3){
-                    Adresse ad=formatAdresse(row[2]);
+                if(row.length==7){
+                    Adresse ad=formatAdresse(row[2],row[3],row[4],row[5],row[6]);
                     Client cl=new Client(row[0],row[1],ad);
                     if(nonDoublons(cl))
                     dao.getClientDAO().create(cl);
@@ -94,6 +94,13 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
             reader.close();
             refreshListe();
         }
+    }
+
+    private Adresse formatAdresse(String numRue, String voie, String code, String ville, String pays) {
+        Adresse adresse=new Adresse(numRue,voie,code,ville,pays);
+        ProcessAdresse pa=new ProcessAdresse();
+        pa.normalizeAdresse(adresse);
+        return adresse;
     }
 
     private boolean nonDoublons(Client client) throws SQLException, ClassNotFoundException {
@@ -105,13 +112,6 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client> 
         return true;
     }
 
-    private Adresse formatAdresse(String s) {
-        String[] row = s.split(",");
-        Adresse adresse=new Adresse(row[0],row[1],row[2],row[3],row[4]);
-        ProcessAdresse pa=new ProcessAdresse();
-        pa.normalizeAdresse(adresse);
-        return adresse;
-    }
 
     @FXML
     public void retourAccueil(ActionEvent event) throws IOException {
