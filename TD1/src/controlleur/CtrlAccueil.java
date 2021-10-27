@@ -1,6 +1,6 @@
 package controlleur;
 
-import controlleur.Client.CtrlAfficheClient;
+import controlleur.client.CtrlAfficheClient;
 import controlleur.Revue.CtrlAfficheRevue;
 import controlleur.abonnement.CtrlAfficheAbonnement;
 import controlleur.periodicite.CtrlAffichePeriodicite;

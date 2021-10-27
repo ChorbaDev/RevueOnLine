@@ -1,7 +1,7 @@
 package vue.dialogFiles;
 
-import controlleur.Client.CtrlAjoutClient;
-import controlleur.Client.CtrlModifClient;
+import controlleur.client.CtrlAjoutClient;
+import controlleur.client.CtrlModifClient;
 import controlleur.abonnement.CtrlAjoutAbonnement;
 import controlleur.abonnement.CtrlModifAbonnement;
 import controlleur.commun.CommunStaticMethods;
