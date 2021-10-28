@@ -19,8 +19,8 @@ public class MySqlPeriodiciteDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        daof=DaoFactory.getDAOFactory(MYSQL);
-        p= new Periodicite(1,"Mensuel");
+        daof = DaoFactory.getDAOFactory(MYSQL);
+        p = new Periodicite(1, "Mensuel");
     }
 
     @After
@@ -30,22 +30,22 @@ public class MySqlPeriodiciteDaoTest {
     @Test
     public void getById() throws SQLException, IOException, ClassNotFoundException {
         daof.getPeriodiciteDAO().create(p);
-        assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size()-1).getCle()>=p.getCle());
+        assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size() - 1).getCle() >= p.getCle());
     }
 
     @Test
     public void create() throws SQLException, IOException, ClassNotFoundException {
-        int initSize=daof.getPeriodiciteDAO().findAll().size();
+        int initSize = daof.getPeriodiciteDAO().findAll().size();
         daof.getPeriodiciteDAO().create(p);
-        assertEquals(initSize+1,daof.getPeriodiciteDAO().findAll().size());
+        assertEquals(initSize + 1, daof.getPeriodiciteDAO().findAll().size());
     }
 
     @Test
     public void delete() throws SQLException, IOException, ClassNotFoundException {
         daof.getPeriodiciteDAO().create(p);
-        int initSize=daof.getPeriodiciteDAO().findAll().size();
+        int initSize = daof.getPeriodiciteDAO().findAll().size();
         daof.getPeriodiciteDAO().delete(p);
-        assertEquals(initSize-1,daof.getPeriodiciteDAO().findAll().size());
+        assertEquals(initSize - 1, daof.getPeriodiciteDAO().findAll().size());
 
     }
 
