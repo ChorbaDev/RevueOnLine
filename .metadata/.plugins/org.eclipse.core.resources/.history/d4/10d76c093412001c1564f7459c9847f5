@@ -1,4 +1,4 @@
 java.sql.*;
-public class metier.Connexion {
+public class modele.metier.Connexion {
 
 }

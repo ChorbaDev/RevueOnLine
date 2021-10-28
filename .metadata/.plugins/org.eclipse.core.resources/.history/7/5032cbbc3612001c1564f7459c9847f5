@@ -2,9 +2,9 @@ import java.sql.SQLException;
 
 public class application {
 
-	public static void main(String[] args) throws SQLException {
+	public static void application.main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		metier.Periodicite p=new metier.Periodicite("testttttt");
+		modele.metier.Periodicite p=new modele.metier.Periodicite("testttttt");
 		p.updatePeriodicite("test");
 	}
 

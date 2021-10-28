@@ -1,0 +1,55 @@
+package controller;
+
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+import javax.print.DocFlavor.URL;
+
+import dao.Persistance;
+import daofactory.DaoFactory;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import modele.metier.Periodicite;
+
+public class CtrlRevue implements Initializable {
+	@FXML
+	private Button btnCreer;
+
+	@FXML
+	private ComboBox<?> comboPeriodicite;
+
+	@FXML
+	private TextArea edtDescp;
+
+	@FXML
+	private TextField edtTarif;
+
+	@FXML
+	private TextField edtTitre;
+
+	@FXML
+	private Label lblExp;
+
+	@FXML
+	void ClickBtnCreer(ActionEvent event) {
+
+	}
+
+	@FXML
+	private ChoiceBox<Periodicite> cbxPeriodicite;
+
+	@Override
+	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
+		DaoFactory dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+		this.cbxPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+	}
+
+}

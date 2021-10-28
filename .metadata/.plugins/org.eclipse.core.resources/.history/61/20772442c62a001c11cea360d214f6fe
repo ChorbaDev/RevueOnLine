@@ -1,0 +1,38 @@
+package controller;
+
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+import javax.print.DocFlavor.URL;
+
+import dao.Persistance;
+import daofactory.DaoFactory;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
+import modele.metier.Periodicite;
+
+public class CtrlRevue implements Initializable {
+
+
+    @FXML
+    private ChoiceBox<Periodicite> cbxPeriodicite;
+
+
+
+    public void initialize(URL location, ResourceBundle resources) {
+
+        DaoFactory dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+        this.cbxPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+    }
+
+	@Override
+	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+}

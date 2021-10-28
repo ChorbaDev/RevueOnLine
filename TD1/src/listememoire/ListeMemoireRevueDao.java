@@ -1,11 +1,13 @@
 package listememoire;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.RevueDao;
-import metier.Revue;
+import javafx.scene.image.Image;
+import modele.metier.Revue;
 
 public class ListeMemoireRevueDao implements RevueDao {
 	private static ListeMemoireRevueDao instance;
@@ -13,7 +15,8 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	private ListeMemoireRevueDao() {
 		this.donnees = new ArrayList<>();
-		this.donnees.add(new Revue(1, "titre", "descp", 1.2, "visuel", 1));
+		File file=new File("TD1/src/vue/images/empty.jpg");
+		this.donnees.add(new Revue(1, "titre", "descp", 1.2,new Image(file.getAbsolutePath()), 1));
 	}
 
 	public static ListeMemoireRevueDao getInstance() {
@@ -24,10 +27,12 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	@Override
 	public boolean create(Revue objet) throws SQLException {
-		while (existanceID(objet) >= 0) {
+		objet.setId(2);
+		while (this.donnees.contains(objet)) {
 			objet.setId(objet.getId() + 1);
 		}
-		return this.donnees.add(objet);
+		boolean ok = this.donnees.add(objet);
+		return ok;
 	}
 
 	private int existanceID(Revue objet) {
@@ -59,7 +64,7 @@ public class ListeMemoireRevueDao implements RevueDao {
 
 	@Override
 	public Revue getById(int id) throws SQLException {
-		Revue objet = new Revue(id, "test", "test", 1.0, "test", 1);
+		Revue objet = new Revue(id, "test", "test", 1.0, 1);
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.get(index);

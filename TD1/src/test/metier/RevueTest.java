@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import metier.Revue;
+import modele.metier.Revue;
 
 public class RevueTest {
 	private Revue r1;
@@ -14,8 +14,8 @@ public class RevueTest {
 
 	@Before
 	public void setUp() {
-		r1 = new Revue(1, "test", "test", 1.0, "test", 1);
-		r2 = new Revue(1, "test", "test", 1.0, "test", 1);
+		r1 = new Revue(1, "test", "test", 1.0, 1);
+		r2 = new Revue(1, "test", "test", 1.0, 1);
 	}
 
 	@Test

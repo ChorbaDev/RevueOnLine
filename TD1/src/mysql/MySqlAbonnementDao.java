@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import dao.AbonnementDao;
-import metier.Abonnement;
-import metier.Connexion;
+import modele.metier.Abonnement;
+import modele.metier.Connexion;
 
 public class MySqlAbonnementDao implements AbonnementDao {
 	private static MySqlAbonnementDao instance;
@@ -25,8 +25,8 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public Abonnement getById(int id) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public Abonnement getById(int id) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select date_debut, date_fin, id_client, id_revue from Abonnement where id_abonnement=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -49,8 +49,8 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public boolean create(Abonnement a) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean create(Abonnement a) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "insert into Abonnement(date_debut,date_fin,id_client,id_revue) values (?,?,?,?)";
 		PreparedStatement req = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -74,8 +74,8 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public boolean update(Abonnement a) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean update(Abonnement a) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "update Abonnement set id_client=? , id_revue=? , date_debut=? , date_fin=? where id_abonnement=? ";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -95,8 +95,8 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public boolean delete(Abonnement a) throws SQLException {
-		Connexion maConnexion = new Connexion();
+	public boolean delete(Abonnement a) throws SQLException, ClassNotFoundException {
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "delete from Abonnement where id_abonnement=? ";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -112,9 +112,9 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public ArrayList<Abonnement> getByClient(int cl) throws SQLException {
+	public ArrayList<Abonnement> getByClient(int cl) throws SQLException, ClassNotFoundException {
 		ArrayList<Abonnement> list = new ArrayList<>();
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select * from Abonnement where id_client=?";
 		PreparedStatement req = connect.prepareStatement(sql);
@@ -128,9 +128,9 @@ public class MySqlAbonnementDao implements AbonnementDao {
 	}
 
 	@Override
-	public ArrayList<Abonnement> findAll() throws SQLException {
+	public ArrayList<Abonnement> findAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Abonnement> list = new ArrayList<>();
-		Connexion maConnexion = new Connexion();
+		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
 		String sql = "select * from Abonnement";
 		PreparedStatement req = connect.prepareStatement(sql);

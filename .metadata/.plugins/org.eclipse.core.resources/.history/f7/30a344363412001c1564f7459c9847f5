@@ -1,5 +1,5 @@
 import  java.sql.*;
-public class metier.Connexion {
+public class modele.metier.Connexion {
 	public Connection creeConnexion() {
 		String url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
 		String login = "elloumi2u_appli";

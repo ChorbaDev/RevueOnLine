@@ -2,9 +2,9 @@ import java.sql.SQLException;
 
 public class application {
 
-	public static void main(String[] args) throws SQLException {
+	public static void application.main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		metier.Revue r=new metier.Revue("titre","descp",1.2,"visuel",4);
+		modele.metier.Revue r=new modele.metier.Revue("titre","descp",1.2,"visuel",4);
 		r.deleteRevue(1);
 	}
 

@@ -1,10 +1,11 @@
 package listememoire;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.PeriodiciteDao;
-import metier.Periodicite;
+import modele.metier.Periodicite;
 
 public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 	private static ListeMemoirePeriodiciteDao instance;
@@ -43,10 +44,12 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 
 	@Override
 	public boolean create(Periodicite objet) {
-		while (existanceID(objet) >= 0) {
+		objet.setCle(1);
+		while (this.donnees.contains(objet)) {
 			objet.setCle(objet.getCle() + 1);
 		}
-		return this.donnees.add(objet);
+		boolean ok = this.donnees.add(objet);
+		return ok;
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 	}
 
 	@Override
-	public boolean delete(Periodicite objet) {
+	public boolean delete(Periodicite objet) throws SQLException {
 		int index = existanceID(objet);
 		if (index > -1) {
 			return this.donnees.remove(objet);
