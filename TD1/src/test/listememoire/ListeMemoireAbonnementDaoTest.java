@@ -15,32 +15,32 @@ import daofactory.DaoFactory;
 import modele.metier.Abonnement;
 
 public class ListeMemoireAbonnementDaoTest {
-	private DaoFactory daof;
-	private Abonnement ab;
+    private DaoFactory daof;
+    private Abonnement ab;
 
-	@Before
-	public void setUp() {
-		daof = getDAOFactory(ListeMemoire);
-		ab = new Abonnement(1, "01/01/2001", "02/02/2002", 1, 1);
-	}
+    @Before
+    public void setUp() {
+        daof = getDAOFactory(ListeMemoire);
+        ab = new Abonnement(1, "01/01/2001", "02/02/2002", 1, 1);
+    }
 
-	@Test
-	public void testAjoutAbonnement() throws SQLException, IOException, ClassNotFoundException {
-		int initSize = daof.getAbonnementDAO().findAll().size();
-		daof.getAbonnementDAO().create(ab);
-		assertEquals(initSize + 1, daof.getAbonnementDAO().findAll().size());
-	}
+    @Test
+    public void testAjoutAbonnement() throws SQLException, IOException, ClassNotFoundException {
+        int initSize = daof.getAbonnementDAO().findAll().size();
+        daof.getAbonnementDAO().create(ab);
+        assertEquals(initSize + 1, daof.getAbonnementDAO().findAll().size());
+    }
 
-	@Test
-	public void testSupprimerAbonnement() throws SQLException, IOException, ClassNotFoundException {
-		daof.getAbonnementDAO().create(ab);
-		int initSize = daof.getAbonnementDAO().findAll().size();
-		daof.getAbonnementDAO().delete(ab);
-		assertEquals(initSize - 1, daof.getAbonnementDAO().findAll().size());
-	}
+    @Test
+    public void testSupprimerAbonnement() throws SQLException, IOException, ClassNotFoundException {
+        daof.getAbonnementDAO().create(ab);
+        int initSize = daof.getAbonnementDAO().findAll().size();
+        daof.getAbonnementDAO().delete(ab);
+        assertEquals(initSize - 1, daof.getAbonnementDAO().findAll().size());
+    }
 
-	@Test
-	public void testExistanceClientAbonnement() throws SQLException, ClassNotFoundException {
-		assertNotNull(daof.getAbonnementDAO().getByClient(ab.getId_client()));
-	}
+    @Test
+    public void testExistanceClientAbonnement() throws SQLException, ClassNotFoundException {
+        assertNotNull(daof.getAbonnementDAO().getByClient(ab.getId_client()));
+    }
 }

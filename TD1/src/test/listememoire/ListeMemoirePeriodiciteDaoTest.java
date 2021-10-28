@@ -13,44 +13,44 @@ import static dao.Persistance.ListeMemoire;
 import static org.junit.Assert.*;
 
 public class ListeMemoirePeriodiciteDaoTest {
-	private DaoFactory daof;
-	private Periodicite p;
+    private DaoFactory daof;
+    private Periodicite p;
 
-	@Before
-	public void setUp() throws Exception {
-		daof = DaoFactory.getDAOFactory(ListeMemoire);
-		p= new Periodicite(1,"Mensuel");
-	}
+    @Before
+    public void setUp() throws Exception {
+        daof = DaoFactory.getDAOFactory(ListeMemoire);
+        p = new Periodicite(1, "Mensuel");
+    }
 
-	@After
-	public void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
 
-	}
+    }
 
-	@Test
-	public void getById() throws SQLException, IOException, ClassNotFoundException {
-		daof.getPeriodiciteDAO().create(p);
-		assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size()-1).getCle()>=p.getCle());
-	}
+    @Test
+    public void getById() throws SQLException, IOException, ClassNotFoundException {
+        daof.getPeriodiciteDAO().create(p);
+        assertTrue(daof.getPeriodiciteDAO().findAll().get(daof.getPeriodiciteDAO().findAll().size() - 1).getCle() >= p.getCle());
+    }
 
-	@Test
-	public void create() throws SQLException, IOException, ClassNotFoundException {
-		int initSize=daof.getPeriodiciteDAO().findAll().size();
-		daof.getPeriodiciteDAO().create(p);
-		assertEquals(initSize+1,daof.getPeriodiciteDAO().findAll().size());
-	}
+    @Test
+    public void create() throws SQLException, IOException, ClassNotFoundException {
+        int initSize = daof.getPeriodiciteDAO().findAll().size();
+        daof.getPeriodiciteDAO().create(p);
+        assertEquals(initSize + 1, daof.getPeriodiciteDAO().findAll().size());
+    }
 
-	@Test
-	public void delete() throws SQLException, IOException, ClassNotFoundException {
-		daof.getPeriodiciteDAO().create(p);
-		int initSize=daof.getPeriodiciteDAO().findAll().size();
-		daof.getPeriodiciteDAO().delete(p);
-		assertEquals(initSize-1,daof.getPeriodiciteDAO().findAll().size());
-	}
+    @Test
+    public void delete() throws SQLException, IOException, ClassNotFoundException {
+        daof.getPeriodiciteDAO().create(p);
+        int initSize = daof.getPeriodiciteDAO().findAll().size();
+        daof.getPeriodiciteDAO().delete(p);
+        assertEquals(initSize - 1, daof.getPeriodiciteDAO().findAll().size());
+    }
 
-	@Test
-	public void getByLibelle() throws SQLException, IOException, ClassNotFoundException {
-		daof.getPeriodiciteDAO().create(p);
-		assertNotNull(daof.getPeriodiciteDAO().getByLibelle(p.getLibelle()).size());
-	}
+    @Test
+    public void getByLibelle() throws SQLException, IOException, ClassNotFoundException {
+        daof.getPeriodiciteDAO().create(p);
+        assertNotNull(daof.getPeriodiciteDAO().getByLibelle(p.getLibelle()).size());
+    }
 }
