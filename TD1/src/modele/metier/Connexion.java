@@ -8,19 +8,22 @@ public class Connexion {
     private static Connexion instance;
     private String url, login, pwd;
     private Connection maConnexion;
+
     private Connexion() throws ClassNotFoundException {
         this.creeConnexion();
     }
+
     public static Connexion getInstance() throws ClassNotFoundException {
         if (instance == null) {
             instance = new Connexion();
         }
         return instance;
     }
+
     public Connection creeConnexion() throws ClassNotFoundException {
         url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
-		login = "elloumi2u_appli";
-		pwd = "32024561";
+        login = "elloumi2u_appli";
+        pwd = "32024561";
 /*        String url =
                 "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/ghoniem1u_bdRvOnl";
         String
