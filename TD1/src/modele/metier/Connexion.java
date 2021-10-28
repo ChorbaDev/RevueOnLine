@@ -21,8 +21,7 @@ public class Connexion {
         url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
 		login = "elloumi2u_appli";
 		pwd = "32024561";
-        /*
-        String url =
+/*        String url =
                 "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/ghoniem1u_bdRvOnl";
         String
                 login = "ghoniem1u_appli";

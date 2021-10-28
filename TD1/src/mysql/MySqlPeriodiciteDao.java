@@ -69,7 +69,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
 	public boolean update(Periodicite object) throws SQLException, ClassNotFoundException {
 		Connexion maConnexion = Connexion.getInstance();
 		Connection connect = maConnexion.creeConnexion();
-		String sql = "update Periodicite set libelle=? where libelle=?";
+		String sql = "update Periodicite set libelle=? where id_periodicite=?";
 		PreparedStatement req = connect.prepareStatement(sql);
 		req.setString(1, object.getLibelle());
 		req.setInt(2, object.getCle());
