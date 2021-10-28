@@ -9,22 +9,22 @@ import org.junit.Test;
 import modele.metier.Revue;
 
 public class RevueTest {
-	private Revue r1;
-	private Revue r2;
+    private Revue r1;
+    private Revue r2;
 
-	@Before
-	public void setUp() {
-		r1 = new Revue(1, "test", "test", 1.0, 1);
-		r2 = new Revue(1, "test", "test", 1.0, 1);
-	}
+    @Before
+    public void setUp() {
+        r1 = new Revue(1, "test", "test", 1.0, 1);
+        r2 = new Revue(1, "test", "test", 1.0, 1);
+    }
 
-	@Test
-	public void testVerifEquals() {
-		assertTrue(r1.equals(r2));
-	}
+    @Test
+    public void testVerifEquals() {
+        assertTrue(r1.equals(r2));
+    }
 
-	@Test
-	public void testHashCode() {
-		assertEquals(r1.hashCode(), r2.hashCode());
-	}
+    @Test
+    public void testHashCode() {
+        assertEquals(r1.hashCode(), r2.hashCode());
+    }
 }
