@@ -55,38 +55,38 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     @Override
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
         String libelle;
-        libelle=edtPeriodicite.getText().trim();
+        libelle = edtPeriodicite.getText().trim();
         if (CommunStaticMethods.isStringOnlyAlphabet(libelle))
             periodicite.setLibelle(libelle);
-        else{
-            if (libelle.isEmpty()) aRemplacer+="Le libellé est obligatoire \n";
-            else aRemplacer+="Le libelle contient des caractères non alphabétiques\n";
+        else {
+            if (libelle.isEmpty()) aRemplacer += "Le libellé est obligatoire \n";
+            else aRemplacer += "Le libelle contient des caractères non alphabétiques\n";
         }
 
     }
 
     @Override
     public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if(tab!=null && dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getPeriodiciteDAO().findAll());
         this.vue.close();
     }
 
     @Override
     public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vue;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.periodicite=(Periodicite) tab.getSelectionModel().getSelectedItem();
-        this.tab=tab;
+        this.vue = vue;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.periodicite = (Periodicite) tab.getSelectionModel().getSelectedItem();
+        this.tab = tab;
         initChamps();
     }
 
     @Override
     public void initChamps() {
-        if (periodicite!=null){
+        if (periodicite != null) {
             edtPeriodicite.setText(periodicite.getLibelle());
         }
 

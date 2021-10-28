@@ -60,15 +60,15 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
 
     @FXML
     public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/periodicite/vueAjoutPeriodicite.fxml");
-        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite= new DialogMAJ(anchor,dao,listePeriodicite,fxmlURL);
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/periodicite/vueAjoutPeriodicite.fxml");
+        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite = new DialogMAJ(anchor, dao, listePeriodicite, fxmlURL);
 
     }
 
     @FXML
     public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/periodicite/vueModifPeriodicite.fxml");
-        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite= new DialogMAJ(anchor,dao,listePeriodicite,fxmlURL);
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/periodicite/vueModifPeriodicite.fxml");
+        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite = new DialogMAJ(anchor, dao, listePeriodicite, fxmlURL);
 
     }
 
