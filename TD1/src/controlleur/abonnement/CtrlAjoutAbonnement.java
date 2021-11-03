@@ -1,5 +1,4 @@
 package controlleur.abonnement;
-
 import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
@@ -13,7 +12,6 @@ import modele.metier.Abonnement;
 import modele.metier.Client;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,7 +23,6 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @FXML
     private ComboBox<String> cbxIdClient; //ID + Nom + Prenom
-
     @FXML
     private ComboBox<String> cbxIdRevue; //ID + Titre
 

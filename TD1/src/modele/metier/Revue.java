@@ -51,10 +51,10 @@ public class Revue {
 	}
 
 	public Revue(String test, String descp, double v, int i) {
-		this.titre = titre;
-		this.description = description;
-		this.tarif_numero = tarif_numero;
-		this.id_p = id_p;
+		this.titre = test;
+		this.description = descp;
+		this.tarif_numero = v;
+		this.id_p = i;
 	}
 
 	@Override
@@ -90,8 +90,6 @@ public class Revue {
 	}
 
 	public void setTitre(String titre) {
-		if(titre.isEmpty())
-			throw new RuntimeException("Le titre doit être renseigné");
 		this.titre = titre;
 	}
 
@@ -100,8 +98,6 @@ public class Revue {
 	}
 
 	public void setDescription(String description) {
-		if(description.isEmpty())
-			throw new RuntimeException("La description doit être renseigné");
 		this.description = description;
 	}
 
@@ -110,8 +106,6 @@ public class Revue {
 	}
 
 	public void setTarif_numero(double tarif_numero) {
-		if(tarif_numero<=0)
-			throw new ArithmeticException("Le tarif doit être strictement positif");
 		this.tarif_numero = tarif_numero;
 	}
 

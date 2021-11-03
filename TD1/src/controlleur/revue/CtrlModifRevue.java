@@ -34,7 +34,7 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     private DaoFactory dao;
     private TableView<Revue> tab;
     private Revue revue;
-
+    private String aRemplacer;
     public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
@@ -55,23 +55,33 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     }
 
 
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
-        revue.setTitre(edtTitre.getText().trim());
-        revue.setDescription(edtDescription.getText().trim());
-        revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-        revue.setVisuel(visuel);
-        if(dao!=null){
-            revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-            dao.getRevueDAO().update(revue);
+    public void setObjectForMetier() throws SQLException, ClassNotFoundException {
+        String titre,description;
+        double tarif;
+        titre=edtTitre.getText().trim();
+        description=edtDescription.getText().trim();
+        if(titre.isEmpty()) aRemplacer+="Le titre ne doit pas etre vide\n";
+        else revue.setTitre(titre);
+        if(description.isEmpty()) aRemplacer+="La description ne doit pas etre vide\n";
+        else revue.setDescription(description);
+        if(!CommunStaticMethods.isNumeric(edtTarif.getText())) aRemplacer+="Vérifier la format du tarif\n";
+        else{
+            tarif=Double.parseDouble(edtTarif.getText());
+            if(tarif==0) aRemplacer+="Le tarif est strictement positif\n";
+            else revue.setTarif_numero(tarif);
         }
+        revue.setVisuel(visuel);
+        if(comboPeriodicite.getValue()==null) aRemplacer+="Choissisez une périodicité\n";
+        else revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
     }
 
     @FXML
-    public void clickMAJ() {
-        String aRemplacer="";
+    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
-        try{
-            setObjectForMetier();
+        aRemplacer="";
+        setObjectForMetier();
+        if(aRemplacer.isEmpty()){
+            dao.getRevueDAO().update(revue);
             aRemplacer=revue.toString();
             initChamps();
             alert=CommunStaticMethods.makeAlert
@@ -79,19 +89,12 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
                             "Cette revue a été modifié avec succès",
                             aRemplacer,
                             Alert.AlertType.INFORMATION);
-        }catch(Exception e){
-            if((e instanceof RuntimeException) || (e instanceof ArithmeticException))
-                aRemplacer=e.getMessage();
-            if(e instanceof NumberFormatException)
-                aRemplacer="Le tarif doit être numérique";
-            if(e instanceof NullPointerException)
-                aRemplacer="il faut choisir une périodicité";
-            alert=CommunStaticMethods.makeAlert
-                    ("Erreur lors de la saisie",
+        }else{
+            alert = CommunStaticMethods.makeAlert
+                    ("Erreur lors de la modification",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
                             Alert.AlertType.ERROR);
-            System.out.println(e.toString());
         }
         alert.showAndWait();
     }

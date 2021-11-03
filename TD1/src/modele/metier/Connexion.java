@@ -28,8 +28,10 @@ public class Connexion {
         String pwd = "bonjour";*/
         maConnexion = null;
         try {
-            if (maConnexion == null || maConnexion.isClosed())
+            if (maConnexion == null || maConnexion.isClosed()){
                 maConnexion = DriverManager.getConnection(url, login, pwd);
+            }
+
         } catch (SQLException sqle) {
             System.out.println("Erreur connexion :" + sqle.getMessage());
         }
