@@ -13,6 +13,7 @@ import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CtrlModifClient implements CommunEntreMAJ {
     @FXML
@@ -48,6 +49,14 @@ public class CtrlModifClient implements CommunEntreMAJ {
             edtVoie.setText(client.getAdresse().getVoie());
         }
     }
+    private boolean nonDoublons(Client client) throws SQLException, ClassNotFoundException {
+        ArrayList<Client> list = dao.getClientDAO().findAll();
+        for (Client cl : list) {
+            if (cl.equalsTout(client))
+                return false;
+        }
+        return true;
+    }
 
     @FXML
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
@@ -58,13 +67,23 @@ public class CtrlModifClient implements CommunEntreMAJ {
             ProcessAdresse pa = new ProcessAdresse();
             pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
-            dao.getClientDAO().update(client);
-            aRemplacer = client.toString();
-            alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette client a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
+            if(nonDoublons(client)){
+                dao.getClientDAO().update(client);
+                aRemplacer = client.toString();
+                alert = CommunStaticMethods.makeAlert
+                        ("Modification avec succès",
+                                "Cette client a été modifié avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+            }
+            else{
+                aRemplacer = "Client existe déja";
+                alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
         } else {
             alert = CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",

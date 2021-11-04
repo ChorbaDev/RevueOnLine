@@ -1,6 +1,7 @@
 package controlleur.client;
 
 import controlleur.commun.CommunEntreAffiche;
+import controlleur.commun.CommunStaticMethods;
 import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.beans.value.ChangeListener;
@@ -84,6 +85,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
     @FXML
     void importeCSV(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
+        String err="";
         FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("CSV files(*.csv)", "*.CSV");
         fc.getExtensionFilters().addAll(ext1);
         File fichierSelect = fc.showOpenDialog(null);
@@ -98,7 +100,18 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
                     Client cl = new Client(row[0], row[1], ad);
                     if (nonDoublons(cl))
                         dao.getClientDAO().create(cl);
+                    else{
+                        err+=cl.getNom()+" existe déja\n";
+                    }
                 }
+            }
+            if(!err.isEmpty()){
+                Alert alert= CommunStaticMethods.makeAlert
+                        ("Ajout avec succès",
+                                "Clients existent déja",
+                                err,
+                                Alert.AlertType.WARNING);
+                alert.showAndWait();
             }
             reader.close();
             refreshListe();
