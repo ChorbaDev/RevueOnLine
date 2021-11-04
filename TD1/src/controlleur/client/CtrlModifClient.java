@@ -165,9 +165,11 @@ public class CtrlModifClient implements CommunEntreMAJ {
     @FXML
     public void fermeDialog() throws SQLException, ClassNotFoundException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
-        this.tab.getItems().clear();
-        if (tab != null && dao != null)
+        //this.tab.getItems().clear();
+        if (tab != null && dao != null){
             this.tab.getItems().addAll(dao.getClientDAO().findAll());
+        }
+
         this.vue.close();
     }
 }

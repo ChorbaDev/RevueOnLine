@@ -6,6 +6,7 @@ import dao.Persistance;
 import daofactory.DaoFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -169,9 +170,16 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
     }
 
     public void filter() {
-        FilteredList<Client> filteredData = new FilteredList<>(listeClient.getItems(), b -> true);
+        FilteredList<Client> filteredData;
+        try{
+            filteredData = new FilteredList<>((ObservableList<Client>) dao.getClientDAO().findAll(), b -> true);
+        }catch(Exception e){
+            filteredData=new FilteredList<Client>(listeClient.getItems(),b->true);
+            e.getMessage();
+        }
+        FilteredList<Client> finalFilteredData = filteredData;
         recherche.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(cl -> {
+            finalFilteredData.setPredicate(cl -> {
                 // If filter text is empty, display all Clients.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -189,14 +197,18 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
                     return false; // Does not match.
             });
             // 3. Wrap the FilteredList in a SortedList.
-            SortedList<Client> sortedData = new SortedList<>(filteredData);
-
+            SortedList<Client> sortedData = new SortedList<>(finalFilteredData);
             // 4. Bind the SortedList comparator to the TableView comparator.
             // 	  Otherwise, sorting the TableView would have no effect.
             sortedData.comparatorProperty().bind(listeClient.comparatorProperty());
 
             // 5. Add sorted (and filtered) data to the table.
-            listeClient.setItems(sortedData);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listeClient.getItems().setAll(sortedData);
 
         });
     }

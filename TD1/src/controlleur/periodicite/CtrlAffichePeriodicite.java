@@ -136,8 +136,12 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
             SortedList<Periodicite> sortedList = new SortedList<>(filteredList);
 
             sortedList.comparatorProperty().bind(listePeriodicite.comparatorProperty());
-
-            listePeriodicite.setItems(sortedList);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listePeriodicite.getItems().setAll(sortedList);
         }));
 
     }

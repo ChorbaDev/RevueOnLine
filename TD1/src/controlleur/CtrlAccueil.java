@@ -5,6 +5,9 @@ import controlleur.revue.CtrlAfficheRevue;
 import controlleur.abonnement.CtrlAfficheAbonnement;
 import controlleur.periodicite.CtrlAffichePeriodicite;
 import dao.Persistance;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +31,10 @@ public class CtrlAccueil implements Initializable {
     private String path;
     @FXML
     private ComboBox<Persistance> comboType;
+    @FXML
+    private Label lblVPN1;
+    @FXML
+    private Label lblVPN2;
 
     @FXML
     void clickAbonnement(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
@@ -90,5 +98,25 @@ public class CtrlAccueil implements Initializable {
        Persistance[] possibleValues = Persistance.values();
        this.comboType.setItems(FXCollections.observableArrayList(possibleValues));
        this.comboType.getSelectionModel().select(1);
+        lblVPN1.setVisible(false);
+        lblVPN2.setVisible(false);
+        listenerCombo();
+    }
+
+    private void listenerCombo() {
+        comboType.valueProperty().addListener(new ChangeListener<Persistance>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Persistance> observableValue, Persistance oldValue, Persistance newValue) {
+                if(newValue==Persistance.MYSQL) {
+                    lblVPN1.setVisible(true);
+                    lblVPN2.setVisible(true);
+                }
+                else{
+                    lblVPN1.setVisible(false);
+                    lblVPN2.setVisible(false);
+                }
+            }
+        });
     }
 }

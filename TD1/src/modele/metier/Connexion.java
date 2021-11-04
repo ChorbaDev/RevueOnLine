@@ -31,7 +31,6 @@ public class Connexion {
             if (maConnexion == null || maConnexion.isClosed()){
                 maConnexion = DriverManager.getConnection(url, login, pwd);
             }
-
         } catch (SQLException sqle) {
             System.out.println("Erreur connexion :" + sqle.getMessage());
         }

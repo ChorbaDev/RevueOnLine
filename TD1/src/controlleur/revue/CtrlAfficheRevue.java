@@ -164,7 +164,12 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
             sortedData.comparatorProperty().bind(listeRevue.comparatorProperty());
 
             // 5. Add sorted (and filtered) data to the table.
-            listeRevue.setItems(sortedData);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listeRevue.getItems().setAll(sortedData);
 
         });
     }

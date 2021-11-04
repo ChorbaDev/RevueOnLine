@@ -149,7 +149,12 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
             sortedList.comparatorProperty().bind(listeAbonnement.comparatorProperty());
 
-            listeAbonnement.setItems(sortedList);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listeAbonnement.getItems().setAll(sortedList);
         }));
 
     }

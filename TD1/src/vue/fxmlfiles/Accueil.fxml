@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../cssfiles/guiAccueil.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.CtrlAccueil">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../cssfiles/guiAccueil.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.CtrlAccueil">
    <children>
       <GridPane prefHeight="522.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -70,6 +78,19 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </ComboBox>
+                        <Label fx:id="lblVPN1" prefHeight="17.0" prefWidth="232.0" text="Veuillez de se connecter sur le VPN cisco." textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblVPN2" prefHeight="27.0" prefWidth="254.0" text="Sinon les données seront enregistrées temporairement" textAlignment="RIGHT" textOverrun="CLIP">
+                           <font>
+                              <Font name="System Bold Italic" size="10.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
