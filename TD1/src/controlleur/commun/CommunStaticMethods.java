@@ -44,4 +44,5 @@ public class CommunStaticMethods {
         stage.setScene(scene);
         stage.show();
     }
+
 }

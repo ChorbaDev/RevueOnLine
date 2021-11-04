@@ -50,7 +50,7 @@ public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
             ProcessAdresse pa = new ProcessAdresse();
             pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
-            if (nonDoublons(client)) {
+            if (nonDoublons()) {
                 dao.getClientDAO().create(client);
                 aRemplacer = client.toString();
                 alert = CommunStaticMethods.makeAlert
@@ -129,7 +129,7 @@ public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
             else aRemplacer += "Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-    private boolean nonDoublons(Client client) throws SQLException, ClassNotFoundException {
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
         ArrayList<Client> list = dao.getClientDAO().findAll();
         for (Client cl : list) {
             if (cl.equalsTout(client))

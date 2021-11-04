@@ -59,7 +59,7 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
 			this.donnees.set(index, objet);
 			return true;
 		}
-		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
@@ -53,43 +54,70 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
+    @Override
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+        ArrayList<Revue> list = dao.getRevueDAO().findAll();
+        for (Revue cl : list) {
+            if (cl.equalsTout(revue))
+                return false;
+        }
+        return true;
+    }
+
     public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+        revue=set();
+    }
+
+    private Revue set() throws SQLException, ClassNotFoundException {
         String titre,description;
         double tarif;
+        Revue r=new Revue();
         titre=edtTitre.getText().trim();
         description=edtDescription.getText().trim();
         if(titre.isEmpty()) aRemplacer+="Le titre ne doit pas etre vide\n";
-        else revue.setTitre(titre);
+        else r.setTitre(titre);
         if(description.isEmpty()) aRemplacer+="La description ne doit pas etre vide\n";
-        else revue.setDescription(description);
+        else r.setDescription(description);
         if(!CommunStaticMethods.isNumeric(edtTarif.getText())) aRemplacer+="Vérifier la format du tarif\n";
         else{
             tarif=Double.parseDouble(edtTarif.getText());
             if(tarif==0) aRemplacer+="Le tarif est strictement positif\n";
-            else revue.setTarif_numero(tarif);
+            else r.setTarif_numero(tarif);
         }
-        revue.setVisuel(visuel);
+        r.setVisuel(visuel);
         if(comboPeriodicite.getValue()==null) aRemplacer+="Choissisez une périodicité\n";
-        else revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+        else r.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+        return r;
     }
+
     @FXML
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer="";
         setObjectForMetier();
         if(aRemplacer.isEmpty()){
-            dao.getRevueDAO().create(revue);
-            aRemplacer=revue.toString();
-            initChamps();
-            alert=CommunStaticMethods.makeAlert
-                    ("Modifiation avec succès",
-                            "Cette revue a été modifié avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-            revue=new Revue();
+            if(nonDoublons()){
+                dao.getRevueDAO().create(revue);
+                aRemplacer=revue.toString();
+                alert=CommunStaticMethods.makeAlert
+                        ("Modifiation avec succès",
+                                "Cette revue a été modifié avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+                initChamps();
+                revue=new Revue();
+            }
+            else{
+                aRemplacer="Revue existe déja";
+                alert=CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
         }else{
             alert = CommunStaticMethods.makeAlert
-                    ("Erreur lors de l'ajout",
+                    ("Erreur lors de la modification",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
                             Alert.AlertType.ERROR);

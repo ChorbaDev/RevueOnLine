@@ -49,7 +49,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
             edtVoie.setText(client.getAdresse().getVoie());
         }
     }
-    private boolean nonDoublons(Client client) throws SQLException, ClassNotFoundException {
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
         ArrayList<Client> list = dao.getClientDAO().findAll();
         for (Client cl : list) {
             if (cl.equalsTout(client))
@@ -63,11 +63,13 @@ public class CtrlModifClient implements CommunEntreMAJ {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
-        if (aRemplacer.isEmpty()) {
+        if (aRemplacer.isEmpty())
+        {
             ProcessAdresse pa = new ProcessAdresse();
             pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
-            if(nonDoublons(client)){
+            if(nonDoublons())
+            {
                 dao.getClientDAO().update(client);
                 aRemplacer = client.toString();
                 alert = CommunStaticMethods.makeAlert
@@ -76,7 +78,8 @@ public class CtrlModifClient implements CommunEntreMAJ {
                                 aRemplacer,
                                 Alert.AlertType.INFORMATION);
             }
-            else{
+            else
+            {
                 aRemplacer = "Client existe déja";
                 alert = CommunStaticMethods.makeAlert
                         ("Attention!",
@@ -84,7 +87,9 @@ public class CtrlModifClient implements CommunEntreMAJ {
                                 aRemplacer,
                                 Alert.AlertType.WARNING);
             }
-        } else {
+        }
+        else
+        {
             alert = CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
                             "Un ou plusieurs champs sont mal remplis.",
@@ -93,8 +98,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
         }
         alert.showAndWait();
     }
-
-    public void setObjectForMetier() {
+    public Client set() {
         String nom, prenom, pay, rue, voie, code, ville;
         nom = edtNom.getText().trim();
         prenom = edtPrenom.getText().trim();
@@ -103,15 +107,15 @@ public class CtrlModifClient implements CommunEntreMAJ {
         voie = edtVoie.getText().trim();
         code = edtCodeP.getText().trim();
         ville = edtVille.getText().trim();
-
+        Client c=new Client(client.getCle());
         if (CommunStaticMethods.isStringOnlyAlphabet(nom))
-            client.setNom(nom);
+            c.setNom(nom);
         else {
             if (nom.isEmpty()) aRemplacer += "Le nom est obligatoire\n";
             else aRemplacer += "Le nom ne contient pas des caractéres non alphabétiques\n";
         }
         if (CommunStaticMethods.isStringOnlyAlphabet(prenom))
-            client.setPrenom(prenom);
+            c.setPrenom(prenom);
         else {
             if (prenom.isEmpty()) aRemplacer += "Le Prénom est obligatoire\n";
             else aRemplacer += "Le prenom ne contient pas des caractéres non alphabétiques\n";
@@ -142,6 +146,10 @@ public class CtrlModifClient implements CommunEntreMAJ {
             if (pay.isEmpty()) aRemplacer += "Le pay est obligatoire\n";
             else aRemplacer += "Le pay ne contient pas des caractéres non alphabétiques\n";
         }
+        return c;
+    }
+    public void setObjectForMetier() {
+        client=set();
     }
 
     public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) {

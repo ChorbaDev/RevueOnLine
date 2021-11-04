@@ -16,6 +16,7 @@ import vue.dialogFiles.DialogMAJ;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
@@ -29,22 +30,39 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
     private AnchorPane anchor;
     private DialogMAJ<CtrlAjoutPeriodicite> vue;
     private TableView<Periodicite> tab;
-
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+        ArrayList<Periodicite> list = dao.getPeriodiciteDAO().findAll();
+        for (Periodicite pr : list) {
+            if (pr.getLibelle().equals(periodicite.getLibelle()))
+                return false;
+        }
+        return true;
+    }
     @FXML
     public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            dao.getPeriodiciteDAO().create(periodicite);
-            aRemplacer = periodicite.toString();
-            alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette periodicite a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-            periodicite = new Periodicite();
-            initChamps();
+            if(nonDoublons()){
+                dao.getPeriodiciteDAO().create(periodicite);
+                aRemplacer = periodicite.toString();
+                alert = CommunStaticMethods.makeAlert
+                        ("Ajout avec succès",
+                                "Cette periodicite a été ajouté avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+                periodicite = new Periodicite();
+                initChamps();
+            }else{
+                aRemplacer = "Périodicité existe déja";
+                alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
+
         } else {
             alert = CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",

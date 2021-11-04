@@ -13,4 +13,5 @@ public interface CommunEntreMAJ extends CommunEntreTout {
     void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException;
     void fermeDialog() throws SQLException, ClassNotFoundException, IOException;
     void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException;
+    boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException;
 }

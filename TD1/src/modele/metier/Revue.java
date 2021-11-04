@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
+import java.util.Objects;
 
 public class Revue {
 	private int id;
@@ -55,26 +56,6 @@ public class Revue {
 		this.description = descp;
 		this.tarif_numero = v;
 		this.id_p = i;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Revue other = (Revue) obj;
-		return id == other.id;
 	}
 
 	public int getId() {
@@ -138,4 +119,23 @@ public class Revue {
 				+ "\nID Periodicite :" + id_p + "\n";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Revue revue = (Revue) o;
+		return id == revue.id;
+	}
+
+	public boolean equalsTout(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Revue revue = (Revue) o;
+		return Double.compare(revue.tarif_numero, tarif_numero) == 0 && id_p == revue.id_p && titre.equals(revue.titre) && description.equals(revue.description);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(titre, description, tarif_numero, visuel, id_p);
+	}
 }

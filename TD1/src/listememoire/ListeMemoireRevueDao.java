@@ -50,7 +50,7 @@ public class ListeMemoireRevueDao implements RevueDao {
 			this.donnees.set(index, objet);
 			return true;
 		}
-		throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		throw new IllegalArgumentException("Tentative de modifié d'un objet inexistant");
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ListeMemoireRevueDao implements RevueDao {
 		if (index > -1) {
 			return this.donnees.get(index);
 		}
-		throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+		throw new IllegalArgumentException("Aucun objet ne posséde cet identifiant");
 
 	}
 
