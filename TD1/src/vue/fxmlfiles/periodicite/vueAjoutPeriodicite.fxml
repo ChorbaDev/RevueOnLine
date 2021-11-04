@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane id="gradientFlow" alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="500.0" prefWidth="400.0" stylesheets="@../../cssfiles/guiMAJ.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.periodicite.CtrlAjoutPeriodicite">
+<FlowPane id="gradientFlow" alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="280.0" prefWidth="400.0" stylesheets="@../../cssfiles/guiMAJ.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.periodicite.CtrlAjoutPeriodicite">
    <children>
-      <FlowPane id="whiteFlow" minHeight="450.0" minWidth="350.0" prefHeight="400.0" prefWidth="300.0">
+      <FlowPane id="whiteFlow" minHeight="161.0" minWidth="350.0" prefHeight="160.0" prefWidth="350.0">
          <children>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" minWidth="352.0" prefHeight="69.0" prefWidth="352.0">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" minWidth="352.0" prefHeight="70.0" prefWidth="352.0">
                <children>
                   <Label id="ajoutRevue" fx:id="titre" alignment="CENTER" prefHeight="36.0" prefWidth="332.0" text="Ajout d'une Periodicité" />
                </children>
             </FlowPane>
-            <GridPane id="grid" alignment="CENTER" prefHeight="325.0" prefWidth="328.0">
+            <GridPane id="grid" alignment="CENTER" prefHeight="47.0" prefWidth="328.0">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="86.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="84.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="102.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="226.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="71.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -36,14 +36,14 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <TextField id="titre" fx:id="edtPeriodicite" maxWidth="200.0" prefHeight="30.0" prefWidth="84.0" GridPane.columnIndex="1">
+                  <TextField id="titre" fx:id="edtPeriodicite" maxWidth="200.0" prefHeight="30.0" prefWidth="166.0" GridPane.columnIndex="1">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
                   </TextField>
                </children>
             </GridPane>
-            <FlowPane alignment="CENTER" minWidth="351.0" prefHeight="39.0" prefWidth="382.0">
+            <FlowPane alignment="CENTER" minWidth="337.0" prefHeight="39.0" prefWidth="337.0">
                <children>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#clickMAJ" text="Ajouter" />
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#fermeDialog" text="Annuler">
