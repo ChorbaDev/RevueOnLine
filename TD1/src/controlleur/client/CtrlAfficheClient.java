@@ -57,19 +57,19 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
     private String path;
 
     @FXML
-    public void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void clickAjouter(ActionEvent event) throws IOException, SQLException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/Client/createClient.fxml");
         DialogMAJ<CtrlAjoutClient> ajoutClient = new DialogMAJ(anchor, dao, listeClient, fxmlURL);
     }
 
     @FXML
-    public void clickModifier(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void clickModifier(ActionEvent event) throws IOException, SQLException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/Client/modifClient.fxml");
         DialogMAJ<CtrlModifClient> ajoutClient = new DialogMAJ(anchor, dao, listeClient, fxmlURL);
     }
 
     @FXML
-    public void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickSupprimer(ActionEvent event) throws SQLException, IOException {
         Alert alert = makeAlert
                 ("Confirmation",
                         "Est-ce-que vous ete sur de supprimer cette client?",
@@ -82,7 +82,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
     }
 
     @FXML
-    void importeCSV(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    void importeCSV(ActionEvent event) throws IOException, SQLException {
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("CSV files(*.csv)", "*.CSV");
         fc.getExtensionFilters().addAll(ext1);
@@ -112,7 +112,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
         return adresse;
     }
 
-    private boolean nonDoublons(Client client) throws SQLException, ClassNotFoundException {
+    private boolean nonDoublons(Client client) throws SQLException {
         ArrayList<Client> list = dao.getClientDAO().findAll();
         for (Client cl : list) {
             if (cl.equalsTout(client))
@@ -207,7 +207,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
         this.btnModifier.setDisable(newValue == null);
     }
 
-    public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
+    public void getInfos(Persistance persistance) throws SQLException, IOException {
         try {
             dao = DaoFactory.getDAOFactory(persistance);
             refreshListe();
@@ -217,7 +217,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
         }
     }
 
-    public void refreshListe() throws SQLException, IOException, ClassNotFoundException {
+    public void refreshListe() throws SQLException, IOException {
         if (listeClient != null) {
             this.listeClient.getItems().clear();
             listeClient.getItems().addAll(dao.getClientDAO().findAll());

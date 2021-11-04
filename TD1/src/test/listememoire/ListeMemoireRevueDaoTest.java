@@ -26,7 +26,7 @@ public class ListeMemoireRevueDaoTest {
     }
 
     @Test
-    public void testAjoutRevue() throws SQLException, IOException, ClassNotFoundException {
+    public void testAjoutRevue() throws SQLException, IOException {
         int initSize = daof.getRevueDAO().findAll().size();
 
         daof.getRevueDAO().create(r);
@@ -34,7 +34,7 @@ public class ListeMemoireRevueDaoTest {
     }
 
     @Test
-    public void testSupprimerRevue() throws SQLException, IOException, ClassNotFoundException {
+    public void testSupprimerRevue() throws SQLException, IOException {
         daof.getRevueDAO().create(r);
         int initSize = daof.getRevueDAO().findAll().size();
         daof.getRevueDAO().delete(r);
@@ -42,7 +42,7 @@ public class ListeMemoireRevueDaoTest {
     }
 
     @Test
-    public void testExistanceTitreRevue() throws SQLException, IOException, ClassNotFoundException {
+    public void testExistanceTitreRevue() throws SQLException, IOException {
         daof.getRevueDAO().create(r);
         assertNotNull(daof.getRevueDAO().getByTitre(r.getTitre()).size());
     }

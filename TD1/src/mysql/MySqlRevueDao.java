@@ -41,7 +41,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public Revue getById(int id) throws SQLException, IOException, ClassNotFoundException {
+    public Revue getById(int id) throws SQLException, IOException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         String sql = "select titre,description,tarif_numero,visuel,id_periodicite from Revue where id_revue=?";
@@ -68,7 +68,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public boolean create(Revue r) throws SQLException, IOException, ClassNotFoundException {
+    public boolean create(Revue r) throws SQLException, IOException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
 
@@ -96,7 +96,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public boolean update(Revue r) throws SQLException, IOException, ClassNotFoundException {
+    public boolean update(Revue r) throws SQLException, IOException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         String sql = "update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
@@ -117,7 +117,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public boolean delete(Revue r) throws SQLException, ClassNotFoundException {
+    public boolean delete(Revue r) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         String sql = "delete from Revue where id_revue=?";
@@ -133,7 +133,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException, ClassNotFoundException {
+    public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
 
         Connexion maConnexion = Connexion.getInstance();
@@ -160,7 +160,7 @@ public class MySqlRevueDao implements RevueDao {
     }
 
     @Override
-    public ArrayList<Revue> findAll() throws SQLException, IOException, ClassNotFoundException {
+    public ArrayList<Revue> findAll() throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
 
         Connexion maConnexion = Connexion.getInstance();

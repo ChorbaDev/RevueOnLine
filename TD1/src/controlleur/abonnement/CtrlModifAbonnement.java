@@ -40,7 +40,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
     private TableView<Abonnement> tab;
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -64,7 +64,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
     }
 
     @FXML
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -74,7 +74,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
 
     @Override
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException {
         int idcl = 0, idrev = 0;
         LocalDate dateDeb, dateFin;
         String[] infoClient, infoRevue;
@@ -119,7 +119,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
 
     @Override
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
         this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;

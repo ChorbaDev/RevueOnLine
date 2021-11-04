@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public interface CommunEntreMAJ extends CommunEntreTout {
-    void clickMAJ() throws SQLException, IOException, ClassNotFoundException;
+    void clickMAJ() throws SQLException, IOException;
 
-    void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException;
+    void setObjectForMetier() throws SQLException, IOException;
 
-    void fermeDialog() throws SQLException, ClassNotFoundException, IOException;
+    void fermeDialog() throws SQLException, IOException;
 
-    void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException;
+    void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException;
 }

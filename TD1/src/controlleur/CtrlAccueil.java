@@ -30,7 +30,7 @@ public class CtrlAccueil implements Initializable {
     private ComboBox<Persistance> comboType;
 
     @FXML
-    void clickAbonnement(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    void clickAbonnement(ActionEvent event) throws IOException, SQLException {
         path = "../vue/fxmlfiles/abonnement/vueAfficheAbonnement.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
@@ -43,7 +43,7 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    void clickClient(ActionEvent e) throws SQLException, IOException, ClassNotFoundException {
+    void clickClient(ActionEvent e) throws SQLException, IOException {
         path = "../vue/fxmlfiles/client/afficheClient.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
@@ -55,7 +55,7 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    void clickPeriodicite(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    void clickPeriodicite(ActionEvent event) throws SQLException, IOException {
         path = "../vue/fxmlfiles/periodicite/vueAffichePeriodicite.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
@@ -68,7 +68,7 @@ public class CtrlAccueil implements Initializable {
     }
 
     @FXML
-    public void clickRevue(ActionEvent e) throws IOException, SQLException, ClassNotFoundException {
+    public void clickRevue(ActionEvent e) throws IOException, SQLException {
         path = "../vue/fxmlfiles/revue/afficheRevue.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));

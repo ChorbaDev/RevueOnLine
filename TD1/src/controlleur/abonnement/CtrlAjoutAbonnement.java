@@ -44,7 +44,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     private TableView<Abonnement> tab;
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -70,7 +70,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     }
 
     @FXML
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -81,7 +81,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
 
     @Override
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException {
         int idcl = 0, idrev = 0;
         LocalDate dateDeb, dateFin;
         String[] infoClient, infoRevue;
@@ -127,7 +127,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     }
 
     @Override
-    public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
 
         this.vue = vueAjoutAbonnement;
         this.anchor = anchor;

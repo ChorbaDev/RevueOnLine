@@ -25,14 +25,14 @@ public class ListeMemoireAbonnementDaoTest {
     }
 
     @Test
-    public void testAjoutAbonnement() throws SQLException, IOException, ClassNotFoundException {
+    public void testAjoutAbonnement() throws SQLException, IOException {
         int initSize = daof.getAbonnementDAO().findAll().size();
         daof.getAbonnementDAO().create(ab);
         assertEquals(initSize + 1, daof.getAbonnementDAO().findAll().size());
     }
 
     @Test
-    public void testSupprimerAbonnement() throws SQLException, IOException, ClassNotFoundException {
+    public void testSupprimerAbonnement() throws SQLException, IOException {
         daof.getAbonnementDAO().create(ab);
         int initSize = daof.getAbonnementDAO().findAll().size();
         daof.getAbonnementDAO().delete(ab);
@@ -40,7 +40,7 @@ public class ListeMemoireAbonnementDaoTest {
     }
 
     @Test
-    public void testExistanceClientAbonnement() throws SQLException, ClassNotFoundException {
+    public void testExistanceClientAbonnement() throws SQLException {
         assertNotNull(daof.getAbonnementDAO().getByClient(ab.getId_client()));
     }
 }

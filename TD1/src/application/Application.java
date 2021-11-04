@@ -10,7 +10,7 @@ import daofactory.DaoFactory;
 
 public class Application {
 
-    public static void main(String[] args) throws SQLException, ParseException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ParseException, IOException {
         String reponse;
         int choixCRUD;
         int choixTable;

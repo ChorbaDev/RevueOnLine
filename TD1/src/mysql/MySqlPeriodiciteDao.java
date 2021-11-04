@@ -24,7 +24,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public Periodicite getById(int id) throws SQLException, ClassNotFoundException {
+    public Periodicite getById(int id) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select libelle from Periodicite where id_periodicite=?");
@@ -43,7 +43,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public boolean create(Periodicite object) throws SQLException, ClassNotFoundException {
+    public boolean create(Periodicite object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         String sql = "insert into Periodicite(libelle) values (?)";
@@ -66,7 +66,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public boolean update(Periodicite object) throws SQLException, ClassNotFoundException {
+    public boolean update(Periodicite object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         String sql = "update Periodicite set libelle=? where id_periodicite=?";
@@ -78,7 +78,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public boolean delete(Periodicite object) throws SQLException, ClassNotFoundException {
+    public boolean delete(Periodicite object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("delete from Periodicite where id_periodicite=?");
@@ -94,7 +94,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException, ClassNotFoundException {
+    public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException {
         ArrayList<Periodicite> lPeriodicite = new ArrayList<>();
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
@@ -115,7 +115,7 @@ public class MySqlPeriodiciteDao implements PeriodiciteDao {
     }
 
     @Override
-    public ArrayList<Periodicite> findAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Periodicite> findAll() throws SQLException {
         ArrayList<Periodicite> lPeriodicite = new ArrayList<>();
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();

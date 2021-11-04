@@ -25,7 +25,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException, ClassNotFoundException {
+    public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
         ArrayList<Client> lClient = new ArrayList<>();
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
@@ -49,7 +49,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public Client getById(int id) throws SQLException, ClassNotFoundException {
+    public Client getById(int id) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client where id_client=?");
@@ -72,7 +72,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public boolean create(Client object) throws SQLException, ClassNotFoundException {
+    public boolean create(Client object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement(
@@ -103,7 +103,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public boolean update(Client object) throws SQLException, ClassNotFoundException {
+    public boolean update(Client object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement(
@@ -121,7 +121,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public boolean delete(Client object) throws SQLException, ClassNotFoundException {
+    public boolean delete(Client object) throws SQLException {
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("delete from Client where id_client=?");
@@ -136,7 +136,7 @@ public class MySqlClientDao implements ClientDao {
     }
 
     @Override
-    public ArrayList<Client> findAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Client> findAll() throws SQLException {
         ArrayList<Client> lClient = new ArrayList<>();
         Connexion maConnexion = Connexion.getInstance();
         Connection connect = maConnexion.creeConnexion();
