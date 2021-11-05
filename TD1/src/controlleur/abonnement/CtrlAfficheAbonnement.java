@@ -89,8 +89,13 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
     @Override
     public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
-        dao = DaoFactory.getDAOFactory(persistance);
-        refreshListe();
+        try {
+            dao = DaoFactory.getDAOFactory(persistance);
+            refreshListe();
+        } catch (SQLException | IOException | RuntimeException e) {
+            dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+            refreshListe();
+        }
     }
 
     @Override
