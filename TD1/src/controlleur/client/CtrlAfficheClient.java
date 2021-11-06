@@ -4,6 +4,7 @@ import controlleur.commun.CommunEntreAffiche;
 import controlleur.commun.CommunStaticMethods;
 import dao.Persistance;
 import daofactory.DaoFactory;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -86,7 +87,7 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
     @FXML
     void importeCSV(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
-        String err="";
+        String err = "";
         FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("CSV files(*.csv)", "*.CSV");
         fc.getExtensionFilters().addAll(ext1);
         File fichierSelect = fc.showOpenDialog(null);
@@ -101,14 +102,14 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
                     Client cl = new Client(row[0], row[1], ad);
                     if (nonDoublons(cl))
                         dao.getClientDAO().create(cl);
-                    else{
-                        err+=cl.getNom()+" existe déja\n";
+                    else {
+                        err += cl.getNom() + " existe déja\n";
                     }
                 }
             }
-            if(!err.isEmpty()){
-                Alert alert= CommunStaticMethods.makeAlert
-                        ("Ajout avec succès",
+            if (!err.isEmpty()) {
+                Alert alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
                                 "Clients existent déja",
                                 err,
                                 Alert.AlertType.WARNING);
@@ -171,10 +172,10 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
 
     public void filter() {
         FilteredList<Client> filteredData;
-        try{
+        try {
             filteredData = new FilteredList<>((ObservableList<Client>) dao.getClientDAO().findAll(), b -> true);
-        }catch(Exception e){
-            filteredData=new FilteredList<Client>(listeClient.getItems(),b->true);
+        } catch (Exception e) {
+            filteredData = new FilteredList<Client>(listeClient.getItems(), b -> true);
             e.getMessage();
         }
         FilteredList<Client> finalFilteredData = filteredData;
@@ -203,9 +204,9 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
             sortedData.comparatorProperty().bind(listeClient.comparatorProperty());
 
             // 5. Add sorted (and filtered) data to the table.
-            try{
+            try {
                 refreshListe();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.getMessage();
             }
             listeClient.getItems().setAll(sortedData);
@@ -246,6 +247,33 @@ public class CtrlAfficheClient implements Initializable, ChangeListener<Client>,
         if (listeClient != null) {
             this.listeClient.getItems().clear();
             listeClient.getItems().addAll(dao.getClientDAO().findAll());
+        }
+    }
+
+    public void exportCSV() throws IOException {
+        Writer writer = null;
+        try {
+            String directoryPath="C:\\RevueOnlineClients";
+            File f=new File(directoryPath);
+            f.mkdir();
+            File file = new File("C:\\RevueOnlineClients\\Clients.csv.");
+            writer = new BufferedWriter(new FileWriter(file));
+            for (Client client : listeClient.getItems()) {
+                String text = client.getNom() + ";" + client.getPrenom() + ";" + client.getAdresse().getNo_rue() +";" +client.getAdresse().getVoie() +";" +client.getAdresse().getCode_postal() +";"+client.getAdresse().getVille()+";"+client.getAdresse().getPays() +"\n";
+                writer.write(text);
+            }
+            Alert alert = CommunStaticMethods.makeAlert
+                    ("Création avec succès",
+                            "Clients sont stockées sont une ficher CSV",
+                            "Fichier nommer Clients.csv dans votre c:",
+                            Alert.AlertType.INFORMATION);
+            alert.showAndWait();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
         }
     }
 }
