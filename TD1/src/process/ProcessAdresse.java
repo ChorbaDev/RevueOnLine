@@ -90,13 +90,14 @@ public class ProcessAdresse {
                 ch += decompVille[i] = capitalize(decompVille[i]);
             }
 
-        }
-        int l = decompVille.length - 1;
-        if (existeDansTab(decompVille[l], tabTiret)) {
-            ch += '-' + decompVille[l];
-        } else ch += decompVille[l] = capitalize(decompVille[l]);
-        return ch;
-    }
+		}
+		int l = decompVille.length - 1;
+		if (existeDansTab(decompVille[l], tabTiret)) {
+			ch += '-' + decompVille[l];
+		}else if(l>0) ch += decompVille[l]= capitalize(decompVille[l]);
+
+		return ch;
+	}
 
     public String normalizeVille(String ville) {
         String ch = ville.trim();

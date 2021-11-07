@@ -52,15 +52,15 @@ public class ListeMemoirePeriodiciteDao implements PeriodiciteDao {
         return ok;
     }
 
-    @Override
-    public boolean update(Periodicite objet) {
-        int index = existanceID(objet);
-        if (index > -1) {
-            this.donnees.set(index, objet);
-            return true;
-        }
-        throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-    }
+	@Override
+	public boolean update(Periodicite objet) {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
+		}
+		throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+	}
 
     @Override
     public boolean delete(Periodicite objet) throws SQLException {

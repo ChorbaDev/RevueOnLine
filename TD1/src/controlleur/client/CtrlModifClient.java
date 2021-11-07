@@ -13,6 +13,7 @@ import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CtrlModifClient implements CommunEntreMAJ {
     @FXML
@@ -48,24 +49,47 @@ public class CtrlModifClient implements CommunEntreMAJ {
             edtVoie.setText(client.getAdresse().getVoie());
         }
     }
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+        ArrayList<Client> list = dao.getClientDAO().findAll();
+        for (Client cl : list) {
+            if (cl.equalsTout(client))
+                return false;
+        }
+        return true;
+    }
 
     @FXML
     public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
-        if (aRemplacer.isEmpty()) {
+        if (aRemplacer.isEmpty())
+        {
             ProcessAdresse pa = new ProcessAdresse();
             pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
-            dao.getClientDAO().update(client);
-            aRemplacer = client.toString();
-            alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette client a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-        } else {
+            if(nonDoublons())
+            {
+                dao.getClientDAO().update(client);
+                aRemplacer = client.toString();
+                alert = CommunStaticMethods.makeAlert
+                        ("Modification avec succès",
+                                "Cette client a été modifié avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+            }
+            else
+            {
+                aRemplacer = "Client existe déja";
+                alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
+        }
+        else
+        {
             alert = CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
                             "Un ou plusieurs champs sont mal remplis.",
@@ -74,8 +98,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
         }
         alert.showAndWait();
     }
-
-    public void setObjectForMetier() {
+    public Client set() {
         String nom, prenom, pay, rue, voie, code, ville;
         nom = edtNom.getText().trim();
         prenom = edtPrenom.getText().trim();
@@ -84,15 +107,15 @@ public class CtrlModifClient implements CommunEntreMAJ {
         voie = edtVoie.getText().trim();
         code = edtCodeP.getText().trim();
         ville = edtVille.getText().trim();
-
+        Client c=new Client(client.getCle());
         if (CommunStaticMethods.isStringOnlyAlphabet(nom))
-            client.setNom(nom);
+            c.setNom(nom);
         else {
             if (nom.isEmpty()) aRemplacer += "Le nom est obligatoire\n";
             else aRemplacer += "Le nom ne contient pas des caractéres non alphabétiques\n";
         }
         if (CommunStaticMethods.isStringOnlyAlphabet(prenom))
-            client.setPrenom(prenom);
+            c.setPrenom(prenom);
         else {
             if (prenom.isEmpty()) aRemplacer += "Le Prénom est obligatoire\n";
             else aRemplacer += "Le prenom ne contient pas des caractéres non alphabétiques\n";
@@ -123,6 +146,10 @@ public class CtrlModifClient implements CommunEntreMAJ {
             if (pay.isEmpty()) aRemplacer += "Le pay est obligatoire\n";
             else aRemplacer += "Le pay ne contient pas des caractéres non alphabétiques\n";
         }
+        return c;
+    }
+    public void setObjectForMetier() {
+        client=set();
     }
 
     public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) {
@@ -138,9 +165,11 @@ public class CtrlModifClient implements CommunEntreMAJ {
     @FXML
     public void fermeDialog() throws SQLException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
-        this.tab.getItems().clear();
-        if (tab != null && dao != null)
+        //this.tab.getItems().clear();
+        if (tab != null && dao != null){
             this.tab.getItems().addAll(dao.getClientDAO().findAll());
+        }
+
         this.vue.close();
     }
 }

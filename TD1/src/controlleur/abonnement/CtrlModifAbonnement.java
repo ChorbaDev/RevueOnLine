@@ -45,13 +45,22 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
         aRemplacer = "";
         setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            dao.getAbonnementDAO().update(abonnement);
-            aRemplacer = abonnement.toString();
-            alert = CommunStaticMethods.makeAlert(
-                    "Ajout avec succès",
-                    "Cet Abonnement a été ajouté avec succès",
-                    aRemplacer,
-                    Alert.AlertType.INFORMATION);
+            if(nonDoublons()){
+                dao.getAbonnementDAO().update(abonnement);
+                aRemplacer = abonnement.toString();
+                alert = CommunStaticMethods.makeAlert(
+                        "Modification avec succès",
+                        "Cet Abonnement a été modifié avec succès",
+                        aRemplacer,
+                        Alert.AlertType.INFORMATION);
+            }else{
+                aRemplacer = "Cette abonnement existe déja";
+                alert = CommunStaticMethods.makeAlert(
+                        "Attention!",
+                        "Probléme de modification",
+                        aRemplacer,
+                        Alert.AlertType.WARNING);
+            }
         } else {
             alert = CommunStaticMethods.makeAlert(
                     "Erreur lors de la saisie",
@@ -72,12 +81,11 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
         this.vue.close();
     }
 
-
-    @Override
-    public void setObjectForMetier() throws SQLException, IOException {
+    private Abonnement set() {
         int idcl = 0, idrev = 0;
         LocalDate dateDeb, dateFin;
         String[] infoClient, infoRevue;
+        Abonnement ab=new Abonnement(abonnement.getId());
         if (!cbxIdClient.getSelectionModel().isEmpty()) {
             infoClient = cbxIdClient.getValue().split(" ");
             idcl = Integer.parseInt(infoClient[0]);
@@ -91,30 +99,35 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
         if (dao != null) {
             if (idcl > 0) {
-                abonnement.setId_revue(idrev);
+                ab.setId_revue(idrev);
             } else {
                 aRemplacer += "L'ID revue passé est incorrecte. \n";
             }
             if (idrev > 0) {
-                abonnement.setId_client(idcl);
+                ab.setId_client(idcl);
             } else {
                 aRemplacer += "L'ID Client passé est incorrecte. \n";
             }
         }
         if (dateDeb.isEqual(LocalDate.now()) || dateDeb.isAfter(LocalDate.now())) {
-            abonnement.setDate_debut(dateDeb);
+            ab.setDate_debut(dateDeb);
         } else {
             if (dateDeb.isBefore(LocalDate.now())) {
                 aRemplacer += "La date de début entrée est inferieure à la date du jour \n";
             }
         }
         if (dateFin.isEqual(dateDeb) || dateFin.isAfter(dateDeb)) {
-            abonnement.setDate_fin(dateFin);
+            ab.setDate_fin(dateFin);
         } else {
             if (dateFin.isBefore(LocalDate.now())) {
                 aRemplacer += "La date de fin entrée est inferieure à la date du jour \n";
             } else aRemplacer += "La date de fin entrée est inferieur à la date de début \n";
         }
+        return ab;
+    }
+    @Override
+    public void setObjectForMetier(){
+        abonnement=set();
     }
 
 
@@ -141,6 +154,16 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
         }
         initChamps();
 
+    }
+
+    @Override
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+        ArrayList<Abonnement> list = dao.getAbonnementDAO().findAll();
+        for (Abonnement ab : list) {
+            if (ab.equalsTout(abonnement))
+                return false;
+        }
+        return true;
     }
 
     @Override

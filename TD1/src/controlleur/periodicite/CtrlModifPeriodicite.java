@@ -10,11 +10,13 @@ import controlleur.commun.CommunEntreMAJ;
 import daofactory.DaoFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import modele.metier.Client;
 import modele.metier.Periodicite;
 import vue.dialogFiles.DialogMAJ;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CtrlModifPeriodicite implements CommunEntreMAJ {
 
@@ -27,20 +29,37 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     private AnchorPane anchor;
     private DialogMAJ<CtrlAjoutPeriodicite> vue;
     private TableView<Periodicite> tab;
-
+    public boolean nonDoublons() throws SQLException {
+        ArrayList<Periodicite> list = dao.getPeriodiciteDAO().findAll();
+        for (Periodicite pr : list) {
+            if (pr.getLibelle().equals(periodicite.getLibelle()))
+                return false;
+        }
+        return true;
+    }
     @Override
     public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
         if (aRemplacer.isEmpty()) {
-            dao.getPeriodiciteDAO().update(periodicite);
-            aRemplacer = periodicite.toString();
-            alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette periodicite a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
+            if(nonDoublons()){
+                dao.getPeriodiciteDAO().update(periodicite);
+                aRemplacer = periodicite.toString();
+                alert = CommunStaticMethods.makeAlert
+                        ("Ajout avec succès",
+                                "Cette periodicite a été ajouté avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+            }else{
+                aRemplacer = "Périodicité existe déja";
+                alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
+
         } else {
             alert = CommunStaticMethods.makeAlert
                     ("Erreur lors de la saisie",
@@ -51,18 +70,21 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
         alert.showAndWait();
 
     }
-
-    @Override
-    public void setObjectForMetier() throws SQLException, IOException {
+    public Periodicite set()  {
         String libelle;
-        libelle = edtPeriodicite.getText().trim();
+        Periodicite p=new Periodicite(periodicite.getCle());
+        libelle=edtPeriodicite.getText().trim();
         if (CommunStaticMethods.isStringOnlyAlphabet(libelle))
-            periodicite.setLibelle(libelle);
-        else {
-            if (libelle.isEmpty()) aRemplacer += "Le libellé est obligatoire \n";
-            else aRemplacer += "Le libelle contient des caractères non alphabétiques\n";
+            p.setLibelle(libelle);
+        else{
+            if (libelle.isEmpty()) aRemplacer+="Le libellé est obligatoire \n";
+            else aRemplacer+="Le libelle contient des caractères non alphabétiques\n";
         }
-
+        return p;
+    }
+    @Override
+    public void setObjectForMetier()  {
+        periodicite=set();
     }
 
     @Override

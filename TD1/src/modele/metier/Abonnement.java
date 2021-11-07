@@ -89,10 +89,7 @@ public class Abonnement {
                 + "\nID (Revue) :" + id_revue + "\n__________________\n";
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(date_debut, date_fin, id, id_client, id_revue);
-    }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -105,5 +102,18 @@ public class Abonnement {
         Abonnement other = (Abonnement) obj;
         return id == other.id;
     }
+
+
+	public boolean equalsTout(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Abonnement that = (Abonnement) o;
+		return id_client == that.id_client && id_revue == that.id_revue && Objects.equals(date_debut, that.date_debut) && Objects.equals(date_fin, that.date_fin);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(date_debut, date_fin, id_client, id_revue);
+	}
 
 }

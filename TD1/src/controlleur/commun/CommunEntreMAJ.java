@@ -16,4 +16,6 @@ public interface CommunEntreMAJ extends CommunEntreTout {
     void fermeDialog() throws SQLException, IOException;
 
     void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException;
+
+    boolean nonDoublons() throws SQLException, IOException;
 }

@@ -86,9 +86,13 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
 
     @Override
     public void getInfos(Persistance persistance) throws SQLException, IOException {
-        dao = DaoFactory.getDAOFactory(persistance);
-        refreshListe();
-
+        try {
+            dao = DaoFactory.getDAOFactory(persistance);
+            refreshListe();
+        } catch (SQLException | IOException | RuntimeException e) {
+            dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+            refreshListe();
+        }
     }
 
     @Override
@@ -136,8 +140,12 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
             SortedList<Periodicite> sortedList = new SortedList<>(filteredList);
 
             sortedList.comparatorProperty().bind(listePeriodicite.comparatorProperty());
-
-            listePeriodicite.setItems(sortedList);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listePeriodicite.getItems().setAll(sortedList);
         }));
 
     }

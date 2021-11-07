@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import modele.metier.Client;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
@@ -41,9 +43,9 @@ public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
     private DaoFactory dao;
     private TableView<Revue> tab;
     private Revue revue;
-
+    private String aRemplacer;
     public void fermeDialog() throws SQLException, IOException {
-        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
+        CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getRevueDAO().findAll());
@@ -62,44 +64,61 @@ public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
         initChamps();
     }
 
-
-    public void setObjectForMetier() throws SQLException, IOException {
-        revue.setTitre(edtTitre.getText().trim());
-        revue.setDescription(edtDescription.getText().trim());
-        revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-        revue.setVisuel(visuel);
-        if (dao != null) {
-            revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-            dao.getRevueDAO().update(revue);
+    private Revue set() throws SQLException {
+        String titre,description;
+        double tarif;
+        Revue r=new Revue(revue.getId());
+        titre=edtTitre.getText().trim();
+        description=edtDescription.getText().trim();
+        if(titre.isEmpty()) aRemplacer+="Le titre ne doit pas etre vide\n";
+        else r.setTitre(titre);
+        if(description.isEmpty()) aRemplacer+="La description ne doit pas etre vide\n";
+        else r.setDescription(description);
+        if(!CommunStaticMethods.isNumeric(edtTarif.getText())) aRemplacer+="Vérifier la format du tarif\n";
+        else{
+            tarif=Double.parseDouble(edtTarif.getText());
+            if(tarif==0) aRemplacer+="Le tarif est strictement positif\n";
+            else r.setTarif_numero(tarif);
         }
+        r.setVisuel(visuel);
+        if(comboPeriodicite.getValue()==null) aRemplacer+="Choissisez une périodicité\n";
+        else r.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+        return r;
+    }
+    public void setObjectForMetier() throws SQLException, ClassNotFoundException {
+        revue=set();
     }
 
     @FXML
-    public void clickMAJ() {
-        String aRemplacer = "";
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
-        try {
-            setObjectForMetier();
-            aRemplacer = revue.toString();
-            initChamps();
+        aRemplacer="";
+        setObjectForMetier();
+        if(aRemplacer.isEmpty()){
+            if(nonDoublons()){
+                aRemplacer=revue.toString();
+                dao.getRevueDAO().update(revue);
+                alert=CommunStaticMethods.makeAlert
+                        ("Modifiation avec succès",
+                                "Cette revue a été modifié avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+                initChamps();
+            }
+            else{
+                aRemplacer="Revue existe déja";
+                alert=CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
+        }else{
             alert = CommunStaticMethods.makeAlert
-                    ("Modifiation avec succès",
-                            "Cette revue a été modifié avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-        } catch (Exception e) {
-            if ((e instanceof RuntimeException) || (e instanceof ArithmeticException))
-                aRemplacer = e.getMessage();
-            if (e instanceof NumberFormatException)
-                aRemplacer = "Le tarif doit être numérique";
-            if (e instanceof NullPointerException)
-                aRemplacer = "il faut choisir une périodicité";
-            alert = CommunStaticMethods.makeAlert
-                    ("Erreur lors de la saisie",
+                    ("Erreur lors de la modification",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
                             Alert.AlertType.ERROR);
-            System.out.println(e.toString());
         }
         alert.showAndWait();
     }
@@ -113,6 +132,16 @@ public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
             comboPeriodicite.getSelectionModel().select(revue.getId_p() - 1);
             nbCaracteres.setText(Integer.toString(edtDescription.getText().length()));
         }
+    }
+
+    @Override
+    public boolean nonDoublons() throws SQLException, IOException {
+        ArrayList<Revue> list = dao.getRevueDAO().findAll();
+        for (Revue cl : list) {
+            if (cl.equalsTout(revue))
+                return false;
+        }
+        return true;
     }
 
     @FXML

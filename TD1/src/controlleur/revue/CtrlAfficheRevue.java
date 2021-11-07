@@ -12,6 +12,9 @@ import javafx.scene.*;
 import javafx.beans.value.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.stage.FileChooser;
+import modele.metier.Adresse;
+import modele.metier.Client;
 import vue.dialogFiles.DialogMAJ;
 
 import java.io.*;
@@ -22,6 +25,7 @@ import modele.metier.Revue;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, CommunEntreAffiche<Revue> {
@@ -183,7 +187,12 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
             sortedData.comparatorProperty().bind(listeRevue.comparatorProperty());
 
             // 5. Add sorted (and filtered) data to the table.
-            listeRevue.setItems(sortedData);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listeRevue.getItems().setAll(sortedData);
 
         });
     }

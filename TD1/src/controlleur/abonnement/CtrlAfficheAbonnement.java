@@ -89,8 +89,13 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
     @Override
     public void getInfos(Persistance persistance) throws SQLException, IOException {
-        dao = DaoFactory.getDAOFactory(persistance);
-        refreshListe();
+        try {
+            dao = DaoFactory.getDAOFactory(persistance);
+            refreshListe();
+        } catch (SQLException | IOException | RuntimeException e) {
+            dao = DaoFactory.getDAOFactory(Persistance.ListeMemoire);
+            refreshListe();
+        }
     }
 
     @Override
@@ -149,7 +154,12 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
             sortedList.comparatorProperty().bind(listeAbonnement.comparatorProperty());
 
-            listeAbonnement.setItems(sortedList);
+            try{
+                refreshListe();
+            }catch(Exception e){
+                e.getMessage();
+            }
+            listeAbonnement.getItems().setAll(sortedList);
         }));
 
     }

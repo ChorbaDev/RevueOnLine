@@ -15,7 +15,17 @@ public class CommunStaticMethods {
                 && (str != null)
                 && (str.matches("^[a-zA-Z ]*$")));
     }
-
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
     public static Alert makeAlert(String title, String header, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

@@ -43,15 +43,15 @@ public class ListeMemoireRevueDao implements RevueDao {
         return -1;
     }
 
-    @Override
-    public boolean update(Revue objet) throws SQLException {
-        int index = existanceID(objet);
-        if (index > -1) {
-            this.donnees.set(index, objet);
-            return true;
-        }
-        throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-    }
+	@Override
+	public boolean update(Revue objet) throws SQLException {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
+		}
+		throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+	}
 
     @Override
     public boolean delete(Revue objet) throws SQLException {
@@ -69,7 +69,7 @@ public class ListeMemoireRevueDao implements RevueDao {
         if (index > -1) {
             return this.donnees.get(index);
         }
-        throw new IllegalArgumentException("Aucun objet ne possede cet identifiant");
+        throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 
     }
 

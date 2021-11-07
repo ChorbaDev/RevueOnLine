@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
@@ -43,9 +44,9 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     private Revue revue;
     private TableView<Revue> tab;
     private DaoFactory dao;
-
-    public void fermeDialog() throws SQLException, IOException {
-        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
+    private String aRemplacer;
+    public void fermeDialog() throws SQLException, IOException{
+        CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getRevueDAO().findAll());
@@ -61,44 +62,73 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
-    public void setObjectForMetier() throws SQLException, IOException {
-        revue.setTitre(edtTitre.getText().trim());
-        revue.setDescription(edtDescription.getText().trim());
-        revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));
-        revue.setVisuel(visuel);
-        if (dao != null) {
-            revue.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
-            dao.getRevueDAO().create(revue);
+    @Override
+    public boolean nonDoublons() throws SQLException, IOException {
+        ArrayList<Revue> list = dao.getRevueDAO().findAll();
+        for (Revue cl : list) {
+            if (cl.equalsTout(revue))
+                return false;
         }
+        return true;
+    }
+
+    public void setObjectForMetier() throws SQLException, IOException{
+        revue=set();
+    }
+
+    private Revue set() throws SQLException, ClassNotFoundException {
+        String titre,description;
+        double tarif;
+        Revue r=new Revue();
+        titre=edtTitre.getText().trim();
+        description=edtDescription.getText().trim();
+        if(titre.isEmpty()) aRemplacer+="Le titre ne doit pas etre vide\n";
+        else r.setTitre(titre);
+        if(description.isEmpty()) aRemplacer+="La description ne doit pas etre vide\n";
+        else r.setDescription(description);
+        if(!CommunStaticMethods.isNumeric(edtTarif.getText())) aRemplacer+="Vérifier la format du tarif\n";
+        else{
+            tarif=Double.parseDouble(edtTarif.getText());
+            if(tarif==0) aRemplacer+="Le tarif est strictement positif\n";
+            else r.setTarif_numero(tarif);
+        }
+        r.setVisuel(visuel);
+        if(comboPeriodicite.getValue()==null) aRemplacer+="Choissisez une périodicité\n";
+        else r.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
+        return r;
     }
 
     @FXML
-    public void clickMAJ() {
-        String aRemplacer = "";
+    public void clickMAJ() throws SQLException, IOException{
         Alert alert;
-        try {
-            setObjectForMetier();
-            aRemplacer = revue.toString();
-            initChamps();
+        aRemplacer="";
+        setObjectForMetier();
+        if(aRemplacer.isEmpty()){
+            if(nonDoublons()){
+                dao.getRevueDAO().create(revue);
+                aRemplacer=revue.toString();
+                alert=CommunStaticMethods.makeAlert
+                        ("Modifiation avec succès",
+                                "Cette revue a été modifié avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+                initChamps();
+                revue=new Revue();
+            }
+            else{
+                aRemplacer="Revue existe déja";
+                alert=CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme de modification",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
+        }else{
             alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette revue a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-            revue = new Revue();
-        } catch (Exception e) {
-            if ((e instanceof RuntimeException) || (e instanceof ArithmeticException))
-                aRemplacer = e.getMessage();
-            if (e instanceof NumberFormatException)
-                aRemplacer = "Le tarif doit être numérique";
-            if (e instanceof NullPointerException)
-                aRemplacer = "il faut choisir une périodicité";
-            alert = CommunStaticMethods.makeAlert
-                    ("Erreur lors de la saisie",
+                    ("Erreur lors de la modification",
                             "Un ou plusieurs champs sont mal remplis.",
                             aRemplacer,
                             Alert.AlertType.ERROR);
-            System.out.println(e.toString());
         }
         alert.showAndWait();
     }
@@ -113,7 +143,6 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
 
     /**
      * selectionner une image PNG ou JPG depuis votre pc
-     *
      * @param event
      */
     @FXML

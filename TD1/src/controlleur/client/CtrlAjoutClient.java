@@ -15,6 +15,7 @@ import vue.dialogFiles.DialogMAJ;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
@@ -49,23 +50,33 @@ public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
             ProcessAdresse pa = new ProcessAdresse();
             pa.normalizeAdresse(adresse);
             client.setAdresse(adresse);
-            dao.getClientDAO().create(client);
-            aRemplacer = client.toString();
-            alert = CommunStaticMethods.makeAlert
-                    ("Ajout avec succès",
-                            "Cette client a été ajouté avec succès",
-                            aRemplacer,
-                            Alert.AlertType.INFORMATION);
-            client = new Client();
-            adresse = new Adresse();
-            initChamps();
-        } else {
-            alert = CommunStaticMethods.makeAlert
-                    ("Erreur lors de la saisie",
-                            "Un ou plusieurs champs sont mal remplis.",
-                            aRemplacer,
-                            Alert.AlertType.ERROR);
+            if (nonDoublons()) {
+                dao.getClientDAO().create(client);
+                aRemplacer = client.toString();
+                alert = CommunStaticMethods.makeAlert
+                        ("Ajout avec succès",
+                                "Cette client a été ajouté avec succès",
+                                aRemplacer,
+                                Alert.AlertType.INFORMATION);
+                client = new Client();
+                adresse = new Adresse();
+                initChamps();
+            } else {
+                aRemplacer = "Cette client existe déja";
+                alert = CommunStaticMethods.makeAlert
+                        ("Attention!",
+                                "Probléme d'insertion",
+                                aRemplacer,
+                                Alert.AlertType.WARNING);
+            }
         }
+         else{
+                alert = CommunStaticMethods.makeAlert
+                        ("Erreur lors de la saisie",
+                                "Un ou plusieurs champs sont mal remplis.",
+                                aRemplacer,
+                                Alert.AlertType.ERROR);
+            }
         alert.showAndWait();
     }
 
@@ -118,7 +129,14 @@ public class CtrlAjoutClient implements Initializable, CommunEntreMAJ {
             else aRemplacer += "Le pay ne contient pas des caractéres non alphabétiques\n";
         }
     }
-
+    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+        ArrayList<Client> list = dao.getClientDAO().findAll();
+        for (Client cl : list) {
+            if (cl.equalsTout(client))
+                return false;
+        }
+        return true;
+    }
     @FXML
     public void fermeDialog() throws SQLException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);

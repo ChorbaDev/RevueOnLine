@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
+import java.util.Objects;
 
 public class Revue {
     private int id;
@@ -53,32 +54,12 @@ public class Revue {
         this.id_p = id_p;
     }
 
-    public Revue(String test, String descp, double v, int i) {
-        this.titre = titre;
-        this.description = description;
-        this.tarif_numero = tarif_numero;
-        this.id_p = id_p;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Revue other = (Revue) obj;
-        return id == other.id;
-    }
+	public Revue(String test, String descp, double v, int i) {
+		this.titre = test;
+		this.description = descp;
+		this.tarif_numero = v;
+		this.id_p = i;
+	}
 
     public int getId() {
         return id;
@@ -92,31 +73,25 @@ public class Revue {
         return titre;
     }
 
-    public void setTitre(String titre) {
-        if (titre.isEmpty())
-            throw new RuntimeException("Le titre doit être renseigné");
-        this.titre = titre;
-    }
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        if (description.isEmpty())
-            throw new RuntimeException("La description doit être renseigné");
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
     public double getTarif_numero() {
         return tarif_numero;
     }
 
-    public void setTarif_numero(double tarif_numero) {
-        if (tarif_numero <= 0)
-            throw new ArithmeticException("Le tarif doit être strictement positif");
-        this.tarif_numero = tarif_numero;
-    }
+	public void setTarif_numero(double tarif_numero) {
+		this.tarif_numero = tarif_numero;
+	}
 
     public InputStream getVisuel() throws IOException {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(visuel, null);
@@ -148,4 +123,23 @@ public class Revue {
                 + "\nID Periodicite :" + id_p + "\n";
     }
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Revue revue = (Revue) o;
+		return id == revue.id;
+	}
+
+	public boolean equalsTout(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Revue revue = (Revue) o;
+		return Double.compare(revue.tarif_numero, tarif_numero) == 0 && id_p == revue.id_p && titre.equals(revue.titre) && description.equals(revue.description);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(titre, description, tarif_numero, visuel, id_p);
+	}
 }

@@ -38,15 +38,15 @@ public class ListeMemoireAbonnementDao implements AbonnementDao {
         return -1;
     }
 
-    @Override
-    public boolean update(Abonnement objet) {
-        int index = existanceID(objet);
-        if (index > -1) {
-            this.donnees.set(index, objet);
-            return true;
-        }
-        throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-    }
+	@Override
+	public boolean update(Abonnement objet) {
+		int index = existanceID(objet);
+		if (index > -1) {
+			this.donnees.set(index, objet);
+			return true;
+		}
+		throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+	}
 
     @Override
     public boolean delete(Abonnement objet) {
