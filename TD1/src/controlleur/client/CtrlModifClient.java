@@ -59,7 +59,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
     }
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -163,7 +163,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
     }
 
     @FXML
-    public void fermeDialog() throws SQLException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         //this.tab.getItems().clear();
         if (tab != null && dao != null){

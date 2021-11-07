@@ -29,7 +29,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     private AnchorPane anchor;
     private DialogMAJ<CtrlAjoutPeriodicite> vue;
     private TableView<Periodicite> tab;
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+    public boolean nonDoublons() throws SQLException {
         ArrayList<Periodicite> list = dao.getPeriodiciteDAO().findAll();
         for (Periodicite pr : list) {
             if (pr.getLibelle().equals(periodicite.getLibelle()))
@@ -38,7 +38,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
         return true;
     }
     @Override
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -88,27 +88,27 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     }
 
     @Override
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+    public void fermeDialog() throws SQLException, IOException {
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if(tab!=null && dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getPeriodiciteDAO().findAll());
         this.vue.close();
     }
 
     @Override
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vue;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.periodicite=(Periodicite) tab.getSelectionModel().getSelectedItem();
-        this.tab=tab;
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
+        this.vue = vue;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.periodicite = (Periodicite) tab.getSelectionModel().getSelectedItem();
+        this.tab = tab;
         initChamps();
     }
 
     @Override
     public void initChamps() {
-        if (periodicite!=null){
+        if (periodicite != null) {
             edtPeriodicite.setText(periodicite.getLibelle());
         }
 

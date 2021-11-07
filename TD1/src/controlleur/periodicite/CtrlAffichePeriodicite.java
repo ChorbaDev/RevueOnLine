@@ -59,21 +59,21 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
     private String path;
 
     @FXML
-    public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/periodicite/vueAjoutPeriodicite.fxml");
-        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite= new DialogMAJ(anchor,dao,listePeriodicite,fxmlURL);
+    public void clickAjouter(ActionEvent event) throws SQLException, IOException {
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/periodicite/vueAjoutPeriodicite.fxml");
+        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite = new DialogMAJ(anchor, dao, listePeriodicite, fxmlURL);
 
     }
 
     @FXML
-    public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        URL fxmlURL=getClass().getResource("../../vue/fxmlfiles/periodicite/vueModifPeriodicite.fxml");
-        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite= new DialogMAJ(anchor,dao,listePeriodicite,fxmlURL);
+    public void clickModifier(ActionEvent event) throws SQLException, IOException {
+        URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/periodicite/vueModifPeriodicite.fxml");
+        DialogMAJ<CtrlAjoutPeriodicite> ajoutPeriodicite = new DialogMAJ(anchor, dao, listePeriodicite, fxmlURL);
 
     }
 
     @FXML
-    public void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickSupprimer(ActionEvent event) throws SQLException, IOException {
         Alert alert = CommunStaticMethods.makeAlert("Confirmation", "Êtes-vous sûr de vouloir supprimer cette periodicité?", "", Alert.AlertType.CONFIRMATION);
         if (alert.showAndWait().get() == ButtonType.OK) {
             dao.getPeriodiciteDAO().delete(listePeriodicite.getSelectionModel().getSelectedItem());
@@ -85,7 +85,7 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
 
 
     @Override
-    public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
+    public void getInfos(Persistance persistance) throws SQLException, IOException {
         try {
             dao = DaoFactory.getDAOFactory(persistance);
             refreshListe();
@@ -96,7 +96,7 @@ public class CtrlAffichePeriodicite implements Initializable, ChangeListener<Per
     }
 
     @Override
-    public void refreshListe() throws SQLException, IOException, ClassNotFoundException {
+    public void refreshListe() throws SQLException, IOException {
         if (listePeriodicite != null) {
             this.listePeriodicite.getItems().clear();
             this.listePeriodicite.getItems().addAll(dao.getPeriodiciteDAO().findAll());

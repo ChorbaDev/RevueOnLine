@@ -1,4 +1,5 @@
 package controlleur.abonnement;
+
 import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
@@ -12,6 +13,7 @@ import modele.metier.Abonnement;
 import modele.metier.Client;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,6 +25,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
 
     @FXML
     private ComboBox<String> cbxIdClient; //ID + Nom + Prenom
+
     @FXML
     private ComboBox<String> cbxIdRevue; //ID + Titre
 
@@ -41,7 +44,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     private TableView<Abonnement> tab;
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -76,7 +79,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     }
 
     @FXML
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -137,7 +140,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     }
 
     @Override
-    public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vueAjoutAbonnement, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
 
         this.vue = vueAjoutAbonnement;
         this.anchor = anchor;
@@ -160,7 +163,7 @@ public class CtrlAjoutAbonnement implements Initializable, CommunEntreMAJ {
     }
 
     @Override
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+    public boolean nonDoublons() throws SQLException, IOException {
         ArrayList<Abonnement> list = dao.getAbonnementDAO().findAll();
         for (Abonnement ab : list) {
             if (ab.equalsTout(abonnement))

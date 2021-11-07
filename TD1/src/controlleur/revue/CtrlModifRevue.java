@@ -15,6 +15,7 @@ import modele.metier.Client;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -22,14 +23,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
-    @FXML private ComboBox<Periodicite> comboPeriodicite;
-    @FXML private TextArea edtDescription;
-    @FXML private TextField edtTarif;
-    @FXML private TextField edtTitre;
-    @FXML private Label visuelPath;
-    @FXML private Label nbCaracteres;
-    final int MAX_CHARS = 400 ;
+public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
+    @FXML
+    private ComboBox<Periodicite> comboPeriodicite;
+    @FXML
+    private TextArea edtDescription;
+    @FXML
+    private TextField edtTarif;
+    @FXML
+    private TextField edtTitre;
+    @FXML
+    private Label visuelPath;
+    @FXML
+    private Label nbCaracteres;
+    final int MAX_CHARS = 400;
     private DialogMAJ<CtrlModifRevue> vue;
     private Image visuel;
     private AnchorPane anchor;
@@ -37,26 +44,27 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     private TableView<Revue> tab;
     private Revue revue;
     private String aRemplacer;
-    public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
-        if(tab!=null && dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vue;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.tab=tab;
-        this.revue= (Revue) tab.getSelectionModel().getSelectedItem();
-        this.visuel=revue.getVisuelImg();
-        if(dao!=null)
+
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
+        this.vue = vue;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.tab = tab;
+        this.revue = (Revue) tab.getSelectionModel().getSelectedItem();
+        this.visuel = revue.getVisuelImg();
+        if (dao != null)
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
         initChamps();
     }
 
-    private Revue set() throws SQLException, ClassNotFoundException {
+    private Revue set() throws SQLException {
         String titre,description;
         double tarif;
         Revue r=new Revue(revue.getId());
@@ -82,7 +90,7 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     }
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer="";
         setObjectForMetier();
@@ -116,18 +124,18 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     }
 
     public void initChamps() {
-        if(revue!=null){
+        if (revue != null) {
             initImg();
             edtTarif.setText(Double.toString(revue.getTarif_numero()));
             edtDescription.setText(revue.getDescription());
             edtTitre.setText(revue.getTitre());
-            comboPeriodicite.getSelectionModel().select(revue.getId_p()-1);
+            comboPeriodicite.getSelectionModel().select(revue.getId_p() - 1);
             nbCaracteres.setText(Integer.toString(edtDescription.getText().length()));
         }
     }
 
     @Override
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+    public boolean nonDoublons() throws SQLException, IOException {
         ArrayList<Revue> list = dao.getRevueDAO().findAll();
         for (Revue cl : list) {
             if (cl.equalsTout(revue))
@@ -137,20 +145,20 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     }
 
     @FXML
-    public void choisirUneImage(ActionEvent event){
+    public void choisirUneImage(ActionEvent event) {
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
         fc.getExtensionFilters().addAll(ext1, ext2);
         File fichierSelect = fc.showOpenDialog(null);
         if (fichierSelect != null) {
-            visuel=new Image(fichierSelect.toURI().toString());
+            visuel = new Image(fichierSelect.toURI().toString());
             visuelPath.setText(fichierSelect.getPath());
         }
     }
 
-    private void initImg(){
-        visuel=revue.getVisuelImg();
+    private void initImg() {
+        visuel = revue.getVisuelImg();
         visuelPath.setText("");
     }
 
@@ -158,11 +166,12 @@ public class CtrlModifRevue implements Initializable , CommunEntreMAJ {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         incNbCaracteres();
     }
+
     private void incNbCaracteres() {
         edtDescription.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= MAX_CHARS ? change : null)
         );
-        edtDescription.textProperty().addListener((observable, oldValue, newValue) ->{
+        edtDescription.textProperty().addListener((observable, oldValue, newValue) -> {
             nbCaracteres.setText(Integer.toString(newValue.length()));
         });
     }

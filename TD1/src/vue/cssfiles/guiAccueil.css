@@ -1,38 +1,46 @@
-#flowGradient{
-    -fx-background-color: linear-gradient(to top right,#FF0F7B,#F89B29);
+#flowGradient {
+    -fx-background-color: linear-gradient(to top right, #FF0F7B, #F89B29);
 }
-#flowLogo{
+
+#flowLogo {
     -fx-background-color: white;
     -fx-background-radius: 30px;
     -fx-border-radius: 30px;
 }
-#flowChamps{
+
+#flowChamps {
     -fx-background-color: white;
 }
-#vboxChamps{
-    -fx-background-color: linear-gradient(to top right,#FF0F7B,#F89B29);
+
+#vboxChamps {
+    -fx-background-color: linear-gradient(to top right, #FF0F7B, #F89B29);
     -fx-background-radius: 30px;
 }
-#phrase{
+
+#phrase {
     -fx-font-weight: bold;
     -fx-font-family: "Segoe UI";
     -fx-font-size: 16px;
 }
-.button{
+
+.button {
     -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-font-size: 14px;
 }
-.button:hover{
+
+.button:hover {
     -fx-background-radius: 20px;
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-size: 20px;
 }
-.button:pressed{
+
+.button:pressed {
     -fx-rotate: 10;
 }
-.combo-box{
+
+.combo-box {
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-background-color: white;

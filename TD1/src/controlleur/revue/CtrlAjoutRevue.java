@@ -1,6 +1,7 @@
 package controlleur.revue;
 
 //import com.jfoenix.controls.*;
+
 import controlleur.commun.CommunEntreMAJ;
 import controlleur.commun.CommunStaticMethods;
 import daofactory.DaoFactory;
@@ -24,13 +25,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
-    @FXML private ComboBox<Periodicite> comboPeriodicite;
-    @FXML private TextArea edtDescription;
-    @FXML private TextField edtTarif;
-    @FXML private TextField edtTitre;
-    @FXML private Label visuelPath;
-    @FXML private Label nbCaracteres;
-    final int MAX_CHARS = 400 ;
+    @FXML
+    private ComboBox<Periodicite> comboPeriodicite;
+    @FXML
+    private TextArea edtDescription;
+    @FXML
+    private TextField edtTarif;
+    @FXML
+    private TextField edtTitre;
+    @FXML
+    private Label visuelPath;
+    @FXML
+    private Label nbCaracteres;
+    final int MAX_CHARS = 400;
     private AnchorPane anchor;
     private DialogMAJ<CtrlAjoutRevue> vue;
     private Image visuel;
@@ -38,24 +45,25 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     private TableView<Revue> tab;
     private DaoFactory dao;
     private String aRemplacer;
-    public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, IOException{
         CommunStaticMethods.blurStage(anchor,0,0,0);
         this.tab.getItems().clear();
-        if(tab!=null && dao!=null)
-        this.tab.getItems().addAll(dao.getRevueDAO().findAll());
+        if (tab != null && dao != null)
+            this.tab.getItems().addAll(dao.getRevueDAO().findAll());
         this.vue.close();
     }
-    public void setVue(DialogMAJ vue, AnchorPane anchor,DaoFactory dao,TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vue;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.tab=tab;
-        if(dao!=null)
+
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
+        this.vue = vue;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.tab = tab;
+        if (dao != null)
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
     @Override
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+    public boolean nonDoublons() throws SQLException, IOException {
         ArrayList<Revue> list = dao.getRevueDAO().findAll();
         for (Revue cl : list) {
             if (cl.equalsTout(revue))
@@ -64,7 +72,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
         return true;
     }
 
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException{
         revue=set();
     }
 
@@ -91,7 +99,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     }
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException{
         Alert alert;
         aRemplacer="";
         setObjectForMetier();
@@ -138,29 +146,30 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
      * @param event
      */
     @FXML
-    public void choisirUneImage(ActionEvent event){
+    public void choisirUneImage(ActionEvent event) {
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
         fc.getExtensionFilters().addAll(ext1, ext2);
         File fichierSelect = fc.showOpenDialog(null);
         if (fichierSelect != null) {
-            visuel=new Image(fichierSelect.toURI().toString());
+            visuel = new Image(fichierSelect.toURI().toString());
             visuelPath.setText(fichierSelect.getPath());
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChamps();
-        revue=new Revue();
+        revue = new Revue();
         incNbCaracteres();
     }
 
     private void incNbCaracteres() {
         edtDescription.setTextFormatter(new TextFormatter<String>(change ->
-        change.getControlNewText().length() <= MAX_CHARS ? change : null)
+                change.getControlNewText().length() <= MAX_CHARS ? change : null)
         );
-        edtDescription.textProperty().addListener((observable, oldValue, newValue) ->{
+        edtDescription.textProperty().addListener((observable, oldValue, newValue) -> {
             nbCaracteres.setText(Integer.toString(newValue.length()));
         });
     }
@@ -169,8 +178,8 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
      * initialiser l'image par le placeholder
      */
     private void initImg() {
-        File file=new File("TD1/src/vue/images/empty.jpg");
-        visuel=new Image(file.getAbsolutePath());
+        File file = new File("TD1/src/vue/images/empty.jpg");
+        visuel = new Image(file.getAbsolutePath());
         visuelPath.setText("");
     }
 

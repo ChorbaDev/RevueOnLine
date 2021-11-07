@@ -39,7 +39,7 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
         return true;
     }
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -74,10 +74,10 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
     }
 
     @FXML
-    void fermeDialog(ActionEvent event) throws SQLException, ClassNotFoundException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+    void fermeDialog(ActionEvent event) throws SQLException {
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if(tab!=null && dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getPeriodiciteDAO().findAll());
         this.vue.close();
 
@@ -97,34 +97,34 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
 
 
     @Override
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException {
         String libelle;
-        libelle=edtPeriodicite.getText().trim();
+        libelle = edtPeriodicite.getText().trim();
         if (CommunStaticMethods.isStringOnlyAlphabet(libelle))
             periodicite.setLibelle(libelle);
-        else{
-            if (libelle.isEmpty()) aRemplacer+="Le libellé est obligatoire \n";
-            else aRemplacer+="Le libelle contient des caractères non alphabétiques\n";
+        else {
+            if (libelle.isEmpty()) aRemplacer += "Le libellé est obligatoire \n";
+            else aRemplacer += "Le libelle contient des caractères non alphabétiques\n";
         }
 
     }
 
     @Override
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
-        CommunStaticMethods.blurStage(anchor,0,0,0);
+    public void fermeDialog() throws SQLException, IOException {
+        CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
-        if (tab!=null&&dao!=null)
+        if (tab != null && dao != null)
             this.tab.getItems().addAll(dao.getPeriodiciteDAO().findAll());
         this.vue.close();
 
     }
 
     @Override
-    public void setVue(DialogMAJ vueAjoutPeriodicite, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
-        this.vue=vueAjoutPeriodicite;
-        this.anchor=anchor;
-        this.dao=dao;
-        this.tab=tab;
+    public void setVue(DialogMAJ vueAjoutPeriodicite, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
+        this.vue = vueAjoutPeriodicite;
+        this.anchor = anchor;
+        this.dao = dao;
+        this.tab = tab;
 
     }
 }

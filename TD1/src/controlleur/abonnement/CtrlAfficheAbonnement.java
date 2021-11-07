@@ -66,19 +66,19 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
 
 
     @FXML
-    public void clickAjouter(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickAjouter(ActionEvent event) throws SQLException, IOException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/abonnement/vueAjoutAbonnement.fxml");
         DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement = new DialogMAJ(anchor, dao, listeAbonnement, fxmlURL);
     }
 
     @FXML
-    public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickModifier(ActionEvent event) throws SQLException, IOException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/abonnement/vueModifAbonnement.fxml");
         DialogMAJ<CtrlAjoutAbonnement> ajoutAbonnement = new DialogMAJ(anchor, dao, listeAbonnement, fxmlURL);
     }
 
     @FXML
-    public void clickSupprimer(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+    public void clickSupprimer(ActionEvent event) throws SQLException, IOException {
         Alert alert = CommunStaticMethods.makeAlert("Confirmation", "Êtes-vous sûr de vouloir supprimer cet abonnement?", "", Alert.AlertType.CONFIRMATION);
         if (alert.showAndWait().get() == ButtonType.OK) {
             dao.getAbonnementDAO().delete(listeAbonnement.getSelectionModel().getSelectedItem());
@@ -88,7 +88,7 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
     }
 
     @Override
-    public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
+    public void getInfos(Persistance persistance) throws SQLException, IOException {
         try {
             dao = DaoFactory.getDAOFactory(persistance);
             refreshListe();
@@ -99,7 +99,7 @@ public class CtrlAfficheAbonnement implements Initializable, ChangeListener<Abon
     }
 
     @Override
-    public void refreshListe() throws SQLException, IOException, ClassNotFoundException {
+    public void refreshListe() throws SQLException, IOException {
         if (listeAbonnement != null) {
             this.listeAbonnement.getItems().clear();
             listeAbonnement.getItems().addAll(dao.getAbonnementDAO().findAll());

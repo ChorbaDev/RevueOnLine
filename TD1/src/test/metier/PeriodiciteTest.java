@@ -13,8 +13,8 @@ public class PeriodiciteTest {
 
     @Before
     public void setUp() throws Exception {
-        p1=new Periodicite(1,"Mensuel");
-        p2=new Periodicite(1,"Mensuel");
+        p1 = new Periodicite(1, "Mensuel");
+        p2 = new Periodicite(1, "Mensuel");
     }
 
     @After
@@ -23,7 +23,7 @@ public class PeriodiciteTest {
 
     @Test
     public void testHashCode() {
-        assertEquals(p1.hashCode(),p2.hashCode());
+        assertEquals(p1.hashCode(), p2.hashCode());
     }
 
     @Test

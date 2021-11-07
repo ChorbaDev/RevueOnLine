@@ -12,6 +12,7 @@ import modele.metier.Abonnement;
 import modele.metier.Client;
 import modele.metier.Revue;
 import vue.dialogFiles.DialogMAJ;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
     private TableView<Abonnement> tab;
 
     @FXML
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -72,7 +73,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
     }
 
     @FXML
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -131,7 +132,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
 
 
     @Override
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
         this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;
