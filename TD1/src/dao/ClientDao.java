@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modele.metier.Client;
 
 public interface ClientDao extends Dao<Client> {
-    ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException, ClassNotFoundException;
+    public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException;
 
-    ArrayList<Client> findAll() throws SQLException, ClassNotFoundException;
+    public ArrayList<Client> findAll() throws SQLException;
 }

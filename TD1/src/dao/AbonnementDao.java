@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modele.metier.Abonnement;
 
 public interface AbonnementDao extends Dao<Abonnement> {
-    ArrayList<Abonnement> getByClient(int id_c) throws SQLException, ClassNotFoundException;
+    public ArrayList<Abonnement> getByClient(int id_c) throws SQLException;
 
-    ArrayList<Abonnement> findAll() throws SQLException, ClassNotFoundException;
+    public ArrayList<Abonnement> findAll() throws SQLException;
 }

@@ -9,18 +9,18 @@ public class Connexion {
     private String url, login, pwd;
     private Connection maConnexion;
 
-    private Connexion() throws ClassNotFoundException {
+    private Connexion()  {
         this.creeConnexion();
     }
 
-    public static Connexion getInstance() throws ClassNotFoundException {
+    public static Connexion getInstance()  {
         if (instance == null) {
             instance = new Connexion();
         }
         return instance;
     }
 
-    public Connection creeConnexion() throws ClassNotFoundException {
+    public Connection creeConnexion()  {
         url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
         login = "elloumi2u_appli";
         pwd = "32024561";

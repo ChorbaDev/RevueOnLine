@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import modele.metier.Revue;
 
 public interface RevueDao extends Dao<Revue> {
-    ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException, ClassNotFoundException;
+    public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException;
 
-    ArrayList<Revue> findAll() throws SQLException, IOException, ClassNotFoundException;
+    public ArrayList<Revue> findAll() throws SQLException, IOException;
 }

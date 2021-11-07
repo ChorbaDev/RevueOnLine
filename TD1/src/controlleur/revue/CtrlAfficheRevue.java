@@ -53,13 +53,13 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
 
 
     @FXML
-    public void clickAjouter(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    public void clickAjouter(ActionEvent event) throws IOException, SQLException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles/Revue/createRevue.fxml");
         DialogMAJ<CtrlAjoutRevue> ajoutClient = new DialogMAJ(anchor, dao, listeRevue, fxmlURL);
     }
 
     @FXML
-    public void clickModifier(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickModifier(ActionEvent event) throws SQLException, IOException {
         URL fxmlURL = getClass().getResource("../../vue/fxmlfiles//Revue/modifRevue.fxml");
 
         DialogMAJ<CtrlModifRevue> modifClient = new DialogMAJ(anchor, dao, listeRevue, fxmlURL);
@@ -76,7 +76,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
     }
 
     @FXML
-    public void clickSupprimer(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+    public void clickSupprimer(ActionEvent event) throws SQLException, IOException {
         Alert alert = CommunStaticMethods.makeAlert
                 ("Confirmation",
                         "Est-ce-que vous ete sur de supprimer cette revue?",
@@ -195,7 +195,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
      * @throws SQLException
      * @throws IOException
      */
-    public void getInfos(Persistance persistance) throws SQLException, IOException, ClassNotFoundException {
+    public void getInfos(Persistance persistance) throws SQLException, IOException {
         try {
             dao = DaoFactory.getDAOFactory(persistance);
             refreshListe();
@@ -211,7 +211,7 @@ public class CtrlAfficheRevue implements Initializable, ChangeListener<Revue>, C
      * @throws SQLException
      * @throws IOException
      */
-    public void refreshListe() throws SQLException, IOException, ClassNotFoundException {
+    public void refreshListe() throws SQLException, IOException {
         if (listeRevue != null) {
             this.listeRevue.getItems().clear();
             this.listeRevue.getItems().addAll(dao.getRevueDAO().findAll());

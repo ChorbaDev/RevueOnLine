@@ -44,7 +44,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
     private TableView<Revue> tab;
     private DaoFactory dao;
 
-    public void fermeDialog() throws SQLException, IOException, ClassNotFoundException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -52,7 +52,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
         this.vue.close();
     }
 
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
         this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;
@@ -61,7 +61,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
             this.comboPeriodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
     }
 
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException {
         revue.setTitre(edtTitre.getText().trim());
         revue.setDescription(edtDescription.getText().trim());
         revue.setTarif_numero(Double.parseDouble(edtTarif.getText()));

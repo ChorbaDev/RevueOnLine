@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modele.metier.Periodicite;
 
 public interface PeriodiciteDao extends Dao<Periodicite> {
-    ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException, ClassNotFoundException;
+    public ArrayList<Periodicite> getByLibelle(String libelle) throws SQLException;
 
-    ArrayList<Periodicite> findAll() throws SQLException, ClassNotFoundException;
+    public ArrayList<Periodicite> findAll() throws SQLException;
 }

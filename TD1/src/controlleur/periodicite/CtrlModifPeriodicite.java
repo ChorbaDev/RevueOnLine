@@ -29,7 +29,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     private TableView<Periodicite> tab;
 
     @Override
-    public void clickMAJ() throws SQLException, IOException, ClassNotFoundException {
+    public void clickMAJ() throws SQLException, IOException {
         Alert alert;
         aRemplacer = "";
         setObjectForMetier();
@@ -53,7 +53,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     }
 
     @Override
-    public void setObjectForMetier() throws SQLException, IOException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException, IOException {
         String libelle;
         libelle = edtPeriodicite.getText().trim();
         if (CommunStaticMethods.isStringOnlyAlphabet(libelle))
@@ -66,7 +66,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     }
 
     @Override
-    public void fermeDialog() throws SQLException, ClassNotFoundException, IOException {
+    public void fermeDialog() throws SQLException, IOException {
         CommunStaticMethods.blurStage(anchor, 0, 0, 0);
         this.tab.getItems().clear();
         if (tab != null && dao != null)
@@ -75,7 +75,7 @@ public class CtrlModifPeriodicite implements CommunEntreMAJ {
     }
 
     @Override
-    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException, ClassNotFoundException {
+    public void setVue(DialogMAJ vue, AnchorPane anchor, DaoFactory dao, TableView tab) throws SQLException, IOException {
         this.vue = vue;
         this.anchor = anchor;
         this.dao = dao;

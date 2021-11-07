@@ -32,14 +32,14 @@ public class ListeMemoireClientDaoTest {
     }
 
     @Test
-    public void create() throws SQLException, IOException, ClassNotFoundException {
+    public void create() throws SQLException, IOException {
         int initSize = daof.getClientDAO().findAll().size();
         daof.getClientDAO().create(c);
         assertEquals(initSize + 1, daof.getClientDAO().findAll().size());
     }
 
     @Test
-    public void delete() throws SQLException, IOException, ClassNotFoundException {
+    public void delete() throws SQLException, IOException {
         daof.getClientDAO().create(c);
         int initSize = daof.getClientDAO().findAll().size();
         daof.getClientDAO().delete(c);
@@ -47,13 +47,13 @@ public class ListeMemoireClientDaoTest {
     }
 
     @Test
-    public void getById() throws SQLException, IOException, ClassNotFoundException {
+    public void getById() throws SQLException, IOException {
         daof.getClientDAO().create(c);
         assertTrue(daof.getClientDAO().findAll().get(daof.getClientDAO().findAll().size() - 1).getCle() >= c.getCle());
     }
 
     @Test
-    public void getByNomPrenom() throws SQLException, IOException, ClassNotFoundException {
+    public void getByNomPrenom() throws SQLException, IOException {
         daof.getClientDAO().create(c);
         assertNotNull(daof.getClientDAO().getByNomPrenom(c.getNom(), c.getPrenom()).size());
     }
