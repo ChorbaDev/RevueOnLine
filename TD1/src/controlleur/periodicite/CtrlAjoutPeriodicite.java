@@ -30,7 +30,7 @@ public class CtrlAjoutPeriodicite implements Initializable, CommunEntreMAJ {
     private AnchorPane anchor;
     private DialogMAJ<CtrlAjoutPeriodicite> vue;
     private TableView<Periodicite> tab;
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+    public boolean nonDoublons() throws SQLException {
         ArrayList<Periodicite> list = dao.getPeriodiciteDAO().findAll();
         for (Periodicite pr : list) {
             if (pr.getLibelle().equals(periodicite.getLibelle()))

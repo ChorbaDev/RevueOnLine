@@ -35,13 +35,18 @@ public class Connexion {
         maConnexion = null;
         try {
             if (maConnexion == null || maConnexion.isClosed()){
-                DriverManager.setLoginTimeout(1);
+                DriverManager.setLoginTimeout(2);
                 maConnexion = DriverManager.getConnection(url, login, pwd);
             }
         } catch (SQLException sqle) {
             Alert alert= CommunStaticMethods.makeAlert("Attention!","Votre connexion a échoué","les données que vous saisirez seront enregistrées temporairement", Alert.AlertType.WARNING);
             alert.showAndWait();
             System.out.println("Erreur connexion :" + sqle.getMessage());
+            try {
+                maConnexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return maConnexion;
     }

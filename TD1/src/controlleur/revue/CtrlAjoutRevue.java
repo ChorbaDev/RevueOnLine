@@ -76,7 +76,7 @@ public class CtrlAjoutRevue implements Initializable, CommunEntreMAJ {
         revue=set();
     }
 
-    private Revue set() throws SQLException, ClassNotFoundException {
+    private Revue set() throws SQLException {
         String titre,description;
         double tarif;
         Revue r=new Revue();

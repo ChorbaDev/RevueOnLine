@@ -157,7 +157,7 @@ public class CtrlModifAbonnement implements CommunEntreMAJ {
     }
 
     @Override
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException, IOException {
+    public boolean nonDoublons() throws SQLException, IOException {
         ArrayList<Abonnement> list = dao.getAbonnementDAO().findAll();
         for (Abonnement ab : list) {
             if (ab.equalsTout(abonnement))

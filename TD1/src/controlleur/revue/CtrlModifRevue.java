@@ -85,7 +85,7 @@ public class CtrlModifRevue implements Initializable, CommunEntreMAJ {
         else r.setId_p(dao.getPeriodiciteDAO().getByLibelle(comboPeriodicite.getValue().getLibelle()).get(0).getCle());
         return r;
     }
-    public void setObjectForMetier() throws SQLException, ClassNotFoundException {
+    public void setObjectForMetier() throws SQLException {
         revue=set();
     }
 

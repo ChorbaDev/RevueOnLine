@@ -49,7 +49,7 @@ public class CtrlModifClient implements CommunEntreMAJ {
             edtVoie.setText(client.getAdresse().getVoie());
         }
     }
-    public boolean nonDoublons() throws SQLException, ClassNotFoundException {
+    public boolean nonDoublons() throws SQLException {
         ArrayList<Client> list = dao.getClientDAO().findAll();
         for (Client cl : list) {
             if (cl.equalsTout(client))
