@@ -20,6 +20,15 @@ public class Revue {
     private Image visuel;
     private int id_p;
 
+    /**
+     * Constructeur revue avec les paramètres suivants :
+     * @param id id revue
+     * @param titre titre de la revue
+     * @param description description de la revue
+     * @param tarif_numero tarif de la revue
+     * @param visuel image de la revue
+     * @param id_p id de la periodicite
+     */
     public Revue(int id, String titre, String description, double tarif_numero, Image visuel, int id_p) {
         this.id = id;
         this.titre = titre;
@@ -29,15 +38,30 @@ public class Revue {
         this.id_p = id_p;
     }
 
+    /**
+     * Constructeur revue avec les paramètres suivants :
+     * @param id id revue
+     */
     public Revue(int id) {
         this.id = id;
 
     }
 
+    /**
+     * Constructeur revue vide
+     */
     public Revue() {
 
     }
 
+    /**
+     * Constructeur revue avec les paramètres suivants :
+     * @param titre titre de la revue
+     * @param description description de la revue
+     * @param tarif_numero tarif de la revue
+     * @param visuel image de la revue
+     * @param id_p id de la periodicite
+     */
     public Revue(String titre, String description, double tarif_numero, Image visuel, int id_p) {
         this.titre = titre;
         this.description = description;
@@ -46,6 +70,14 @@ public class Revue {
         this.id_p = id_p;
     }
 
+    /**
+     * Constructeur revue avec les paramètres suivants :
+     * @param id id revue
+     * @param titre titre de la revue
+     * @param description description de la revue
+     * @param tarif_numero tarif de la revue
+     * @param id_p id de la periodicite
+     */
     public Revue(int id, String titre, String description, double tarif_numero, int id_p) {
         this.id = id;
         this.titre = titre;
@@ -54,11 +86,19 @@ public class Revue {
         this.id_p = id_p;
     }
 
-	public Revue(String test, String descp, double v, int i) {
-		this.titre = test;
+
+    /**
+     * Constructeur revue avec les paramètres suivants :
+     * @param titre titre de la revue
+     * @param descp description de la revue
+     * @param tarif tarif de la revue
+     * @param id_p id de la periodicite
+     */
+	public Revue(String titre, String descp, double tarif, int id_p) {
+		this.titre = titre;
 		this.description = descp;
-		this.tarif_numero = v;
-		this.id_p = i;
+		this.tarif_numero = tarif;
+		this.id_p = id_p;
 	}
 
     public int getId() {
@@ -93,6 +133,10 @@ public class Revue {
 		this.tarif_numero = tarif_numero;
 	}
 
+    /**
+     * @return renvoie un inputstream de l'image
+     * @throws IOException
+     */
     public InputStream getVisuel() throws IOException {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(visuel, null);
         ByteArrayOutputStream os = new ByteArrayOutputStream();
