@@ -130,7 +130,7 @@ public class Abonnement {
 
 
     /**
-     * @param obj
+     * @param obj objet abonnement
      * @return vrai si l'id en paramètre égale l'id donné
      */
     @Override
@@ -147,7 +147,7 @@ public class Abonnement {
 
 
     /**
-     * @param o
+     * @param o objet abonnement
      * @return vrai si tous les attributs de l'objet passé en paramettre sont egaux aux attributs de l'obj donné
      */
 	public boolean equalsTout(Object o) {
