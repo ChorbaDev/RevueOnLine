@@ -13,6 +13,14 @@ public class Abonnement {
     private int id_revue;
     private final DateTimeFormatter FORMATAGE = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+
+    /**
+     * Constructeur d'abonnement prenant les paramètres suivants :
+     * @param deb date de début d'abonnement en String
+     * @param fin date de fin d'abonnement en String
+     * @param id_c identifiant du client
+     * @param id_r identifiant de la revue
+     */
     public Abonnement(String deb, String fin, int id_c, int id_r) {
         date_debut = LocalDate.parse(deb, FORMATAGE);
         date_fin = LocalDate.parse(fin, FORMATAGE);
@@ -20,6 +28,14 @@ public class Abonnement {
         id_revue = id_r;
     }
 
+    /**
+     * Constructeur d'abonnement prenant les paramètres suivants :
+     * @param id identifiant de l'abonnement
+     * @param deb date de début d'abonnement en String
+     * @param fin date de fin d'abonnement en String
+     * @param id_c identifiant du client
+     * @param id_r identifiant de la revue
+     */
     public Abonnement(int id, String deb, String fin, int id_c, int id_r) {
         date_debut = LocalDate.parse(deb, FORMATAGE);
         date_fin = LocalDate.parse(fin, FORMATAGE);
@@ -28,6 +44,14 @@ public class Abonnement {
         this.id = id;
     }
 
+    /**
+     * Constructeur d'abonnement prenant les paramètres suivants :
+     * @param id identifiant de l'abonnement
+     * @param deb date de début d'abonnement en LocalDate
+     * @param fin date de fin d'abonnement en LocalDate
+     * @param id_c identifiant du client
+     * @param id_r identifiant de la revue
+     */
     public Abonnement(int id, LocalDate deb, LocalDate fin, int id_c, int id_r) {
         date_debut = deb;
         date_fin = fin;
@@ -36,10 +60,17 @@ public class Abonnement {
         this.id = id;
     }
 
+    /**
+     * Constructeur d'abonnement prenant les paramètres suivants :
+     * @param id identifiant de l'abonnement
+     */
     public Abonnement(int id) {
         this.id = id;
     }
 
+    /**
+     * Constructeur d'abonnement sans paramètres
+     */
     public Abonnement() {
     }
 
@@ -83,6 +114,14 @@ public class Abonnement {
         this.id_revue = id_revue;
     }
 
+    /**
+     * @return ID:[id] <br>
+     * Date debut : [date_debut] <br>
+     * Date fin : [date_fin] <br>
+     * ID (Client) : [id_client] <br>
+     * ID (Revue) : [id_revue] <br>
+     * -----------------------
+     */
     @Override
     public String toString() {
         return "ID :" + id + "\nDate debut :" + date_debut + "\nDate fin :" + date_fin + "\nID (Client) :" + id_client
@@ -90,7 +129,10 @@ public class Abonnement {
     }
 
 
-
+    /**
+     * @param obj
+     * @return vrai si l'id en paramètre égale l'id donné
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -104,6 +146,10 @@ public class Abonnement {
     }
 
 
+    /**
+     * @param o
+     * @return vrai si tous les attributs de l'objet passé en paramettre sont egaux aux attributs de l'obj donné
+     */
 	public boolean equalsTout(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
