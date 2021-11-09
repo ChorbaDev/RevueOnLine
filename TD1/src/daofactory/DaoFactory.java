@@ -1,7 +1,5 @@
 package daofactory;
-
 import dao.*;
-
 
 public abstract class DaoFactory {
 

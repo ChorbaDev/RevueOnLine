@@ -14,8 +14,11 @@ import modele.metier.Connexion;
 
 public class MySqlClientDao implements ClientDao {
     private static MySqlClientDao instance;
+    private Connection connect;
 
     public MySqlClientDao() {
+        Connexion maConnexion = Connexion.getInstance();
+        connect = maConnexion.creeConnexion();
     }
 
     public static MySqlClientDao getInstance() {
@@ -27,8 +30,6 @@ public class MySqlClientDao implements ClientDao {
     @Override
     public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws SQLException {
         ArrayList<Client> lClient = new ArrayList<>();
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client where nom=? and prenom=?");
         req.setString(1, nom);
         req.setString(2, prenom);
@@ -43,15 +44,12 @@ public class MySqlClientDao implements ClientDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
+
         return lClient;
     }
 
     @Override
     public Client getById(int id) throws SQLException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client where id_client=?");
         req.setInt(1, id);
         ResultSet res = req.executeQuery();
@@ -66,15 +64,12 @@ public class MySqlClientDao implements ClientDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
+
         return client;
     }
 
     @Override
     public boolean create(Client object) throws SQLException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement(
                 "insert into Client(nom,prenom,no_rue,voie,code_postal,ville,pays) values (?,?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
@@ -96,16 +91,12 @@ public class MySqlClientDao implements ClientDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return nbLignes == 1;
     }
 
     @Override
     public boolean update(Client object) throws SQLException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement(
                 "update Client set nom=?, prenom=?,no_rue=?,voie=?,code_postal=?,ville=?,pays=? where id_client=?");
         req.setString(1, object.getNom());
@@ -122,15 +113,11 @@ public class MySqlClientDao implements ClientDao {
 
     @Override
     public boolean delete(Client object) throws SQLException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("delete from Client where id_client=?");
         req.setInt(1, object.getCle());
         int nbLignes = req.executeUpdate();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return nbLignes == 1;
     }
@@ -138,8 +125,6 @@ public class MySqlClientDao implements ClientDao {
     @Override
     public ArrayList<Client> findAll() throws SQLException {
         ArrayList<Client> lClient = new ArrayList<>();
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         PreparedStatement req = connect.prepareStatement("select * from Client");
 
         ResultSet res = req.executeQuery();
@@ -153,8 +138,7 @@ public class MySqlClientDao implements ClientDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
+
         return lClient;
     }
 }

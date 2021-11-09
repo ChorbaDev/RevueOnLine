@@ -18,7 +18,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="javafx-swt" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.27" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="java" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.26" level="project" />
   </component>
 </module>

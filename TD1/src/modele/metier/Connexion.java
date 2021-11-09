@@ -9,7 +9,9 @@ import java.sql.SQLException;
 
 public class Connexion {
     private static Connexion instance;
-    private String url, login, pwd;
+    private final String URL="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
+    private final String LOGIN="elloumi2u_appli";
+    private final String PWD="32024561";
     private Connection maConnexion;
 
     private Connexion()  {
@@ -24,29 +26,21 @@ public class Connexion {
     }
 
     public Connection creeConnexion()  {
-        url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
-        login = "elloumi2u_appli";
-        pwd = "32024561";
-/*        String url =
-                "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/ghoniem1u_bdRvOnl";
-        String
-                login = "ghoniem1u_appli";
-        String pwd = "bonjour";*/
-        maConnexion = null;
+
         try {
             if (maConnexion == null || maConnexion.isClosed()){
                 DriverManager.setLoginTimeout(2);
-                maConnexion = DriverManager.getConnection(url, login, pwd);
+                maConnexion = DriverManager.getConnection(this.URL, this.LOGIN, this.PWD);
             }
         } catch (SQLException sqle) {
             Alert alert= CommunStaticMethods.makeAlert("Attention!","Votre connexion a échoué","les données que vous saisirez seront enregistrées temporairement", Alert.AlertType.WARNING);
             alert.showAndWait();
             System.out.println("Erreur connexion :" + sqle.getMessage());
-            try {
+            /*try {
                 maConnexion.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         return maConnexion;
     }

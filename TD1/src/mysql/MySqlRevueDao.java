@@ -15,8 +15,11 @@ import modele.metier.Revue;
 
 public class MySqlRevueDao implements RevueDao {
     private static MySqlRevueDao instance;
+    private Connection connect;
 
     private MySqlRevueDao() {
+        Connexion maConnexion = Connexion.getInstance();
+        connect = maConnexion.creeConnexion();
     }
 
     public static MySqlRevueDao getInstance() {
@@ -25,7 +28,7 @@ public class MySqlRevueDao implements RevueDao {
         return instance;
     }
 
-    public Image setImg(InputStream index) throws SQLException, IOException {
+    public Image setImg(InputStream index) throws IOException {
         InputStream is = index;
         OutputStream os = new FileOutputStream(new File("photo.jpg"));
         byte[] content = new byte[1024];
@@ -42,8 +45,6 @@ public class MySqlRevueDao implements RevueDao {
 
     @Override
     public Revue getById(int id) throws SQLException, IOException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         String sql = "select titre,description,tarif_numero,visuel,id_periodicite from Revue where id_revue=?";
         PreparedStatement req = connect.prepareStatement(sql);
         req.setInt(1, id);
@@ -60,8 +61,6 @@ public class MySqlRevueDao implements RevueDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return revue;
 
@@ -69,9 +68,6 @@ public class MySqlRevueDao implements RevueDao {
 
     @Override
     public boolean create(Revue r) throws SQLException, IOException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
-
         String sql = "insert into Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
         PreparedStatement req = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         req.setString(1, r.getTitre());
@@ -89,16 +85,12 @@ public class MySqlRevueDao implements RevueDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return nbLignes == 1;
     }
 
     @Override
     public boolean update(Revue r) throws SQLException, IOException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         String sql = "update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
         PreparedStatement req = connect.prepareStatement(sql);
         req.setString(1, r.getTitre());
@@ -110,24 +102,18 @@ public class MySqlRevueDao implements RevueDao {
         int nbLignes = req.executeUpdate();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return nbLignes == 1;
     }
 
     @Override
     public boolean delete(Revue r) throws SQLException {
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         String sql = "delete from Revue where id_revue=?";
         PreparedStatement req = connect.prepareStatement(sql);
         req.setInt(1, r.getId());
         int nbLignes = req.executeUpdate();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return nbLignes == 1;
     }
@@ -135,9 +121,6 @@ public class MySqlRevueDao implements RevueDao {
     @Override
     public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
-
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         String sql = "select * from Revue where titre=?";
         PreparedStatement req = connect.prepareStatement(sql);
         req.setString(1, titre);
@@ -148,13 +131,10 @@ public class MySqlRevueDao implements RevueDao {
             list.add(new Revue(res.getInt(1), res.getString(2), res.getString(3), res.getDouble(4), img,
                     res.getInt(6)));
         }
-
         if (res != null)
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return list;
     }
@@ -162,9 +142,6 @@ public class MySqlRevueDao implements RevueDao {
     @Override
     public ArrayList<Revue> findAll() throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
-
-        Connexion maConnexion = Connexion.getInstance();
-        Connection connect = maConnexion.creeConnexion();
         String sql = "select * from Revue";
         PreparedStatement req = connect.prepareStatement(sql);
         ResultSet res = req.executeQuery();
@@ -179,8 +156,6 @@ public class MySqlRevueDao implements RevueDao {
             res.close();
         if (req != null)
             req.close();
-        if (connect != null)
-            connect.close();
 
         return list;
     }
