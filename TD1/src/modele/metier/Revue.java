@@ -135,7 +135,7 @@ public class Revue {
 
     /**
      * @return renvoie un inputstream de l'image
-     * @throws IOException
+     * @see InputStream
      */
     public InputStream getVisuel() throws IOException {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(visuel, null);
@@ -175,6 +175,13 @@ public class Revue {
 		return id == revue.id;
 	}
 
+    /**
+     * @param o passage en parametre d'un objet Revue
+     * @return vrai si tous les attributs de la Revue sont égaux à celui passé en parametre
+     * @see Abonnement#equalsTout(Object)
+     * @see Client#equalsTout(Object)
+     * @see Periodicite#equalsTout(Object)
+     */
 	public boolean equalsTout(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;

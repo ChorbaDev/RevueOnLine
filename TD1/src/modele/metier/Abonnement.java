@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Classe metier Abonnement
+ */
 public class Abonnement {
 
     private int id;
@@ -149,6 +152,9 @@ public class Abonnement {
     /**
      * @param o objet abonnement
      * @return vrai si tous les attributs de l'objet passé en paramettre sont egaux aux attributs de l'obj donné
+     * @see Revue#equalsTout(Object)
+     * @see Periodicite#equalsTout(Object)
+     * @see Abonnement#equalsTout(Object)
      */
 	public boolean equalsTout(Object o) {
 		if (this == o) return true;

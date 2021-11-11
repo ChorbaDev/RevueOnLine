@@ -2,6 +2,9 @@ package modele.metier;
 
 import java.util.Objects;
 
+/**
+ * Classe metier periodicité qui permet d'avoir une periodicté pour un abonnement qui sera par exemple mensuel annuel ou autre
+ */
 public class Periodicite {
     private int cle;
     private String libelle;
@@ -13,6 +16,10 @@ public class Periodicite {
     public Periodicite() {
     }
 
+    /**
+     * @param cle id unique de la periodicté
+     * @param libelle Libellé de la periodicité
+     */
     public Periodicite(int cle, String libelle) {
         this.cle = cle;
         this.libelle = libelle;
@@ -30,6 +37,10 @@ public class Periodicite {
         return result;
     }
 
+    /**
+     * @param obj passage d'un objet periodicite en parametre
+     * @return vrai si l'id de la clé est égal à celui de la clé de l'objet passé en parametre
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -65,6 +76,13 @@ public class Periodicite {
         this.cle = cle;
     }
 
+    /**
+     * @param o passage d'un objet periodicite en parametre
+     * @return vrai si tous les attributs de l'objet sont égaux à ceux de l'objet passé en parametre
+     * @see Abonnement#equalsTout(Object)
+     * @see Client#equalsTout(Object)
+     * @see Revue#equalsTout(Object)
+     */
     public boolean equalsTout(Object o) {
         if (this == o)
             return true;

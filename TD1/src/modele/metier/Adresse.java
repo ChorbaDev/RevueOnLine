@@ -1,9 +1,11 @@
 package modele.metier;
 
-import javafx.scene.control.TableColumn;
 
 import java.util.Objects;
 
+/**
+ * Classe metier adresse
+ */
 public class Adresse {
     private String no_rue;
     private String voie;
@@ -11,6 +13,14 @@ public class Adresse {
     private String ville;
     private String pays;
 
+
+    /**
+     * @param no_rue numéro de la rue
+     * @param voie nom de la rue
+     * @param code_postal code postal de l'adresse
+     * @param ville ville
+     * @param pays pays
+     */
     public Adresse(String no_rue, String voie, String code_postal, String ville, String pays) {
         this.no_rue = no_rue;
         this.voie = voie;

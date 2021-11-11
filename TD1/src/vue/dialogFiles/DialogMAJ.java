@@ -24,6 +24,9 @@ import java.net.URL;
 import java.sql.SQLException;
 
 public class DialogMAJ<C> extends Stage {
+    /**
+     * Permet d'ouvrir une fenêtre de dialogue pour changer/entrer rapidement les informations nécessaires
+     */
     public DialogMAJ(AnchorPane anchor, DaoFactory dao, TableView tab, URL fxmlURL) throws IOException, SQLException {
         final FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
         final Parent node = (Parent) fxmlLoader.load();

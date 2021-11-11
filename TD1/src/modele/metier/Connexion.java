@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Classe de connexion à la base de donnée
+ * La base distante utilisée est celle d'Omar Elloumi
+ */
 public class Connexion {
     private static Connexion instance;
     private final String URL="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
@@ -14,10 +18,18 @@ public class Connexion {
     private final String PWD="32024561";
     private Connection maConnexion;
 
+    /**
+     * Constructeur connexion privé
+     * Utilisation du singleton pattern
+     * @see java.awt.Desktop#getDesktop() for refrence
+     */
     private Connexion()  {
         this.creeConnexion();
     }
 
+    /**
+     * @return une instance unique de la connexion
+     */
     public static Connexion getInstance()  {
         if (instance == null) {
             instance = new Connexion();
@@ -25,6 +37,10 @@ public class Connexion {
         return instance;
     }
 
+    /**
+     * @return maConnexion un objet de type Connection
+     * @see Connection
+     */
     public Connection creeConnexion()  {
 
         try {
