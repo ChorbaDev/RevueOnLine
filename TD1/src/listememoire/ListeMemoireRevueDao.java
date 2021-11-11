@@ -16,7 +16,7 @@ public class ListeMemoireRevueDao implements RevueDao {
     private ListeMemoireRevueDao() {
         this.donnees = new ArrayList<>();
         File file = new File("TD1/src/vue/images/empty.jpg");
-        this.donnees.add(new Revue(1, "titre", "descp", 1.2, new Image(file.getAbsolutePath()), 1));
+        this.donnees.add(new Revue(1, "VOGUE", "Vogue, influent magazine américain de mode et de style de vie. Il a été fondé en 1892 en tant que journal hebdomadaire de la haute société, créé par Arthur Baldwin Turnure pour l'élite sociale de New York et couvrant l'actualité de la scène sociale locale, les traditions de la haute société et l'étiquette sociale ; il a également examiné des livres, des pièces de théâtre et de la musique", 19.99, new Image(file.getAbsolutePath()), 1));
     }
 
     public static ListeMemoireRevueDao getInstance() {
