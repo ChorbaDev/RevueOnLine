@@ -43,6 +43,10 @@ public class MySqlRevueDao implements RevueDao {
         return img;
     }
 
+    /**
+     * @param id id de l'objet recherché
+     * @return un objet revue de la BD MySQL
+     */
     @Override
     public Revue getById(int id) throws SQLException, IOException {
         String sql = "select titre,description,tarif_numero,visuel,id_periodicite from Revue where id_revue=?";
@@ -66,6 +70,10 @@ public class MySqlRevueDao implements RevueDao {
 
     }
 
+    /**
+     * @param r objet revue à créer
+     * @return vrai si la ligne à bien été envoyé dans la base
+     */
     @Override
     public boolean create(Revue r) throws SQLException, IOException {
         String sql = "insert into Revue(titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)";
@@ -89,6 +97,10 @@ public class MySqlRevueDao implements RevueDao {
         return nbLignes == 1;
     }
 
+    /**
+     * @param r objet revue à modifier
+     * @return vrai si la ligne à bien été modifié dans la base
+     */
     @Override
     public boolean update(Revue r) throws SQLException, IOException {
         String sql = "update Revue set titre=? , description=? , tarif_numero=? , visuel=? , id_periodicite=? where id_revue=?";
@@ -106,6 +118,10 @@ public class MySqlRevueDao implements RevueDao {
         return nbLignes == 1;
     }
 
+    /**
+     * @param r obj revue à supprimer
+     * @return vrai si la supression et réussie
+     */
     @Override
     public boolean delete(Revue r) throws SQLException {
         String sql = "delete from Revue where id_revue=?";
@@ -118,6 +134,10 @@ public class MySqlRevueDao implements RevueDao {
         return nbLignes == 1;
     }
 
+    /**
+     * @param titre titre de la revue recherché
+     * @return un objet revue avec un titre identique à celui passé en param
+     */
     @Override
     public ArrayList<Revue> getByTitre(String titre) throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
@@ -139,6 +159,9 @@ public class MySqlRevueDao implements RevueDao {
         return list;
     }
 
+    /**
+     * @return arraylist contenant toutes les revues
+     */
     @Override
     public ArrayList<Revue> findAll() throws SQLException, IOException {
         ArrayList<Revue> list = new ArrayList<>();
