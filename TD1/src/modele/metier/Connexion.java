@@ -13,9 +13,9 @@ import java.sql.SQLException;
  */
 public class Connexion {
     private static Connexion instance;
-    private final String URL="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/elloumi2u_base";
-    private final String LOGIN="elloumi2u_appli";
-    private final String PWD="32024561";
+    private final String URL="jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/";
+    private final String LOGIN="";
+    private final String PWD="";
     private Connection maConnexion;
 
     /**
